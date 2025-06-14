@@ -89,18 +89,6 @@ export function UserStatus({ user, onLogout }: UserStatusProps) {
 
         <DropdownMenuSeparator />
 
-        <DropdownMenuItem onClick={handleDataExport} className="cursor-pointer">
-          <Download className="mr-2 h-4 w-4" />
-          <span>데이터 내보내기</span>
-        </DropdownMenuItem>
-
-        <DropdownMenuItem onClick={handleDataImport} className="cursor-pointer">
-          <Upload className="mr-2 h-4 w-4" />
-          <span>데이터 가져오기</span>
-        </DropdownMenuItem>
-
-        <DropdownMenuSeparator />
-
         <DropdownMenuItem onClick={onLogout} className="cursor-pointer">
           <LogOut className="mr-2 h-4 w-4" />
           <span className="text-red-600 dark:text-red-400">로그아웃</span>
