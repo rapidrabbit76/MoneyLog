@@ -1,0 +1,10 @@
+{
+    "github.copilot.chat.commitMessageGeneration.instructions": [
+        {
+            "file": ".github/prompts/commit-message-instructions.md"
+        }
+    ],
+    "editor.formatOnSave": false,
+    "editor.formatOnType": false,
+    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint",
+}
