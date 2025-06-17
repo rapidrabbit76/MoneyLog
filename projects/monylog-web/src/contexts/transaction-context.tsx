@@ -3,19 +3,19 @@
 import React, { createContext, useContext, useReducer, useEffect, type ReactNode } from "react"
 import type { Transaction } from "@/types/transaction"
 
-interface TransactionState {
+interface ExpenseState {
   transactions: Transaction[]
   isLoading: boolean
 }
 
-type TransactionAction = 
+type TransactionAction =
   | { type: "SET_TRANSACTIONS"; payload: Transaction[] }
   | { type: "ADD_TRANSACTION"; payload: Transaction }
   | { type: "UPDATE_TRANSACTION"; payload: { id: string; transaction: Partial<Transaction> } }
   | { type: "DELETE_TRANSACTION"; payload: string }
   | { type: "SET_LOADING"; payload: boolean }
 
-interface TransactionContextType extends TransactionState {
+interface TransactionContextType extends ExpenseState {
   addTransaction: (transaction: Transaction) => void
   updateTransaction: (id: string, transaction: Partial<Transaction>) => void
   deleteTransaction: (id: string) => void
@@ -24,7 +24,7 @@ interface TransactionContextType extends TransactionState {
 
 const TransactionContext = createContext<TransactionContextType | undefined>(undefined)
 
-function transactionReducer(state: TransactionState, action: TransactionAction): TransactionState {
+function transactionReducer(state: ExpenseState, action: TransactionAction): ExpenseState {
   switch (action.type) {
     case "SET_TRANSACTIONS":
       return {
@@ -63,7 +63,7 @@ function transactionReducer(state: TransactionState, action: TransactionAction):
 
 const STORAGE_KEY = "transactions"
 
-export function TransactionProvider({ children }: { children: ReactNode }) {
+export function ExpensesProvider({ children }: { children: ReactNode }) {
   const [state, dispatch] = useReducer(transactionReducer, {
     transactions: [],
     isLoading: true

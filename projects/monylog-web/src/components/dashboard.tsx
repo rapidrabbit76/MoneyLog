@@ -15,7 +15,8 @@ import { Sidebar } from "@/components/sidebar"
 import { ChatInput } from "@/components/chat-input"
 import { TransactionList } from "@/components/transaction-list"
 import { CalendarView } from "@/components/calendar-view"
-import { SimpleCategoryManager } from "@/components/simple-category-manager"
+// import { SimpleTagManager } from "@/components/simple-tag-manager"
+import { TagManagement } from "@/components/tag-management"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { parseTransaction } from "@/lib/expense-message"
 import { AnalyticsPage } from "@/components/analytics-page"
@@ -26,24 +27,24 @@ interface DashboardProps {
   // No props needed now - using Context
 }
 
-export default function Dashboard({}: DashboardProps) {
+export default function Dashboard({ }: DashboardProps) {
   const router = useRouter()
   const pathname = usePathname()
   const { user, logout } = useAuth()
   const { transactions, addTransaction } = useTransactions()
-  const { 
-    sidebarOpen, 
-    setSidebarOpen, 
-    sidebarWidth, 
-    setSidebarWidth, 
-    sidebarCollapsed, 
-    setSidebarCollapsed, 
-    activeTab, 
-    setActiveTab, 
-    isResizing, 
+  const {
+    sidebarOpen,
+    setSidebarOpen,
+    sidebarWidth,
+    setSidebarWidth,
+    sidebarCollapsed,
+    setSidebarCollapsed,
+    activeTab,
+    setActiveTab,
+    isResizing,
     setIsResizing,
     updateSidebarState,
-    toggleSidebar 
+    toggleSidebar
   } = useSidebar()
 
   const defaultHandleChatSubmit = (message: string) => {
@@ -228,7 +229,7 @@ export default function Dashboard({}: DashboardProps) {
                   </div>
 
                   <div className="rounded-lg border bg-card p-6 shadow-sm">
-                    <SimpleCategoryManager />
+                    <TagManagement />
                   </div>
                 </div>
               </div>

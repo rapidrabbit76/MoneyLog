@@ -2,13 +2,12 @@
 
 import type React from "react"
 import { useRouter } from "next/navigation"
-import { UserContext, useUser } from "@/contexts/user-context"; // Changed from useAuth to useUser
+import { UserContext } from "@/contexts/user-context"; // Changed from useAuth to useUser
 import Dashboard from "@/components/dashboard"
 import { useContext, useEffect } from "react"
 
 export default function Home() {
   const router = useRouter()
-  // const { user, isLoading } = useUser(); 
   const context = useContext(UserContext);
 
   useEffect(() => {

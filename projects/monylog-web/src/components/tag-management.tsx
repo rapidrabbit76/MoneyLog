@@ -10,7 +10,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Plus, Trash2, Tag, Settings } from "lucide-react"
 import { useCategories } from "@/hooks/use-categories"
 
-export function CategoryManagement() {
+export function TagManagement() {
   const { categories, addCategory, deleteCategory } = useCategories()
   const [isOpen, setIsOpen] = useState(false)
   const [newCategory, setNewCategory] = useState("")
