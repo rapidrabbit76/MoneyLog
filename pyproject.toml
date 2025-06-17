@@ -1,6 +1,6 @@
 [project]
 name = "monylog"
-version = "0.1.0"
+version = "0.0.1"
 description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.12"
@@ -12,13 +12,13 @@ members = [
     "features/monylog-shared_kernel",
     "features/monylog-shared_kernel-infra-fastapi",
     "features/monylog-shared-kernel-infra-database-sqla",
-    "experiments/message2expense",
+    # "experiments/message2expense",
 ]
 
 
 [tool.ruff]
 line-length = 120
-namespace-packages = ["features/**", "projects/**"]
+# namespace-packages = ["features/**", "projects/**"]
 
 # Exclude a variety of commonly ignored directories.
 exclude = [

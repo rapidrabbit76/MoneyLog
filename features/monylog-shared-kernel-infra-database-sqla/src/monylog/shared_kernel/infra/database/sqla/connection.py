@@ -20,7 +20,7 @@ logger = logging.getLogger("monylog.database.sqla")
 AsyncSessions = Annotated[
     Union[AsyncSession, async_scoped_session], "SQLA AsyncSession"
 ]
-Sessions = Annotated[Union[Session, scoped_session], "SQLA Session"]
+Sessions = Annotated[Union[Session], "SQLA Session"]
 
 
 @dataclass(init=True, kw_only=True, slots=True)

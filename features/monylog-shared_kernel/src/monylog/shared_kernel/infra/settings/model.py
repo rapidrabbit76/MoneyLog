@@ -47,8 +47,8 @@ class CacheSettings(BaseModel):
 class JWTSettings(BaseModel):
     secret_key: str = "SECRET"
     algorithm: str = "HS256"
+    access_token_exp: int = 3600
     refresh_token_exp: int = 31_536_000
-    access_token_exp: int = 31_536_000
 
 
 class AuthManagerSettings(BaseModel):
