@@ -7,7 +7,6 @@ import type { Transaction } from "@/types/transaction"
 
 import { useState, useEffect } from "react"
 import { useRouter, usePathname } from "next/navigation"
-import { useLocalStorage } from "@/hooks/use-local-storage"
 import { useAuth } from "@/hooks/use-auth"
 import { cn } from "@/lib/utils"
 import { Logo } from "@/components/logo"
@@ -20,46 +19,50 @@ import { SimpleCategoryManager } from "@/components/simple-category-manager"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { parseTransaction } from "@/lib/parse-transaction"
 import { AnalyticsPage } from "@/components/analytics-page"
+import { useTransactions } from "@/contexts/transaction-context"
+import { useSidebar } from "@/contexts/sidebar-context"
 
 interface DashboardProps {
-  initialTab?: string
+  // No props needed now - using Context
 }
 
-export default function Dashboard({ initialTab = "main" }: DashboardProps) {
+export default function Dashboard({}: DashboardProps) {
   const router = useRouter()
   const pathname = usePathname()
   const { user, logout } = useAuth()
+  const { transactions, addTransaction } = useTransactions()
+  const { 
+    sidebarOpen, 
+    setSidebarOpen, 
+    sidebarWidth, 
+    setSidebarWidth, 
+    sidebarCollapsed, 
+    setSidebarCollapsed, 
+    activeTab, 
+    setActiveTab, 
+    isResizing, 
+    setIsResizing,
+    updateSidebarState,
+    toggleSidebar 
+  } = useSidebar()
 
-  const [sidebarOpen, setSidebarOpen] = useState(true)
-  const [sidebarWidth, setSidebarWidth] = useState(280)
-  const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
-  const [activeTab, setActiveTab] = useState(initialTab)
-  const [transactions, setTransactions] = useLocalStorage<Transaction[]>("transactions", [])
-  const [isResizing, setIsResizing] = useState(false)
-
-  const handleChatSubmit = (message: string) => {
+  const defaultHandleChatSubmit = (message: string) => {
     try {
       // Try to parse as JSON first (new format from confirmation)
       const transaction = JSON.parse(message) as Transaction
-      setTransactions([transaction, ...transactions])
+      addTransaction(transaction)
     } catch (error) {
       // If JSON parsing fails, try the old parsing method
       const transaction = parseTransaction(message)
       if (transaction) {
-        setTransactions([transaction, ...transactions])
+        addTransaction(transaction)
       }
     }
   }
 
-  const handleMouseDown = (e: React.MouseEvent) => {
+  const defaultHandleMouseDown = (e: React.MouseEvent) => {
     e.preventDefault()
     setIsResizing(true)
-  }
-
-  // 사이드바 너비에 따라 아이콘 모드 설정
-  const updateSidebarState = (width: number) => {
-    setSidebarWidth(width)
-    setSidebarCollapsed(width < 180)
   }
 
   useEffect(() => {
@@ -84,18 +87,7 @@ export default function Dashboard({ initialTab = "main" }: DashboardProps) {
       document.removeEventListener("mousemove", handleMouseMove)
       document.removeEventListener("mouseup", handleMouseUp)
     }
-  }, [isResizing])
-
-  // 사이드바 토글 시 너비 조정
-  const toggleSidebar = () => {
-    if (sidebarOpen) {
-      setSidebarOpen(false)
-    } else {
-      setSidebarOpen(true)
-      // 사이드바를 다시 열 때 이전 너비 복원
-      updateSidebarState(sidebarWidth)
-    }
-  }
+  }, [isResizing, updateSidebarState, setIsResizing])
 
   const handleTabChange = (tab: string) => {
     setActiveTab(tab)
@@ -160,7 +152,7 @@ export default function Dashboard({ initialTab = "main" }: DashboardProps) {
         {sidebarOpen && (
           <div
             className="w-1 cursor-col-resize bg-border hover:bg-primary/50 active:bg-primary"
-            onMouseDown={handleMouseDown}
+            onMouseDown={defaultHandleMouseDown}
           />
         )}
 
@@ -180,7 +172,7 @@ export default function Dashboard({ initialTab = "main" }: DashboardProps) {
             {activeTab === "main" && (
               <>
                 <div className="mb-4">
-                  <ChatInput onSubmit={handleChatSubmit} />
+                  <ChatInput onSubmit={defaultHandleChatSubmit} />
                 </div>
                 <div className="flex-1 overflow-y-auto pb-4">
                   <TransactionList transactions={transactions} />

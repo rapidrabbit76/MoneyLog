@@ -3,6 +3,8 @@ import type { Metadata } from "next"
 import { Mona_Sans as FontSans } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
+import { TransactionProvider } from "@/contexts/transaction-context"
+import { SidebarProvider } from "@/contexts/sidebar-context"
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -12,7 +14,7 @@ const fontSans = FontSans({
 export const metadata: Metadata = {
   title: "가계부 챗",
   description: "채팅으로 가계부를 작성하는 서비스",
-    generator: 'v0.dev'
+  generator: 'v0.dev'
 }
 
 export default function RootLayout({
@@ -30,7 +32,11 @@ export default function RootLayout({
           disableTransitionOnChange={false}
           storageKey="finance-chat-theme"
         >
-          {children}
+          <TransactionProvider>
+            <SidebarProvider>
+              {children}
+            </SidebarProvider>
+          </TransactionProvider>
         </ThemeProvider>
       </body>
     </html>

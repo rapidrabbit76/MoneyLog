@@ -78,6 +78,7 @@ function parseSingleTransaction(message: string): Omit<ParsedTransaction, "id"> 
 
 export function createTransactionFromParsed(parsed: ParsedTransaction): Transaction {
   return {
+    id: parsed.id,
     description: parsed.description,
     amount: parsed.amount,
     date: new Date().toISOString(),
@@ -135,6 +136,7 @@ export function parseTransaction(message: string): Transaction | null {
     : "expense"
 
   return {
+    id: `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
     description,
     amount,
     date: new Date().toISOString(),
