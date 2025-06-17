@@ -200,7 +200,7 @@ export default function DashboardClient({ initialUser, initialTab = "main" }: Da
                           <span className="text-muted-foreground">이메일:</span> {user?.email}
                         </p>
                         <p>
-                          <span className="text-muted-foreground">이름:</span> {user?.name}
+                          <span className="text-muted-foreground">이름:</span> {user?.nickname}
                         </p>
                       </div>
 

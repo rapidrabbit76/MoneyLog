@@ -5,6 +5,7 @@ import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { TransactionProvider } from "@/contexts/transaction-context"
 import { SidebarProvider } from "@/contexts/sidebar-context"
+import { UserProvider } from "@/contexts/user-context"
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -32,11 +33,13 @@ export default function RootLayout({
           disableTransitionOnChange={false}
           storageKey="finance-chat-theme"
         >
-          <TransactionProvider>
-            <SidebarProvider>
-              {children}
-            </SidebarProvider>
-          </TransactionProvider>
+          <UserProvider>
+            <TransactionProvider>
+              <SidebarProvider>
+                {children}
+              </SidebarProvider>
+            </TransactionProvider>
+          </UserProvider>
         </ThemeProvider>
       </body>
     </html>

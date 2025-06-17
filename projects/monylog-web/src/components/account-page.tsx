@@ -22,9 +22,9 @@ export function AccountPage() {
 
   // 프로필 정보 상태
   const [profileData, setProfileData] = useState({
-    name: user?.name || "",
+    name: user?.nickname || "",
     email: user?.email || "",
-    image: user?.image || null,
+    image: user?.thumbnail || null,
   })
 
   // 비밀번호 변경 상태
@@ -248,9 +248,9 @@ export function AccountPage() {
                   variant="outline"
                   onClick={() => {
                     setProfileData({
-                      name: user?.name || "",
+                      name: user?.nickname || "",
                       email: user?.email || "",
-                      image: user?.image || null,
+                      image: user?.thumbnail || null,
                     })
                   }}
                   disabled={isLoading}

@@ -8,9 +8,9 @@ const SESSION_COOKIE_NAME = "finance-chat-session"
 // 테스트 사용자 데이터
 const TEST_USER: User = {
   id: "1",
-  name: "이용수",
+  nickname: "이용수",
   email: "yslee.dev@gmail.com",
-  image: null,
+  thumbnail: null,
 }
 
 // 이메일/비밀번호 로그인 (모킹)
@@ -89,10 +89,4 @@ export function getClientSession(): Session | null {
   } catch (error) {
     return null
   }
-}
-
-// 클라이언트에서 현재 사용자 가져오기
-export function getClientUser(): User | null {
-  const session = getClientSession()
-  return session?.user || null
 }

@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -10,7 +10,9 @@ import { Label } from "@/components/ui/label"
 import { Separator } from "@/components/ui/separator"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Github } from "lucide-react"
-import { loginWithEmail, loginWithGoogle, loginWithGithub } from "@/lib/auth"
+import { loginWithGoogle, loginWithGithub } from "@/lib/auth"
+import { loginWithEmail, getCurrentUser } from "@/lib/api/auth"
+import { UserContext } from "@/contexts/user-context"
 
 interface LoginFormProps {
   onSignupClick: () => void
@@ -22,6 +24,8 @@ export function LoginForm({ onSignupClick }: LoginFormProps) {
   const [password, setPassword] = useState("")
   const [error, setError] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(false)
+  const userContext = useContext(UserContext);
+
 
   const handleEmailLogin = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -29,10 +33,12 @@ export function LoginForm({ onSignupClick }: LoginFormProps) {
     setIsLoading(true)
 
     try {
-      await loginWithEmail(email, password)
-      // 인증 상태 변경 이벤트 발생
-      window.dispatchEvent(new Event("auth-change"))
-      router.push("/")
+      await loginWithEmail({ email, password })
+      await userContext?.fetchUser()
+      const user = userContext?.user;
+      if (user) {
+        router.push("/")
+      }
     } catch (err) {
       setError("이메일 또는 비밀번호가 올바르지 않습니다.")
     } finally {
@@ -40,37 +46,9 @@ export function LoginForm({ onSignupClick }: LoginFormProps) {
     }
   }
 
-  const handleGoogleLogin = async () => {
-    setError(null)
-    setIsLoading(true)
+  const handleGoogleLogin = async () => { }
 
-    try {
-      await loginWithGoogle()
-      // 인증 상태 변경 이벤트 발생
-      window.dispatchEvent(new Event("auth-change"))
-      router.push("/")
-    } catch (err) {
-      setError("Google 로그인 중 오류가 발생했습니다.")
-    } finally {
-      setIsLoading(false)
-    }
-  }
-
-  const handleGithubLogin = async () => {
-    setError(null)
-    setIsLoading(true)
-
-    try {
-      await loginWithGithub()
-      // 인증 상태 변경 이벤트 발생
-      window.dispatchEvent(new Event("auth-change"))
-      router.push("/")
-    } catch (err) {
-      setError("GitHub 로그인 중 오류가 발생했습니다.")
-    } finally {
-      setIsLoading(false)
-    }
-  }
+  const handleGithubLogin = async () => { }
 
   return (
     <div className="mt-8">

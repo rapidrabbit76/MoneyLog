@@ -20,8 +20,8 @@ interface UserStatusProps {
 export function UserStatus({ user, onLogout }: UserStatusProps) {
   const router = useRouter()
 
-  const initials = user?.name
-    ? user.name
+  const initials = user?.nickname
+    ? user.nickname
         .split(" ")
         .map((n) => n[0])
         .join("")
@@ -58,8 +58,8 @@ export function UserStatus({ user, onLogout }: UserStatusProps) {
       <DropdownMenuTrigger asChild>
         <button className="relative h-10 w-10 rounded-full overflow-hidden border-2 border-primary/20 hover:border-primary/40 transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
           <Avatar className="h-full w-full">
-            {user?.image ? (
-              <AvatarImage src={user.image || "/placeholder.svg"} alt={user.name || "사용자"} />
+            {user?.thumbnail ? (
+              <AvatarImage src={user.thumbnail || "/placeholder.svg"} alt={user.nickname || "사용자"} />
             ) : (
               <AvatarFallback className="bg-primary/10 text-primary font-medium text-sm">{initials}</AvatarFallback>
             )}
@@ -70,7 +70,7 @@ export function UserStatus({ user, onLogout }: UserStatusProps) {
       <DropdownMenuContent className="w-56" align="end" sideOffset={8}>
         <DropdownMenuLabel className="font-normal">
           <div className="flex flex-col space-y-1">
-            <p className="text-sm font-medium leading-none">{user?.name || "사용자"}</p>
+            <p className="text-sm font-medium leading-none">{user?.nickname || "사용자"}</p>
             <p className="text-xs leading-none text-muted-foreground">{user?.email || "user@example.com"}</p>
           </div>
         </DropdownMenuLabel>

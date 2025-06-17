@@ -2,23 +2,28 @@
 
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
-import { useAuth } from "@/hooks/use-auth"
+import { useUser } from "@/contexts/user-context"; // Changed from useAuth to useUser
 import { LoginForm } from "@/components/auth/login-form"
 import { SignupForm } from "@/components/auth/signup-form"
 
 export default function LoginPage() {
-  const { isAuthenticated, loading } = useAuth()
+  const { user, isLoading } = useUser(); // Changed from useAuth to useUser
   const router = useRouter()
   const [isSignupMode, setIsSignupMode] = useState(false)
 
   useEffect(() => {
-    if (!loading && isAuthenticated) {
+    if (!isLoading && user) { // Check isLoading and user
       router.push("/")
     }
-  }, [isAuthenticated, loading, router])
+  }, [user, isLoading, router]) // Dependency array updated
 
-  if (loading) {
+  if (isLoading) {
     return <div className="flex h-screen items-center justify-center">로딩 중...</div>
+  }
+  
+  // If user is already authenticated, don't render the login form (will be redirected)
+  if (user) {
+    return null;
   }
 
   return (
