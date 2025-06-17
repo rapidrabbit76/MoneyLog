@@ -24,6 +24,7 @@ class Expense(Base, TimestampMixin):
         nullable=False,
         default=Decimal("0.00"),
     )
+    user_id: Mapped[str] = mapped_column(sa.VARCHAR(32), sa.ForeignKey("monylog_user.id"), nullable=False, index=True)
     type: Mapped[ExpenseType] = mapped_column(sa.Enum("income", "expense", name="money_type"), nullable=False)
     title: Mapped[str] = mapped_column(sa.Text, nullable=False)
     note: Mapped[str] = mapped_column(sa.Text, nullable=True, default=None)

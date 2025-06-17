@@ -6,6 +6,10 @@
   "python.envFile": "${workspaceFolder}/.env",
   "python.testing.unittestEnabled": false,
   "python.testing.pytestEnabled": true,
+  "python.formatting.provider": "",
+  "[python]": {
+    "editor.defaultFormatter": "charliermarsh.ruff"
+  },
   "files.exclude": {
     "checkpoints": true,
     "**/.ruff_cache/**": true,
@@ -16,6 +20,8 @@
     "**/docker/**": true,
     "**/*.lock/**": true,
     "**/health/**": true,
-    "**/.venv/**": true
+    "src/monylog/alembic": true,
+    "**/.venv/**": true,
+    "**/.vscode/**": true
   }
 }

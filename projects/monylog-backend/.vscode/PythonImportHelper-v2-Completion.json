@@ -1,0 +1,2893 @@
+[
+    {
+        "label": "runpy",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "runpy",
+        "description": "runpy",
+        "detail": "runpy",
+        "documentation": {}
+    },
+    {
+        "label": "annotations",
+        "importPath": "__future__",
+        "description": "__future__",
+        "isExtraImport": true,
+        "detail": "__future__",
+        "documentation": {}
+    },
+    {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "site",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "site",
+        "description": "site",
+        "detail": "site",
+        "documentation": {}
+    },
+    {
+        "label": "sys",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "sys",
+        "description": "sys",
+        "detail": "sys",
+        "documentation": {}
+    },
+    {
+        "label": "json",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "json",
+        "description": "json",
+        "detail": "json",
+        "documentation": {}
+    },
+    {
+        "label": "argparse",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "argparse",
+        "description": "argparse",
+        "detail": "argparse",
+        "documentation": {}
+    },
+    {
+        "label": "pformat",
+        "importPath": "pprint",
+        "description": "pprint",
+        "isExtraImport": true,
+        "detail": "pprint",
+        "documentation": {}
+    },
+    {
+        "label": "jmespath",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "jmespath",
+        "description": "jmespath",
+        "detail": "jmespath",
+        "documentation": {}
+    },
+    {
+        "label": "exceptions",
+        "importPath": "jmespath",
+        "description": "jmespath",
+        "isExtraImport": true,
+        "detail": "jmespath",
+        "documentation": {}
+    },
+    {
+        "label": "Sequence",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Union",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "TYPE_CHECKING",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "TYPE_CHECKING",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Type",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "TYPE_CHECKING",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Annotated",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "TypeVar",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "TYPE_CHECKING",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "TYPE_CHECKING",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "op",
+        "importPath": "alembic",
+        "description": "alembic",
+        "isExtraImport": true,
+        "detail": "alembic",
+        "documentation": {}
+    },
+    {
+        "label": "context",
+        "importPath": "alembic",
+        "description": "alembic",
+        "isExtraImport": true,
+        "detail": "alembic",
+        "documentation": {}
+    },
+    {
+        "label": "op",
+        "importPath": "alembic",
+        "description": "alembic",
+        "isExtraImport": true,
+        "detail": "alembic",
+        "documentation": {}
+    },
+    {
+        "label": "sqlalchemy",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "sqlalchemy",
+        "description": "sqlalchemy",
+        "detail": "sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "pool",
+        "importPath": "sqlalchemy",
+        "description": "sqlalchemy",
+        "isExtraImport": true,
+        "detail": "sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "create_engine",
+        "importPath": "sqlalchemy",
+        "description": "sqlalchemy",
+        "isExtraImport": true,
+        "detail": "sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "Inspector",
+        "importPath": "sqlalchemy",
+        "description": "sqlalchemy",
+        "isExtraImport": true,
+        "detail": "sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "orm",
+        "importPath": "sqlalchemy",
+        "description": "sqlalchemy",
+        "isExtraImport": true,
+        "detail": "sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "orm",
+        "importPath": "sqlalchemy",
+        "description": "sqlalchemy",
+        "isExtraImport": true,
+        "detail": "sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "orm",
+        "importPath": "sqlalchemy",
+        "description": "sqlalchemy",
+        "isExtraImport": true,
+        "detail": "sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "get_existing_tables",
+        "importPath": "monylog.alembic.migrations.utils",
+        "description": "monylog.alembic.migrations.utils",
+        "isExtraImport": true,
+        "detail": "monylog.alembic.migrations.utils",
+        "documentation": {}
+    },
+    {
+        "label": "UUIDType",
+        "importPath": "sqlalchemy_fields.types",
+        "description": "sqlalchemy_fields.types",
+        "isExtraImport": true,
+        "detail": "sqlalchemy_fields.types",
+        "documentation": {}
+    },
+    {
+        "label": "URLType",
+        "importPath": "sqlalchemy_fields.types",
+        "description": "sqlalchemy_fields.types",
+        "isExtraImport": true,
+        "detail": "sqlalchemy_fields.types",
+        "documentation": {}
+    },
+    {
+        "label": "entities",
+        "importPath": "monylog.backend.expense",
+        "description": "monylog.backend.expense",
+        "isExtraImport": true,
+        "detail": "monylog.backend.expense",
+        "documentation": {}
+    },
+    {
+        "label": "entities",
+        "importPath": "monylog.backend.auth",
+        "description": "monylog.backend.auth",
+        "isExtraImport": true,
+        "detail": "monylog.backend.auth",
+        "documentation": {}
+    },
+    {
+        "label": "fileConfig",
+        "importPath": "logging.config",
+        "description": "logging.config",
+        "isExtraImport": true,
+        "detail": "logging.config",
+        "documentation": {}
+    },
+    {
+        "label": "metadata",
+        "importPath": "monylog.shared_kernel.infra.database.sqla.base",
+        "description": "monylog.shared_kernel.infra.database.sqla.base",
+        "isExtraImport": true,
+        "detail": "monylog.shared_kernel.infra.database.sqla.base",
+        "documentation": {}
+    },
+    {
+        "label": "uuid",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "uuid",
+        "description": "uuid",
+        "detail": "uuid",
+        "documentation": {}
+    },
+    {
+        "label": "containers",
+        "importPath": "dependency_injector",
+        "description": "dependency_injector",
+        "isExtraImport": true,
+        "detail": "dependency_injector",
+        "documentation": {}
+    },
+    {
+        "label": "providers",
+        "importPath": "dependency_injector",
+        "description": "dependency_injector",
+        "isExtraImport": true,
+        "detail": "dependency_injector",
+        "documentation": {}
+    },
+    {
+        "label": "containers",
+        "importPath": "dependency_injector",
+        "description": "dependency_injector",
+        "isExtraImport": true,
+        "detail": "dependency_injector",
+        "documentation": {}
+    },
+    {
+        "label": "providers",
+        "importPath": "dependency_injector",
+        "description": "dependency_injector",
+        "isExtraImport": true,
+        "detail": "dependency_injector",
+        "documentation": {}
+    },
+    {
+        "label": "containers",
+        "importPath": "dependency_injector",
+        "description": "dependency_injector",
+        "isExtraImport": true,
+        "detail": "dependency_injector",
+        "documentation": {}
+    },
+    {
+        "label": "providers",
+        "importPath": "dependency_injector",
+        "description": "dependency_injector",
+        "isExtraImport": true,
+        "detail": "dependency_injector",
+        "documentation": {}
+    },
+    {
+        "label": "containers",
+        "importPath": "dependency_injector",
+        "description": "dependency_injector",
+        "isExtraImport": true,
+        "detail": "dependency_injector",
+        "documentation": {}
+    },
+    {
+        "label": "providers",
+        "importPath": "dependency_injector",
+        "description": "dependency_injector",
+        "isExtraImport": true,
+        "detail": "dependency_injector",
+        "documentation": {}
+    },
+    {
+        "label": "Settings",
+        "importPath": "monylog.backend.settings",
+        "description": "monylog.backend.settings",
+        "isExtraImport": true,
+        "detail": "monylog.backend.settings",
+        "documentation": {}
+    },
+    {
+        "label": "get_settings",
+        "importPath": "monylog.backend.settings",
+        "description": "monylog.backend.settings",
+        "isExtraImport": true,
+        "detail": "monylog.backend.settings",
+        "documentation": {}
+    },
+    {
+        "label": "get_settings",
+        "importPath": "monylog.backend.settings",
+        "description": "monylog.backend.settings",
+        "isExtraImport": true,
+        "detail": "monylog.backend.settings",
+        "documentation": {}
+    },
+    {
+        "label": "Settings",
+        "importPath": "monylog.backend.settings",
+        "description": "monylog.backend.settings",
+        "isExtraImport": true,
+        "detail": "monylog.backend.settings",
+        "documentation": {}
+    },
+    {
+        "label": "Settings",
+        "importPath": "monylog.backend.settings",
+        "description": "monylog.backend.settings",
+        "isExtraImport": true,
+        "detail": "monylog.backend.settings",
+        "documentation": {}
+    },
+    {
+        "label": "Settings",
+        "importPath": "monylog.backend.settings",
+        "description": "monylog.backend.settings",
+        "isExtraImport": true,
+        "detail": "monylog.backend.settings",
+        "documentation": {}
+    },
+    {
+        "label": "Settings",
+        "importPath": "monylog.backend.settings",
+        "description": "monylog.backend.settings",
+        "isExtraImport": true,
+        "detail": "monylog.backend.settings",
+        "documentation": {}
+    },
+    {
+        "label": "model_validator",
+        "importPath": "pydantic",
+        "description": "pydantic",
+        "isExtraImport": true,
+        "detail": "pydantic",
+        "documentation": {}
+    },
+    {
+        "label": "BaseModel",
+        "importPath": "pydantic",
+        "description": "pydantic",
+        "isExtraImport": true,
+        "detail": "pydantic",
+        "documentation": {}
+    },
+    {
+        "label": "model_validator",
+        "importPath": "pydantic",
+        "description": "pydantic",
+        "isExtraImport": true,
+        "detail": "pydantic",
+        "documentation": {}
+    },
+    {
+        "label": "model_validator",
+        "importPath": "pydantic",
+        "description": "pydantic",
+        "isExtraImport": true,
+        "detail": "pydantic",
+        "documentation": {}
+    },
+    {
+        "label": "computed_field",
+        "importPath": "pydantic",
+        "description": "pydantic",
+        "isExtraImport": true,
+        "detail": "pydantic",
+        "documentation": {}
+    },
+    {
+        "label": "BaseModel",
+        "importPath": "pydantic",
+        "description": "pydantic",
+        "isExtraImport": true,
+        "detail": "pydantic",
+        "documentation": {}
+    },
+    {
+        "label": "Field",
+        "importPath": "pydantic",
+        "description": "pydantic",
+        "isExtraImport": true,
+        "detail": "pydantic",
+        "documentation": {}
+    },
+    {
+        "label": "computed_field",
+        "importPath": "pydantic",
+        "description": "pydantic",
+        "isExtraImport": true,
+        "detail": "pydantic",
+        "documentation": {}
+    },
+    {
+        "label": "BaseModel",
+        "importPath": "pydantic",
+        "description": "pydantic",
+        "isExtraImport": true,
+        "detail": "pydantic",
+        "documentation": {}
+    },
+    {
+        "label": "Field",
+        "importPath": "pydantic",
+        "description": "pydantic",
+        "isExtraImport": true,
+        "detail": "pydantic",
+        "documentation": {}
+    },
+    {
+        "label": "SecretStr",
+        "importPath": "pydantic",
+        "description": "pydantic",
+        "isExtraImport": true,
+        "detail": "pydantic",
+        "documentation": {}
+    },
+    {
+        "label": "CamelModel",
+        "importPath": "monylog.shared_kernel.infra.camel_model",
+        "description": "monylog.shared_kernel.infra.camel_model",
+        "isExtraImport": true,
+        "detail": "monylog.shared_kernel.infra.camel_model",
+        "documentation": {}
+    },
+    {
+        "label": "Field",
+        "importPath": "monylog.shared_kernel.infra.camel_model",
+        "description": "monylog.shared_kernel.infra.camel_model",
+        "isExtraImport": true,
+        "detail": "monylog.shared_kernel.infra.camel_model",
+        "documentation": {}
+    },
+    {
+        "label": "CamelModel",
+        "importPath": "monylog.shared_kernel.infra.camel_model",
+        "description": "monylog.shared_kernel.infra.camel_model",
+        "isExtraImport": true,
+        "detail": "monylog.shared_kernel.infra.camel_model",
+        "documentation": {}
+    },
+    {
+        "label": "Field",
+        "importPath": "monylog.shared_kernel.infra.camel_model",
+        "description": "monylog.shared_kernel.infra.camel_model",
+        "isExtraImport": true,
+        "detail": "monylog.shared_kernel.infra.camel_model",
+        "documentation": {}
+    },
+    {
+        "label": "CamelModel",
+        "importPath": "monylog.shared_kernel.infra.camel_model",
+        "description": "monylog.shared_kernel.infra.camel_model",
+        "isExtraImport": true,
+        "detail": "monylog.shared_kernel.infra.camel_model",
+        "documentation": {}
+    },
+    {
+        "label": "Field",
+        "importPath": "monylog.shared_kernel.infra.camel_model",
+        "description": "monylog.shared_kernel.infra.camel_model",
+        "isExtraImport": true,
+        "detail": "monylog.shared_kernel.infra.camel_model",
+        "documentation": {}
+    },
+    {
+        "label": "CamelModel",
+        "importPath": "monylog.shared_kernel.infra.camel_model",
+        "description": "monylog.shared_kernel.infra.camel_model",
+        "isExtraImport": true,
+        "detail": "monylog.shared_kernel.infra.camel_model",
+        "documentation": {}
+    },
+    {
+        "label": "Field",
+        "importPath": "monylog.shared_kernel.infra.camel_model",
+        "description": "monylog.shared_kernel.infra.camel_model",
+        "isExtraImport": true,
+        "detail": "monylog.shared_kernel.infra.camel_model",
+        "documentation": {}
+    },
+    {
+        "label": "CamelModel",
+        "importPath": "monylog.shared_kernel.infra.camel_model",
+        "description": "monylog.shared_kernel.infra.camel_model",
+        "isExtraImport": true,
+        "detail": "monylog.shared_kernel.infra.camel_model",
+        "documentation": {}
+    },
+    {
+        "label": "Field",
+        "importPath": "monylog.shared_kernel.infra.camel_model",
+        "description": "monylog.shared_kernel.infra.camel_model",
+        "isExtraImport": true,
+        "detail": "monylog.shared_kernel.infra.camel_model",
+        "documentation": {}
+    },
+    {
+        "label": "CamelModel",
+        "importPath": "monylog.shared_kernel.infra.camel_model",
+        "description": "monylog.shared_kernel.infra.camel_model",
+        "isExtraImport": true,
+        "detail": "monylog.shared_kernel.infra.camel_model",
+        "documentation": {}
+    },
+    {
+        "label": "Field",
+        "importPath": "monylog.shared_kernel.infra.camel_model",
+        "description": "monylog.shared_kernel.infra.camel_model",
+        "isExtraImport": true,
+        "detail": "monylog.shared_kernel.infra.camel_model",
+        "documentation": {}
+    },
+    {
+        "label": "ResponseDto",
+        "importPath": "monylog.shared_kernel.infra.fastapi.dtos.response",
+        "description": "monylog.shared_kernel.infra.fastapi.dtos.response",
+        "isExtraImport": true,
+        "detail": "monylog.shared_kernel.infra.fastapi.dtos.response",
+        "documentation": {}
+    },
+    {
+        "label": "ResponseDto",
+        "importPath": "monylog.shared_kernel.infra.fastapi.dtos.response",
+        "description": "monylog.shared_kernel.infra.fastapi.dtos.response",
+        "isExtraImport": true,
+        "detail": "monylog.shared_kernel.infra.fastapi.dtos.response",
+        "documentation": {}
+    },
+    {
+        "label": "PaginationResponse",
+        "importPath": "monylog.shared_kernel.infra.fastapi.dtos.response",
+        "description": "monylog.shared_kernel.infra.fastapi.dtos.response",
+        "isExtraImport": true,
+        "detail": "monylog.shared_kernel.infra.fastapi.dtos.response",
+        "documentation": {}
+    },
+    {
+        "label": "PaginationResponse",
+        "importPath": "monylog.shared_kernel.infra.fastapi.dtos.response",
+        "description": "monylog.shared_kernel.infra.fastapi.dtos.response",
+        "isExtraImport": true,
+        "detail": "monylog.shared_kernel.infra.fastapi.dtos.response",
+        "documentation": {}
+    },
+    {
+        "label": "PaginationList",
+        "importPath": "monylog.shared_kernel.infra.fastapi.dtos.response",
+        "description": "monylog.shared_kernel.infra.fastapi.dtos.response",
+        "isExtraImport": true,
+        "detail": "monylog.shared_kernel.infra.fastapi.dtos.response",
+        "documentation": {}
+    },
+    {
+        "label": "ResponseDto",
+        "importPath": "monylog.shared_kernel.infra.fastapi.dtos.response",
+        "description": "monylog.shared_kernel.infra.fastapi.dtos.response",
+        "isExtraImport": true,
+        "detail": "monylog.shared_kernel.infra.fastapi.dtos.response",
+        "documentation": {}
+    },
+    {
+        "label": "nanoid",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "nanoid",
+        "description": "nanoid",
+        "detail": "nanoid",
+        "documentation": {}
+    },
+    {
+        "label": "Mapped",
+        "importPath": "sqlalchemy.orm",
+        "description": "sqlalchemy.orm",
+        "isExtraImport": true,
+        "detail": "sqlalchemy.orm",
+        "documentation": {}
+    },
+    {
+        "label": "mapped_column",
+        "importPath": "sqlalchemy.orm",
+        "description": "sqlalchemy.orm",
+        "isExtraImport": true,
+        "detail": "sqlalchemy.orm",
+        "documentation": {}
+    },
+    {
+        "label": "Mapped",
+        "importPath": "sqlalchemy.orm",
+        "description": "sqlalchemy.orm",
+        "isExtraImport": true,
+        "detail": "sqlalchemy.orm",
+        "documentation": {}
+    },
+    {
+        "label": "mapped_column",
+        "importPath": "sqlalchemy.orm",
+        "description": "sqlalchemy.orm",
+        "isExtraImport": true,
+        "detail": "sqlalchemy.orm",
+        "documentation": {}
+    },
+    {
+        "label": "Mapped",
+        "importPath": "sqlalchemy.orm",
+        "description": "sqlalchemy.orm",
+        "isExtraImport": true,
+        "detail": "sqlalchemy.orm",
+        "documentation": {}
+    },
+    {
+        "label": "mapped_column",
+        "importPath": "sqlalchemy.orm",
+        "description": "sqlalchemy.orm",
+        "isExtraImport": true,
+        "detail": "sqlalchemy.orm",
+        "documentation": {}
+    },
+    {
+        "label": "Mapped",
+        "importPath": "sqlalchemy.orm",
+        "description": "sqlalchemy.orm",
+        "isExtraImport": true,
+        "detail": "sqlalchemy.orm",
+        "documentation": {}
+    },
+    {
+        "label": "mapped_column",
+        "importPath": "sqlalchemy.orm",
+        "description": "sqlalchemy.orm",
+        "isExtraImport": true,
+        "detail": "sqlalchemy.orm",
+        "documentation": {}
+    },
+    {
+        "label": "Base",
+        "importPath": "monylog.shared_kernel.infra.database.sqla",
+        "description": "monylog.shared_kernel.infra.database.sqla",
+        "isExtraImport": true,
+        "detail": "monylog.shared_kernel.infra.database.sqla",
+        "documentation": {}
+    },
+    {
+        "label": "Base",
+        "importPath": "monylog.shared_kernel.infra.database.sqla",
+        "description": "monylog.shared_kernel.infra.database.sqla",
+        "isExtraImport": true,
+        "detail": "monylog.shared_kernel.infra.database.sqla",
+        "documentation": {}
+    },
+    {
+        "label": "Base",
+        "importPath": "monylog.shared_kernel.infra.database.sqla",
+        "description": "monylog.shared_kernel.infra.database.sqla",
+        "isExtraImport": true,
+        "detail": "monylog.shared_kernel.infra.database.sqla",
+        "documentation": {}
+    },
+    {
+        "label": "Base",
+        "importPath": "monylog.shared_kernel.infra.database.sqla",
+        "description": "monylog.shared_kernel.infra.database.sqla",
+        "isExtraImport": true,
+        "detail": "monylog.shared_kernel.infra.database.sqla",
+        "documentation": {}
+    },
+    {
+        "label": "TimestampMixin",
+        "importPath": "monylog.shared_kernel.infra.database.sqla.mixin",
+        "description": "monylog.shared_kernel.infra.database.sqla.mixin",
+        "isExtraImport": true,
+        "detail": "monylog.shared_kernel.infra.database.sqla.mixin",
+        "documentation": {}
+    },
+    {
+        "label": "SyncSqlaMixIn",
+        "importPath": "monylog.shared_kernel.infra.database.sqla.mixin",
+        "description": "monylog.shared_kernel.infra.database.sqla.mixin",
+        "isExtraImport": true,
+        "detail": "monylog.shared_kernel.infra.database.sqla.mixin",
+        "documentation": {}
+    },
+    {
+        "label": "TimestampMixin",
+        "importPath": "monylog.shared_kernel.infra.database.sqla.mixin",
+        "description": "monylog.shared_kernel.infra.database.sqla.mixin",
+        "isExtraImport": true,
+        "detail": "monylog.shared_kernel.infra.database.sqla.mixin",
+        "documentation": {}
+    },
+    {
+        "label": "TimestampMixin",
+        "importPath": "monylog.shared_kernel.infra.database.sqla.mixin",
+        "description": "monylog.shared_kernel.infra.database.sqla.mixin",
+        "isExtraImport": true,
+        "detail": "monylog.shared_kernel.infra.database.sqla.mixin",
+        "documentation": {}
+    },
+    {
+        "label": "TimestampMixin",
+        "importPath": "monylog.shared_kernel.infra.database.sqla.mixin",
+        "description": "monylog.shared_kernel.infra.database.sqla.mixin",
+        "isExtraImport": true,
+        "detail": "monylog.shared_kernel.infra.database.sqla.mixin",
+        "documentation": {}
+    },
+    {
+        "label": "SyncSqlaMixIn",
+        "importPath": "monylog.shared_kernel.infra.database.sqla.mixin",
+        "description": "monylog.shared_kernel.infra.database.sqla.mixin",
+        "isExtraImport": true,
+        "detail": "monylog.shared_kernel.infra.database.sqla.mixin",
+        "documentation": {}
+    },
+    {
+        "label": "SyncSqlaMixIn",
+        "importPath": "monylog.shared_kernel.infra.database.sqla.mixin",
+        "description": "monylog.shared_kernel.infra.database.sqla.mixin",
+        "isExtraImport": true,
+        "detail": "monylog.shared_kernel.infra.database.sqla.mixin",
+        "documentation": {}
+    },
+    {
+        "label": "Provide",
+        "importPath": "dependency_injector.wiring",
+        "description": "dependency_injector.wiring",
+        "isExtraImport": true,
+        "detail": "dependency_injector.wiring",
+        "documentation": {}
+    },
+    {
+        "label": "inject",
+        "importPath": "dependency_injector.wiring",
+        "description": "dependency_injector.wiring",
+        "isExtraImport": true,
+        "detail": "dependency_injector.wiring",
+        "documentation": {}
+    },
+    {
+        "label": "Provide",
+        "importPath": "dependency_injector.wiring",
+        "description": "dependency_injector.wiring",
+        "isExtraImport": true,
+        "detail": "dependency_injector.wiring",
+        "documentation": {}
+    },
+    {
+        "label": "inject",
+        "importPath": "dependency_injector.wiring",
+        "description": "dependency_injector.wiring",
+        "isExtraImport": true,
+        "detail": "dependency_injector.wiring",
+        "documentation": {}
+    },
+    {
+        "label": "inject",
+        "importPath": "dependency_injector.wiring",
+        "description": "dependency_injector.wiring",
+        "isExtraImport": true,
+        "detail": "dependency_injector.wiring",
+        "documentation": {}
+    },
+    {
+        "label": "Provide",
+        "importPath": "dependency_injector.wiring",
+        "description": "dependency_injector.wiring",
+        "isExtraImport": true,
+        "detail": "dependency_injector.wiring",
+        "documentation": {}
+    },
+    {
+        "label": "fastapi",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "APIRouter",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "Body",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "Depends",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "Form",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "Response",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "status",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "Depends",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "APIRouter",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "APIRouter",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "Body",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "Depends",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "Query",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "status",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "APIRouter",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "Depends",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "Body",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "status",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "FastAPI",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "FastAPI",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "UserPayloadSchema",
+        "importPath": "monylog.backend.auth.dtos.schemas",
+        "description": "monylog.backend.auth.dtos.schemas",
+        "isExtraImport": true,
+        "detail": "monylog.backend.auth.dtos.schemas",
+        "documentation": {}
+    },
+    {
+        "label": "UserPayloadSchema",
+        "importPath": "monylog.backend.auth.dtos.schemas",
+        "description": "monylog.backend.auth.dtos.schemas",
+        "isExtraImport": true,
+        "detail": "monylog.backend.auth.dtos.schemas",
+        "documentation": {}
+    },
+    {
+        "label": "JWTService",
+        "importPath": "monylog.backend.auth.services.jwt",
+        "description": "monylog.backend.auth.services.jwt",
+        "isExtraImport": true,
+        "detail": "monylog.backend.auth.services.jwt",
+        "documentation": {}
+    },
+    {
+        "label": "JWTService",
+        "importPath": "monylog.backend.auth.services.jwt",
+        "description": "monylog.backend.auth.services.jwt",
+        "isExtraImport": true,
+        "detail": "monylog.backend.auth.services.jwt",
+        "documentation": {}
+    },
+    {
+        "label": "MonyLogContainer",
+        "importPath": "monylog.backend.container",
+        "description": "monylog.backend.container",
+        "isExtraImport": true,
+        "detail": "monylog.backend.container",
+        "documentation": {}
+    },
+    {
+        "label": "MonyLogContainer",
+        "importPath": "monylog.backend.container",
+        "description": "monylog.backend.container",
+        "isExtraImport": true,
+        "detail": "monylog.backend.container",
+        "documentation": {}
+    },
+    {
+        "label": "MonyLogContainer",
+        "importPath": "monylog.backend.container",
+        "description": "monylog.backend.container",
+        "isExtraImport": true,
+        "detail": "monylog.backend.container",
+        "documentation": {}
+    },
+    {
+        "label": "MonyLogContainer",
+        "importPath": "monylog.backend.container",
+        "description": "monylog.backend.container",
+        "isExtraImport": true,
+        "detail": "monylog.backend.container",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "field",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "field",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "timedelta",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "date",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "jwt",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "jwt",
+        "description": "jwt",
+        "detail": "jwt",
+        "documentation": {}
+    },
+    {
+        "label": "APIKeyCookie",
+        "importPath": "fastapi.security",
+        "description": "fastapi.security",
+        "isExtraImport": true,
+        "detail": "fastapi.security",
+        "documentation": {}
+    },
+    {
+        "label": "bcrypt",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "bcrypt",
+        "description": "bcrypt",
+        "detail": "bcrypt",
+        "documentation": {}
+    },
+    {
+        "label": "BaseMsgException",
+        "importPath": "monylog.shared_kernel.infra.fastapi.exception_handlers.base",
+        "description": "monylog.shared_kernel.infra.fastapi.exception_handlers.base",
+        "isExtraImport": true,
+        "detail": "monylog.shared_kernel.infra.fastapi.exception_handlers.base",
+        "documentation": {}
+    },
+    {
+        "label": "BaseMsgException",
+        "importPath": "monylog.shared_kernel.infra.fastapi.exception_handlers.base",
+        "description": "monylog.shared_kernel.infra.fastapi.exception_handlers.base",
+        "isExtraImport": true,
+        "detail": "monylog.shared_kernel.infra.fastapi.exception_handlers.base",
+        "documentation": {}
+    },
+    {
+        "label": "BaseMsgException",
+        "importPath": "monylog.shared_kernel.infra.fastapi.exception_handlers.base",
+        "description": "monylog.shared_kernel.infra.fastapi.exception_handlers.base",
+        "isExtraImport": true,
+        "detail": "monylog.shared_kernel.infra.fastapi.exception_handlers.base",
+        "documentation": {}
+    },
+    {
+        "label": "custom_exception_handler",
+        "importPath": "monylog.shared_kernel.infra.fastapi.exception_handlers.base",
+        "description": "monylog.shared_kernel.infra.fastapi.exception_handlers.base",
+        "isExtraImport": true,
+        "detail": "monylog.shared_kernel.infra.fastapi.exception_handlers.base",
+        "documentation": {}
+    },
+    {
+        "label": "router",
+        "importPath": "monylog.backend.auth.rest.fastapi",
+        "description": "monylog.backend.auth.rest.fastapi",
+        "isExtraImport": true,
+        "detail": "monylog.backend.auth.rest.fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "router",
+        "importPath": "monylog.backend.auth.rest.fastapi",
+        "description": "monylog.backend.auth.rest.fastapi",
+        "isExtraImport": true,
+        "detail": "monylog.backend.auth.rest.fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "router",
+        "importPath": "monylog.backend.expense.rest.fastapi",
+        "description": "monylog.backend.expense.rest.fastapi",
+        "isExtraImport": true,
+        "detail": "monylog.backend.expense.rest.fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "router",
+        "importPath": "monylog.backend.llm.rest.fastapi",
+        "description": "monylog.backend.llm.rest.fastapi",
+        "isExtraImport": true,
+        "detail": "monylog.backend.llm.rest.fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "router",
+        "importPath": "monylog.backend.llm.rest.fastapi",
+        "description": "monylog.backend.llm.rest.fastapi",
+        "isExtraImport": true,
+        "detail": "monylog.backend.llm.rest.fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "Pageable",
+        "importPath": "monylog.shared_kernel.infra.fastapi.dtos.request",
+        "description": "monylog.shared_kernel.infra.fastapi.dtos.request",
+        "isExtraImport": true,
+        "detail": "monylog.shared_kernel.infra.fastapi.dtos.request",
+        "documentation": {}
+    },
+    {
+        "label": "DateRange",
+        "importPath": "monylog.shared_kernel.domain.types",
+        "description": "monylog.shared_kernel.domain.types",
+        "isExtraImport": true,
+        "detail": "monylog.shared_kernel.domain.types",
+        "documentation": {}
+    },
+    {
+        "label": "Decimal",
+        "importPath": "decimal",
+        "description": "decimal",
+        "isExtraImport": true,
+        "detail": "decimal",
+        "documentation": {}
+    },
+    {
+        "label": "Decimal",
+        "importPath": "decimal",
+        "description": "decimal",
+        "isExtraImport": true,
+        "detail": "decimal",
+        "documentation": {}
+    },
+    {
+        "label": "Decimal",
+        "importPath": "decimal",
+        "description": "decimal",
+        "isExtraImport": true,
+        "detail": "decimal",
+        "documentation": {}
+    },
+    {
+        "label": "Decimal",
+        "importPath": "decimal",
+        "description": "decimal",
+        "isExtraImport": true,
+        "detail": "decimal",
+        "documentation": {}
+    },
+    {
+        "label": "Decimal",
+        "importPath": "decimal",
+        "description": "decimal",
+        "isExtraImport": true,
+        "detail": "decimal",
+        "documentation": {}
+    },
+    {
+        "label": "LangchainLLMExpenseAnalyzeResult",
+        "importPath": "monylog.backend.llm.service.v1.schema",
+        "description": "monylog.backend.llm.service.v1.schema",
+        "isExtraImport": true,
+        "detail": "monylog.backend.llm.service.v1.schema",
+        "documentation": {}
+    },
+    {
+        "label": "ExpenseResult",
+        "importPath": "monylog.backend.llm.service.v1.schema",
+        "description": "monylog.backend.llm.service.v1.schema",
+        "isExtraImport": true,
+        "detail": "monylog.backend.llm.service.v1.schema",
+        "documentation": {}
+    },
+    {
+        "label": "ExpenseType",
+        "importPath": "monylog.shared_kernel.domain.enum",
+        "description": "monylog.shared_kernel.domain.enum",
+        "isExtraImport": true,
+        "detail": "monylog.shared_kernel.domain.enum",
+        "documentation": {}
+    },
+    {
+        "label": "ExpenseType",
+        "importPath": "monylog.shared_kernel.domain.enum",
+        "description": "monylog.shared_kernel.domain.enum",
+        "isExtraImport": true,
+        "detail": "monylog.shared_kernel.domain.enum",
+        "documentation": {}
+    },
+    {
+        "label": "ExpenseType",
+        "importPath": "monylog.shared_kernel.domain.enum",
+        "description": "monylog.shared_kernel.domain.enum",
+        "isExtraImport": true,
+        "detail": "monylog.shared_kernel.domain.enum",
+        "documentation": {}
+    },
+    {
+        "label": "ExpenseType",
+        "importPath": "monylog.shared_kernel.domain.enum",
+        "description": "monylog.shared_kernel.domain.enum",
+        "isExtraImport": true,
+        "detail": "monylog.shared_kernel.domain.enum",
+        "documentation": {}
+    },
+    {
+        "label": "ExpenseType",
+        "importPath": "monylog.shared_kernel.domain.enum",
+        "description": "monylog.shared_kernel.domain.enum",
+        "isExtraImport": true,
+        "detail": "monylog.shared_kernel.domain.enum",
+        "documentation": {}
+    },
+    {
+        "label": "ApplicationMode",
+        "importPath": "monylog.shared_kernel.domain.enum",
+        "description": "monylog.shared_kernel.domain.enum",
+        "isExtraImport": true,
+        "detail": "monylog.shared_kernel.domain.enum",
+        "documentation": {}
+    },
+    {
+        "label": "ExpenseUseCase",
+        "importPath": "monylog.backend.expense.use_case",
+        "description": "monylog.backend.expense.use_case",
+        "isExtraImport": true,
+        "detail": "monylog.backend.expense.use_case",
+        "documentation": {}
+    },
+    {
+        "label": "A",
+        "importPath": "re",
+        "description": "re",
+        "isExtraImport": true,
+        "detail": "re",
+        "documentation": {}
+    },
+    {
+        "label": "Expense",
+        "importPath": "monylog.backend.expense.entities",
+        "description": "monylog.backend.expense.entities",
+        "isExtraImport": true,
+        "detail": "monylog.backend.expense.entities",
+        "documentation": {}
+    },
+    {
+        "label": "ABC",
+        "importPath": "abc",
+        "description": "abc",
+        "isExtraImport": true,
+        "detail": "abc",
+        "documentation": {}
+    },
+    {
+        "label": "abstractmethod",
+        "importPath": "abc",
+        "description": "abc",
+        "isExtraImport": true,
+        "detail": "abc",
+        "documentation": {}
+    },
+    {
+        "label": "Expense",
+        "importPath": "monylog.backend.expense.entities.expense",
+        "description": "monylog.backend.expense.entities.expense",
+        "isExtraImport": true,
+        "detail": "monylog.backend.expense.entities.expense",
+        "documentation": {}
+    },
+    {
+        "label": "ExpenseTag",
+        "importPath": "monylog.backend.expense.entities.expense",
+        "description": "monylog.backend.expense.entities.expense",
+        "isExtraImport": true,
+        "detail": "monylog.backend.expense.entities.expense",
+        "documentation": {}
+    },
+    {
+        "label": "ExpenseLog",
+        "importPath": "monylog.backend.expense.entities.log",
+        "description": "monylog.backend.expense.entities.log",
+        "isExtraImport": true,
+        "detail": "monylog.backend.expense.entities.log",
+        "documentation": {}
+    },
+    {
+        "label": "LangchainLLMExpenseAnalyzer",
+        "importPath": "monylog.backend.llm.service.v1",
+        "description": "monylog.backend.llm.service.v1",
+        "isExtraImport": true,
+        "detail": "monylog.backend.llm.service.v1",
+        "documentation": {}
+    },
+    {
+        "label": "LangchainLLMExpenseAnalyzerConfig",
+        "importPath": "monylog.backend.llm.service.v1",
+        "description": "monylog.backend.llm.service.v1",
+        "isExtraImport": true,
+        "detail": "monylog.backend.llm.service.v1",
+        "documentation": {}
+    },
+    {
+        "label": "ExpenseLLMUseCase",
+        "importPath": "monylog.backend.llm.use_case.expense_use_case",
+        "description": "monylog.backend.llm.use_case.expense_use_case",
+        "isExtraImport": true,
+        "detail": "monylog.backend.llm.use_case.expense_use_case",
+        "documentation": {}
+    },
+    {
+        "label": "ChatOpenAI",
+        "importPath": "langchain_openai",
+        "description": "langchain_openai",
+        "isExtraImport": true,
+        "detail": "langchain_openai",
+        "documentation": {}
+    },
+    {
+        "label": "DateTime",
+        "importPath": "pendulum",
+        "description": "pendulum",
+        "isExtraImport": true,
+        "detail": "pendulum",
+        "documentation": {}
+    },
+    {
+        "label": "DateTime",
+        "importPath": "pendulum",
+        "description": "pendulum",
+        "isExtraImport": true,
+        "detail": "pendulum",
+        "documentation": {}
+    },
+    {
+        "label": "DateTime",
+        "importPath": "pendulum",
+        "description": "pendulum",
+        "isExtraImport": true,
+        "detail": "pendulum",
+        "documentation": {}
+    },
+    {
+        "label": "ChatPromptTemplate",
+        "importPath": "langchain_core.prompts",
+        "description": "langchain_core.prompts",
+        "isExtraImport": true,
+        "detail": "langchain_core.prompts",
+        "documentation": {}
+    },
+    {
+        "label": "SystemMessagePromptTemplate",
+        "importPath": "langchain_core.prompts",
+        "description": "langchain_core.prompts",
+        "isExtraImport": true,
+        "detail": "langchain_core.prompts",
+        "documentation": {}
+    },
+    {
+        "label": "HumanMessagePromptTemplate",
+        "importPath": "langchain_core.prompts",
+        "description": "langchain_core.prompts",
+        "isExtraImport": true,
+        "detail": "langchain_core.prompts",
+        "documentation": {}
+    },
+    {
+        "label": "boto3.session",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "boto3.session",
+        "description": "boto3.session",
+        "detail": "boto3.session",
+        "documentation": {}
+    },
+    {
+        "label": "httpx",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "httpx",
+        "description": "httpx",
+        "detail": "httpx",
+        "documentation": {}
+    },
+    {
+        "label": "ExpenseContainer",
+        "importPath": "monylog.backend.expense.containers.di",
+        "description": "monylog.backend.expense.containers.di",
+        "isExtraImport": true,
+        "detail": "monylog.backend.expense.containers.di",
+        "documentation": {}
+    },
+    {
+        "label": "LLMContainer",
+        "importPath": "monylog.backend.llm.containers.di",
+        "description": "monylog.backend.llm.containers.di",
+        "isExtraImport": true,
+        "detail": "monylog.backend.llm.containers.di",
+        "documentation": {}
+    },
+    {
+        "label": "AuthContainer",
+        "importPath": "monylog.backend.auth.containers.di",
+        "description": "monylog.backend.auth.containers.di",
+        "isExtraImport": true,
+        "detail": "monylog.backend.auth.containers.di",
+        "documentation": {}
+    },
+    {
+        "label": "SqlaContainer",
+        "importPath": "monylog.shared_kernel.infra.database.sqla.container.di",
+        "description": "monylog.shared_kernel.infra.database.sqla.container.di",
+        "isExtraImport": true,
+        "detail": "monylog.shared_kernel.infra.database.sqla.container.di",
+        "documentation": {}
+    },
+    {
+        "label": "asynccontextmanager",
+        "importPath": "contextlib",
+        "description": "contextlib",
+        "isExtraImport": true,
+        "detail": "contextlib",
+        "documentation": {}
+    },
+    {
+        "label": "FastAPI",
+        "importPath": "fastapi.applications",
+        "description": "fastapi.applications",
+        "isExtraImport": true,
+        "detail": "fastapi.applications",
+        "documentation": {}
+    },
+    {
+        "label": "Middleware",
+        "importPath": "fastapi.middleware",
+        "description": "fastapi.middleware",
+        "isExtraImport": true,
+        "detail": "fastapi.middleware",
+        "documentation": {}
+    },
+    {
+        "label": "CORSMiddleware",
+        "importPath": "fastapi.middleware.cors",
+        "description": "fastapi.middleware.cors",
+        "isExtraImport": true,
+        "detail": "fastapi.middleware.cors",
+        "documentation": {}
+    },
+    {
+        "label": "GZipMiddleware",
+        "importPath": "fastapi.middleware.gzip",
+        "description": "fastapi.middleware.gzip",
+        "isExtraImport": true,
+        "detail": "fastapi.middleware.gzip",
+        "documentation": {}
+    },
+    {
+        "label": "endpoint",
+        "importPath": "monylog.backend.endpoint.rest.fastapi",
+        "description": "monylog.backend.endpoint.rest.fastapi",
+        "isExtraImport": true,
+        "detail": "monylog.backend.endpoint.rest.fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "lifespan",
+        "importPath": "monylog.backend.lifespan",
+        "description": "monylog.backend.lifespan",
+        "isExtraImport": true,
+        "detail": "monylog.backend.lifespan",
+        "documentation": {}
+    },
+    {
+        "label": "BaseMsgException",
+        "importPath": "monylog.shared_kernel.domain.exception",
+        "description": "monylog.shared_kernel.domain.exception",
+        "isExtraImport": true,
+        "detail": "monylog.shared_kernel.domain.exception",
+        "documentation": {}
+    },
+    {
+        "label": "CorrelationIdMiddleware",
+        "importPath": "monylog.shared_kernel.infra.fastapi.middlewares.correlation_id",
+        "description": "monylog.shared_kernel.infra.fastapi.middlewares.correlation_id",
+        "isExtraImport": true,
+        "detail": "monylog.shared_kernel.infra.fastapi.middlewares.correlation_id",
+        "documentation": {}
+    },
+    {
+        "label": "SessionMiddleware",
+        "importPath": "monylog.shared_kernel.infra.fastapi.middlewares.session",
+        "description": "monylog.shared_kernel.infra.fastapi.middlewares.session",
+        "isExtraImport": true,
+        "detail": "monylog.shared_kernel.infra.fastapi.middlewares.session",
+        "documentation": {}
+    },
+    {
+        "label": "MsgSpecJSONResponse",
+        "importPath": "monylog.shared_kernel.infra.fastapi.utils.responses",
+        "description": "monylog.shared_kernel.infra.fastapi.utils.responses",
+        "isExtraImport": true,
+        "detail": "monylog.shared_kernel.infra.fastapi.utils.responses",
+        "documentation": {}
+    },
+    {
+        "label": "BaseSettings",
+        "importPath": "pydantic_settings",
+        "description": "pydantic_settings",
+        "isExtraImport": true,
+        "detail": "pydantic_settings",
+        "documentation": {}
+    },
+    {
+        "label": "SettingsConfigDict",
+        "importPath": "pydantic_settings",
+        "description": "pydantic_settings",
+        "isExtraImport": true,
+        "detail": "pydantic_settings",
+        "documentation": {}
+    },
+    {
+        "label": "SessionSettings",
+        "importPath": "monylog.shared_kernel.infra.settings.model",
+        "description": "monylog.shared_kernel.infra.settings.model",
+        "isExtraImport": true,
+        "detail": "monylog.shared_kernel.infra.settings.model",
+        "documentation": {}
+    },
+    {
+        "label": "CacheSettings",
+        "importPath": "monylog.shared_kernel.infra.settings.model",
+        "description": "monylog.shared_kernel.infra.settings.model",
+        "isExtraImport": true,
+        "detail": "monylog.shared_kernel.infra.settings.model",
+        "documentation": {}
+    },
+    {
+        "label": "CookieSettings",
+        "importPath": "monylog.shared_kernel.infra.settings.model",
+        "description": "monylog.shared_kernel.infra.settings.model",
+        "isExtraImport": true,
+        "detail": "monylog.shared_kernel.infra.settings.model",
+        "documentation": {}
+    },
+    {
+        "label": "CORSSettings",
+        "importPath": "monylog.shared_kernel.infra.settings.model",
+        "description": "monylog.shared_kernel.infra.settings.model",
+        "isExtraImport": true,
+        "detail": "monylog.shared_kernel.infra.settings.model",
+        "documentation": {}
+    },
+    {
+        "label": "EmailSettings",
+        "importPath": "monylog.shared_kernel.infra.settings.model",
+        "description": "monylog.shared_kernel.infra.settings.model",
+        "isExtraImport": true,
+        "detail": "monylog.shared_kernel.infra.settings.model",
+        "documentation": {}
+    },
+    {
+        "label": "FastAPISettings",
+        "importPath": "monylog.shared_kernel.infra.settings.model",
+        "description": "monylog.shared_kernel.infra.settings.model",
+        "isExtraImport": true,
+        "detail": "monylog.shared_kernel.infra.settings.model",
+        "documentation": {}
+    },
+    {
+        "label": "GZipSettings",
+        "importPath": "monylog.shared_kernel.infra.settings.model",
+        "description": "monylog.shared_kernel.infra.settings.model",
+        "isExtraImport": true,
+        "detail": "monylog.shared_kernel.infra.settings.model",
+        "documentation": {}
+    },
+    {
+        "label": "JWTSettings",
+        "importPath": "monylog.shared_kernel.infra.settings.model",
+        "description": "monylog.shared_kernel.infra.settings.model",
+        "isExtraImport": true,
+        "detail": "monylog.shared_kernel.infra.settings.model",
+        "documentation": {}
+    },
+    {
+        "label": "LoggerSettings",
+        "importPath": "monylog.shared_kernel.infra.settings.model",
+        "description": "monylog.shared_kernel.infra.settings.model",
+        "isExtraImport": true,
+        "detail": "monylog.shared_kernel.infra.settings.model",
+        "documentation": {}
+    },
+    {
+        "label": "OAuthSettings",
+        "importPath": "monylog.shared_kernel.infra.settings.model",
+        "description": "monylog.shared_kernel.infra.settings.model",
+        "isExtraImport": true,
+        "detail": "monylog.shared_kernel.infra.settings.model",
+        "documentation": {}
+    },
+    {
+        "label": "ObjectStorageSettings",
+        "importPath": "monylog.shared_kernel.infra.settings.model",
+        "description": "monylog.shared_kernel.infra.settings.model",
+        "isExtraImport": true,
+        "detail": "monylog.shared_kernel.infra.settings.model",
+        "documentation": {}
+    },
+    {
+        "label": "RatelimiterSettings",
+        "importPath": "monylog.shared_kernel.infra.settings.model",
+        "description": "monylog.shared_kernel.infra.settings.model",
+        "isExtraImport": true,
+        "detail": "monylog.shared_kernel.infra.settings.model",
+        "documentation": {}
+    },
+    {
+        "label": "DatabaseSettings",
+        "importPath": "monylog.shared_kernel.infra.database.sqla.settings",
+        "description": "monylog.shared_kernel.infra.database.sqla.settings",
+        "isExtraImport": true,
+        "detail": "monylog.shared_kernel.infra.database.sqla.settings",
+        "documentation": {}
+    },
+    {
+        "label": "lru_cache",
+        "importPath": "functools",
+        "description": "functools",
+        "isExtraImport": true,
+        "detail": "functools",
+        "documentation": {}
+    },
+    {
+        "label": "pytest",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "pytest",
+        "description": "pytest",
+        "detail": "pytest",
+        "documentation": {}
+    },
+    {
+        "label": "TestClient",
+        "importPath": "fastapi.testclient",
+        "description": "fastapi.testclient",
+        "isExtraImport": true,
+        "detail": "fastapi.testclient",
+        "documentation": {}
+    },
+    {
+        "label": "TestClient",
+        "importPath": "fastapi.testclient",
+        "description": "fastapi.testclient",
+        "isExtraImport": true,
+        "detail": "fastapi.testclient",
+        "documentation": {}
+    },
+    {
+        "label": "AsyncMock",
+        "importPath": "unittest.mock",
+        "description": "unittest.mock",
+        "isExtraImport": true,
+        "detail": "unittest.mock",
+        "documentation": {}
+    },
+    {
+        "label": "patch",
+        "importPath": "unittest.mock",
+        "description": "unittest.mock",
+        "isExtraImport": true,
+        "detail": "unittest.mock",
+        "documentation": {}
+    },
+    {
+        "label": "ExpenseMessageAnalyzeRequest",
+        "importPath": "monylog.backend.llm.dtos.request",
+        "description": "monylog.backend.llm.dtos.request",
+        "isExtraImport": true,
+        "detail": "monylog.backend.llm.dtos.request",
+        "documentation": {}
+    },
+    {
+        "label": "MessageAnalyzedSchema",
+        "importPath": "monylog.backend.llm.dtos.schemas",
+        "description": "monylog.backend.llm.dtos.schemas",
+        "isExtraImport": true,
+        "detail": "monylog.backend.llm.dtos.schemas",
+        "documentation": {}
+    },
+    {
+        "label": "bin_dir",
+        "kind": 5,
+        "importPath": ".venv.bin.activate_this",
+        "description": ".venv.bin.activate_this",
+        "peekOfCode": "bin_dir = os.path.dirname(abs_file)\nbase = bin_dir[: -len(\"bin\") - 1]  # strip away the bin part from the __file__, plus the path separator\n# prepend bin to PATH (this file is inside the bin directory)\nos.environ[\"PATH\"] = os.pathsep.join([bin_dir, *os.environ.get(\"PATH\", \"\").split(os.pathsep)])\nos.environ[\"VIRTUAL_ENV\"] = base  # virtual env is right above bin directory\nos.environ[\"VIRTUAL_ENV_PROMPT\"] = \"backend\" or os.path.basename(base)  # noqa: SIM222\n# add the virtual environments libraries to the host python import mechanism\nprev_length = len(sys.path)\nfor lib in \"../lib/python3.12/site-packages\".split(os.pathsep):\n    path = os.path.realpath(os.path.join(bin_dir, lib))",
+        "detail": ".venv.bin.activate_this",
+        "documentation": {}
+    },
+    {
+        "label": "base",
+        "kind": 5,
+        "importPath": ".venv.bin.activate_this",
+        "description": ".venv.bin.activate_this",
+        "peekOfCode": "base = bin_dir[: -len(\"bin\") - 1]  # strip away the bin part from the __file__, plus the path separator\n# prepend bin to PATH (this file is inside the bin directory)\nos.environ[\"PATH\"] = os.pathsep.join([bin_dir, *os.environ.get(\"PATH\", \"\").split(os.pathsep)])\nos.environ[\"VIRTUAL_ENV\"] = base  # virtual env is right above bin directory\nos.environ[\"VIRTUAL_ENV_PROMPT\"] = \"backend\" or os.path.basename(base)  # noqa: SIM222\n# add the virtual environments libraries to the host python import mechanism\nprev_length = len(sys.path)\nfor lib in \"../lib/python3.12/site-packages\".split(os.pathsep):\n    path = os.path.realpath(os.path.join(bin_dir, lib))\n    site.addsitedir(path)",
+        "detail": ".venv.bin.activate_this",
+        "documentation": {}
+    },
+    {
+        "label": "os.environ[\"PATH\"]",
+        "kind": 5,
+        "importPath": ".venv.bin.activate_this",
+        "description": ".venv.bin.activate_this",
+        "peekOfCode": "os.environ[\"PATH\"] = os.pathsep.join([bin_dir, *os.environ.get(\"PATH\", \"\").split(os.pathsep)])\nos.environ[\"VIRTUAL_ENV\"] = base  # virtual env is right above bin directory\nos.environ[\"VIRTUAL_ENV_PROMPT\"] = \"backend\" or os.path.basename(base)  # noqa: SIM222\n# add the virtual environments libraries to the host python import mechanism\nprev_length = len(sys.path)\nfor lib in \"../lib/python3.12/site-packages\".split(os.pathsep):\n    path = os.path.realpath(os.path.join(bin_dir, lib))\n    site.addsitedir(path)\nsys.path[:] = sys.path[prev_length:] + sys.path[0:prev_length]\nsys.real_prefix = sys.prefix",
+        "detail": ".venv.bin.activate_this",
+        "documentation": {}
+    },
+    {
+        "label": "os.environ[\"VIRTUAL_ENV\"]",
+        "kind": 5,
+        "importPath": ".venv.bin.activate_this",
+        "description": ".venv.bin.activate_this",
+        "peekOfCode": "os.environ[\"VIRTUAL_ENV\"] = base  # virtual env is right above bin directory\nos.environ[\"VIRTUAL_ENV_PROMPT\"] = \"backend\" or os.path.basename(base)  # noqa: SIM222\n# add the virtual environments libraries to the host python import mechanism\nprev_length = len(sys.path)\nfor lib in \"../lib/python3.12/site-packages\".split(os.pathsep):\n    path = os.path.realpath(os.path.join(bin_dir, lib))\n    site.addsitedir(path)\nsys.path[:] = sys.path[prev_length:] + sys.path[0:prev_length]\nsys.real_prefix = sys.prefix\nsys.prefix = base",
+        "detail": ".venv.bin.activate_this",
+        "documentation": {}
+    },
+    {
+        "label": "os.environ[\"VIRTUAL_ENV_PROMPT\"]",
+        "kind": 5,
+        "importPath": ".venv.bin.activate_this",
+        "description": ".venv.bin.activate_this",
+        "peekOfCode": "os.environ[\"VIRTUAL_ENV_PROMPT\"] = \"backend\" or os.path.basename(base)  # noqa: SIM222\n# add the virtual environments libraries to the host python import mechanism\nprev_length = len(sys.path)\nfor lib in \"../lib/python3.12/site-packages\".split(os.pathsep):\n    path = os.path.realpath(os.path.join(bin_dir, lib))\n    site.addsitedir(path)\nsys.path[:] = sys.path[prev_length:] + sys.path[0:prev_length]\nsys.real_prefix = sys.prefix\nsys.prefix = base",
+        "detail": ".venv.bin.activate_this",
+        "documentation": {}
+    },
+    {
+        "label": "prev_length",
+        "kind": 5,
+        "importPath": ".venv.bin.activate_this",
+        "description": ".venv.bin.activate_this",
+        "peekOfCode": "prev_length = len(sys.path)\nfor lib in \"../lib/python3.12/site-packages\".split(os.pathsep):\n    path = os.path.realpath(os.path.join(bin_dir, lib))\n    site.addsitedir(path)\nsys.path[:] = sys.path[prev_length:] + sys.path[0:prev_length]\nsys.real_prefix = sys.prefix\nsys.prefix = base",
+        "detail": ".venv.bin.activate_this",
+        "documentation": {}
+    },
+    {
+        "label": "sys.path[:]",
+        "kind": 5,
+        "importPath": ".venv.bin.activate_this",
+        "description": ".venv.bin.activate_this",
+        "peekOfCode": "sys.path[:] = sys.path[prev_length:] + sys.path[0:prev_length]\nsys.real_prefix = sys.prefix\nsys.prefix = base",
+        "detail": ".venv.bin.activate_this",
+        "documentation": {}
+    },
+    {
+        "label": "sys.real_prefix",
+        "kind": 5,
+        "importPath": ".venv.bin.activate_this",
+        "description": ".venv.bin.activate_this",
+        "peekOfCode": "sys.real_prefix = sys.prefix\nsys.prefix = base",
+        "detail": ".venv.bin.activate_this",
+        "documentation": {}
+    },
+    {
+        "label": "sys.prefix",
+        "kind": 5,
+        "importPath": ".venv.bin.activate_this",
+        "description": ".venv.bin.activate_this",
+        "peekOfCode": "sys.prefix = base",
+        "detail": ".venv.bin.activate_this",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": ".venv.bin.jp",
+        "description": ".venv.bin.jp",
+        "peekOfCode": "def main():\n    parser = argparse.ArgumentParser()\n    parser.add_argument('expression')\n    parser.add_argument('-f', '--filename',\n                        help=('The filename containing the input data.  '\n                              'If a filename is not given then data is '\n                              'read from stdin.'))\n    parser.add_argument('--ast', action='store_true',\n                        help=('Pretty print the AST, do not search the data.'))\n    args = parser.parse_args()",
+        "detail": ".venv.bin.jp",
+        "documentation": {}
+    },
+    {
+        "label": "upgrade",
+        "kind": 2,
+        "importPath": "src.monylog.alembic.migrations.versions.2025-05-27-1644-f7d9f3e6ac1a-init",
+        "description": "src.monylog.alembic.migrations.versions.2025-05-27-1644-f7d9f3e6ac1a-init",
+        "peekOfCode": "def upgrade() -> None:\n    existing_tables = set(get_existing_tables())  # noqa: F841\n    print(expense_entities.Expense.__tablename__)\n    if auth_entities.User.__tablename__ not in existing_tables:\n        op.create_table(\n            auth_entities.User.__tablename__,\n            sa.Column(\"id\", sa.VARCHAR(32), primary_key=True),\n            sa.Column(\"email\", sa.VARCHAR(300), nullable=False, unique=True),\n            sa.Column(\"hashed_password\", sa.Text, nullable=False),\n            sa.Column(\"nickname\", sa.Text, nullable=False),",
+        "detail": "src.monylog.alembic.migrations.versions.2025-05-27-1644-f7d9f3e6ac1a-init",
+        "documentation": {}
+    },
+    {
+        "label": "downgrade",
+        "kind": 2,
+        "importPath": "src.monylog.alembic.migrations.versions.2025-05-27-1644-f7d9f3e6ac1a-init",
+        "description": "src.monylog.alembic.migrations.versions.2025-05-27-1644-f7d9f3e6ac1a-init",
+        "peekOfCode": "def downgrade() -> None:\n    existing_tables = set(get_existing_tables())  # noqa: F841\n    if expense_entities.ExpenseLog.__tablename__ in existing_tables:\n        op.drop_table(expense_entities.ExpenseLog.__tablename__)\n    if expense_entities.Expense.__tablename__ in existing_tables:\n        op.drop_table(expense_entities.Expense.__tablename__)\n    if expense_entities.ExpenseTag.__tablename__ in existing_tables:\n        op.drop_table(expense_entities.ExpenseTag.__tablename__)\n    if expense_entities.expense_tag_asociation_table.name in existing_tables:\n        op.drop_table(expense_entities.expense_tag_asociation_table.name)",
+        "detail": "src.monylog.alembic.migrations.versions.2025-05-27-1644-f7d9f3e6ac1a-init",
+        "documentation": {}
+    },
+    {
+        "label": "run_migrations_offline",
+        "kind": 2,
+        "importPath": "src.monylog.alembic.migrations.env",
+        "description": "src.monylog.alembic.migrations.env",
+        "peekOfCode": "def run_migrations_offline() -> None:\n    \"\"\"Run migrations in 'offline' mode.\n    This configures the context with just a URL\n    and not an Engine, though an Engine is acceptable\n    here as well.  By skipping the Engine creation\n    we don't even need a DBAPI to be available.\n    Calls to context.execute() here emit the given string to the\n    script output.\n    \"\"\"\n    context.configure(",
+        "detail": "src.monylog.alembic.migrations.env",
+        "documentation": {}
+    },
+    {
+        "label": "run_migrations_online",
+        "kind": 2,
+        "importPath": "src.monylog.alembic.migrations.env",
+        "description": "src.monylog.alembic.migrations.env",
+        "peekOfCode": "def run_migrations_online() -> None:\n    \"\"\"Run migrations in 'online' mode.\n    In this scenario we need to create an Engine\n    and associate a connection with the context.\n    \"\"\"\n    connectable = create_engine(url, poolclass=pool.NullPool, echo=True)\n    with connectable.connect() as connection:\n        context.configure(connection=connection, target_metadata=target_metadata)\n        with context.begin_transaction():\n            context.run_migrations()",
+        "detail": "src.monylog.alembic.migrations.env",
+        "documentation": {}
+    },
+    {
+        "label": "config",
+        "kind": 5,
+        "importPath": "src.monylog.alembic.migrations.env",
+        "description": "src.monylog.alembic.migrations.env",
+        "peekOfCode": "config = context.config\n# Interpret the config file for Python logging.\n# This line sets up loggers basically.\nif config.config_file_name is not None:\n    fileConfig(config.config_file_name)\n# add your model's MetaData object here\n# for 'autogenerate' support\n# from myapp import mymodel\n# target_metadata = mymodel.Base.metadata\ntarget_metadata = metadata",
+        "detail": "src.monylog.alembic.migrations.env",
+        "documentation": {}
+    },
+    {
+        "label": "target_metadata",
+        "kind": 5,
+        "importPath": "src.monylog.alembic.migrations.env",
+        "description": "src.monylog.alembic.migrations.env",
+        "peekOfCode": "target_metadata = metadata\nurl: str = os.getenv(\"MONYLOG_DB__URL\", \"sqlite:///data/monylog.db\")  # type: ignore\nassert isinstance(url, str)\nuse_url = input(f\"Use this URL? (Y/N): {url} - (Y/N) :\")\nwhile use_url.upper() not in (\"Y\", \"N\"):\n    use_url = input(\"Invalid input. Please enter Y or N: \")\n# other values from the config, defined by the needs of env.py,\n# can be acquired:\n# my_important_option = config.get_main_option(\"my_important_option\")\n# ... etc.",
+        "detail": "src.monylog.alembic.migrations.env",
+        "documentation": {}
+    },
+    {
+        "label": "use_url",
+        "kind": 5,
+        "importPath": "src.monylog.alembic.migrations.env",
+        "description": "src.monylog.alembic.migrations.env",
+        "peekOfCode": "use_url = input(f\"Use this URL? (Y/N): {url} - (Y/N) :\")\nwhile use_url.upper() not in (\"Y\", \"N\"):\n    use_url = input(\"Invalid input. Please enter Y or N: \")\n# other values from the config, defined by the needs of env.py,\n# can be acquired:\n# my_important_option = config.get_main_option(\"my_important_option\")\n# ... etc.\ndef run_migrations_offline() -> None:\n    \"\"\"Run migrations in 'offline' mode.\n    This configures the context with just a URL",
+        "detail": "src.monylog.alembic.migrations.env",
+        "documentation": {}
+    },
+    {
+        "label": "get_existing_tables",
+        "kind": 2,
+        "importPath": "src.monylog.alembic.migrations.utils",
+        "description": "src.monylog.alembic.migrations.utils",
+        "peekOfCode": "def get_existing_tables() -> list[str]:\n    con = op.get_bind()\n    inspector = Inspector.from_engine(con)\n    response = []\n    response.extend(inspector.get_table_names())\n    response.extend(get_existing_mv())\n    return response\ndef get_existing_mv() -> list[str]:\n    con = op.get_bind()\n    inspector = Inspector.from_engine(con)",
+        "detail": "src.monylog.alembic.migrations.utils",
+        "documentation": {}
+    },
+    {
+        "label": "get_existing_mv",
+        "kind": 2,
+        "importPath": "src.monylog.alembic.migrations.utils",
+        "description": "src.monylog.alembic.migrations.utils",
+        "peekOfCode": "def get_existing_mv() -> list[str]:\n    con = op.get_bind()\n    inspector = Inspector.from_engine(con)\n    response = []\n    # response.extend(inspector.get_materialized_view_names())\n    response.extend(inspector.get_view_names())\n    return response\ndef get_revision_id():\n    return str(uuid.uuid4()).replace(\"-\", \"\")[:12]\ndef run():",
+        "detail": "src.monylog.alembic.migrations.utils",
+        "documentation": {}
+    },
+    {
+        "label": "get_revision_id",
+        "kind": 2,
+        "importPath": "src.monylog.alembic.migrations.utils",
+        "description": "src.monylog.alembic.migrations.utils",
+        "peekOfCode": "def get_revision_id():\n    return str(uuid.uuid4()).replace(\"-\", \"\")[:12]\ndef run():\n    print(\"********** Running migrations... **********\")\n    try:\n        from alembic import command\n        from alembic.config import Config\n        print(os.getcwd())\n        alembic_cfg = Config(\"alembic.ini\")\n        # Set the script location dynamically",
+        "detail": "src.monylog.alembic.migrations.utils",
+        "documentation": {}
+    },
+    {
+        "label": "run",
+        "kind": 2,
+        "importPath": "src.monylog.alembic.migrations.utils",
+        "description": "src.monylog.alembic.migrations.utils",
+        "peekOfCode": "def run():\n    print(\"********** Running migrations... **********\")\n    try:\n        from alembic import command\n        from alembic.config import Config\n        print(os.getcwd())\n        alembic_cfg = Config(\"alembic.ini\")\n        # Set the script location dynamically\n        # migrations_path = \"src/migration\"\n        # alembic_cfg.set_main_option(\"script_location\", str(migrations_path))",
+        "detail": "src.monylog.alembic.migrations.utils",
+        "documentation": {}
+    },
+    {
+        "label": "AuthContainer",
+        "kind": 6,
+        "importPath": "src.monylog.backend.auth.containers.di",
+        "description": "src.monylog.backend.auth.containers.di",
+        "peekOfCode": "class AuthContainer(containers.DeclarativeContainer):\n    settings = providers.Resource(Settings)\n    use_case = providers.Singleton(AuthUseCase)",
+        "detail": "src.monylog.backend.auth.containers.di",
+        "documentation": {}
+    },
+    {
+        "label": "UserLoginRequest",
+        "kind": 6,
+        "importPath": "src.monylog.backend.auth.dtos.request",
+        "description": "src.monylog.backend.auth.dtos.request",
+        "peekOfCode": "class UserLoginRequest(UserLoginSchmema):\n    @model_validator(mode=\"before\")\n    def validate_email(cls, values):\n        email = values.get(\"email\")\n        if not email or \"@\" not in email:\n            raise ValueError(\"Invalid email format\")\n        return values\nclass UserRegisterRequest(UserRegisterSchema):\n    @model_validator(mode=\"before\")\n    def validate_email(cls, values):",
+        "detail": "src.monylog.backend.auth.dtos.request",
+        "documentation": {}
+    },
+    {
+        "label": "UserRegisterRequest",
+        "kind": 6,
+        "importPath": "src.monylog.backend.auth.dtos.request",
+        "description": "src.monylog.backend.auth.dtos.request",
+        "peekOfCode": "class UserRegisterRequest(UserRegisterSchema):\n    @model_validator(mode=\"before\")\n    def validate_email(cls, values):\n        email = values.get(\"email\")\n        if not email or \"@\" not in email:\n            raise ValueError(\"Invalid email format\")\n        return values\n    @model_validator(mode=\"before\")\n    def validate_password(cls, values):\n        password = values.get(\"password\")",
+        "detail": "src.monylog.backend.auth.dtos.request",
+        "documentation": {}
+    },
+    {
+        "label": "UserResponse",
+        "kind": 5,
+        "importPath": "src.monylog.backend.auth.dtos.response",
+        "description": "src.monylog.backend.auth.dtos.response",
+        "peekOfCode": "UserResponse = ResponseDto[UserReadSchema]",
+        "detail": "src.monylog.backend.auth.dtos.response",
+        "documentation": {}
+    },
+    {
+        "label": "UserLoginSchmema",
+        "kind": 6,
+        "importPath": "src.monylog.backend.auth.dtos.schemas",
+        "description": "src.monylog.backend.auth.dtos.schemas",
+        "peekOfCode": "class UserLoginSchmema(CamelModel):\n    email: str = Field(..., description=\"User's email address\")\n    password: str = Field(..., description=\"User's password\")\nclass UserRegisterSchema(CamelModel):\n    email: str = Field(..., description=\"User's email address\")\n    password: str = Field(..., description=\"User's password\")\nclass UserReadSchema(CamelModel):\n    id: str = Field(..., description=\"User's unique identifier\")\n    email: str = Field(..., description=\"User's email address\")\n    nickname: str = Field(..., description=\"User's nickname\")",
+        "detail": "src.monylog.backend.auth.dtos.schemas",
+        "documentation": {}
+    },
+    {
+        "label": "UserRegisterSchema",
+        "kind": 6,
+        "importPath": "src.monylog.backend.auth.dtos.schemas",
+        "description": "src.monylog.backend.auth.dtos.schemas",
+        "peekOfCode": "class UserRegisterSchema(CamelModel):\n    email: str = Field(..., description=\"User's email address\")\n    password: str = Field(..., description=\"User's password\")\nclass UserReadSchema(CamelModel):\n    id: str = Field(..., description=\"User's unique identifier\")\n    email: str = Field(..., description=\"User's email address\")\n    nickname: str = Field(..., description=\"User's nickname\")\n    thumbnail: str | None = Field(None, description=\"User's profile thumbnail image URL\")\nclass UserPayloadSchema(CamelModel):\n    id: str = Field(..., description=\"User's unique identifier\")",
+        "detail": "src.monylog.backend.auth.dtos.schemas",
+        "documentation": {}
+    },
+    {
+        "label": "UserReadSchema",
+        "kind": 6,
+        "importPath": "src.monylog.backend.auth.dtos.schemas",
+        "description": "src.monylog.backend.auth.dtos.schemas",
+        "peekOfCode": "class UserReadSchema(CamelModel):\n    id: str = Field(..., description=\"User's unique identifier\")\n    email: str = Field(..., description=\"User's email address\")\n    nickname: str = Field(..., description=\"User's nickname\")\n    thumbnail: str | None = Field(None, description=\"User's profile thumbnail image URL\")\nclass UserPayloadSchema(CamelModel):\n    id: str = Field(..., description=\"User's unique identifier\")\n    email: str = Field(..., description=\"User's email address\")",
+        "detail": "src.monylog.backend.auth.dtos.schemas",
+        "documentation": {}
+    },
+    {
+        "label": "UserPayloadSchema",
+        "kind": 6,
+        "importPath": "src.monylog.backend.auth.dtos.schemas",
+        "description": "src.monylog.backend.auth.dtos.schemas",
+        "peekOfCode": "class UserPayloadSchema(CamelModel):\n    id: str = Field(..., description=\"User's unique identifier\")\n    email: str = Field(..., description=\"User's email address\")",
+        "detail": "src.monylog.backend.auth.dtos.schemas",
+        "documentation": {}
+    },
+    {
+        "label": "User",
+        "kind": 6,
+        "importPath": "src.monylog.backend.auth.entities.user",
+        "description": "src.monylog.backend.auth.entities.user",
+        "peekOfCode": "class User(Base, TimestampMixin):\n    __tablename__ = \"monylog_user\"\n    id: Mapped[str] = mapped_column(sa.VARCHAR(32), default=lambda: nanoid.generate(size=32), primary_key=True)\n    email: Mapped[str] = mapped_column(sa.VARCHAR(300), nullable=False, unique=True)\n    hashed_password: Mapped[str] = mapped_column(sa.Text, nullable=False)\n    nickname: Mapped[str] = mapped_column(sa.VARCHAR(100), nullable=False, unique=True)\n    thumbnail: Mapped[Optional[str]] = mapped_column(sa.Text, nullable=True, default=None)\n    is_active: Mapped[bool] = mapped_column(sa.Boolean, default=True, nullable=False)\n    is_verified: Mapped[bool] = mapped_column(sa.Boolean, default=False, nullable=False)\n    is_superuser: Mapped[bool] = mapped_column(sa.Boolean, default=False, nullable=False)",
+        "detail": "src.monylog.backend.auth.entities.user",
+        "documentation": {}
+    },
+    {
+        "label": "UserLoginHistory",
+        "kind": 6,
+        "importPath": "src.monylog.backend.auth.entities.user",
+        "description": "src.monylog.backend.auth.entities.user",
+        "peekOfCode": "class UserLoginHistory(Base):\n    __tablename__ = \"monylog_user_login_history\"\n    id: Mapped[int] = mapped_column(sa.Integer, primary_key=True, autoincrement=True)\n    user_id: Mapped[str] = mapped_column(sa.VARCHAR(32), sa.ForeignKey(\"monylog_user.id\"), nullable=False)\n    login_time: Mapped[sa.TIMESTAMP] = mapped_column(\n        sa.TIMESTAMP(timezone=True),\n        default=sa.func.now(),\n        nullable=False,\n    )\n    user: Mapped[User] = orm.relationship(",
+        "detail": "src.monylog.backend.auth.entities.user",
+        "documentation": {}
+    },
+    {
+        "label": "settings",
+        "kind": 5,
+        "importPath": "src.monylog.backend.auth.rest.fastapi",
+        "description": "src.monylog.backend.auth.rest.fastapi",
+        "peekOfCode": "settings = get_settings()\nrouter = APIRouter()\nget_auth_use_case = Provide[MonyLogContainer.auth.use_case]\n@router.post(\n    \"/register\",\n    status_code=status.HTTP_201_CREATED,\n)\n@inject\nasync def register(\n    response: Response,",
+        "detail": "src.monylog.backend.auth.rest.fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "router",
+        "kind": 5,
+        "importPath": "src.monylog.backend.auth.rest.fastapi",
+        "description": "src.monylog.backend.auth.rest.fastapi",
+        "peekOfCode": "router = APIRouter()\nget_auth_use_case = Provide[MonyLogContainer.auth.use_case]\n@router.post(\n    \"/register\",\n    status_code=status.HTTP_201_CREATED,\n)\n@inject\nasync def register(\n    response: Response,\n    user_data: UserRegisterRequest = Form(...),",
+        "detail": "src.monylog.backend.auth.rest.fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "get_auth_use_case",
+        "kind": 5,
+        "importPath": "src.monylog.backend.auth.rest.fastapi",
+        "description": "src.monylog.backend.auth.rest.fastapi",
+        "peekOfCode": "get_auth_use_case = Provide[MonyLogContainer.auth.use_case]\n@router.post(\n    \"/register\",\n    status_code=status.HTTP_201_CREATED,\n)\n@inject\nasync def register(\n    response: Response,\n    user_data: UserRegisterRequest = Form(...),\n    use_case: AuthUseCase = Depends(get_auth_use_case),",
+        "detail": "src.monylog.backend.auth.rest.fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "JWTService",
+        "kind": 6,
+        "importPath": "src.monylog.backend.auth.services.jwt",
+        "description": "src.monylog.backend.auth.services.jwt",
+        "peekOfCode": "class JWTService:\n    class Payload(BaseModel):\n        sub: str\n        user: UserPayloadSchema\n        type: str | None = None\n        exp: datetime\n    access_cookie_scheme = APIKeyCookie(name=\"x-monylog-access-token\")\n    refresh_cookie_scheme = APIKeyCookie(name=\"x-monylog-refresh-token\")\n    @classmethod\n    def create_access_token(",
+        "detail": "src.monylog.backend.auth.services.jwt",
+        "documentation": {}
+    },
+    {
+        "label": "settings",
+        "kind": 5,
+        "importPath": "src.monylog.backend.auth.services.jwt",
+        "description": "src.monylog.backend.auth.services.jwt",
+        "peekOfCode": "settings = get_settings().jwt\n@dataclass(init=True, repr=True, eq=True, frozen=True)\nclass JWTService:\n    class Payload(BaseModel):\n        sub: str\n        user: UserPayloadSchema\n        type: str | None = None\n        exp: datetime\n    access_cookie_scheme = APIKeyCookie(name=\"x-monylog-access-token\")\n    refresh_cookie_scheme = APIKeyCookie(name=\"x-monylog-refresh-token\")",
+        "detail": "src.monylog.backend.auth.services.jwt",
+        "documentation": {}
+    },
+    {
+        "label": "PasswordHelper",
+        "kind": 6,
+        "importPath": "src.monylog.backend.auth.services.password_helper",
+        "description": "src.monylog.backend.auth.services.password_helper",
+        "peekOfCode": "class PasswordHelper:\n    @classmethod\n    def password_hash(cls, password: str) -> str:\n        return bcrypt.hashpw(password.encode(\"utf-8\"), bcrypt.gensalt()).decode(\"utf-8\")\n    @classmethod\n    def password_verify(cls, password: str, hashed_password: str) -> bool:\n        return bcrypt.checkpw(password.encode(\"utf-8\"), hashed_password.encode(\"utf-8\"))",
+        "detail": "src.monylog.backend.auth.services.password_helper",
+        "documentation": {}
+    },
+    {
+        "label": "AuthException",
+        "kind": 6,
+        "importPath": "src.monylog.backend.auth.exceptions",
+        "description": "src.monylog.backend.auth.exceptions",
+        "peekOfCode": "class AuthException(BaseMsgException):\n    error: str = \"\"\n    message: str = \"\"\n    code: int = 401\nclass AuthTokenExpiredException(AuthException):\n    error: str = \"AUTH_TOKEN_EXPIRED\"\n    message: str = \"인증 토큰이 만료되었습니다.\"\n    code: int = 401\nclass AuthTokenInvalidException(AuthException):\n    error: str = \"AUTH_TOKEN_INVALID\"",
+        "detail": "src.monylog.backend.auth.exceptions",
+        "documentation": {}
+    },
+    {
+        "label": "AuthTokenExpiredException",
+        "kind": 6,
+        "importPath": "src.monylog.backend.auth.exceptions",
+        "description": "src.monylog.backend.auth.exceptions",
+        "peekOfCode": "class AuthTokenExpiredException(AuthException):\n    error: str = \"AUTH_TOKEN_EXPIRED\"\n    message: str = \"인증 토큰이 만료되었습니다.\"\n    code: int = 401\nclass AuthTokenInvalidException(AuthException):\n    error: str = \"AUTH_TOKEN_INVALID\"\n    message: str = \"유효하지 않은 인증 토큰입니다.\"\n    code: int = 401\nclass UserCredentialsInvalidException(AuthException):\n    error: str = \"USER_CREDENTIALS_INVALID\"",
+        "detail": "src.monylog.backend.auth.exceptions",
+        "documentation": {}
+    },
+    {
+        "label": "AuthTokenInvalidException",
+        "kind": 6,
+        "importPath": "src.monylog.backend.auth.exceptions",
+        "description": "src.monylog.backend.auth.exceptions",
+        "peekOfCode": "class AuthTokenInvalidException(AuthException):\n    error: str = \"AUTH_TOKEN_INVALID\"\n    message: str = \"유효하지 않은 인증 토큰입니다.\"\n    code: int = 401\nclass UserCredentialsInvalidException(AuthException):\n    error: str = \"USER_CREDENTIALS_INVALID\"\n    message: str = \"사용자 인증 정보가 유효하지 않습니다.\"\n    code: int = 401\nclass UserAlreadyExistsException(AuthException):\n    error: str = \"USER_ALREADY_EXISTS\"",
+        "detail": "src.monylog.backend.auth.exceptions",
+        "documentation": {}
+    },
+    {
+        "label": "UserCredentialsInvalidException",
+        "kind": 6,
+        "importPath": "src.monylog.backend.auth.exceptions",
+        "description": "src.monylog.backend.auth.exceptions",
+        "peekOfCode": "class UserCredentialsInvalidException(AuthException):\n    error: str = \"USER_CREDENTIALS_INVALID\"\n    message: str = \"사용자 인증 정보가 유효하지 않습니다.\"\n    code: int = 401\nclass UserAlreadyExistsException(AuthException):\n    error: str = \"USER_ALREADY_EXISTS\"\n    message: str = \"이미 존재하는 사용자입니다.\"\n    code: int = 409\nclass UserInactiveException(AuthException):\n    error: str = \"USER_INACTIVE\"",
+        "detail": "src.monylog.backend.auth.exceptions",
+        "documentation": {}
+    },
+    {
+        "label": "UserAlreadyExistsException",
+        "kind": 6,
+        "importPath": "src.monylog.backend.auth.exceptions",
+        "description": "src.monylog.backend.auth.exceptions",
+        "peekOfCode": "class UserAlreadyExistsException(AuthException):\n    error: str = \"USER_ALREADY_EXISTS\"\n    message: str = \"이미 존재하는 사용자입니다.\"\n    code: int = 409\nclass UserInactiveException(AuthException):\n    error: str = \"USER_INACTIVE\"\n    message: str = \"사용자가 비활성화 상태입니다.\"\n    code: int = 403\nclass UserNotVerifiedException(AuthException):\n    error: str = \"USER_NOT_VERIFIED\"",
+        "detail": "src.monylog.backend.auth.exceptions",
+        "documentation": {}
+    },
+    {
+        "label": "UserInactiveException",
+        "kind": 6,
+        "importPath": "src.monylog.backend.auth.exceptions",
+        "description": "src.monylog.backend.auth.exceptions",
+        "peekOfCode": "class UserInactiveException(AuthException):\n    error: str = \"USER_INACTIVE\"\n    message: str = \"사용자가 비활성화 상태입니다.\"\n    code: int = 403\nclass UserNotVerifiedException(AuthException):\n    error: str = \"USER_NOT_VERIFIED\"\n    message: str = \"사용자가 인증되지 않았습니다.\"\n    code: int = 403",
+        "detail": "src.monylog.backend.auth.exceptions",
+        "documentation": {}
+    },
+    {
+        "label": "UserNotVerifiedException",
+        "kind": 6,
+        "importPath": "src.monylog.backend.auth.exceptions",
+        "description": "src.monylog.backend.auth.exceptions",
+        "peekOfCode": "class UserNotVerifiedException(AuthException):\n    error: str = \"USER_NOT_VERIFIED\"\n    message: str = \"사용자가 인증되지 않았습니다.\"\n    code: int = 403",
+        "detail": "src.monylog.backend.auth.exceptions",
+        "documentation": {}
+    },
+    {
+        "label": "AuthUseCase",
+        "kind": 6,
+        "importPath": "src.monylog.backend.auth.use_case",
+        "description": "src.monylog.backend.auth.use_case",
+        "peekOfCode": "class AuthUseCase(SyncSqlaMixIn):\n    def register(self, user_data: \"UserRegisterRequest\") -> User:\n        user = User.build(\n            email=user_data.email,\n            password=user_data.password,\n            nickname=user_data.email.split(\"@\")[0],\n        )\n        with self.db.session() as session:\n            stmt = sa.select(User.id).where(User.email == user_data.email)\n            existing_user = session.execute(stmt).scalar_one_or_none()",
+        "detail": "src.monylog.backend.auth.use_case",
+        "documentation": {}
+    },
+    {
+        "label": "endpoint",
+        "kind": 5,
+        "importPath": "src.monylog.backend.endpoint.rest.fastapi",
+        "description": "src.monylog.backend.endpoint.rest.fastapi",
+        "peekOfCode": "endpoint = APIRouter(prefix=\"/api/v1\")\nendpoint.include_router(auth_router, prefix=\"/auth\", tags=[\"auth\"])\nendpoint.include_router(expense_router, prefix=\"/expense\", tags=[\"expense\"])\nendpoint.include_router(llm_router, prefix=\"/llm\", tags=[\"llm\"])",
+        "detail": "src.monylog.backend.endpoint.rest.fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "ExpenseContainer",
+        "kind": 6,
+        "importPath": "src.monylog.backend.expense.containers.di",
+        "description": "src.monylog.backend.expense.containers.di",
+        "peekOfCode": "class ExpenseContainer(containers.DeclarativeContainer):\n    settings = providers.Resource(Settings)\n    use_case = providers.Singleton(ExpenseUseCase)",
+        "detail": "src.monylog.backend.expense.containers.di",
+        "documentation": {}
+    },
+    {
+        "label": "CreateExpenseTagRequest",
+        "kind": 6,
+        "importPath": "src.monylog.backend.expense.dtos.request",
+        "description": "src.monylog.backend.expense.dtos.request",
+        "peekOfCode": "class CreateExpenseTagRequest(CamelModel):\n    class ExpenseTagDataSchema(CamelModel):\n        color: str = Field(\"#00f0f0\")\n    name: str = Field(default=\"\", description=\"name of ExpenseTag\")\n    data: ExpenseTagDataSchema = Field(default_factory=ExpenseTagDataSchema)\nclass SearchExpenseTagRequest(CamelModel):\n    name: str | None = None\n    id: str | None = None\n    @model_validator(mode=\"after\")\n    def validate_at_least_one_field(self) -> \"SearchExpenseTagRequest\":",
+        "detail": "src.monylog.backend.expense.dtos.request",
+        "documentation": {}
+    },
+    {
+        "label": "SearchExpenseTagRequest",
+        "kind": 6,
+        "importPath": "src.monylog.backend.expense.dtos.request",
+        "description": "src.monylog.backend.expense.dtos.request",
+        "peekOfCode": "class SearchExpenseTagRequest(CamelModel):\n    name: str | None = None\n    id: str | None = None\n    @model_validator(mode=\"after\")\n    def validate_at_least_one_field(self) -> \"SearchExpenseTagRequest\":\n        if self.name is None and self.id is None:\n            raise ValueError(\"At least one of name or id must be provided\")\n        return self\nclass CreateExpenseRequest(CamelModel):\n    request_id: str",
+        "detail": "src.monylog.backend.expense.dtos.request",
+        "documentation": {}
+    },
+    {
+        "label": "CreateExpenseRequest",
+        "kind": 6,
+        "importPath": "src.monylog.backend.expense.dtos.request",
+        "description": "src.monylog.backend.expense.dtos.request",
+        "peekOfCode": "class CreateExpenseRequest(CamelModel):\n    request_id: str\n    expenses: list[ExpenseSchema]\nclass ExpenseQeuryRequest(Pageable, DateRange, CamelModel):\n    pass",
+        "detail": "src.monylog.backend.expense.dtos.request",
+        "documentation": {}
+    },
+    {
+        "label": "ExpenseQeuryRequest",
+        "kind": 6,
+        "importPath": "src.monylog.backend.expense.dtos.request",
+        "description": "src.monylog.backend.expense.dtos.request",
+        "peekOfCode": "class ExpenseQeuryRequest(Pageable, DateRange, CamelModel):\n    pass",
+        "detail": "src.monylog.backend.expense.dtos.request",
+        "documentation": {}
+    },
+    {
+        "label": "MessageAnalyzedResponse",
+        "kind": 5,
+        "importPath": "src.monylog.backend.expense.dtos.response",
+        "description": "src.monylog.backend.expense.dtos.response",
+        "peekOfCode": "MessageAnalyzedResponse = ResponseDto[MessageAnalyzedSchema]\nExpenseTagPagingResponse = ResponseDto[list[ExpenseTagSchema]]\nExpensePagingResponse = ResponseDto[PaginationResponse[ExpenseReadSchema]]",
+        "detail": "src.monylog.backend.expense.dtos.response",
+        "documentation": {}
+    },
+    {
+        "label": "ExpenseTagPagingResponse",
+        "kind": 5,
+        "importPath": "src.monylog.backend.expense.dtos.response",
+        "description": "src.monylog.backend.expense.dtos.response",
+        "peekOfCode": "ExpenseTagPagingResponse = ResponseDto[list[ExpenseTagSchema]]\nExpensePagingResponse = ResponseDto[PaginationResponse[ExpenseReadSchema]]",
+        "detail": "src.monylog.backend.expense.dtos.response",
+        "documentation": {}
+    },
+    {
+        "label": "ExpensePagingResponse",
+        "kind": 5,
+        "importPath": "src.monylog.backend.expense.dtos.response",
+        "description": "src.monylog.backend.expense.dtos.response",
+        "peekOfCode": "ExpensePagingResponse = ResponseDto[PaginationResponse[ExpenseReadSchema]]",
+        "detail": "src.monylog.backend.expense.dtos.response",
+        "documentation": {}
+    },
+    {
+        "label": "MessageAnalyzedSchema",
+        "kind": 6,
+        "importPath": "src.monylog.backend.expense.dtos.schemas",
+        "description": "src.monylog.backend.expense.dtos.schemas",
+        "peekOfCode": "class MessageAnalyzedSchema(LangchainLLMExpenseAnalyzeResult, CamelModel):\n    pass\nclass ExpenseTagSchema(CamelModel):\n    id: str\n    name: str\n    data: dict = Field(default_factory=dict)\nclass ExpenseSchema(CamelModel):\n    title: str\n    tags: list[str] = Field(default_factory=list)\n    amount: Decimal = Field(default=Decimal(\"0.00\"))",
+        "detail": "src.monylog.backend.expense.dtos.schemas",
+        "documentation": {}
+    },
+    {
+        "label": "ExpenseTagSchema",
+        "kind": 6,
+        "importPath": "src.monylog.backend.expense.dtos.schemas",
+        "description": "src.monylog.backend.expense.dtos.schemas",
+        "peekOfCode": "class ExpenseTagSchema(CamelModel):\n    id: str\n    name: str\n    data: dict = Field(default_factory=dict)\nclass ExpenseSchema(CamelModel):\n    title: str\n    tags: list[str] = Field(default_factory=list)\n    amount: Decimal = Field(default=Decimal(\"0.00\"))\n    dt: datetime\n    type: ExpenseType = Field(default=ExpenseType.EXPENSE)",
+        "detail": "src.monylog.backend.expense.dtos.schemas",
+        "documentation": {}
+    },
+    {
+        "label": "ExpenseSchema",
+        "kind": 6,
+        "importPath": "src.monylog.backend.expense.dtos.schemas",
+        "description": "src.monylog.backend.expense.dtos.schemas",
+        "peekOfCode": "class ExpenseSchema(CamelModel):\n    title: str\n    tags: list[str] = Field(default_factory=list)\n    amount: Decimal = Field(default=Decimal(\"0.00\"))\n    dt: datetime\n    type: ExpenseType = Field(default=ExpenseType.EXPENSE)\nclass ExpenseReadSchema(ExpenseSchema):\n    id: int\n    data: dict = Field(default_factory=dict)\n    tags: list[ExpenseTagSchema] = Field(default_factory=list)",
+        "detail": "src.monylog.backend.expense.dtos.schemas",
+        "documentation": {}
+    },
+    {
+        "label": "ExpenseReadSchema",
+        "kind": 6,
+        "importPath": "src.monylog.backend.expense.dtos.schemas",
+        "description": "src.monylog.backend.expense.dtos.schemas",
+        "peekOfCode": "class ExpenseReadSchema(ExpenseSchema):\n    id: int\n    data: dict = Field(default_factory=dict)\n    tags: list[ExpenseTagSchema] = Field(default_factory=list)",
+        "detail": "src.monylog.backend.expense.dtos.schemas",
+        "documentation": {}
+    },
+    {
+        "label": "Expense",
+        "kind": 6,
+        "importPath": "src.monylog.backend.expense.entities.expense",
+        "description": "src.monylog.backend.expense.entities.expense",
+        "peekOfCode": "class Expense(Base, TimestampMixin):\n    __tablename__ = \"monylog_expense\"\n    id: Mapped[int] = mapped_column(sa.Integer, primary_key=True, autoincrement=True)\n    amount: Mapped[Decimal] = mapped_column(\n        sa.DECIMAL(2),\n        nullable=False,\n        default=Decimal(\"0.00\"),\n    )\n    user_id: Mapped[str] = mapped_column(sa.VARCHAR(32), sa.ForeignKey(\"monylog_user.id\"), nullable=False, index=True)\n    type: Mapped[ExpenseType] = mapped_column(sa.Enum(\"income\", \"expense\", name=\"money_type\"), nullable=False)",
+        "detail": "src.monylog.backend.expense.entities.expense",
+        "documentation": {}
+    },
+    {
+        "label": "ExpenseLog",
+        "kind": 6,
+        "importPath": "src.monylog.backend.expense.entities.log",
+        "description": "src.monylog.backend.expense.entities.log",
+        "peekOfCode": "class ExpenseLog(Base, TimestampMixin):\n    __tablename__ = \"monylog_expense_log\"\n    id: Mapped[int] = mapped_column(sa.Integer, primary_key=True, autoincrement=True)\n    user_id: Mapped[str] = mapped_column(\n        sa.VARCHAR(32),\n        sa.ForeignKey(\"monylog_user.id\"),\n        nullable=False,\n        index=True,\n    )\n    request_id: Mapped[str] = mapped_column(sa.String(100), unique=True, nullable=False)",
+        "detail": "src.monylog.backend.expense.entities.log",
+        "documentation": {}
+    },
+    {
+        "label": "ExpenseTag",
+        "kind": 6,
+        "importPath": "src.monylog.backend.expense.entities.tag",
+        "description": "src.monylog.backend.expense.entities.tag",
+        "peekOfCode": "class ExpenseTag(Base, TimestampMixin):\n    __tablename__ = \"monylog_expense_tag\"\n    id: Mapped[str] = mapped_column(\n        sa.VARCHAR(12),\n        default=lambda: nanoid.generate(size=12),\n        primary_key=True,\n    )\n    user_id: Mapped[str] = mapped_column(\n        sa.VARCHAR(32),\n        sa.ForeignKey(\"monylog_user.id\"),",
+        "detail": "src.monylog.backend.expense.entities.tag",
+        "documentation": {}
+    },
+    {
+        "label": "expense_tag_asociation_table",
+        "kind": 5,
+        "importPath": "src.monylog.backend.expense.entities.tag",
+        "description": "src.monylog.backend.expense.entities.tag",
+        "peekOfCode": "expense_tag_asociation_table = sa.Table(\n    \"monylog_expense_tag_asociation_table\",\n    Base.metadata,\n    sa.Column(\"id\", sa.Integer, primary_key=True, autoincrement=True),\n    sa.Column(\"expense_id\", sa.Integer, sa.ForeignKey(\"monylog_expense.id\"), nullable=False),\n    sa.Column(\"tag_id\", sa.VARCHAR(12), sa.ForeignKey(\"monylog_expense_tag.id\"), nullable=False),\n    sa.Column(\"created_at\", sa.TIMESTAMP(timezone=True), default=sa.func.now(), nullable=False),\n    sa.Column(\"updated_at\", sa.TIMESTAMP(timezone=True), default=sa.func.now(), nullable=False),\n)",
+        "detail": "src.monylog.backend.expense.entities.tag",
+        "documentation": {}
+    },
+    {
+        "label": "router",
+        "kind": 5,
+        "importPath": "src.monylog.backend.expense.rest.fastapi",
+        "description": "src.monylog.backend.expense.rest.fastapi",
+        "peekOfCode": "router = APIRouter()\nget_exponse_use_case = Provide[MonyLogContainer.expense.use_case]\n@router.get(\n    \"/tags\",\n    response_model=ExpenseTagPagingResponse,\n)\n@inject\nasync def get_tags(\n    user: UserPayloadSchema = Depends(JWTService.get_current_user),\n    use_case: ExpenseUseCase = Depends(get_exponse_use_case),",
+        "detail": "src.monylog.backend.expense.rest.fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "get_exponse_use_case",
+        "kind": 5,
+        "importPath": "src.monylog.backend.expense.rest.fastapi",
+        "description": "src.monylog.backend.expense.rest.fastapi",
+        "peekOfCode": "get_exponse_use_case = Provide[MonyLogContainer.expense.use_case]\n@router.get(\n    \"/tags\",\n    response_model=ExpenseTagPagingResponse,\n)\n@inject\nasync def get_tags(\n    user: UserPayloadSchema = Depends(JWTService.get_current_user),\n    use_case: ExpenseUseCase = Depends(get_exponse_use_case),\n):",
+        "detail": "src.monylog.backend.expense.rest.fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "ExpenseCalculatorResult",
+        "kind": 6,
+        "importPath": "src.monylog.backend.expense.services.calculrator",
+        "description": "src.monylog.backend.expense.services.calculrator",
+        "peekOfCode": "class ExpenseCalculatorResult:\n    total: Decimal = field(default=Decimal(\"0.00\"), init=False)\n    groups: dict[str, Decimal] = field(default_factory=dict)\n    def __post_init__(self):\n        for key, value in self.groups.items():\n            if not isinstance(value, Decimal):\n                raise TypeError(f\"Expected Decimal for {key}, got {type(value)}\")\n            self.total += value\nclass ExpenseCalculator(ABC):\n    \"\"\"",
+        "detail": "src.monylog.backend.expense.services.calculrator",
+        "documentation": {}
+    },
+    {
+        "label": "ExpenseCalculator",
+        "kind": 6,
+        "importPath": "src.monylog.backend.expense.services.calculrator",
+        "description": "src.monylog.backend.expense.services.calculrator",
+        "peekOfCode": "class ExpenseCalculator(ABC):\n    \"\"\"\n    A simple calculator for expenses.\n    \"\"\"\n    @classmethod\n    @abstractmethod\n    def calculate(cls, expenses: list[Expense]) -> ExpenseCalculatorResult:\n        \"\"\"\n        Calculate the total of a list of expenses.\n        :param expenses: List of expense objects.",
+        "detail": "src.monylog.backend.expense.services.calculrator",
+        "documentation": {}
+    },
+    {
+        "label": "ExpenseSumCalculator",
+        "kind": 6,
+        "importPath": "src.monylog.backend.expense.services.calculrator",
+        "description": "src.monylog.backend.expense.services.calculrator",
+        "peekOfCode": "class ExpenseSumCalculator(ExpenseCalculator):\n    \"\"\"\n    A concrete implementation of ExpenseCalculator that sums expenses.\n    \"\"\"\n    @classmethod\n    def calculate(cls, expenses: list[Expense]) -> ExpenseCalculatorResult:\n        \"\"\"\n        Calculate the total of a list of expenses.\n        :param expenses: List of expense objects.\n        :return: Total amount of expenses (income - expense).",
+        "detail": "src.monylog.backend.expense.services.calculrator",
+        "documentation": {}
+    },
+    {
+        "label": "ExpenseGroupSumCalculator",
+        "kind": 6,
+        "importPath": "src.monylog.backend.expense.services.calculrator",
+        "description": "src.monylog.backend.expense.services.calculrator",
+        "peekOfCode": "class ExpenseGroupSumCalculator(ExpenseCalculator):\n    \"\"\"\n    A concrete implementation of ExpenseCalculator that groups and sums expenses by type.\n    \"\"\"\n    @classmethod\n    def calculate(cls, expenses: list[Expense]) -> ExpenseCalculatorResult:\n        \"\"\"\n        Calculate the total of a list of expenses grouped by type.\n        :param expenses: List of expense objects.\n        :return: Dictionary with total amounts grouped by expense type.",
+        "detail": "src.monylog.backend.expense.services.calculrator",
+        "documentation": {}
+    },
+    {
+        "label": "ExpenseCalculatorOps",
+        "kind": 5,
+        "importPath": "src.monylog.backend.expense.services.calculrator",
+        "description": "src.monylog.backend.expense.services.calculrator",
+        "peekOfCode": "ExpenseCalculatorOps = TypeVar(\"ExpenseCalculatorOps\", bound=ExpenseCalculator)\nclass ExpenseSumCalculator(ExpenseCalculator):\n    \"\"\"\n    A concrete implementation of ExpenseCalculator that sums expenses.\n    \"\"\"\n    @classmethod\n    def calculate(cls, expenses: list[Expense]) -> ExpenseCalculatorResult:\n        \"\"\"\n        Calculate the total of a list of expenses.\n        :param expenses: List of expense objects.",
+        "detail": "src.monylog.backend.expense.services.calculrator",
+        "documentation": {}
+    },
+    {
+        "label": "ExpenseException",
+        "kind": 6,
+        "importPath": "src.monylog.backend.expense.exceptions",
+        "description": "src.monylog.backend.expense.exceptions",
+        "peekOfCode": "class ExpenseException(BaseMsgException):\n    \"\"\"\n    Base exception for all expense-related errors.\n    \"\"\"\n    error: str = \"\"\n    message: str = \"\"\n    code: int = 500\nclass ExpenseNotAnalyzedException(ExpenseException):\n    \"\"\"\n    Exception raised when an expense has not been analyzed.",
+        "detail": "src.monylog.backend.expense.exceptions",
+        "documentation": {}
+    },
+    {
+        "label": "ExpenseNotAnalyzedException",
+        "kind": 6,
+        "importPath": "src.monylog.backend.expense.exceptions",
+        "description": "src.monylog.backend.expense.exceptions",
+        "peekOfCode": "class ExpenseNotAnalyzedException(ExpenseException):\n    \"\"\"\n    Exception raised when an expense has not been analyzed.\n    \"\"\"\n    error: str = \"ExpenseNotAnalyzed\"\n    message = \"analyzed expense count is 0, please analyze new message.\"\n    code: int = 404\nclass ExpenseNotFoundException(ExpenseException):\n    \"\"\"\n    Exception raised when an expense is not found.",
+        "detail": "src.monylog.backend.expense.exceptions",
+        "documentation": {}
+    },
+    {
+        "label": "ExpenseNotFoundException",
+        "kind": 6,
+        "importPath": "src.monylog.backend.expense.exceptions",
+        "description": "src.monylog.backend.expense.exceptions",
+        "peekOfCode": "class ExpenseNotFoundException(ExpenseException):\n    \"\"\"\n    Exception raised when an expense is not found.\n    \"\"\"\n    error: str = \"ExpenseNotFound\"\n    message: str = \"Expense not found.\"\n    code: int = 404",
+        "detail": "src.monylog.backend.expense.exceptions",
+        "documentation": {}
+    },
+    {
+        "label": "ExpenseUseCase",
+        "kind": 6,
+        "importPath": "src.monylog.backend.expense.use_case",
+        "description": "src.monylog.backend.expense.use_case",
+        "peekOfCode": "class ExpenseUseCase(SyncSqlaMixIn):\n    def append_tag(\n        self,\n        user: \"UserPayloadSchema\",\n        name: str,\n        color: str = \"#00f0f0\",\n    ) -> ExpenseTag:\n        with self.db.session() as session:\n            stmt = sa.select(ExpenseTag).where(ExpenseTag.name == name, ExpenseTag.user_id == user.id)\n            tag = session.execute(stmt).scalar()",
+        "detail": "src.monylog.backend.expense.use_case",
+        "documentation": {}
+    },
+    {
+        "label": "LLMContainer",
+        "kind": 6,
+        "importPath": "src.monylog.backend.llm.containers.di",
+        "description": "src.monylog.backend.llm.containers.di",
+        "peekOfCode": "class LLMContainer(containers.DeclarativeContainer):\n    settings = providers.Resource(Settings)\n    analyzer = providers.Singleton(LangchainLLMExpenseAnalyzer, config=settings.provided.expense_analyzer)\n    use_case = providers.Dict(expense=providers.Singleton(ExpenseLLMUseCase, analyzer=analyzer))",
+        "detail": "src.monylog.backend.llm.containers.di",
+        "documentation": {}
+    },
+    {
+        "label": "ExpenseMessageAnalyzeRequest",
+        "kind": 6,
+        "importPath": "src.monylog.backend.llm.dtos.request",
+        "description": "src.monylog.backend.llm.dtos.request",
+        "peekOfCode": "class ExpenseMessageAnalyzeRequest(CamelModel):\n    message: str\n    tags: list[str] = Field(\n        default_factory=list,\n    )\n    @model_validator(mode=\"after\")\n    def validate_at_tags_count(self) -> \"ExpenseMessageAnalyzeRequest\":\n        if len(self.tags) == 0:\n            raise ValueError(\"tags must be need!\")\n        return self",
+        "detail": "src.monylog.backend.llm.dtos.request",
+        "documentation": {}
+    },
+    {
+        "label": "MessageAnalyzedResponse",
+        "kind": 5,
+        "importPath": "src.monylog.backend.llm.dtos.response",
+        "description": "src.monylog.backend.llm.dtos.response",
+        "peekOfCode": "MessageAnalyzedResponse = ResponseDto[MessageAnalyzedSchema]",
+        "detail": "src.monylog.backend.llm.dtos.response",
+        "documentation": {}
+    },
+    {
+        "label": "MessageAnalyzedSchema",
+        "kind": 6,
+        "importPath": "src.monylog.backend.llm.dtos.schemas",
+        "description": "src.monylog.backend.llm.dtos.schemas",
+        "peekOfCode": "class MessageAnalyzedSchema(CamelModel):\n    id: str\n    expenses: list[ExpenseResult] = Field(default_factory=list)\n    @computed_field\n    @property\n    def count(self) -> int:\n        return len(self.expenses)\nclass ExpenseTagSchema(CamelModel):\n    id: str\n    name: str",
+        "detail": "src.monylog.backend.llm.dtos.schemas",
+        "documentation": {}
+    },
+    {
+        "label": "ExpenseTagSchema",
+        "kind": 6,
+        "importPath": "src.monylog.backend.llm.dtos.schemas",
+        "description": "src.monylog.backend.llm.dtos.schemas",
+        "peekOfCode": "class ExpenseTagSchema(CamelModel):\n    id: str\n    name: str\n    data: dict = Field(default_factory=dict)",
+        "detail": "src.monylog.backend.llm.dtos.schemas",
+        "documentation": {}
+    },
+    {
+        "label": "router",
+        "kind": 5,
+        "importPath": "src.monylog.backend.llm.rest.fastapi",
+        "description": "src.monylog.backend.llm.rest.fastapi",
+        "peekOfCode": "router = APIRouter()\n@router.post(\n    \"/expense\",\n    status_code=status.HTTP_200_OK,\n    response_model=MessageAnalyzedResponse,\n)\n@inject\nasync def analyze_message(\n    use_case: ExpenseLLMUseCase = Depends(Provide[MonyLogContainer.llm.use_case]),\n    payload: ExpenseMessageAnalyzeRequest = Body(),",
+        "detail": "src.monylog.backend.llm.rest.fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "LangchainLLMExpenseAnalyzer",
+        "kind": 6,
+        "importPath": "src.monylog.backend.llm.service.v1.pipeline",
+        "description": "src.monylog.backend.llm.service.v1.pipeline",
+        "peekOfCode": "class LangchainLLMExpenseAnalyzer:\n    \"\"\"\n    A generic pipeline for analyzing expenses using Langchain LLM.\n    This class is a placeholder for the actual implementation.\n    \"\"\"\n    config: LangchainLLMExpenseAnalyzerConfig | dict = field(default_factory=LangchainLLMExpenseAnalyzerConfig)\n    client: ChatOpenAI = field(init=False, repr=False)\n    pipeline: \"RunnableSerializable\" = field(init=False, repr=False)\n    def __post_init__(self):\n        if isinstance(self.config, dict):",
+        "detail": "src.monylog.backend.llm.service.v1.pipeline",
+        "documentation": {}
+    },
+    {
+        "label": "__SYSTEM_PROMPT",
+        "kind": 5,
+        "importPath": "src.monylog.backend.llm.service.v1.prompt",
+        "description": "src.monylog.backend.llm.service.v1.prompt",
+        "peekOfCode": "__SYSTEM_PROMPT = \"\"\"\nYou are a helpful assistant that extracts expenses from user messages.\nYou will receive a user message and you need to extract the expenses from it.\nThe expenses can be of two types: income and expense.\nYou will return the expenses in a structured format.\nignore the not related sentences to the task, and extract the expenses and income from the user message.\nThe accuracy of the task is important. You must extract the expenses and income from the user message accurately.\nYou are an assistant specialized in extracting financial entries from free-form user messages.\nYour job is to identify all expenses and incomes mentioned, determine their dates and amounts, and output them in a precise JSON format.\n\"\"\"",
+        "detail": "src.monylog.backend.llm.service.v1.prompt",
+        "documentation": {}
+    },
+    {
+        "label": "__PROMPT_TEMPLATE__",
+        "kind": 5,
+        "importPath": "src.monylog.backend.llm.service.v1.prompt",
+        "description": "src.monylog.backend.llm.service.v1.prompt",
+        "peekOfCode": "__PROMPT_TEMPLATE__ = ChatPromptTemplate.from_messages(\n    [\n        SystemMessagePromptTemplate.from_template(__SYSTEM_PROMPT),\n        SystemMessagePromptTemplate.from_template(\"/no_think\"),\n        HumanMessagePromptTemplate.from_template(\"{message}\"),\n        HumanMessagePromptTemplate.from_template(\"current DATETIME with time zone is {current_datetime}\"),\n        HumanMessagePromptTemplate.from_template(\n            \"\"\"The following tags will be used as candidate labels during inference \n            candidate of tags is [{tags}]\"\"\"\n        ),",
+        "detail": "src.monylog.backend.llm.service.v1.prompt",
+        "documentation": {}
+    },
+    {
+        "label": "__PROMPT_TEMPLATE_WITH_THINK__",
+        "kind": 5,
+        "importPath": "src.monylog.backend.llm.service.v1.prompt",
+        "description": "src.monylog.backend.llm.service.v1.prompt",
+        "peekOfCode": "__PROMPT_TEMPLATE_WITH_THINK__ = ChatPromptTemplate.from_messages(\n    [\n        SystemMessagePromptTemplate.from_template(__SYSTEM_PROMPT),\n        HumanMessagePromptTemplate.from_template(\"{message}\"),\n        HumanMessagePromptTemplate.from_template(\"current DATETIME with time zone is {current_datetime}\"),\n        HumanMessagePromptTemplate.from_template(\n            \"\"\"The following tags will be used as candidate labels during inference \n            candidate of tags is [{tags}]\"\"\"\n        ),\n    ]",
+        "detail": "src.monylog.backend.llm.service.v1.prompt",
+        "documentation": {}
+    },
+    {
+        "label": "ExpenseResult",
+        "kind": 6,
+        "importPath": "src.monylog.backend.llm.service.v1.schema",
+        "description": "src.monylog.backend.llm.service.v1.schema",
+        "peekOfCode": "class ExpenseResult(BaseModel):\n    title: str = Field(\n        description=\"The expense name from the user message.\",\n    )\n    tags: list[str] = Field(\n        description=\"The expense category tags from the message\",\n    )\n    amount: Decimal = Field(\n        default=Decimal(\"0.00\"),\n        description=\"The amount of the expense from the user message.\",",
+        "detail": "src.monylog.backend.llm.service.v1.schema",
+        "documentation": {}
+    },
+    {
+        "label": "ResultSchema",
+        "kind": 6,
+        "importPath": "src.monylog.backend.llm.service.v1.schema",
+        "description": "src.monylog.backend.llm.service.v1.schema",
+        "peekOfCode": "class ResultSchema(BaseModel):\n    expenses: list[ExpenseResult] = Field(\n        description=\"The result of the expenses extraction from the user message.\",\n    )\n    @computed_field\n    @property\n    def count(self) -> int:\n        return len(self.expenses)\nclass LangchainLLMExpenseAnalyzeResult(ResultSchema):\n    id: str = Field(",
+        "detail": "src.monylog.backend.llm.service.v1.schema",
+        "documentation": {}
+    },
+    {
+        "label": "LangchainLLMExpenseAnalyzeResult",
+        "kind": 6,
+        "importPath": "src.monylog.backend.llm.service.v1.schema",
+        "description": "src.monylog.backend.llm.service.v1.schema",
+        "peekOfCode": "class LangchainLLMExpenseAnalyzeResult(ResultSchema):\n    id: str = Field(\n        description=\"The unique identifier for the expense analysis result.\",\n    )\n    message: str = Field(\n        description=\"The original user message that was analyzed for expenses.\",\n    )\n    tags: list[str] = Field(default_factory=list, description=\"candidate of tags\")",
+        "detail": "src.monylog.backend.llm.service.v1.schema",
+        "documentation": {}
+    },
+    {
+        "label": "LangchainLLMExpenseAnalyzerConfig",
+        "kind": 6,
+        "importPath": "src.monylog.backend.llm.service.v1.settings",
+        "description": "src.monylog.backend.llm.service.v1.settings",
+        "peekOfCode": "class LangchainLLMExpenseAnalyzerConfig(BaseModel):\n    base_url: str = Field(default=\"http://192.168.81.2:11434/v1\")\n    api_key: SecretStr | str = Field(default=SecretStr(\"password\"))\n    model: str = Field(default=\"qwen3:1.7B\")\n    temperature: float = Field(default=0.0)\n    max_tokens: int = Field(default=1024 * 4)",
+        "detail": "src.monylog.backend.llm.service.v1.settings",
+        "documentation": {}
+    },
+    {
+        "label": "ExpenseLLMUseCase",
+        "kind": 6,
+        "importPath": "src.monylog.backend.llm.use_case.expense_use_case",
+        "description": "src.monylog.backend.llm.use_case.expense_use_case",
+        "peekOfCode": "class ExpenseLLMUseCase(SyncSqlaMixIn):\n    analyzer: LangchainLLMExpenseAnalyzer\n    async def generate_expense_from_message(\n        self,\n        message: str,\n        tags: list[str],\n        current_datetime: DateTime = DateTime.now(\"UTC\"),\n    ) -> LangchainLLMExpenseAnalyzeResult:\n        result = await self.analyzer.aanalyze(message, tags, current_datetime.to_iso8601_string())\n        if result.count == 0:",
+        "detail": "src.monylog.backend.llm.use_case.expense_use_case",
+        "documentation": {}
+    },
+    {
+        "label": "LLMException",
+        "kind": 6,
+        "importPath": "src.monylog.backend.llm.exceptions",
+        "description": "src.monylog.backend.llm.exceptions",
+        "peekOfCode": "class LLMException(BaseMsgException):\n    \"\"\"\n    Base exception for all expense-related errors.\n    \"\"\"\n    error: str = \"\"\n    message: str = \"\"\n    code: int = 500\nclass ExpenseNotAnalyzedException(LLMException):\n    \"\"\"\n    Exception raised when an expense has not been analyzed.",
+        "detail": "src.monylog.backend.llm.exceptions",
+        "documentation": {}
+    },
+    {
+        "label": "ExpenseNotAnalyzedException",
+        "kind": 6,
+        "importPath": "src.monylog.backend.llm.exceptions",
+        "description": "src.monylog.backend.llm.exceptions",
+        "peekOfCode": "class ExpenseNotAnalyzedException(LLMException):\n    \"\"\"\n    Exception raised when an expense has not been analyzed.\n    \"\"\"\n    error: str = \"ExpenseNotAnalyzed\"\n    message = \"analyzed expense count is 0, please analyze new message.\"\n    code: int = 404",
+        "detail": "src.monylog.backend.llm.exceptions",
+        "documentation": {}
+    },
+    {
+        "label": "MonyLogContainer",
+        "kind": 6,
+        "importPath": "src.monylog.backend.container",
+        "description": "src.monylog.backend.container",
+        "peekOfCode": "class MonyLogContainer(containers.DeclarativeContainer):\n    wiring_config = containers.WiringConfiguration(\n        packages=[],\n        modules=[\n            \"monylog.shared_kernel.infra.object_storage.s3\",\n            \"monylog.shared_kernel.infra.database.sqla.mixin\",\n            \"monylog.backend.expense.rest.fastapi\",\n            \"monylog.backend.llm.rest.fastapi\",\n            \"monylog.backend.auth.rest.fastapi\",\n        ],",
+        "detail": "src.monylog.backend.container",
+        "documentation": {}
+    },
+    {
+        "label": "http_client",
+        "kind": 2,
+        "importPath": "src.monylog.backend.container",
+        "description": "src.monylog.backend.container",
+        "peekOfCode": "def http_client(retries: int = 3):\n    transports = httpx.AsyncHTTPTransport(retries=retries)\n    client = httpx.AsyncClient(transport=transports)\n    return client\nclass MonyLogContainer(containers.DeclarativeContainer):\n    wiring_config = containers.WiringConfiguration(\n        packages=[],\n        modules=[\n            \"monylog.shared_kernel.infra.object_storage.s3\",\n            \"monylog.shared_kernel.infra.database.sqla.mixin\",",
+        "detail": "src.monylog.backend.container",
+        "documentation": {}
+    },
+    {
+        "label": "create_app",
+        "kind": 2,
+        "importPath": "src.monylog.backend.main",
+        "description": "src.monylog.backend.main",
+        "peekOfCode": "def create_app() -> FastAPI:\n    middleware = [\n        Middleware(CorrelationIdMiddleware),\n        Middleware(\n            CORSMiddleware,\n            allow_origins=settings.cors.allow_origins,\n            allow_credentials=settings.cors.allow_credentials,\n            allow_methods=settings.cors.allow_methods,\n            allow_headers=settings.cors.allow_headers,\n        ),",
+        "detail": "src.monylog.backend.main",
+        "documentation": {}
+    },
+    {
+        "label": "container",
+        "kind": 5,
+        "importPath": "src.monylog.backend.main",
+        "description": "src.monylog.backend.main",
+        "peekOfCode": "container = MonyLogContainer()\nsettings: Settings = container.settings.provided()\ndef create_app() -> FastAPI:\n    middleware = [\n        Middleware(CorrelationIdMiddleware),\n        Middleware(\n            CORSMiddleware,\n            allow_origins=settings.cors.allow_origins,\n            allow_credentials=settings.cors.allow_credentials,\n            allow_methods=settings.cors.allow_methods,",
+        "detail": "src.monylog.backend.main",
+        "documentation": {}
+    },
+    {
+        "label": "app",
+        "kind": 5,
+        "importPath": "src.monylog.backend.main",
+        "description": "src.monylog.backend.main",
+        "peekOfCode": "app = create_app()",
+        "detail": "src.monylog.backend.main",
+        "documentation": {}
+    },
+    {
+        "label": "Settings",
+        "kind": 6,
+        "importPath": "src.monylog.backend.settings",
+        "description": "src.monylog.backend.settings",
+        "peekOfCode": "class Settings(BaseSettings):\n    mode: ApplicationMode = ApplicationMode.devel\n    db: DatabaseSettings = DatabaseSettings()\n    cors: CORSSettings = CORSSettings()\n    gzip: GZipSettings = GZipSettings()\n    logger: LoggerSettings = LoggerSettings()\n    jwt: JWTSettings = JWTSettings()\n    email: EmailSettings = EmailSettings()\n    oauth_google: OAuthSettings = OAuthSettings()\n    rate_limiter: RatelimiterSettings = RatelimiterSettings()",
+        "detail": "src.monylog.backend.settings",
+        "documentation": {}
+    },
+    {
+        "label": "get_settings",
+        "kind": 2,
+        "importPath": "src.monylog.backend.settings",
+        "description": "src.monylog.backend.settings",
+        "peekOfCode": "def get_settings() -> Settings:\n    return Settings()",
+        "detail": "src.monylog.backend.settings",
+        "documentation": {}
+    },
+    {
+        "label": "test_login_and_me",
+        "kind": 2,
+        "importPath": "test.test_auth",
+        "description": "test.test_auth",
+        "peekOfCode": "def test_login_and_me():\n    # 로그인\n    response = client.post(\"/auth/login\", json={\"username\": \"test\", \"password\": \"password\"})\n    assert response.status_code == 200\n    assert \"access_token\" in response.cookies\n    # /me에서 사용자 정보 확인\n    cookies = {\"access_token\": response.cookies[\"access_token\"]}\n    response = client.get(\"/auth/me\", cookies=cookies)\n    assert response.status_code == 200\n    assert response.json()[\"user\"][\"sub\"] == \"test\"",
+        "detail": "test.test_auth",
+        "documentation": {}
+    },
+    {
+        "label": "test_login_fail",
+        "kind": 2,
+        "importPath": "test.test_auth",
+        "description": "test.test_auth",
+        "peekOfCode": "def test_login_fail():\n    response = client.post(\"/auth/login\", json={\"username\": \"wrong\", \"password\": \"wrong\"})\n    assert response.status_code == 401\ndef test_logout():\n    response = client.post(\"/auth/login\", json={\"username\": \"test\", \"password\": \"password\"})\n    cookies = {\"access_token\": response.cookies[\"access_token\"]}\n    response = client.post(\"/auth/logout\", cookies=cookies)\n    assert response.status_code == 200\n    # 로그아웃 후 /me 접근 시 401\n    response = client.get(\"/auth/me\")",
+        "detail": "test.test_auth",
+        "documentation": {}
+    },
+    {
+        "label": "test_logout",
+        "kind": 2,
+        "importPath": "test.test_auth",
+        "description": "test.test_auth",
+        "peekOfCode": "def test_logout():\n    response = client.post(\"/auth/login\", json={\"username\": \"test\", \"password\": \"password\"})\n    cookies = {\"access_token\": response.cookies[\"access_token\"]}\n    response = client.post(\"/auth/logout\", cookies=cookies)\n    assert response.status_code == 200\n    # 로그아웃 후 /me 접근 시 401\n    response = client.get(\"/auth/me\")\n    assert response.status_code == 401\ndef test_refresh_token():\n    # 로그인하여 리프레시 토큰 획득",
+        "detail": "test.test_auth",
+        "documentation": {}
+    },
+    {
+        "label": "test_refresh_token",
+        "kind": 2,
+        "importPath": "test.test_auth",
+        "description": "test.test_auth",
+        "peekOfCode": "def test_refresh_token():\n    # 로그인하여 리프레시 토큰 획득\n    response = client.post(\"/auth/login\", json={\"username\": \"test\", \"password\": \"password\"})\n    assert response.status_code == 200\n    assert \"refresh_token\" in response.cookies\n    refresh_token = response.cookies[\"refresh_token\"]\n    # /refresh로 액세스 토큰 재발급\n    cookies = {\"refresh_token\": refresh_token}\n    response = client.post(\"/auth/refresh\", cookies=cookies)\n    assert response.status_code == 200",
+        "detail": "test.test_auth",
+        "documentation": {}
+    },
+    {
+        "label": "test_refresh_token_fail",
+        "kind": 2,
+        "importPath": "test.test_auth",
+        "description": "test.test_auth",
+        "peekOfCode": "def test_refresh_token_fail():\n    response = client.post(\"/auth/refresh\")\n    assert response.status_code == 401",
+        "detail": "test.test_auth",
+        "documentation": {}
+    },
+    {
+        "label": "app",
+        "kind": 5,
+        "importPath": "test.test_auth",
+        "description": "test.test_auth",
+        "peekOfCode": "app = FastAPI()\napp.include_router(router, prefix=\"/auth\")\nclient = TestClient(app)\ndef test_login_and_me():\n    # 로그인\n    response = client.post(\"/auth/login\", json={\"username\": \"test\", \"password\": \"password\"})\n    assert response.status_code == 200\n    assert \"access_token\" in response.cookies\n    # /me에서 사용자 정보 확인\n    cookies = {\"access_token\": response.cookies[\"access_token\"]}",
+        "detail": "test.test_auth",
+        "documentation": {}
+    },
+    {
+        "label": "client",
+        "kind": 5,
+        "importPath": "test.test_auth",
+        "description": "test.test_auth",
+        "peekOfCode": "client = TestClient(app)\ndef test_login_and_me():\n    # 로그인\n    response = client.post(\"/auth/login\", json={\"username\": \"test\", \"password\": \"password\"})\n    assert response.status_code == 200\n    assert \"access_token\" in response.cookies\n    # /me에서 사용자 정보 확인\n    cookies = {\"access_token\": response.cookies[\"access_token\"]}\n    response = client.get(\"/auth/me\", cookies=cookies)\n    assert response.status_code == 200",
+        "detail": "test.test_auth",
+        "documentation": {}
+    },
+    {
+        "label": "client",
+        "kind": 2,
+        "importPath": "test.test_llm",
+        "description": "test.test_llm",
+        "peekOfCode": "def client():\n    return TestClient(app)\n@pytest.mark.asyncio\n@patch(\"monylog.backend.llm.rest.fastapi.ExpenseLLMUseCase\")\n@patch(\"monylog.backend.llm.rest.fastapi.Provide\")\ndef test_analyze_message_success(mock_provide, mock_expense_use_case, client):\n    # Arrange\n    mock_use_case_instance = AsyncMock()\n    mock_use_case_instance.generate_expense_from_message.return_value = {\"field1\": \"value1\", \"field2\": \"value2\"}\n    # Provide returns a dict with \"expense\" key pointing to our mock",
+        "detail": "test.test_llm",
+        "documentation": {}
+    },
+    {
+        "label": "test_analyze_message_success",
+        "kind": 2,
+        "importPath": "test.test_llm",
+        "description": "test.test_llm",
+        "peekOfCode": "def test_analyze_message_success(mock_provide, mock_expense_use_case, client):\n    # Arrange\n    mock_use_case_instance = AsyncMock()\n    mock_use_case_instance.generate_expense_from_message.return_value = {\"field1\": \"value1\", \"field2\": \"value2\"}\n    # Provide returns a dict with \"expense\" key pointing to our mock\n    mock_provide.return_value = {\"expense\": mock_use_case_instance}\n    payload = {\"message\": \"Sample expense message\", \"tags\": [\"food\", \"lunch\"]}\n    # Patch dependency injection\n    app.dependency_overrides = {fastapi.Depends(lambda: mock_provide.return_value): mock_provide.return_value}\n    # Act",
+        "detail": "test.test_llm",
+        "documentation": {}
+    },
+    {
+        "label": "app",
+        "kind": 5,
+        "importPath": "test.test_llm",
+        "description": "test.test_llm",
+        "peekOfCode": "app = fastapi.FastAPI()\napp.include_router(router)\n@pytest.fixture\ndef client():\n    return TestClient(app)\n@pytest.mark.asyncio\n@patch(\"monylog.backend.llm.rest.fastapi.ExpenseLLMUseCase\")\n@patch(\"monylog.backend.llm.rest.fastapi.Provide\")\ndef test_analyze_message_success(mock_provide, mock_expense_use_case, client):\n    # Arrange",
+        "detail": "test.test_llm",
+        "documentation": {}
+    }
+]

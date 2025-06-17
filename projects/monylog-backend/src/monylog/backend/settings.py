@@ -17,6 +17,7 @@ from monylog.shared_kernel.infra.settings.model import (
 )
 from monylog.shared_kernel.infra.database.sqla.settings import DatabaseSettings
 from monylog.backend.llm.service.v1 import LangchainLLMExpenseAnalyzerConfig
+from functools import lru_cache
 
 
 class Settings(BaseSettings):
@@ -49,3 +50,8 @@ class Settings(BaseSettings):
 
 
 Settings.model_rebuild()
+
+
+@lru_cache(maxsize=1)
+def get_settings() -> Settings:
+    return Settings()

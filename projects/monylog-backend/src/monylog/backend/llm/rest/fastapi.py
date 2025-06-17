@@ -6,7 +6,7 @@ from ..dtos.request import ExpenseMessageAnalyzeRequest
 from ..dtos.response import MessageAnalyzedResponse
 from ..dtos.schemas import MessageAnalyzedSchema
 
-router = APIRouter(prefix="/llm", tags=["llm"])
+router = APIRouter()
 
 
 @router.post(
