@@ -7,7 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Badge } from "@/components/ui/badge"
 import { Check, X, Edit } from "lucide-react"
-import type { ParsedExpense } from "@/lib/parse-transaction"
+import type { ParsedExpense } from "@/lib/expense-message"
 import { useCategories } from "@/hooks/use-categories"
 
 interface TransactionConfirmationProps {

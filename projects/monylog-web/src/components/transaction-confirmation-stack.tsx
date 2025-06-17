@@ -8,7 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
 import { Check, X, Edit, ArrowLeft, ArrowRight } from "lucide-react"
-import type { ParsedExpense } from "@/lib/parse-transaction"
+import type { ParsedExpense } from "@/lib/expense-message"
 import { useCategories } from "@/hooks/use-categories"
 
 interface TransactionConfirmationStackProps {

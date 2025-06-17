@@ -17,7 +17,7 @@ import { ChatInput } from "@/components/chat-input"
 import { TransactionList } from "@/components/transaction-list"
 import { CalendarView } from "@/components/calendar-view"
 import { ThemeToggle } from "@/components/theme-toggle"
-import { parseTransaction } from "@/lib/parse-transaction"
+import { parseTransaction } from "@/lib/expense-message"
 import { logout } from "@/lib/auth-client"
 
 interface DashboardClientProps {
