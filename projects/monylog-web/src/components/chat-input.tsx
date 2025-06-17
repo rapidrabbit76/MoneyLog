@@ -7,7 +7,9 @@ import { Send } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { TransactionConfirmationStack } from "@/components/transaction-confirmation-stack"
-import { parseTransactionInput, createTransactionFromParsed, type ParsedTransaction } from "@/lib/parse-transaction"
+import { expenseMessageProcessing, type ParsedExpense } from "@/lib/parse-transaction"
+
+import { AnalyzeExpenseMessageResponse } from "@/lib/api/llm"
 
 interface ChatInputProps {
   onSubmit: (message: string) => void
@@ -15,14 +17,16 @@ interface ChatInputProps {
 
 export function ChatInput({ onSubmit }: ChatInputProps) {
   const [message, setMessage] = useState("")
-  const [pendingTransactions, setPendingTransactions] = useState<ParsedTransaction[]>([])
+  const [pendingExpense, setPendingExpense] = useState<AnalyzeExpenseMessageResponse>(
+    { id: "", count: 0, expenses: [] }
+  )
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (message.trim()) {
-      const parsed = parseTransactionInput(message)
-      if (parsed.length > 0) {
-        setPendingTransactions(parsed)
+      const parsed = await expenseMessageProcessing(message)
+      if (parsed.count > 0) {
+        setPendingExpense(parsed)
         setMessage("")
       } else {
         alert("입력 형식이 올바르지 않습니다. 예: '담배 4800' 또는 '커피 3000, 점심 8000'")
@@ -30,24 +34,25 @@ export function ChatInput({ onSubmit }: ChatInputProps) {
     }
   }
 
-  const handleConfirm = (confirmedTransactions: ParsedTransaction[]) => {
+  const handleConfirm = (confirmedTransactions: ParsedExpense[]) => {
     // 확인된 거래들을 개별적으로 처리
     confirmedTransactions.forEach((transaction) => {
-      const transactionData = createTransactionFromParsed(transaction)
-      onSubmit(JSON.stringify(transactionData))
+      // const transactionData = createTransactionFromParsed(transaction)
+      // onSubmit(JSON.stringify(transactionData))
+      console.log("Confirmed transaction:", transaction)
     })
-    setPendingTransactions([])
+    setPendingExpense({ id: "", count: 0, expenses: [] })
   }
 
   const handleCancel = () => {
-    setPendingTransactions([])
+    setPendingExpense({ id: "", count: 0, expenses: [] })
   }
 
-  if (pendingTransactions.length > 0) {
+  if (pendingExpense.count > 0) {
     return (
       <div className="space-y-4">
         <TransactionConfirmationStack
-          transactions={pendingTransactions}
+          expenses={pendingExpense.expenses}
           onConfirm={handleConfirm}
           onCancel={handleCancel}
         />

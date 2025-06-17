@@ -1,91 +1,61 @@
 import type { Transaction } from "@/types/transaction"
+import { analyzeExpenseMessage, AnalyzeExpenseMessageResponse } from "@/lib/api/llm"
 
-export interface ParsedTransaction {
-  id: string
-  description: string
-  amount: number
-  category: string
-  type: "income" | "expense"
+export interface ParsedExpense {
+  title: string;
+  tags: string[];
+  amount: number;
+  dt: string;
+  type: 'expense' | 'income';
 }
 
-export function parseTransactionInput(message: string): ParsedTransaction[] {
-  // 여러 거래를 파싱하는 로직 (예시)
-  // 실제로는 AI API에서 복수개의 거래를 반환할 예정
+
+
+export async function expenseMessageProcessing(message: string): Promise<AnalyzeExpenseMessageResponse> {
+  if (!message || message.trim().length === 0) {
+    return { id: "", count: 0, expenses: [] }
+  }
+  // AI API를 호출하여 메시지를 분석
+  const aiResponse = await analyzeExpenseMessage({
+    message,
+    tags: ["담배", "커피", "점심", "저녁", "택시", "버스", "지하철", "월급", "용돈", "이자", "배당금"],
+  })
+  return aiResponse
+
 
   // 간단한 예시: 쉼표나 줄바꿈으로 구분된 여러 거래
-  const transactions: ParsedTransaction[] = []
+  // const transactions: ParsedTransaction[] = []
 
-  // 쉼표로 구분된 여러 거래 처리
-  const parts = message
-    .split(/[,\n]/)
-    .map((part) => part.trim())
-    .filter((part) => part.length > 0)
+  // // 쉼표로 구분된 여러 거래 처리
+  // const parts = message
+  //   .split(/[,\n]/)
+  //   .map((part) => part.trim())
+  //   .filter((part) => part.length > 0)
 
-  for (const part of parts) {
-    const parsed = parseSingleTransaction(part)
-    if (parsed) {
-      transactions.push({
-        ...parsed,
-        id: `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
-      })
-    }
-  }
+  // for (const part of parts) {
+  //   const parsed = parseSingleTransaction(part)
+  //   if (parsed) {
+  //     transactions.push({
+  //       ...parsed,
+  //       id: `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+  //     })
+  //   }
+  // }
 
-  // 단일 거래인 경우도 처리
-  if (transactions.length === 0) {
-    const parsed = parseSingleTransaction(message)
-    if (parsed) {
-      transactions.push({
-        ...parsed,
-        id: `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
-      })
-    }
-  }
+  // // 단일 거래인 경우도 처리
+  // if (transactions.length === 0) {
+  //   const parsed = parseSingleTransaction(message)
+  //   if (parsed) {
+  //     transactions.push({
+  //       ...parsed,
+  //       id: `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+  //     })
+  //   }
+  // }
 
-  return transactions
 }
 
-function parseSingleTransaction(message: string): Omit<ParsedTransaction, "id"> | null {
-  // 기본 패턴: [설명] [금액]
-  const parts = message.trim().split(/\s+/)
 
-  if (parts.length < 2) {
-    return null
-  }
-
-  // 마지막 부분을 금액으로 가정
-  const amountStr = parts[parts.length - 1].replace(/,/g, "")
-  const amount = Number.parseFloat(amountStr)
-
-  if (isNaN(amount)) {
-    return null
-  }
-
-  // 설명은 금액을 제외한 나머지
-  const description = parts.slice(0, parts.length - 1).join(" ")
-
-  // 기본값으로 설정 (AI API에서 나중에 분류할 예정)
-  const category = "기타"
-  const type = "expense" // 기본값은 지출
-
-  return {
-    description,
-    amount,
-    category,
-    type,
-  }
-}
-
-export function createTransactionFromParsed(parsed: ParsedTransaction): Transaction {
-  return {
-    id: parsed.id,
-    description: parsed.description,
-    amount: parsed.amount,
-    date: new Date().toISOString(),
-    category: parsed.category,
-    type: parsed.type,
-  }
-}
 
 export function parseTransaction(message: string): Transaction | null {
   // 기본 패턴: [설명] [금액]

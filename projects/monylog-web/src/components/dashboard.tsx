@@ -47,6 +47,7 @@ export default function Dashboard({}: DashboardProps) {
   } = useSidebar()
 
   const defaultHandleChatSubmit = (message: string) => {
+    console.log("Received message:", message)
     try {
       // Try to parse as JSON first (new format from confirmation)
       const transaction = JSON.parse(message) as Transaction

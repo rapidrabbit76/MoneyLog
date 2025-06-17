@@ -7,19 +7,19 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Badge } from "@/components/ui/badge"
 import { Check, X, Edit } from "lucide-react"
-import type { ParsedTransaction } from "@/lib/parse-transaction"
+import type { ParsedExpense } from "@/lib/parse-transaction"
 import { useCategories } from "@/hooks/use-categories"
 
 interface TransactionConfirmationProps {
-  parsedTransaction: ParsedTransaction
-  onConfirm: (transaction: ParsedTransaction) => void
+  parsedTransaction: ParsedExpense
+  onConfirm: (transaction: ParsedExpense) => void
   onCancel: () => void
 }
 
 export function TransactionConfirmation({ parsedTransaction, onConfirm, onCancel }: TransactionConfirmationProps) {
   const { categories } = useCategories()
   const [isEditing, setIsEditing] = useState(false)
-  const [editedTransaction, setEditedTransaction] = useState<ParsedTransaction>(parsedTransaction)
+  const [editedTransaction, setEditedTransaction] = useState<ParsedExpense>(parsedTransaction)
 
   const handleConfirm = () => {
     onConfirm(editedTransaction)
