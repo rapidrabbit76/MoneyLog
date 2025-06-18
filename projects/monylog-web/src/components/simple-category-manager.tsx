@@ -7,7 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Plus, Trash2, Settings } from "lucide-react"
 import { useCategories } from "@/hooks/use-categories"
 
-export function SimpleTagManager() {
+export function SimpleCategoryManager() {
   const { categories, addCategory, deleteCategory } = useCategories()
   const [isOpen, setIsOpen] = useState(false)
   const [newCategory, setNewCategory] = useState("")
