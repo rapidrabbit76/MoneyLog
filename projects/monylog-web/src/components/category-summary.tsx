@@ -7,12 +7,12 @@ import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Minus, ArrowUpCircle, ArrowDownCircle, Calculator } from "lucide-react"
-import type { Transaction } from "@/types/transaction"
+import type { Expenses } from "@/types/expenses"
 import { formatCurrency } from "@/lib/format-currency"
 import { useCategories } from "@/hooks/use-categories"
 
 interface CategorySummaryProps {
-  transactions: Transaction[]
+  transactions: Expenses[]
 }
 
 type Period = "week" | "month" | "quarter" | "year"

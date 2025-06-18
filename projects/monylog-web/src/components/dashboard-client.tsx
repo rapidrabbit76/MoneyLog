@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button"
 
 import type React from "react"
 import type { User } from "@/types/auth"
-import type { Transaction } from "@/types/transaction"
+import type { Expenses } from "@/types/expenses"
 
 import { useState, useEffect } from "react"
 import { useRouter, usePathname } from "next/navigation"
@@ -14,7 +14,7 @@ import { Logo } from "@/components/logo"
 import { UserStatus } from "@/components/user-status"
 import { Sidebar } from "@/components/sidebar"
 import { ChatInput } from "@/components/chat-input"
-import { TransactionList } from "@/components/transaction-list"
+import { ExpenseViewList } from "@/components/transaction-list"
 import { CalendarView } from "@/components/calendar-view"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { parseTransaction } from "@/lib/expense-message"
@@ -34,7 +34,7 @@ export default function DashboardClient({ initialUser, initialTab = "main" }: Da
   const [sidebarWidth, setSidebarWidth] = useState(280)
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
   const [activeTab, setActiveTab] = useState(initialTab)
-  const [transactions, setTransactions] = useLocalStorage<Transaction[]>("transactions", [])
+  const [transactions, setTransactions] = useLocalStorage<Expenses[]>("transactions", [])
   const [isResizing, setIsResizing] = useState(false)
 
   const handleChatSubmit = (message: string) => {
@@ -172,7 +172,7 @@ export default function DashboardClient({ initialUser, initialTab = "main" }: Da
                   <ChatInput onSubmit={handleChatSubmit} />
                 </div>
                 <div className="flex-1 overflow-y-auto pb-4">
-                  <TransactionList transactions={transactions} />
+                  <ExpenseViewList transactions={transactions} />
                 </div>
               </>
             )}

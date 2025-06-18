@@ -24,14 +24,14 @@ const SidebarContext = createContext<SidebarContextType | undefined>(undefined)
 
 export function SidebarProvider({ children }: { children: ReactNode }) {
   const [sidebarOpen, setSidebarOpen] = useState(true)
-  const [sidebarWidth, setSidebarWidth] = useState(280)
+  const [sidebarWidth, setSidebarWidth] = useState(220)
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
   const [activeTab, setActiveTab] = useState("main")
   const [isResizing, setIsResizing] = useState(false)
 
   const updateSidebarState = (width: number) => {
     setSidebarWidth(width)
-    setSidebarCollapsed(width < 180)
+    setSidebarCollapsed(width < 80)
   }
 
   const toggleSidebar = () => {

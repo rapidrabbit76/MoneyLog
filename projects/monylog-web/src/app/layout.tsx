@@ -3,7 +3,7 @@ import type { Metadata } from "next"
 import { Mona_Sans as FontSans } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
-import { TransactionProvider } from "@/contexts/transaction-context"
+import { ExpensesProvider } from "@/contexts/expenses-context"
 import { SidebarProvider } from "@/contexts/sidebar-context"
 import { UserProvider } from "@/contexts/user-context"
 
@@ -34,11 +34,11 @@ export default function RootLayout({
           storageKey="finance-chat-theme"
         >
           <UserProvider>
-            <TransactionProvider>
+            <ExpensesProvider>
               <SidebarProvider>
                 {children}
               </SidebarProvider>
-            </TransactionProvider>
+            </ExpensesProvider>
           </UserProvider>
         </ThemeProvider>
       </body>

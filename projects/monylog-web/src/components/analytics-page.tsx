@@ -16,12 +16,12 @@ import {
   PieChart,
   BarChart3,
 } from "lucide-react"
-import type { Transaction } from "@/types/transaction"
+import type { Expenses } from "@/types/expenses"
 import { formatCurrency } from "@/lib/format-currency"
 import { useCategories } from "@/hooks/use-categories"
 
 interface AnalyticsPageProps {
-  transactions: Transaction[]
+  transactions: Expenses[]
 }
 
 type Period = "week" | "month" | "quarter" | "year"

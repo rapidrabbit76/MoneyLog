@@ -1,20 +1,20 @@
 "use client"
 
 import { useMemo } from "react"
-import type { Transaction } from "@/types/transaction"
+import type { Expenses } from "@/types/expenses"
 import { formatCurrency } from "@/lib/format-currency"
 import { Card, CardContent } from "@/components/ui/card"
 
 interface TransactionListProps {
-  transactions: Transaction[]
+  transactions: Expenses[]
 }
 
-export function TransactionList({ transactions }: TransactionListProps) {
+export function ExpenseViewList({ transactions }: TransactionListProps) {
   const groupedTransactions = useMemo(() => {
-    const groups: Record<string, Transaction[]> = {}
+    const groups: Record<string, Expenses[]> = {}
 
     transactions.forEach((transaction) => {
-      const date = new Date(transaction.date).toLocaleDateString()
+      const date = new Date(transaction.dt).toLocaleDateString()
       if (!groups[date]) {
         groups[date] = []
       }
@@ -32,6 +32,7 @@ export function TransactionList({ transactions }: TransactionListProps) {
         <div className="space-y-3 max-w-md">
           <p className="text-xl font-medium">아직 거래 내역이 없습니다</p>
           <p className="text-sm text-muted-foreground">
+            {/* TODO: 담배 관련 내용 제거해야 할듯 */}
             채팅창에 &quot;담배 4800&quot;와 같이 입력하여 지출을 기록하거나, &quot;월급 2000000&quot;와 같이 입력하여
             수입을 기록해보세요.
           </p>
@@ -49,24 +50,22 @@ export function TransactionList({ transactions }: TransactionListProps) {
             {transactions.map((transaction, index) => (
               <Card
                 key={index}
-                className={`overflow-hidden transition-all hover:shadow-md ${
-                  transaction.type === "expense"
-                    ? "border-l-4 border-l-red-500 dark:border-l-red-400"
-                    : "border-l-4 border-l-blue-500 dark:border-l-blue-400"
-                }`}
+                className={`overflow-hidden transition-all hover:shadow-md ${transaction.type === "expense"
+                  ? "border-l-4 border-l-red-500 dark:border-l-red-400"
+                  : "border-l-4 border-l-blue-500 dark:border-l-blue-400"
+                  }`}
               >
                 <CardContent className="p-4">
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="font-medium">{transaction.description}</p>
-                      <p className="text-sm text-muted-foreground">{transaction.category}</p>
+                      <p className="font-medium">{transaction.title}</p>
+                      <p className="text-sm text-muted-foreground">{transaction.tags.join(", ")}</p>
                     </div>
                     <p
-                      className={`text-lg font-bold ${
-                        transaction.type === "expense"
-                          ? "text-red-500 dark:text-red-400"
-                          : "text-blue-500 dark:text-blue-400"
-                      }`}
+                      className={`text-lg font-bold ${transaction.type === "expense"
+                        ? "text-red-500 dark:text-red-400"
+                        : "text-blue-500 dark:text-blue-400"
+                        }`}
                     >
                       {transaction.type === "expense" ? "-" : "+"}
                       {formatCurrency(transaction.amount)}

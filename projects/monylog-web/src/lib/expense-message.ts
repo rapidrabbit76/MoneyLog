@@ -1,4 +1,4 @@
-import type { Transaction } from "@/types/transaction"
+import type { Expenses } from "@/types/expenses"
 import { analyzeExpenseMessage, AnalyzeExpenseMessageResponse } from "@/lib/api/llm"
 
 export interface ParsedExpense {
@@ -57,7 +57,7 @@ export async function expenseMessageProcessing(message: string): Promise<Analyze
 
 
 
-export function parseTransaction(message: string): Transaction | null {
+export function parseTransaction(message: string): Expenses | null {
   // 기본 패턴: [설명] [금액]
   const parts = message.trim().split(/\s+/)
 
@@ -107,7 +107,7 @@ export function parseTransaction(message: string): Transaction | null {
 
   return {
     id: `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
-    description,
+    title: description,
     amount,
     date: new Date().toISOString(),
     category,

@@ -6,11 +6,11 @@ import { useState, useMemo } from "react"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import type { Transaction } from "@/types/transaction"
+import type { Expenses } from "@/types/expenses"
 import { formatCurrency } from "@/lib/format-currency"
 
 interface CalendarViewProps {
-  transactions: Transaction[]
+  transactions: Expenses[]
 }
 
 export function CalendarView({ transactions }: CalendarViewProps) {
@@ -71,7 +71,7 @@ export function CalendarView({ transactions }: CalendarViewProps) {
 
   // 날짜별 거래 내역 그룹화
   const transactionsByDate = useMemo(() => {
-    const grouped: Record<string, Transaction[]> = {}
+    const grouped: Record<string, Expenses[]> = {}
 
     transactions.forEach((transaction) => {
       const date = new Date(transaction.date)

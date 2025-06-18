@@ -11,7 +11,7 @@ import { Check, X, Edit, ArrowLeft, ArrowRight } from "lucide-react"
 import type { ParsedExpense } from "@/lib/expense-message"
 import { useCategories } from "@/hooks/use-categories"
 
-interface TransactionConfirmationStackProps {
+interface ExpensesConfirmationStackProps {
   expenses: {
     title: string;
     tags: string[];
@@ -23,10 +23,10 @@ interface TransactionConfirmationStackProps {
   onCancel: () => void
 }
 
-export function TransactionConfirmationStack({ expenses, onConfirm, onCancel }: TransactionConfirmationStackProps) {
+export function ExpensesConfirmationStack({ expenses, onConfirm, onCancel }: ExpensesConfirmationStackProps) {
   const { categories } = useCategories()
   const [currentIndex, setCurrentIndex] = useState(0)
-  const [confirmedTransactions, setConfirmedTransactions] = useState<ParsedExpense[]>([])
+  const [confirmedExpenses, setConfirmedExpenses] = useState<ParsedExpense[]>([])
   const [editingExpenses, setEditingExpenses] = useState<{
     title: string;
     tags: string[];
@@ -37,12 +37,12 @@ export function TransactionConfirmationStack({ expenses, onConfirm, onCancel }: 
   const [isEditing, setIsEditing] = useState(false)
 
   const currentExpenses = editingExpenses[currentIndex]
-  const totalTransactions = editingExpenses.length
-  const progress = ((currentIndex + 1) / totalTransactions) * 100
+  const totalExpenses = editingExpenses.length
+  const progress = ((currentIndex + 1) / totalExpenses) * 100
 
   const handleConfirmCurrent = () => {
-    const confirmed = [...confirmedTransactions, currentExpenses]
-    setConfirmedTransactions(confirmed)
+    const confirmed = [...confirmedExpenses, currentExpenses]
+    setConfirmedExpenses(confirmed)
 
     if (currentIndex < editingExpenses.length - 1) {
       setCurrentIndex(currentIndex + 1)
@@ -55,15 +55,15 @@ export function TransactionConfirmationStack({ expenses, onConfirm, onCancel }: 
 
   const handleSkipCurrent = () => {
     // 현재 거래를 제외하고 다음으로
-    const updatedTransactions = editingExpenses.filter((_, index) => index !== currentIndex)
-    setEditingExpenses(updatedTransactions)
+    const updatedExpenses = editingExpenses.filter((_, index) => index !== currentIndex)
+    setEditingExpenses(updatedExpenses)
 
-    if (updatedTransactions.length === 0) {
+    if (updatedExpenses.length === 0) {
       // 모든 거래가 제거됨
-      onConfirm(confirmedTransactions)
-    } else if (currentIndex >= updatedTransactions.length) {
+      onConfirm(confirmedExpenses)
+    } else if (currentIndex >= updatedExpenses.length) {
       // 마지막 거래를 제거한 경우
-      setCurrentIndex(updatedTransactions.length - 1)
+      setCurrentIndex(updatedExpenses.length - 1)
     }
     setIsEditing(false)
   }
@@ -78,22 +78,22 @@ export function TransactionConfirmationStack({ expenses, onConfirm, onCancel }: 
 
   const handleCancelEdit = () => {
     // 원래 값으로 복원
-    const originalTransaction = expenses.find((t) => t.title === currentExpenses.title)
-    if (originalTransaction) {
-      const updatedTransactions = [...editingExpenses]
-      updatedTransactions[currentIndex] = originalTransaction
-      setEditingExpenses(updatedTransactions)
+    const originalExpense = expenses.find((t) => t.title === currentExpenses.title)
+    if (originalExpense) {
+      const updatedExpenses = [...editingExpenses]
+      updatedExpenses[currentIndex] = originalExpense
+      setEditingExpenses(updatedExpenses)
     }
     setIsEditing(false)
   }
 
-  const handleTransactionChange = (field: keyof ParsedExpense, value: any) => {
-    const updatedTransactions = [...editingExpenses]
-    updatedTransactions[currentIndex] = {
-      ...updatedTransactions[currentIndex],
+  const handleExpenseChange = (field: keyof ParsedExpense, value: any) => {
+    const updatedExpense = [...editingExpenses]
+    updatedExpense[currentIndex] = {
+      ...updatedExpense[currentIndex],
       [field]: value,
     }
-    setEditingExpenses(updatedTransactions)
+    setEditingExpenses(updatedExpense)
   }
 
   const handlePrevious = () => {
@@ -121,7 +121,7 @@ export function TransactionConfirmationStack({ expenses, onConfirm, onCancel }: 
         <div className="flex justify-between text-sm text-muted-foreground">
           <span>거래 확인 진행상황</span>
           <span>
-            {currentIndex + 1} / {totalTransactions}
+            {currentIndex + 1} / {totalExpenses}
           </span>
         </div>
         <Progress value={progress} className="h-2" />
@@ -129,7 +129,7 @@ export function TransactionConfirmationStack({ expenses, onConfirm, onCancel }: 
 
       {/* 카드 스택 */}
       <div className="relative h-[400px]">
-        {editingExpenses.map((transaction, index) => {
+        {editingExpenses.map((pendingExpense, index) => {
           const isActive = index === currentIndex
           const offset = index - currentIndex
           const isVisible = Math.abs(offset) <= 2
@@ -165,7 +165,7 @@ export function TransactionConfirmationStack({ expenses, onConfirm, onCancel }: 
                       <Input
                         id="Title"
                         value={currentExpenses.title}
-                        onChange={(e) => handleTransactionChange("title", e.target.value)}
+                        onChange={(e) => handleExpenseChange("title", e.target.value)}
                       />
                     </div>
 
@@ -175,7 +175,7 @@ export function TransactionConfirmationStack({ expenses, onConfirm, onCancel }: 
                         id="amount"
                         type="number"
                         value={currentExpenses.amount}
-                        onChange={(e) => handleTransactionChange("amount", Number.parseFloat(e.target.value))}
+                        onChange={(e) => handleExpenseChange("amount", Number.parseFloat(e.target.value))}
                       />
                     </div>
 
@@ -183,7 +183,7 @@ export function TransactionConfirmationStack({ expenses, onConfirm, onCancel }: 
                       <Label htmlFor="type">유형</Label>
                       <Select
                         value={currentExpenses.type}
-                        onValueChange={(value: "income" | "expense") => handleTransactionChange("type", value)}
+                        onValueChange={(value: "income" | "expense") => handleExpenseChange("type", value)}
                       >
                         <SelectTrigger>
                           <SelectValue />
@@ -199,7 +199,7 @@ export function TransactionConfirmationStack({ expenses, onConfirm, onCancel }: 
                       <Label htmlFor="category">테그</Label>
                       <Select
                         value={currentExpenses.tags.join(", ")}
-                        onValueChange={(value) => handleTransactionChange("tags", value.split(", ").map(tag => tag.trim()))}
+                        onValueChange={(value) => handleExpenseChange("tags", value.split(", ").map(tag => tag.trim()))}
                       >
                         <SelectTrigger>
                           <SelectValue placeholder="테그 선택" />
@@ -230,43 +230,43 @@ export function TransactionConfirmationStack({ expenses, onConfirm, onCancel }: 
                     <div className="space-y-3">
                       <div className="flex justify-between items-center">
                         <span className="text-sm text-muted-foreground">제목:</span>
-                        <span className="font-medium">{transaction.title}</span>
+                        <span className="font-medium">{pendingExpense.title}</span>
                       </div>
 
                       <div className="flex justify-between items-center">
                         <span className="text-sm text-muted-foreground">금액:</span>
                         <span
-                          className={`font-bold text-lg ${transaction.type === "expense"
+                          className={`font-bold text-lg ${pendingExpense.type === "expense"
                             ? "text-red-500 dark:text-red-400"
                             : "text-blue-500 dark:text-blue-400"
                             }`}
                         >
-                          {transaction.type === "expense" ? "-" : "+"}
+                          {pendingExpense.type === "expense" ? "-" : "+"}
                           {new Intl.NumberFormat("ko-KR", {
                             style: "currency",
                             currency: "KRW",
                             maximumFractionDigits: 0,
-                          }).format(transaction.amount)}
+                          }).format(pendingExpense.amount)}
                         </span>
                       </div>
 
                       <div className="flex justify-between items-center">
                         <span className="text-sm text-muted-foreground">유형:</span>
-                        <Badge variant={transaction.type === "expense" ? "destructive" : "default"}>
-                          {transaction.type === "expense" ? "지출" : "수입"}
+                        <Badge variant={pendingExpense.type === "expense" ? "destructive" : "default"}>
+                          {pendingExpense.type === "expense" ? "지출" : "수입"}
                         </Badge>
                       </div>
 
                       <div className="flex justify-between items-center">
                         <span className="text-sm text-muted-foreground">테그:</span>
-                        <Badge variant="outline">{transaction.tags}</Badge>
+                        <Badge variant="outline">{pendingExpense.tags}</Badge>
                       </div>
                     </div>
 
                     {isActive && (
                       <>
                         {/* 네비게이션 버튼 */}
-                        {totalTransactions > 1 && (
+                        {totalExpenses > 1 && (
                           <div className="flex justify-center gap-2 pt-2">
                             <Button variant="outline" size="sm" onClick={handlePrevious} disabled={currentIndex === 0}>
                               <ArrowLeft className="h-4 w-4" />

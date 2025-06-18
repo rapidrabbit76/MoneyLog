@@ -6,12 +6,12 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
 import { Calendar, TrendingDown, TrendingUp, Minus } from "lucide-react"
-import type { Transaction } from "@/types/transaction"
+import type { Expenses } from "@/types/expenses"
 import { formatCurrency } from "@/lib/format-currency"
 import { useCategories } from "@/hooks/use-categories"
 
 interface CategorySpendingViewProps {
-  transactions: Transaction[]
+  transactions: Expenses[]
 }
 
 type Period = "week" | "month" | "quarter" | "year"

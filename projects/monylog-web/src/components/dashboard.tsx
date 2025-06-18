@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button"
 
 import type React from "react"
-import type { Transaction } from "@/types/transaction"
+import type { Expenses } from "@/types/expenses"
 
 import { useState, useEffect } from "react"
 import { useRouter, usePathname } from "next/navigation"
@@ -13,52 +13,40 @@ import { Logo } from "@/components/logo"
 import { UserStatus } from "@/components/user-status"
 import { Sidebar } from "@/components/sidebar"
 import { ChatInput } from "@/components/chat-input"
-import { TransactionList } from "@/components/transaction-list"
+import { ExpenseViewList } from "@/components/transaction-list"
 import { CalendarView } from "@/components/calendar-view"
 import { SimpleCategoryManager } from "@/components/simple-category-manager"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { parseTransaction } from "@/lib/expense-message"
 import { AnalyticsPage } from "@/components/analytics-page"
-import { useTransactions } from "@/contexts/transaction-context"
+import { useTransactions as useExpenses } from "@/contexts/expenses-context"
 import { useSidebar } from "@/contexts/sidebar-context"
 
 interface DashboardProps {
   // No props needed now - using Context
 }
 
-export default function Dashboard({}: DashboardProps) {
+export default function Dashboard({ }: DashboardProps) {
   const router = useRouter()
   const pathname = usePathname()
   const { user, logout } = useAuth()
-  const { transactions, addTransaction } = useTransactions()
-  const { 
-    sidebarOpen, 
-    setSidebarOpen, 
-    sidebarWidth, 
-    setSidebarWidth, 
-    sidebarCollapsed, 
-    setSidebarCollapsed, 
-    activeTab, 
-    setActiveTab, 
-    isResizing, 
+  const { expenses, addExpenses } = useExpenses()
+  const {
+    sidebarOpen,
+    setSidebarOpen,
+    sidebarWidth,
+    setSidebarWidth,
+    sidebarCollapsed,
+    setSidebarCollapsed,
+    activeTab,
+    setActiveTab,
+    isResizing,
     setIsResizing,
     updateSidebarState,
-    toggleSidebar 
+    toggleSidebar
   } = useSidebar()
 
-  const defaultHandleChatSubmit = (message: string) => {
-    console.log("Received message:", message)
-    try {
-      // Try to parse as JSON first (new format from confirmation)
-      const transaction = JSON.parse(message) as Transaction
-      addTransaction(transaction)
-    } catch (error) {
-      // If JSON parsing fails, try the old parsing method
-      const transaction = parseTransaction(message)
-      if (transaction) {
-        addTransaction(transaction)
-      }
-    }
+  const defaultHandleChatSubmit = () => {
   }
 
   const defaultHandleMouseDown = (e: React.MouseEvent) => {
@@ -70,7 +58,7 @@ export default function Dashboard({}: DashboardProps) {
     const handleMouseMove = (e: MouseEvent) => {
       if (!isResizing) return
       const newWidth = e.clientX
-      if (newWidth > 60 && newWidth < 500) {
+      if (newWidth >= 60 && newWidth <= 220) {
         updateSidebarState(newWidth)
       }
     }
@@ -143,7 +131,7 @@ export default function Dashboard({}: DashboardProps) {
           <Sidebar
             activeTab={activeTab}
             setActiveTab={handleTabChange}
-            transactions={transactions}
+            transactions={expenses}
             collapsed={sidebarCollapsed}
             toggleCollapsed={() => setSidebarCollapsed(!sidebarCollapsed)}
           />
@@ -176,20 +164,20 @@ export default function Dashboard({}: DashboardProps) {
                   <ChatInput onSubmit={defaultHandleChatSubmit} />
                 </div>
                 <div className="flex-1 overflow-y-auto pb-4">
-                  <TransactionList transactions={transactions} />
+                  <ExpenseViewList transactions={expenses} />
                 </div>
               </>
             )}
 
             {activeTab === "transactions" && (
               <div className="flex-1 overflow-y-auto pb-4">
-                <CalendarView transactions={transactions} />
+                <CalendarView transactions={expenses} />
               </div>
             )}
 
             {activeTab === "analytics" && (
               <div className="flex-1 overflow-y-auto pb-4">
-                <AnalyticsPage transactions={transactions} />
+                <AnalyticsPage transactions={expenses} />
               </div>
             )}
 

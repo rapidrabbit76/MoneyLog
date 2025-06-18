@@ -2,18 +2,20 @@
 
 import type React from "react"
 
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { Send } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
-import { TransactionConfirmationStack } from "@/components/transaction-confirmation-stack"
+import { ExpensesConfirmationStack } from "@/components/expenses-confirmation-stack"
 import { expenseMessageProcessing, type ParsedExpense } from "@/lib/expense-message"
 import LoadingPopup from "./loading-popup"
 
 import { AnalyzeExpenseMessageResponse } from "@/lib/api/llm"
+import { createExpenses } from "@/lib/api/expenses"
+import { ExpensesContext } from "@/contexts/expenses-context"
 
 interface ChatInputProps {
-  onSubmit: (message: string) => void
+  onSubmit: () => void
 }
 
 export function ChatInput({ onSubmit }: ChatInputProps) {
@@ -21,6 +23,8 @@ export function ChatInput({ onSubmit }: ChatInputProps) {
   const [pendingExpense, setPendingExpense] = useState<AnalyzeExpenseMessageResponse>(
     { id: "", count: 0, expenses: [] }
   )
+
+  const expenseContext = useContext(ExpensesContext)
   const [isLoading, setIsLoading] = useState(false)
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -49,7 +53,24 @@ export function ChatInput({ onSubmit }: ChatInputProps) {
     confirmedTransactions.forEach((transaction) => {
       console.log("Confirmed transaction:", transaction)
     })
-    setPendingExpense({ id: "", count: 0, expenses: [] })
+    //  call create Expense API
+    createExpenses({
+      requestId: pendingExpense.id,
+      expenses: confirmedTransactions,
+    })
+      .then(() => {
+        console.log("Expenses created successfully")
+        expenseContext?.refreshExpenses?.()
+      })
+      .catch((error) => {
+        console.error("Error creating expenses:", error)
+        alert("지출 내역을 저장하는 중 오류가 발생했습니다. 다시 시도해주세요.")
+      })
+      .finally(() => {
+        setIsLoading(false)
+        setPendingExpense({ id: "", count: 0, expenses: [] })
+        onSubmit()
+      })
   }
 
   const handleCancel = () => {
@@ -59,7 +80,7 @@ export function ChatInput({ onSubmit }: ChatInputProps) {
   if (pendingExpense.count > 0) {
     return (
       <div className="space-y-4">
-        <TransactionConfirmationStack
+        <ExpensesConfirmationStack
           expenses={pendingExpense.expenses}
           onConfirm={handleConfirm}
           onCancel={handleCancel}
