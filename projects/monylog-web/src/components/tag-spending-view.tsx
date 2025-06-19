@@ -8,16 +8,16 @@ import { Progress } from "@/components/ui/progress"
 import { Calendar, TrendingDown, TrendingUp, Minus } from "lucide-react"
 import type { Expenses } from "@/types/expenses"
 import { formatCurrency } from "@/lib/format-currency"
-import { useCategories } from "@/hooks/use-tags"
+import { useTags } from "@/hooks/use-tags"
 
-interface CategorySpendingViewProps {
+interface TagSpendingViewProps {
   expenses: Expenses[]
 }
 
 type Period = "week" | "month" | "quarter" | "year"
 
-interface CategorySummary {
-  category: string
+interface TagSummary {
+  tag: string
   totalAmount: number
   transactionCount: number
   percentage: number
@@ -25,9 +25,9 @@ interface CategorySummary {
   trendPercentage: number
 }
 
-export function CategorySpendingView({ expenses }: CategorySpendingViewProps) {
+export function TagSpendingView({ expenses }: TagSpendingViewProps) {
   const [selectedPeriod, setSelectedPeriod] = useState<Period>("month")
-  const { categories } = useCategories()
+  const { tags } = useTags()
 
   const periodLabels = {
     week: "이번 주",
@@ -73,7 +73,7 @@ export function CategorySpendingView({ expenses }: CategorySpendingViewProps) {
     return { start: prevStart, end: prevEnd }
   }
 
-  const categoryData = useMemo(() => {
+  const tagData = useMemo(() => {
     const { start, end } = getDateRange(selectedPeriod)
     const { start: prevStart, end: prevEnd } = getPreviousDateRange(selectedPeriod)
 
@@ -89,25 +89,26 @@ export function CategorySpendingView({ expenses }: CategorySpendingViewProps) {
       return date >= prevStart && date <= prevEnd && t.type === "expense"
     })
 
-    // 카테고리별 집계
-    const categoryMap = new Map<string, CategorySummary>()
-    const prevCategoryMap = new Map<string, number>()
+    // 태그별 집계
+    const tagMap = new Map<string, TagSummary>()
+    const prevTagMap = new Map<string, number>()
 
     // 이전 기간 데이터
     previousExpenses.forEach((transaction) => {
-      const current = prevCategoryMap.get(transaction.category) || 0
-      prevCategoryMap.set(transaction.category, current + transaction.amount)
+      const tagName = transaction.tags[0]?.name || "기타"
+      const current = prevTagMap.get(tagName) || 0
+      prevTagMap.set(tagName, current + transaction.amount)
     })
 
-    // 현재 기간 데이터
     currentExpenses.forEach((transaction) => {
-      const current = categoryMap.get(transaction.category)
+      const tagName = transaction.tags[0]?.name || "기타"
+      const current = tagMap.get(tagName)
       if (current) {
         current.totalAmount += transaction.amount
         current.transactionCount += 1
       } else {
-        categoryMap.set(transaction.category, {
-          category: transaction.category,
+        tagMap.set(tagName, {
+          tag: tagName,
           totalAmount: transaction.amount,
           transactionCount: 1,
           percentage: 0,
@@ -118,12 +119,12 @@ export function CategorySpendingView({ expenses }: CategorySpendingViewProps) {
     })
 
     // 총 지출 계산
-    const totalSpending = Array.from(categoryMap.values()).reduce((sum, cat) => sum + cat.totalAmount, 0)
+    const totalSpending = Array.from(tagMap.values()).reduce((sum, cat) => sum + cat.totalAmount, 0)
 
     // 퍼센티지 및 트렌드 계산
-    const result: CategorySummary[] = Array.from(categoryMap.values()).map((cat) => {
+    const result: TagSummary[] = Array.from(tagMap.values()).map((cat) => {
       const percentage = totalSpending > 0 ? (cat.totalAmount / totalSpending) * 100 : 0
-      const prevAmount = prevCategoryMap.get(cat.category) || 0
+      const prevAmount = prevTagMap.get(cat.tag) || 0
 
       let trend: "up" | "down" | "same" = "same"
       let trendPercentage = 0
@@ -152,7 +153,7 @@ export function CategorySpendingView({ expenses }: CategorySpendingViewProps) {
     return result.sort((a, b) => b.totalAmount - a.totalAmount)
   }, [expenses, selectedPeriod])
 
-  const totalSpending = categoryData.reduce((sum, cat) => sum + cat.totalAmount, 0)
+  const totalSpending = tagData.reduce((sum, cat) => sum + cat.totalAmount, 0)
 
   const getTrendIcon = (trend: "up" | "down" | "same") => {
     switch (trend) {
@@ -182,7 +183,7 @@ export function CategorySpendingView({ expenses }: CategorySpendingViewProps) {
         <div className="flex items-center justify-between">
           <CardTitle className="text-sm font-medium flex items-center gap-2">
             <Calendar className="h-4 w-4" />
-            카테고리별 지출
+            태그별 지출
           </CardTitle>
         </div>
         <Select value={selectedPeriod} onValueChange={(value: Period) => setSelectedPeriod(value)}>
@@ -203,18 +204,18 @@ export function CategorySpendingView({ expenses }: CategorySpendingViewProps) {
           <div className="text-lg font-bold text-red-500 dark:text-red-400">{formatCurrency(totalSpending)}</div>
         </div>
 
-        {categoryData.length === 0 ? (
+        {tagData.length === 0 ? (
           <div className="text-center py-4">
             <p className="text-xs text-muted-foreground">{periodLabels[selectedPeriod]} 지출 내역이 없습니다</p>
           </div>
         ) : (
           <div className="space-y-3 max-h-64 overflow-y-auto">
-            {categoryData.map((cat) => (
-              <div key={cat.category} className="space-y-2">
+            {tagData.map((cat) => (
+              <div key={cat.tag} className="space-y-2">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <Badge variant="outline" className="text-xs px-2 py-0">
-                      {cat.category}
+                      {cat.tag}
                     </Badge>
                     <div className="flex items-center gap-1">
                       {getTrendIcon(cat.trend)}
@@ -239,7 +240,7 @@ export function CategorySpendingView({ expenses }: CategorySpendingViewProps) {
           </div>
         )}
 
-        {categoryData.length > 0 && (
+        {tagData.length > 0 && (
           <div className="pt-2 border-t">
             <div className="text-xs text-muted-foreground text-center">💡 이전 기간 대비 증감률을 표시합니다</div>
           </div>

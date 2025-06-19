@@ -9,7 +9,7 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Minus, ArrowUpCircle, ArrowDownCircle, Calculator } from "lucide-react"
 import type { Expenses } from "@/types/expenses"
 import { formatCurrency } from "@/lib/format-currency"
-import { useCategories } from "@/hooks/use-tags"
+import { useTags } from "@/hooks/use-tags"
 
 interface TagSummaryProps {
   expenses: Expenses[]
@@ -35,7 +35,7 @@ interface TagData {
 export function TagSummary({ expenses }: TagSummaryProps) {
   const [selectedPeriod, setSelectedPeriod] = useState<Period>("month")
   const [viewType, setViewType] = useState<ViewType>("both")
-  const { categories } = useCategories()
+  const { tags } = useTags()
 
   const periodLabels = {
     week: "이번 주",
