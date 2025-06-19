@@ -10,12 +10,12 @@ interface ExpensesState {
 }
 
 type ExpensesAction =
-  | { type: "SET_TRANSACTIONS"; payload: Expenses[] }
-  | { type: "ADD_TRANSACTION"; payload: Expenses }
-  | { type: "UPDATE_TRANSACTION"; payload: { id: string; transaction: Partial<Expenses> } }
-  | { type: "DELETE_TRANSACTION"; payload: number }
+  | { type: "SET_EXPENSES"; payload: Expenses[] }
+  | { type: "ADD_EXPENSE"; payload: Expenses }
+  | { type: "UPDATE_EXPENSE"; payload: { id: string; expense: Partial<Expenses> } }
+  | { type: "DELETE_EXPENSE"; payload: number }
   | { type: "SET_LOADING"; payload: boolean }
-  | { type: "REFRESH_TRANSACTIONS" }
+  | { type: "REFRESH_EXPENSES" }
 
 interface ExpensesContextType extends ExpensesState {
   addExpense: (Expense: Expenses) => void
@@ -29,18 +29,18 @@ export const ExpensesContext = createContext<ExpensesContextType | undefined>(un
 
 function ExpensesReducer(state: ExpensesState, action: ExpensesAction): ExpensesState {
   switch (action.type) {
-    case "SET_TRANSACTIONS":
+    case "SET_EXPENSES":
       return {
         ...state,
         expenses: action.payload
       }
-    case "ADD_TRANSACTION":
-      const newTransactions = [action.payload, ...state.expenses]
+    case "ADD_EXPENSE":
+      const newExpenses = [action.payload, ...state.expenses]
       return {
         ...state,
-        expenses: newTransactions
+        expenses: newExpenses
       }
-    case "DELETE_TRANSACTION":
+    case "DELETE_EXPENSE":
       return {
         ...state,
         expenses: state.expenses.filter(expense => expense.id !== action.payload)
@@ -50,7 +50,7 @@ function ExpensesReducer(state: ExpensesState, action: ExpensesAction): Expenses
         ...state,
         isLoading: action.payload
       }
-    case "REFRESH_TRANSACTIONS":
+    case "REFRESH_EXPENSES":
       return {
         ...state,
         isLoading: true
@@ -60,7 +60,7 @@ function ExpensesReducer(state: ExpensesState, action: ExpensesAction): Expenses
   }
 }
 
-const STORAGE_KEY = "transactions"
+const STORAGE_KEY = "expenses"
 
 export function ExpensesProvider({ children }: { children: ReactNode }) {
   const [state, dispatch] = useReducer(ExpensesReducer, {
@@ -68,44 +68,43 @@ export function ExpensesProvider({ children }: { children: ReactNode }) {
     isLoading: true
   })
 
-  // Load transactions from localStorage on mount
+  // Load expenses from localStorage on mount
   useEffect(() => {
     try {
       getExpenses({ page: 1, size: 500 }).then((expenses) => {
-        dispatch({ type: "SET_TRANSACTIONS", payload: expenses })
+        dispatch({ type: "SET_EXPENSES", payload: expenses })
       }
       ).catch((error) => {
-        console.error("Failed to load transactions:", error)
+        console.error("Failed to load expenses:", error)
         dispatch({ type: "SET_LOADING", payload: false })
       })
     } catch (error) {
-      console.error("Failed to load transactions from localStorage:", error)
+      console.error("Failed to load expenses from localStorage:", error)
       dispatch({ type: "SET_LOADING", payload: false })
     }
   }, [])
 
-
   const addExpense = (expense: Expenses) => {
-    dispatch({ type: "ADD_TRANSACTION", payload: expense })
+    dispatch({ type: "ADD_EXPENSE", payload: expense })
   }
 
   // const updateExpense = (id: number, expense: Partial<Expenses>) => {
-  //   dispatch({ type: "UPDATE_TRANSACTION", payload: { id, expense } })
+  //   dispatch({ type: "UPDATE_EXPENSE", payload: { id, expense } })
   // }
 
   const deleteExpense = (id: number) => {
-    dispatch({ type: "DELETE_TRANSACTION", payload: id })
+    dispatch({ type: "DELETE_EXPENSE", payload: id })
   }
 
   const setExpenses = (expenses: Expenses[]) => {
-    dispatch({ type: "SET_TRANSACTIONS", payload: expenses })
+    dispatch({ type: "SET_EXPENSES", payload: expenses })
   }
 
   const refreshExpenses = () => {
-    dispatch({ type: "REFRESH_TRANSACTIONS" })
+    dispatch({ type: "REFRESH_EXPENSES" })
     try {
       getExpenses({ page: 1, size: 500 }).then((expenses) => {
-        dispatch({ type: "SET_TRANSACTIONS", payload: expenses })
+        dispatch({ type: "SET_EXPENSES", payload: expenses })
         return expenses
       }).catch((error) => {
       }).finally(() => {
@@ -133,10 +132,10 @@ export function ExpensesProvider({ children }: { children: ReactNode }) {
   )
 }
 
-export function useTransactions() {
+export function useExpenses() {
   const context = useContext(ExpensesContext)
   if (context === undefined) {
-    throw new Error("useTransactions must be used within a TransactionProvider")
+    throw new Error("useExpenses must be used within an ExpensesProvider")
   }
   return context
 }

@@ -10,10 +10,10 @@ import type { Expenses } from "@/types/expenses"
 import { formatCurrency } from "@/lib/format-currency"
 
 interface CalendarViewProps {
-  transactions: Expenses[]
+  expenses: Expenses[]
 }
 
-export function CalendarView({ transactions }: CalendarViewProps) {
+export function CalendarView({ expenses }: CalendarViewProps) {
   const [currentDate, setCurrentDate] = useState(new Date())
 
   const currentYear = currentDate.getFullYear()
@@ -70,31 +70,31 @@ export function CalendarView({ transactions }: CalendarViewProps) {
   }, [currentYear, currentMonth, firstDayOfMonth, lastDayOfMonth])
 
   // 날짜별 거래 내역 그룹화
-  const transactionsByDate = useMemo(() => {
+  const expensesByDate = useMemo(() => {
     const grouped: Record<string, Expenses[]> = {}
 
-    transactions.forEach((transaction) => {
-      const date = new Date(transaction.date)
+    expenses.forEach((expense) => {
+      const date = new Date(expense.dt)
       const dateKey = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`
 
       if (!grouped[dateKey]) {
         grouped[dateKey] = []
       }
 
-      grouped[dateKey].push(transaction)
+      grouped[dateKey].push(expense)
     })
 
     return grouped
-  }, [transactions])
+  }, [expenses])
 
   // 날짜별 총액 계산
   const getDailyTotals = (date: Date) => {
     const dateKey = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`
-    const dayTransactions = transactionsByDate[dateKey] || []
+    const dayExpenses = expensesByDate[dateKey] || []
 
-    const expense = dayTransactions.filter((t) => t.type === "expense").reduce((sum, t) => sum + t.amount, 0)
+    const expense = dayExpenses.filter((t) => t.type === "expense").reduce((sum, t) => sum + t.amount, 0)
 
-    const income = dayTransactions.filter((t) => t.type === "income").reduce((sum, t) => sum + t.amount, 0)
+    const income = dayExpenses.filter((t) => t.type === "income").reduce((sum, t) => sum + t.amount, 0)
 
     return { expense, income }
   }
@@ -140,7 +140,7 @@ export function CalendarView({ transactions }: CalendarViewProps) {
         {/* 달력 날짜 */}
         {calendarDays.map((day, index) => {
           const { expense, income } = getDailyTotals(day.date)
-          const hasTransactions = expense > 0 || income > 0
+          const hasExpenses = expense > 0 || income > 0
           const isToday =
             day.date.getDate() === new Date().getDate() &&
             day.date.getMonth() === new Date().getMonth() &&
@@ -153,7 +153,7 @@ export function CalendarView({ transactions }: CalendarViewProps) {
                 "min-h-[100px] transition-all hover:shadow-md",
                 !day.isCurrentMonth ? "opacity-40" : "",
                 isToday ? "border-primary ring-1 ring-primary" : "",
-                hasTransactions ? "hover:border-primary" : "",
+                hasExpenses ? "hover:border-primary" : "",
               )}
             >
               <CardContent className="p-3">
@@ -167,7 +167,7 @@ export function CalendarView({ transactions }: CalendarViewProps) {
                   {day.date.getDate()}
                 </div>
 
-                {hasTransactions && (
+                {hasExpenses && (
                   <div className="mt-2 space-y-1 text-xs">
                     {expense > 0 && <div className="text-red-500 dark:text-red-400">-{formatCurrency(expense)}</div>}
                     {income > 0 && <div className="text-blue-500 dark:text-blue-400">+{formatCurrency(income)}</div>}

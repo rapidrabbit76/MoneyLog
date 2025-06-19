@@ -9,7 +9,7 @@ import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
 import { Check, X, Edit, ArrowLeft, ArrowRight } from "lucide-react"
 import type { ParsedExpense } from "@/lib/expense-message"
-import { useCategories } from "@/hooks/use-categories"
+import { useCategories } from "@/hooks/use-tags"
 
 interface ExpensesConfirmationStackProps {
   expenses: {
@@ -19,12 +19,12 @@ interface ExpensesConfirmationStackProps {
     dt: string;
     type: 'expense' | 'income';
   }[]
-  onConfirm: (transactions: ParsedExpense[]) => void
+  onConfirm: (expenses: ParsedExpense[]) => void
   onCancel: () => void
 }
 
 export function ExpensesConfirmationStack({ expenses, onConfirm, onCancel }: ExpensesConfirmationStackProps) {
-  const { categories } = useCategories()
+  const { categories: tags } = useCategories()
   const [currentIndex, setCurrentIndex] = useState(0)
   const [confirmedExpenses, setConfirmedExpenses] = useState<ParsedExpense[]>([])
   const [editingExpenses, setEditingExpenses] = useState<{
@@ -196,18 +196,18 @@ export function ExpensesConfirmationStack({ expenses, onConfirm, onCancel }: Exp
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="category">테그</Label>
+                      <Label htmlFor="tag">태그</Label>
                       <Select
                         value={currentExpenses.tags.join(", ")}
                         onValueChange={(value) => handleExpenseChange("tags", value.split(", ").map(tag => tag.trim()))}
                       >
                         <SelectTrigger>
-                          <SelectValue placeholder="테그 선택" />
+                          <SelectValue placeholder="태그 선택" />
                         </SelectTrigger>
                         <SelectContent>
-                          {categories.map((category) => (
-                            <SelectItem key={category} value={category}>
-                              {category}
+                          {tags.map((tag) => (
+                            <SelectItem key={tag} value={tag}>
+                              {tag}
                             </SelectItem>
                           ))}
                         </SelectContent>
@@ -258,7 +258,7 @@ export function ExpensesConfirmationStack({ expenses, onConfirm, onCancel }: Exp
                       </div>
 
                       <div className="flex justify-between items-center">
-                        <span className="text-sm text-muted-foreground">테그:</span>
+                        <span className="text-sm text-muted-foreground">태그:</span>
                         <Badge variant="outline">{pendingExpense.tags}</Badge>
                       </div>
                     </div>

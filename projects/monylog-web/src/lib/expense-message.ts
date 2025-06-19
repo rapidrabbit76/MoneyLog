@@ -24,7 +24,7 @@ export async function expenseMessageProcessing(message: string): Promise<Analyze
 
 
   // 간단한 예시: 쉼표나 줄바꿈으로 구분된 여러 거래
-  // const transactions: ParsedTransaction[] = []
+  // const expenses: ParsedExpense[] = []
 
   // // 쉼표로 구분된 여러 거래 처리
   // const parts = message
@@ -33,9 +33,9 @@ export async function expenseMessageProcessing(message: string): Promise<Analyze
   //   .filter((part) => part.length > 0)
 
   // for (const part of parts) {
-  //   const parsed = parseSingleTransaction(part)
+  //   const parsed = parseSingleExpense(part)
   //   if (parsed) {
-  //     transactions.push({
+  //     expenses.push({
   //       ...parsed,
   //       id: `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
   //     })
@@ -43,10 +43,10 @@ export async function expenseMessageProcessing(message: string): Promise<Analyze
   // }
 
   // // 단일 거래인 경우도 처리
-  // if (transactions.length === 0) {
-  //   const parsed = parseSingleTransaction(message)
+  // if (expenses.length === 0) {
+  //   const parsed = parseSingleExpense(message)
   //   if (parsed) {
-  //     transactions.push({
+  //     expenses.push({
   //       ...parsed,
   //       id: `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
   //     })
@@ -57,7 +57,7 @@ export async function expenseMessageProcessing(message: string): Promise<Analyze
 
 
 
-export function parseTransaction(message: string): Expenses | null {
+export function parseExpense(message: string): Expenses | null {
   // 기본 패턴: [설명] [금액]
   const parts = message.trim().split(/\s+/)
 
@@ -77,7 +77,7 @@ export function parseTransaction(message: string): Expenses | null {
   const description = parts.slice(0, parts.length - 1).join(" ")
 
   // 간단한 카테고리 매핑 (임시, 나중에 AI API로 대체)
-  const categoryMap: Record<string, string> = {
+  const tagMap: Record<string, string> = {
     담배: "생활용품",
     커피: "식비",
     점심: "식비",
@@ -92,10 +92,10 @@ export function parseTransaction(message: string): Expenses | null {
   }
 
   // 카테고리 결정
-  let category = "기타"
-  for (const [keyword, cat] of Object.entries(categoryMap)) {
+  let tag = "기타"
+  for (const [keyword, t] of Object.entries(tagMap)) {
     if (description.includes(keyword)) {
-      category = cat
+      tag = t
       break
     }
   }
@@ -106,11 +106,11 @@ export function parseTransaction(message: string): Expenses | null {
     : "expense"
 
   return {
-    id: `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+    id: Date.now(),
     title: description,
     amount,
-    date: new Date().toISOString(),
-    category,
-    type,
+    dt: new Date().toISOString(),
+    type: 'expense',
+    tags: [], // 기본값으로 빈 배열 추가
   }
 }

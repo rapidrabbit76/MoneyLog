@@ -8,10 +8,10 @@ import { Progress } from "@/components/ui/progress"
 import { Calendar, TrendingDown, TrendingUp, Minus } from "lucide-react"
 import type { Expenses } from "@/types/expenses"
 import { formatCurrency } from "@/lib/format-currency"
-import { useCategories } from "@/hooks/use-categories"
+import { useCategories } from "@/hooks/use-tags"
 
 interface CategorySpendingViewProps {
-  transactions: Expenses[]
+  expenses: Expenses[]
 }
 
 type Period = "week" | "month" | "quarter" | "year"
@@ -25,7 +25,7 @@ interface CategorySummary {
   trendPercentage: number
 }
 
-export function CategorySpendingView({ transactions }: CategorySpendingViewProps) {
+export function CategorySpendingView({ expenses }: CategorySpendingViewProps) {
   const [selectedPeriod, setSelectedPeriod] = useState<Period>("month")
   const { categories } = useCategories()
 
@@ -77,14 +77,14 @@ export function CategorySpendingView({ transactions }: CategorySpendingViewProps
     const { start, end } = getDateRange(selectedPeriod)
     const { start: prevStart, end: prevEnd } = getPreviousDateRange(selectedPeriod)
 
-    // 현재 기간 거래
-    const currentTransactions = transactions.filter((t) => {
+    // 현재 기간 소비
+    const currentExpenses = expenses.filter((t) => {
       const date = new Date(t.date)
       return date >= start && date <= end && t.type === "expense"
     })
 
-    // 이전 기간 거래
-    const previousTransactions = transactions.filter((t) => {
+    // 이전 기간 소비
+    const previousExpenses = expenses.filter((t) => {
       const date = new Date(t.date)
       return date >= prevStart && date <= prevEnd && t.type === "expense"
     })
@@ -94,13 +94,13 @@ export function CategorySpendingView({ transactions }: CategorySpendingViewProps
     const prevCategoryMap = new Map<string, number>()
 
     // 이전 기간 데이터
-    previousTransactions.forEach((transaction) => {
+    previousExpenses.forEach((transaction) => {
       const current = prevCategoryMap.get(transaction.category) || 0
       prevCategoryMap.set(transaction.category, current + transaction.amount)
     })
 
     // 현재 기간 데이터
-    currentTransactions.forEach((transaction) => {
+    currentExpenses.forEach((transaction) => {
       const current = categoryMap.get(transaction.category)
       if (current) {
         current.totalAmount += transaction.amount
@@ -150,7 +150,7 @@ export function CategorySpendingView({ transactions }: CategorySpendingViewProps
 
     // 금액 순으로 정렬
     return result.sort((a, b) => b.totalAmount - a.totalAmount)
-  }, [transactions, selectedPeriod])
+  }, [expenses, selectedPeriod])
 
   const totalSpending = categoryData.reduce((sum, cat) => sum + cat.totalAmount, 0)
 

@@ -15,11 +15,11 @@ import { Sidebar } from "@/components/sidebar"
 import { ChatInput } from "@/components/chat-input"
 import { ExpenseViewList } from "@/components/transaction-list"
 import { CalendarView } from "@/components/calendar-view"
-import { SimpleCategoryManager } from "@/components/simple-category-manager"
+import { SimpleTagManager } from "@/components/simple-category-manager"
 import { ThemeToggle } from "@/components/theme-toggle"
-import { parseTransaction } from "@/lib/expense-message"
+import { parseExpense } from "@/lib/expense-message"
 import { AnalyticsPage } from "@/components/analytics-page"
-import { useTransactions as useExpenses } from "@/contexts/expenses-context"
+import { useExpenses } from "@/contexts/expenses-context"
 import { useSidebar } from "@/contexts/sidebar-context"
 
 interface DashboardProps {
@@ -80,14 +80,13 @@ export default function Dashboard({ }: DashboardProps) {
 
   const handleTabChange = (tab: string) => {
     setActiveTab(tab)
-
     // 라우터를 사용하여 페이지 이동
     switch (tab) {
       case "main":
         router.push("/")
         break
-      case "transactions":
-        router.push("/transactions")
+      case "expenses":
+        router.push("/expenses")
         break
       case "analytics":
         router.push("/analytics")
@@ -131,7 +130,7 @@ export default function Dashboard({ }: DashboardProps) {
           <Sidebar
             activeTab={activeTab}
             setActiveTab={handleTabChange}
-            transactions={expenses}
+            expenses={expenses}
             collapsed={sidebarCollapsed}
             toggleCollapsed={() => setSidebarCollapsed(!sidebarCollapsed)}
           />
@@ -164,20 +163,20 @@ export default function Dashboard({ }: DashboardProps) {
                   <ChatInput onSubmit={defaultHandleChatSubmit} />
                 </div>
                 <div className="flex-1 overflow-y-auto pb-4">
-                  <ExpenseViewList transactions={expenses} />
+                  <ExpenseViewList expenses={expenses} />
                 </div>
               </>
             )}
 
-            {activeTab === "transactions" && (
+            {activeTab === "expenses" && (
               <div className="flex-1 overflow-y-auto pb-4">
-                <CalendarView transactions={expenses} />
+                <CalendarView expenses={expenses} />
               </div>
             )}
 
             {activeTab === "analytics" && (
               <div className="flex-1 overflow-y-auto pb-4">
-                <AnalyticsPage transactions={expenses} />
+                <AnalyticsPage expenses={expenses} />
               </div>
             )}
 
@@ -216,7 +215,7 @@ export default function Dashboard({ }: DashboardProps) {
                   </div>
 
                   <div className="rounded-lg border bg-card p-6 shadow-sm">
-                    <SimpleCategoryManager />
+                    <SimpleTagManager />
                   </div>
                 </div>
               </div>

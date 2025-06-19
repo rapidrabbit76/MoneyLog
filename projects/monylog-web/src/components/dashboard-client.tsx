@@ -34,13 +34,13 @@ export default function DashboardClient({ initialUser, initialTab = "main" }: Da
   const [sidebarWidth, setSidebarWidth] = useState(280)
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
   const [activeTab, setActiveTab] = useState(initialTab)
-  const [transactions, setTransactions] = useLocalStorage<Expenses[]>("transactions", [])
+  const [expenses, setExpenses] = useLocalStorage<Expenses[]>("expenses", [])
   const [isResizing, setIsResizing] = useState(false)
 
   const handleChatSubmit = (message: string) => {
-    const transaction = parseTransaction(message)
-    if (transaction) {
-      setTransactions([transaction, ...transactions])
+    const expense = parseTransaction(message)
+    if (expense) {
+      setExpenses([expense, ...expenses])
     }
   }
 
@@ -98,8 +98,8 @@ export default function DashboardClient({ initialUser, initialTab = "main" }: Da
       case "main":
         router.push("/")
         break
-      case "transactions":
-        router.push("/transactions")
+      case "expenses":
+        router.push("/expenses")
         break
       case "settings":
         router.push("/settings")
@@ -139,7 +139,7 @@ export default function DashboardClient({ initialUser, initialTab = "main" }: Da
           <Sidebar
             activeTab={activeTab}
             setActiveTab={handleTabChange}
-            transactions={transactions}
+            expenses={expenses}
             collapsed={sidebarCollapsed}
             toggleCollapsed={() => setSidebarCollapsed(!sidebarCollapsed)}
           />
@@ -169,17 +169,17 @@ export default function DashboardClient({ initialUser, initialTab = "main" }: Da
             {activeTab === "main" && (
               <>
                 <div className="mb-4">
-                  <ChatInput onSubmit={handleChatSubmit} />
+                  <ChatInput onSubmit={() => handleChatSubmit} />
                 </div>
                 <div className="flex-1 overflow-y-auto pb-4">
-                  <ExpenseViewList transactions={transactions} />
+                  <ExpenseViewList expenses={expenses} />
                 </div>
               </>
             )}
 
-            {activeTab === "transactions" && (
+            {activeTab === "expenses" && (
               <div className="flex-1 overflow-y-auto pb-4">
-                <CalendarView transactions={transactions} />
+                <CalendarView expenses={expenses} />
               </div>
             )}
 

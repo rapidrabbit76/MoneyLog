@@ -5,28 +5,28 @@ import type { Expenses } from "@/types/expenses"
 import { formatCurrency } from "@/lib/format-currency"
 import { Card, CardContent } from "@/components/ui/card"
 
-interface TransactionListProps {
-  transactions: Expenses[]
+interface ExpenseListProps {
+  expenses: Expenses[]
 }
 
-export function ExpenseViewList({ transactions }: TransactionListProps) {
-  const groupedTransactions = useMemo(() => {
+export function ExpenseViewList({ expenses }: ExpenseListProps) {
+  const groupedExpenses = useMemo(() => {
     const groups: Record<string, Expenses[]> = {}
 
-    transactions.forEach((transaction) => {
-      const date = new Date(transaction.dt).toLocaleDateString()
+    expenses.forEach((expense) => {
+      const date = new Date(expense.dt).toLocaleDateString()
       if (!groups[date]) {
         groups[date] = []
       }
-      groups[date].push(transaction)
+      groups[date].push(expense)
     })
 
     return Object.entries(groups).sort(([dateA], [dateB]) => {
       return new Date(dateB).getTime() - new Date(dateA).getTime()
     })
-  }, [transactions])
+  }, [expenses])
 
-  if (transactions.length === 0) {
+  if (expenses.length === 0) {
     return (
       <div className="flex h-full items-center justify-center text-center">
         <div className="space-y-3 max-w-md">
@@ -43,14 +43,14 @@ export function ExpenseViewList({ transactions }: TransactionListProps) {
 
   return (
     <div className="space-y-8">
-      {groupedTransactions.map(([date, transactions]) => (
+      {groupedExpenses.map(([date, expenses]) => (
         <div key={date} className="space-y-3">
           <h3 className="sticky top-0 bg-background py-2 text-sm font-medium">{date}</h3>
           <div className="space-y-3">
-            {transactions.map((transaction, index) => (
+            {expenses.map((expense, index) => (
               <Card
                 key={index}
-                className={`overflow-hidden transition-all hover:shadow-md ${transaction.type === "expense"
+                className={`overflow-hidden transition-all hover:shadow-md ${expense.type === "expense"
                   ? "border-l-4 border-l-red-500 dark:border-l-red-400"
                   : "border-l-4 border-l-blue-500 dark:border-l-blue-400"
                   }`}
@@ -58,17 +58,17 @@ export function ExpenseViewList({ transactions }: TransactionListProps) {
                 <CardContent className="p-4">
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="font-medium">{transaction.title}</p>
-                      <p className="text-sm text-muted-foreground">{transaction.tags.join(", ")}</p>
+                      <p className="font-medium">{expense.title}</p>
+                      <p className="text-sm text-muted-foreground">{expense.tags.join(", ")}</p>
                     </div>
                     <p
-                      className={`text-lg font-bold ${transaction.type === "expense"
+                      className={`text-lg font-bold ${expense.type === "expense"
                         ? "text-red-500 dark:text-red-400"
                         : "text-blue-500 dark:text-blue-400"
                         }`}
                     >
-                      {transaction.type === "expense" ? "-" : "+"}
-                      {formatCurrency(transaction.amount)}
+                      {expense.type === "expense" ? "-" : "+"}
+                      {formatCurrency(expense.amount)}
                     </p>
                   </div>
                 </CardContent>

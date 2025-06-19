@@ -9,14 +9,14 @@ import { useRouter } from "next/navigation"
 interface SidebarProps {
   activeTab: string
   setActiveTab: (tab: string) => void
-  transactions: Expenses[]
+  expenses: Expenses[]
   collapsed: boolean
   toggleCollapsed: () => void
 }
 
-export function Sidebar({ activeTab, setActiveTab, transactions, collapsed, toggleCollapsed }: SidebarProps) {
-  const totalExpense = transactions.filter((t) => t.type === "expense").reduce((sum, t) => sum + t.amount, 0)
-  const totalIncome = transactions.filter((t) => t.type === "income").reduce((sum, t) => sum + t.amount, 0)
+export function Sidebar({ activeTab, setActiveTab, expenses, collapsed, toggleCollapsed }: SidebarProps) {
+  const totalExpense = expenses.filter((e) => e.type === "expense").reduce((sum, e) => sum + e.amount, 0)
+  const totalIncome = expenses.filter((e) => e.type === "income").reduce((sum, e) => sum + e.amount, 0)
   const router = useRouter()
 
   return (
@@ -36,12 +36,12 @@ export function Sidebar({ activeTab, setActiveTab, transactions, collapsed, togg
         <button
           className={cn(
             "flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors",
-            activeTab === "transactions"
+            activeTab === "expenses"
               ? "bg-primary text-primary-foreground"
               : "hover:bg-muted hover:text-foreground",
             collapsed && "justify-center px-2",
           )}
-          onClick={() => setActiveTab("transactions")}
+          onClick={() => setActiveTab("expenses")}
         >
           <Receipt className="h-4 w-4" />
           {!collapsed && <span>소비내역</span>}

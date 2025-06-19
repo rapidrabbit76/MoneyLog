@@ -8,7 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Badge } from "@/components/ui/badge"
 import { Check, X, Edit } from "lucide-react"
 import type { ParsedExpense } from "@/lib/expense-message"
-import { useCategories } from "@/hooks/use-categories"
+import { useCategories } from "@/hooks/use-tags"
 
 interface TransactionConfirmationProps {
   parsedTransaction: ParsedExpense

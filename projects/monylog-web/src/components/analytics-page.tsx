@@ -18,17 +18,17 @@ import {
 } from "lucide-react"
 import type { Expenses } from "@/types/expenses"
 import { formatCurrency } from "@/lib/format-currency"
-import { useCategories } from "@/hooks/use-categories"
+import { useTags } from "@/hooks/use-tags"
 
 interface AnalyticsPageProps {
-  transactions: Expenses[]
+  expenses: Expenses[]
 }
 
 type Period = "week" | "month" | "quarter" | "year"
 type ViewType = "expense" | "income" | "both"
 
-interface CategoryData {
-  category: string
+interface TagData {
+  tag: string
   expenseAmount: number
   incomeAmount: number
   netAmount: number
@@ -41,10 +41,10 @@ interface CategoryData {
   trendPercentage: number
 }
 
-export function AnalyticsPage({ transactions }: AnalyticsPageProps) {
+export function AnalyticsPage({ expenses }: AnalyticsPageProps) {
   const [selectedPeriod, setSelectedPeriod] = useState<Period>("month")
   const [viewType, setViewType] = useState<ViewType>("both")
-  const { categories } = useCategories()
+  const { tags } = useTags()
 
   const periodLabels = {
     week: "이번 주",
@@ -90,58 +90,60 @@ export function AnalyticsPage({ transactions }: AnalyticsPageProps) {
     return { start: prevStart, end: prevEnd }
   }
 
-  const categoryData = useMemo(() => {
+  const tagData = useMemo(() => {
     const { start, end } = getDateRange(selectedPeriod)
     const { start: prevStart, end: prevEnd } = getPreviousDateRange(selectedPeriod)
 
     // 현재 기간 거래 필터링
-    const currentTransactions = transactions.filter((t) => {
-      const date = new Date(t.date)
+    const currentExpenses = expenses.filter((t) => {
+      const date = new Date(t.dt)
       return date >= start && date <= end
     })
 
     // 이전 기간 거래 필터링
-    const previousTransactions = transactions.filter((t) => {
-      const date = new Date(t.date)
+    const previousExpenses = expenses.filter((t) => {
+      const date = new Date(t.dt)
       return date >= prevStart && date <= prevEnd
     })
 
-    // 카테고리별 집계
-    const categoryMap = new Map<string, CategoryData>()
-    const prevCategoryMap = new Map<string, { expense: number; income: number }>()
+    // 태그별 집계
+    const tagMap = new Map<string, TagData>()
+    const prevTagMap = new Map<string, { expense: number; income: number }>()
 
     // 이전 기간 데이터
-    previousTransactions.forEach((transaction) => {
-      const current = prevCategoryMap.get(transaction.category) || { expense: 0, income: 0 }
-      if (transaction.type === "expense") {
-        current.expense += transaction.amount
+    previousExpenses.forEach((expense) => {
+      const tagName = expense.tags[0]?.name || "기타"
+      const current = prevTagMap.get(tagName) || { expense: 0, income: 0 }
+      if (expense.type === "expense") {
+        current.expense += expense.amount
       } else {
-        current.income += transaction.amount
+        current.income += expense.amount
       }
-      prevCategoryMap.set(transaction.category, current)
+      prevTagMap.set(tagName, current)
     })
 
     // 현재 기간 데이터
-    currentTransactions.forEach((transaction) => {
-      const current = categoryMap.get(transaction.category)
+    currentExpenses.forEach((expense) => {
+      const tagName = expense.tags[0]?.name || "기타"
+      const current = tagMap.get(tagName)
       if (current) {
-        if (transaction.type === "expense") {
-          current.expenseAmount += transaction.amount
+        if (expense.type === "expense") {
+          current.expenseAmount += expense.amount
           current.expenseCount += 1
         } else {
-          current.incomeAmount += transaction.amount
+          current.incomeAmount += expense.amount
           current.incomeCount += 1
         }
         current.totalCount += 1
         current.netAmount = current.incomeAmount - current.expenseAmount
       } else {
-        categoryMap.set(transaction.category, {
-          category: transaction.category,
-          expenseAmount: transaction.type === "expense" ? transaction.amount : 0,
-          incomeAmount: transaction.type === "income" ? transaction.amount : 0,
-          netAmount: transaction.type === "income" ? transaction.amount : -transaction.amount,
-          expenseCount: transaction.type === "expense" ? 1 : 0,
-          incomeCount: transaction.type === "income" ? 1 : 0,
+        tagMap.set(tagName, {
+          tag: tagName,
+          expenseAmount: expense.type === "expense" ? expense.amount : 0,
+          incomeAmount: expense.type === "income" ? expense.amount : 0,
+          netAmount: expense.type === "income" ? expense.amount : -expense.amount,
+          expenseCount: expense.type === "expense" ? 1 : 0,
+          incomeCount: expense.type === "income" ? 1 : 0,
           totalCount: 1,
           expensePercentage: 0,
           incomePercentage: 0,
@@ -152,35 +154,35 @@ export function AnalyticsPage({ transactions }: AnalyticsPageProps) {
     })
 
     // 총 지출/수입 계산
-    const totalExpense = Array.from(categoryMap.values()).reduce((sum, cat) => sum + cat.expenseAmount, 0)
-    const totalIncome = Array.from(categoryMap.values()).reduce((sum, cat) => sum + cat.incomeAmount, 0)
+    const totalExpense = Array.from(tagMap.values()).reduce((sum, tag) => sum + tag.expenseAmount, 0)
+    const totalIncome = Array.from(tagMap.values()).reduce((sum, tag) => sum + tag.incomeAmount, 0)
 
     // 퍼센티지 및 트렌드 계산
-    const result: CategoryData[] = Array.from(categoryMap.values()).map((cat) => {
-      const expensePercentage = totalExpense > 0 ? (cat.expenseAmount / totalExpense) * 100 : 0
-      const incomePercentage = totalIncome > 0 ? (cat.incomeAmount / totalIncome) * 100 : 0
+    const result: TagData[] = Array.from(tagMap.values()).map((tag) => {
+      const expensePercentage = totalExpense > 0 ? (tag.expenseAmount / totalExpense) * 100 : 0
+      const incomePercentage = totalIncome > 0 ? (tag.incomeAmount / totalIncome) * 100 : 0
 
       // 트렌드 계산
-      const prevData = prevCategoryMap.get(cat.category) || { expense: 0, income: 0 }
+      const prevData = prevTagMap.get(tag.tag) || { expense: 0, income: 0 }
       const prevNet = prevData.income - prevData.expense
 
       let trend: "up" | "down" | "same" = "same"
       let trendPercentage = 0
 
       if (prevNet !== 0) {
-        const change = ((cat.netAmount - prevNet) / Math.abs(prevNet)) * 100
+        const change = ((tag.netAmount - prevNet) / Math.abs(prevNet)) * 100
         trendPercentage = Math.abs(change)
 
         if (change > 10) trend = "up"
         else if (change < -10) trend = "down"
         else trend = "same"
-      } else if (cat.netAmount !== 0) {
-        trend = cat.netAmount > 0 ? "up" : "down"
+      } else if (tag.netAmount !== 0) {
+        trend = tag.netAmount > 0 ? "up" : "down"
         trendPercentage = 100
       }
 
       return {
-        ...cat,
+        ...tag,
         expensePercentage,
         incomePercentage,
         trend,
@@ -194,20 +196,20 @@ export function AnalyticsPage({ transactions }: AnalyticsPageProps) {
       if (viewType === "income") return b.incomeAmount - a.incomeAmount
       return Math.abs(b.netAmount) - Math.abs(a.netAmount)
     })
-  }, [transactions, selectedPeriod, viewType])
+  }, [expenses, selectedPeriod, viewType])
 
   const totals = useMemo(() => {
-    return categoryData.reduce(
-      (acc, cat) => ({
-        expense: acc.expense + cat.expenseAmount,
-        income: acc.income + cat.incomeAmount,
-        net: acc.net + cat.netAmount,
-        expenseCount: acc.expenseCount + cat.expenseCount,
-        incomeCount: acc.incomeCount + cat.incomeCount,
+    return tagData.reduce(
+      (acc, tag) => ({
+        expense: acc.expense + tag.expenseAmount,
+        income: acc.income + tag.incomeAmount,
+        net: acc.net + tag.netAmount,
+        expenseCount: acc.expenseCount + tag.expenseCount,
+        incomeCount: acc.incomeCount + tag.incomeCount,
       }),
       { expense: 0, income: 0, net: 0, expenseCount: 0, incomeCount: 0 },
     )
-  }, [categoryData])
+  }, [tagData])
 
   const getNetAmountColor = (amount: number) => {
     if (amount > 0) return "text-blue-500 dark:text-blue-400"
@@ -249,7 +251,7 @@ export function AnalyticsPage({ transactions }: AnalyticsPageProps) {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold">분석</h1>
-          <p className="text-muted-foreground">카테고리별 수입과 지출을 분석해보세요</p>
+          <p className="text-muted-foreground">태그별 수입과 지출을 분석해보세요</p>
         </div>
         <div className="flex items-center gap-4">
           <Select value={selectedPeriod} onValueChange={(value: Period) => setSelectedPeriod(value)}>
@@ -326,30 +328,30 @@ export function AnalyticsPage({ transactions }: AnalyticsPageProps) {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Calculator className="h-5 w-5" />
-                카테고리별 종합 분석
+                태그별 종합 분석
               </CardTitle>
             </CardHeader>
             <CardContent>
-              {categoryData.length === 0 ? (
+              {tagData.length === 0 ? (
                 <div className="text-center py-12">
                   <p className="text-muted-foreground">{periodLabels[selectedPeriod]} 거래 내역이 없습니다</p>
                 </div>
               ) : (
                 <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-                  {categoryData.map((cat) => (
-                    <Card key={cat.category} className="hover:shadow-md transition-shadow">
+                  {tagData.map((tag) => (
+                    <Card key={tag.tag} className="hover:shadow-md transition-shadow">
                       <CardContent className="p-4">
                         <div className="space-y-3">
-                          {/* 카테고리 헤더 */}
+                          {/* 태그 헤더 */}
                           <div className="flex items-center justify-between">
                             <Badge variant="outline" className="font-medium">
-                              {cat.category}
+                              {tag.tag}
                             </Badge>
                             <div className="flex items-center gap-1">
-                              {getTrendIcon(cat.trend)}
-                              {cat.trend !== "same" && (
-                                <span className={`text-sm font-medium ${getTrendColor(cat.trend)}`}>
-                                  {cat.trendPercentage.toFixed(0)}%
+                              {getTrendIcon(tag.trend)}
+                              {tag.trend !== "same" && (
+                                <span className={`text-sm font-medium ${getTrendColor(tag.trend)}`}>
+                                  {tag.trendPercentage.toFixed(0)}%
                                 </span>
                               )}
                             </div>
@@ -359,35 +361,35 @@ export function AnalyticsPage({ transactions }: AnalyticsPageProps) {
                           <div className="flex items-center justify-between">
                             <span className="text-sm text-muted-foreground">순 수지</span>
                             <div className="flex items-center gap-2">
-                              {getNetAmountIcon(cat.netAmount)}
-                              <span className={`font-bold ${getNetAmountColor(cat.netAmount)}`}>
-                                {formatCurrency(cat.netAmount)}
+                              {getNetAmountIcon(tag.netAmount)}
+                              <span className={`font-bold ${getNetAmountColor(tag.netAmount)}`}>
+                                {formatCurrency(tag.netAmount)}
                               </span>
                             </div>
                           </div>
 
                           {/* 지출 정보 */}
-                          {cat.expenseAmount > 0 && (
+                          {tag.expenseAmount > 0 && (
                             <div className="flex justify-between items-center">
                               <span className="text-sm text-muted-foreground">지출</span>
                               <div className="text-right">
                                 <div className="text-sm font-medium text-red-500 dark:text-red-400">
-                                  {formatCurrency(cat.expenseAmount)}
+                                  {formatCurrency(tag.expenseAmount)}
                                 </div>
-                                <div className="text-xs text-muted-foreground">{cat.expenseCount}건</div>
+                                <div className="text-xs text-muted-foreground">{tag.expenseCount}건</div>
                               </div>
                             </div>
                           )}
 
                           {/* 수입 정보 */}
-                          {cat.incomeAmount > 0 && (
+                          {tag.incomeAmount > 0 && (
                             <div className="flex justify-between items-center">
                               <span className="text-sm text-muted-foreground">수입</span>
                               <div className="text-right">
                                 <div className="text-sm font-medium text-blue-500 dark:text-blue-400">
-                                  {formatCurrency(cat.incomeAmount)}
+                                  {formatCurrency(tag.incomeAmount)}
                                 </div>
-                                <div className="text-xs text-muted-foreground">{cat.incomeCount}건</div>
+                                <div className="text-xs text-muted-foreground">{tag.incomeCount}건</div>
                               </div>
                             </div>
                           )}
@@ -410,31 +412,31 @@ export function AnalyticsPage({ transactions }: AnalyticsPageProps) {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              {categoryData.filter((cat) => cat.expenseAmount > 0).length === 0 ? (
+              {tagData.filter((tag) => tag.expenseAmount > 0).length === 0 ? (
                 <div className="text-center py-12">
                   <p className="text-muted-foreground">{periodLabels[selectedPeriod]} 지출 내역이 없습니다</p>
                 </div>
               ) : (
                 <div className="space-y-4">
-                  {categoryData
-                    .filter((cat) => cat.expenseAmount > 0)
-                    .map((cat) => (
-                      <div key={cat.category} className="space-y-2">
+                  {tagData
+                    .filter((tag) => tag.expenseAmount > 0)
+                    .map((tag) => (
+                      <div key={tag.tag} className="space-y-2">
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-2">
-                            <Badge variant="outline">{cat.category}</Badge>
-                            <span className="text-sm text-muted-foreground">{cat.expenseCount}건</span>
+                            <Badge variant="outline">{tag.tag}</Badge>
+                            <span className="text-sm text-muted-foreground">{tag.expenseCount}건</span>
                           </div>
                           <div className="text-right">
                             <div className="font-bold text-red-500 dark:text-red-400">
-                              {formatCurrency(cat.expenseAmount)}
+                              {formatCurrency(tag.expenseAmount)}
                             </div>
                             <div className="text-xs text-muted-foreground">
-                              전체의 {cat.expensePercentage.toFixed(1)}%
+                              전체의 {tag.expensePercentage.toFixed(1)}%
                             </div>
                           </div>
                         </div>
-                        <Progress value={cat.expensePercentage} className="h-2" />
+                        <Progress value={tag.expensePercentage} className="h-2" />
                       </div>
                     ))}
                 </div>
@@ -452,31 +454,31 @@ export function AnalyticsPage({ transactions }: AnalyticsPageProps) {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              {categoryData.filter((cat) => cat.incomeAmount > 0).length === 0 ? (
+              {tagData.filter((tag) => tag.incomeAmount > 0).length === 0 ? (
                 <div className="text-center py-12">
                   <p className="text-muted-foreground">{periodLabels[selectedPeriod]} 수입 내역이 없습니다</p>
                 </div>
               ) : (
                 <div className="space-y-4">
-                  {categoryData
-                    .filter((cat) => cat.incomeAmount > 0)
-                    .map((cat) => (
-                      <div key={cat.category} className="space-y-2">
+                  {tagData
+                    .filter((tag) => tag.incomeAmount > 0)
+                    .map((tag) => (
+                      <div key={tag.tag} className="space-y-2">
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-2">
-                            <Badge variant="outline">{cat.category}</Badge>
-                            <span className="text-sm text-muted-foreground">{cat.incomeCount}건</span>
+                            <Badge variant="outline">{tag.tag}</Badge>
+                            <span className="text-sm text-muted-foreground">{tag.incomeCount}건</span>
                           </div>
                           <div className="text-right">
                             <div className="font-bold text-blue-500 dark:text-blue-400">
-                              {formatCurrency(cat.incomeAmount)}
+                              {formatCurrency(tag.incomeAmount)}
                             </div>
                             <div className="text-xs text-muted-foreground">
-                              전체의 {cat.incomePercentage.toFixed(1)}%
+                              전체의 {tag.incomePercentage.toFixed(1)}%
                             </div>
                           </div>
                         </div>
-                        <Progress value={cat.incomePercentage} className="h-2" />
+                        <Progress value={tag.incomePercentage} className="h-2" />
                       </div>
                     ))}
                 </div>

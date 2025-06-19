@@ -9,17 +9,17 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Minus, ArrowUpCircle, ArrowDownCircle, Calculator } from "lucide-react"
 import type { Expenses } from "@/types/expenses"
 import { formatCurrency } from "@/lib/format-currency"
-import { useCategories } from "@/hooks/use-categories"
+import { useCategories } from "@/hooks/use-tags"
 
-interface CategorySummaryProps {
-  transactions: Expenses[]
+interface TagSummaryProps {
+  expenses: Expenses[]
 }
 
 type Period = "week" | "month" | "quarter" | "year"
 type ViewType = "expense" | "income" | "both"
 
-interface CategoryData {
-  category: string
+interface TagData {
+  tag: string
   expenseAmount: number
   incomeAmount: number
   netAmount: number
@@ -32,7 +32,7 @@ interface CategoryData {
   trendPercentage: number
 }
 
-export function CategorySummary({ transactions }: CategorySummaryProps) {
+export function TagSummary({ expenses }: TagSummaryProps) {
   const [selectedPeriod, setSelectedPeriod] = useState<Period>("month")
   const [viewType, setViewType] = useState<ViewType>("both")
   const { categories } = useCategories()
@@ -71,38 +71,39 @@ export function CategorySummary({ transactions }: CategorySummaryProps) {
     return { start, end }
   }
 
-  const categoryData = useMemo(() => {
+  const tagData = useMemo(() => {
     const { start, end } = getDateRange(selectedPeriod)
 
     // 현재 기간 거래 필터링
-    const currentTransactions = transactions.filter((t) => {
-      const date = new Date(t.date)
+    const currentExpenses = expenses.filter((e) => {
+      const date = new Date(e.dt)
       return date >= start && date <= end
     })
 
-    // 카테고리별 집계
-    const categoryMap = new Map<string, CategoryData>()
+    // 태그별 집계
+    const tagMap = new Map<string, TagData>()
 
-    currentTransactions.forEach((transaction) => {
-      const current = categoryMap.get(transaction.category)
+    currentExpenses.forEach((expense) => {
+      const tagName = expense.tags[0]?.name || "기타"
+      const current = tagMap.get(tagName)
       if (current) {
-        if (transaction.type === "expense") {
-          current.expenseAmount += transaction.amount
+        if (expense.type === "expense") {
+          current.expenseAmount += expense.amount
           current.expenseCount += 1
         } else {
-          current.incomeAmount += transaction.amount
+          current.incomeAmount += expense.amount
           current.incomeCount += 1
         }
         current.totalCount += 1
         current.netAmount = current.incomeAmount - current.expenseAmount
       } else {
-        categoryMap.set(transaction.category, {
-          category: transaction.category,
-          expenseAmount: transaction.type === "expense" ? transaction.amount : 0,
-          incomeAmount: transaction.type === "income" ? transaction.amount : 0,
-          netAmount: transaction.type === "income" ? transaction.amount : -transaction.amount,
-          expenseCount: transaction.type === "expense" ? 1 : 0,
-          incomeCount: transaction.type === "income" ? 1 : 0,
+        tagMap.set(tagName, {
+          tag: tagName,
+          expenseAmount: expense.type === "expense" ? expense.amount : 0,
+          incomeAmount: expense.type === "income" ? expense.amount : 0,
+          netAmount: expense.type === "income" ? expense.amount : -expense.amount,
+          expenseCount: expense.type === "expense" ? 1 : 0,
+          incomeCount: expense.type === "income" ? 1 : 0,
           totalCount: 1,
           expensePercentage: 0,
           incomePercentage: 0,
@@ -113,11 +114,11 @@ export function CategorySummary({ transactions }: CategorySummaryProps) {
     })
 
     // 총 지출/수입 계산
-    const totalExpense = Array.from(categoryMap.values()).reduce((sum, cat) => sum + cat.expenseAmount, 0)
-    const totalIncome = Array.from(categoryMap.values()).reduce((sum, cat) => sum + cat.incomeAmount, 0)
+    const totalExpense = Array.from(tagMap.values()).reduce((sum, cat) => sum + cat.expenseAmount, 0)
+    const totalIncome = Array.from(tagMap.values()).reduce((sum, cat) => sum + cat.incomeAmount, 0)
 
     // 퍼센티지 계산
-    const result: CategoryData[] = Array.from(categoryMap.values()).map((cat) => ({
+    const result: TagData[] = Array.from(tagMap.values()).map((cat) => ({
       ...cat,
       expensePercentage: totalExpense > 0 ? (cat.expenseAmount / totalExpense) * 100 : 0,
       incomePercentage: totalIncome > 0 ? (cat.incomeAmount / totalIncome) * 100 : 0,
@@ -129,10 +130,10 @@ export function CategorySummary({ transactions }: CategorySummaryProps) {
       if (viewType === "income") return b.incomeAmount - a.incomeAmount
       return Math.abs(b.netAmount) - Math.abs(a.netAmount)
     })
-  }, [transactions, selectedPeriod, viewType])
+  }, [expenses, selectedPeriod, viewType])
 
   const totals = useMemo(() => {
-    return categoryData.reduce(
+    return tagData.reduce(
       (acc, cat) => ({
         expense: acc.expense + cat.expenseAmount,
         income: acc.income + cat.incomeAmount,
@@ -142,7 +143,7 @@ export function CategorySummary({ transactions }: CategorySummaryProps) {
       }),
       { expense: 0, income: 0, net: 0, expenseCount: 0, incomeCount: 0 },
     )
-  }, [categoryData])
+  }, [tagData])
 
   const getNetAmountColor = (amount: number) => {
     if (amount > 0) return "text-blue-500 dark:text-blue-400"
@@ -229,21 +230,21 @@ export function CategorySummary({ transactions }: CategorySummaryProps) {
         </CardContent>
       </Card>
 
-      {/* 카테고리별 상세 */}
+      {/* 태그별 상세 */}
       <div className="space-y-2 max-h-80 overflow-y-auto">
-        {categoryData.length === 0 ? (
+        {tagData.length === 0 ? (
           <div className="text-center py-8">
             <p className="text-xs text-muted-foreground">{periodLabels[selectedPeriod]} 거래 내역이 없습니다</p>
           </div>
         ) : (
-          categoryData.map((cat) => (
-            <Card key={cat.category} className="hover:shadow-sm transition-shadow">
+          tagData.map((cat) => (
+            <Card key={cat.tag} className="hover:shadow-sm transition-shadow">
               <CardContent className="p-3">
                 <div className="space-y-2">
-                  {/* 카테고리 헤더 */}
+                  {/* 태그 헤더 */}
                   <div className="flex items-center justify-between">
                     <Badge variant="outline" className="text-xs">
-                      {cat.category}
+                      {cat.tag}
                     </Badge>
                     {viewType === "both" && (
                       <div className="flex items-center gap-1">
