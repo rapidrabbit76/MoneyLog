@@ -6,7 +6,7 @@ import { useContext, useState } from "react"
 import { Send } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
-import { ExpensesConfirmationStack } from "@/components/expenses-confirmation-stack"
+import { ExpensesConfirmationStack } from "@/components/expense/confirmation-stack"
 import { expenseMessageProcessing, type ParsedExpense } from "@/lib/expense-message"
 import LoadingPopup from "./loading-popup"
 

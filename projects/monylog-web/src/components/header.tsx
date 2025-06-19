@@ -1,7 +1,7 @@
 "use client"
 
 import { Logo } from "@/components/logo"
-import { ThemeToggle } from "@/components/theme-toggle"
+import { ThemeToggle } from "@/components/theme/toggle"
 import { UserStatus } from "@/components/user-status"
 import { useAuth } from "@/hooks/use-auth"
 import { usePathname, useRouter } from "next/navigation"

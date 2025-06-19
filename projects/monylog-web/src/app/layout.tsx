@@ -1,13 +1,13 @@
-import type React from "react"
-import type { Metadata } from "next"
-import { Mona_Sans as FontSans } from "next/font/google"
-import "./globals.css"
-import { ThemeProvider } from "@/components/theme-provider"
+import { AppHeader } from "@/components/header"
+import { SidebarContainer } from "@/components/sidebar-container"
+import { ThemeProvider } from "@/components/theme/provider"
 import { ExpensesProvider } from "@/contexts/expenses-context"
 import { SidebarProvider } from "@/contexts/sidebar-context"
 import { UserProvider } from "@/contexts/user-context"
-import { SidebarContainer } from "@/components/dashboard-sidebar-container"
-import { AppHeader } from "@/components/app-header"
+import type { Metadata } from "next"
+import { Mona_Sans as FontSans } from "next/font/google"
+import type React from "react"
+import "./globals.css"
 
 const fontSans = FontSans({
   subsets: ["latin"],

@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation"
 import { UserContext, useUser } from "@/contexts/user-context"; // Changed from useAuth to useUser
 import { useContext, useEffect } from "react"
 import { ChatInput } from "@/components/chat-input";
-import { ExpenseViewList } from "@/components/expense-list";
+import { ExpenseViewList } from "@/components/expense/list";
 import { useExpenses } from "@/contexts/expenses-context";
 
 export default function Home() {

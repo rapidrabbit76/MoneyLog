@@ -1,7 +1,7 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { ThemeToggle } from "@/components/theme-toggle"
+import { ThemeToggle } from "@/components/theme/toggle"
 import { SimpleTagManager } from "@/components/simple-category-manager"
 import { useRouter } from "next/navigation"
 import type { User } from "@/types/auth"
