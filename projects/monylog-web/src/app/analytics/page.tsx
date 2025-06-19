@@ -3,11 +3,13 @@
 import { useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { useAuth } from "@/hooks/use-auth"
-import Dashboard from "@/components/dashboard"
+import { AnalyticsPage } from "@/components/analytics-page"
+import { useExpenses } from "@/contexts/expenses-context"
 
-export default function AnalyticsPage() {
+export default function AnalyticsRoutePage() {
   const { isAuthenticated, loading } = useAuth()
   const router = useRouter()
+  const { expenses } = useExpenses()
 
   useEffect(() => {
     if (!loading && !isAuthenticated) {
@@ -23,5 +25,9 @@ export default function AnalyticsPage() {
     return null // 리다이렉트 중이므로 아무것도 렌더링하지 않음
   }
 
-  return <Dashboard initialTab="analytics" />
+  return (
+    <div className="flex-1 overflow-y-auto pb-4">
+      <AnalyticsPage expenses={expenses} />
+    </div>
+  )
 }

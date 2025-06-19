@@ -3,11 +3,13 @@
 import { useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { useAuth } from "@/hooks/use-auth"
-import Dashboard from "@/components/dashboard"
+import { SettingsPanel } from "@/components/settings-panel"
+import { useUser } from "@/contexts/user-context"
 
-export default function SettingsPage() {
-  const { isAuthenticated, loading } = useAuth()
+export default function SettingsRoutePage() {
+  const { isAuthenticated, loading, logout } = useAuth()
   const router = useRouter()
+  const { user } = useUser()
 
   useEffect(() => {
     if (!loading && !isAuthenticated) {
@@ -23,5 +25,12 @@ export default function SettingsPage() {
     return null // 리다이렉트 중이므로 아무것도 렌더링하지 않음
   }
 
-  return <Dashboard initialTab="settings" />
+  const handleLogout = async () => {
+    await logout()
+    router.push("/login")
+  }
+
+  return (
+    <SettingsPanel user={user} onLogout={handleLogout} />
+  )
 }

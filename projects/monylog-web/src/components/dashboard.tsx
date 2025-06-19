@@ -26,18 +26,8 @@ interface DashboardProps {
 }
 
 export default function Dashboard({ }: DashboardProps) {
-  const { expenses } = useExpenses()
 
-  const defaultHandleChatSubmit = () => { }
 
   return (
-    <div className="flex flex-1 flex-col overflow-hidden p-4">
-      <div className="mb-4">
-        <ChatInput onSubmit={defaultHandleChatSubmit} />
-      </div>
-      <div className="flex-1 overflow-y-auto pb-4">
-        <ExpenseViewList expenses={expenses} />
-      </div>
-    </div>
   )
 }

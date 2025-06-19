@@ -42,7 +42,9 @@ export default function RootLayout({
                   <DashboardSidebarContainer />
                   <div className="flex-1 flex flex-col overflow-hidden">
                     <AppHeader />
-                    {children}
+                    <div className="flex flex-1 flex-col overflow-hidden p-4">
+                      {children}
+                    </div>
                   </div>
                 </div>
               </SidebarProvider>
