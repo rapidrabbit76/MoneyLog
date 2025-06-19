@@ -4,20 +4,19 @@ import { Home, Receipt, Settings, BarChart3 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import type { Expenses } from "@/types/expenses"
 import { formatCurrency } from "@/lib/format-currency"
-import { useRouter } from "next/navigation"
+import { useRouter, usePathname } from "next/navigation"
 
 interface SidebarProps {
-  activeTab: string
-  setActiveTab: (tab: string) => void
   expenses: Expenses[]
   collapsed: boolean
   toggleCollapsed: () => void
 }
 
-export function Sidebar({ activeTab, setActiveTab, expenses, collapsed, toggleCollapsed }: SidebarProps) {
+export function Sidebar({ expenses, collapsed, toggleCollapsed }: SidebarProps) {
   const totalExpense = expenses.filter((e) => e.type === "expense").reduce((sum, e) => sum + e.amount, 0)
   const totalIncome = expenses.filter((e) => e.type === "income").reduce((sum, e) => sum + e.amount, 0)
   const router = useRouter()
+  const pathname = usePathname()
 
   return (
     <div className="flex h-full flex-col">
@@ -25,10 +24,10 @@ export function Sidebar({ activeTab, setActiveTab, expenses, collapsed, toggleCo
         <button
           className={cn(
             "flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors",
-            activeTab === "main" ? "bg-primary text-primary-foreground" : "hover:bg-muted hover:text-foreground",
+            pathname === "/" ? "bg-primary text-primary-foreground" : "hover:bg-muted hover:text-foreground",
             collapsed && "justify-center px-2",
           )}
-          onClick={() => setActiveTab("main")}
+          onClick={() => router.push("/")}
         >
           <Home className="h-4 w-4" />
           {!collapsed && <span>메인</span>}
@@ -36,12 +35,10 @@ export function Sidebar({ activeTab, setActiveTab, expenses, collapsed, toggleCo
         <button
           className={cn(
             "flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors",
-            activeTab === "expenses"
-              ? "bg-primary text-primary-foreground"
-              : "hover:bg-muted hover:text-foreground",
+            pathname === "/expenses" ? "bg-primary text-primary-foreground" : "hover:bg-muted hover:text-foreground",
             collapsed && "justify-center px-2",
           )}
-          onClick={() => setActiveTab("expenses")}
+          onClick={() => router.push("/expenses")}
         >
           <Receipt className="h-4 w-4" />
           {!collapsed && <span>소비내역</span>}
@@ -49,13 +46,10 @@ export function Sidebar({ activeTab, setActiveTab, expenses, collapsed, toggleCo
         <button
           className={cn(
             "flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors",
-            activeTab === "analytics" ? "bg-primary text-primary-foreground" : "hover:bg-muted hover:text-foreground",
+            pathname === "/analytics" ? "bg-primary text-primary-foreground" : "hover:bg-muted hover:text-foreground",
             collapsed && "justify-center px-2",
           )}
-          onClick={() => {
-            setActiveTab("analytics")
-            router.push("/analytics")
-          }}
+          onClick={() => router.push("/analytics")}
         >
           <BarChart3 className="h-4 w-4" />
           {!collapsed && <span>분석</span>}
@@ -63,10 +57,10 @@ export function Sidebar({ activeTab, setActiveTab, expenses, collapsed, toggleCo
         <button
           className={cn(
             "flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors",
-            activeTab === "settings" ? "bg-primary text-primary-foreground" : "hover:bg-muted hover:text-foreground",
+            pathname === "/settings" ? "bg-primary text-primary-foreground" : "hover:bg-muted hover:text-foreground",
             collapsed && "justify-center px-2",
           )}
-          onClick={() => setActiveTab("settings")}
+          onClick={() => router.push("/settings")}
         >
           <Settings className="h-4 w-4" />
           {!collapsed && <span>설정</span>}

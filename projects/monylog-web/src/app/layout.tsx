@@ -6,6 +6,7 @@ import { ThemeProvider } from "@/components/theme-provider"
 import { ExpensesProvider } from "@/contexts/expenses-context"
 import { SidebarProvider } from "@/contexts/sidebar-context"
 import { UserProvider } from "@/contexts/user-context"
+import { DashboardSidebarContainer } from "@/components/dashboard-sidebar-container"
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -36,7 +37,12 @@ export default function RootLayout({
           <UserProvider>
             <ExpensesProvider>
               <SidebarProvider>
-                {children}
+                <div className="flex h-screen w-full overflow-hidden">
+                  <DashboardSidebarContainer />
+                  <div className="flex-1 flex flex-col overflow-hidden">
+                    {children}
+                  </div>
+                </div>
               </SidebarProvider>
             </ExpensesProvider>
           </UserProvider>
