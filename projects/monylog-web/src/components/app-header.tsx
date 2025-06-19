@@ -4,9 +4,13 @@ import { Logo } from "@/components/logo"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { UserStatus } from "@/components/user-status"
 import { useAuth } from "@/hooks/use-auth"
-import { useRouter } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 
 export function AppHeader() {
+  const pathName = usePathname()
+  if (pathName === "/login" || pathName === "/register") {
+    return null
+  }
   const { user, logout } = useAuth()
   const router = useRouter()
 

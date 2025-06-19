@@ -3,7 +3,6 @@
 import type React from "react"
 import { useRouter } from "next/navigation"
 import { UserContext, useUser } from "@/contexts/user-context"; // Changed from useAuth to useUser
-import Dashboard from "@/components/dashboard"
 import { useContext, useEffect } from "react"
 import { ChatInput } from "@/components/chat-input";
 import { ExpenseViewList } from "@/components/transaction-list";

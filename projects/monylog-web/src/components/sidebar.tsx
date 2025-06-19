@@ -5,6 +5,8 @@ import { cn } from "@/lib/utils"
 import type { Expenses } from "@/types/expenses"
 import { formatCurrency } from "@/lib/format-currency"
 import { useRouter, usePathname } from "next/navigation"
+import { useContext } from "react"
+import { UserContext } from "@/contexts/user-context"
 
 interface SidebarProps {
   expenses: Expenses[]
@@ -17,6 +19,11 @@ export function Sidebar({ expenses, collapsed, toggleCollapsed }: SidebarProps) 
   const totalIncome = expenses.filter((e) => e.type === "income").reduce((sum, e) => sum + e.amount, 0)
   const router = useRouter()
   const pathname = usePathname()
+  const context = useContext(UserContext);
+
+    if (!context?.user) {
+        return null // If user is not authenticated, do not render the sidebar
+    }
 
   return (
     <div className="flex h-full flex-col">
