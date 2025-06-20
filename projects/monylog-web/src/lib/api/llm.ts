@@ -1,3 +1,5 @@
+import { fetchWithAuthRetry } from "./auth";
+
 interface AnalyzeExpenseMessageRequest {
     message: string;
     tags: string[];
@@ -25,16 +27,13 @@ const BASE_URL = process.env.NODE_ENV === 'development'
 
 export const analyzeExpenseMessage = async (body: AnalyzeExpenseMessageRequest): Promise<AnalyzeExpenseMessageResponse> => {
     try {
-
-        const response = await fetch(`${BASE_URL}/api/v1/llm/expense`, {
+        const response = await fetchWithAuthRetry(`${BASE_URL}/api/v1/llm/expense`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(body),
-            credentials: 'include', // 쿠키를 주고받기 위해 필요한 설정
         });
-
         if (!response.ok) {
             const error = await response.json();
             throw new Error(error.message || '로그인에 실패했습니다.');

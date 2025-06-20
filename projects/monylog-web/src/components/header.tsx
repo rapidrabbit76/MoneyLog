@@ -8,11 +8,12 @@ import { usePathname, useRouter } from "next/navigation"
 
 export function AppHeader() {
   const pathName = usePathname()
+  const { user, logout } = useAuth()
+  const router = useRouter()
+
   if (pathName === "/login" || pathName === "/register") {
     return null
   }
-  const { user, logout } = useAuth()
-  const router = useRouter()
 
   const handleLogout = async () => {
     await logout()

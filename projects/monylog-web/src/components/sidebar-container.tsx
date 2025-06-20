@@ -10,9 +10,6 @@ import { useUserStore } from '@/store/user-store';
 
 export function SidebarContainer() {
     const pathName = usePathname()
-    if (pathName === "/login" || pathName === "/register") {
-        return null // 로그인 페이지나 회원가입 페이지에서는 사이드바를 렌더링하지 않음
-    }
     const {
         sidebarOpen,
         setSidebarOpen,
@@ -29,12 +26,6 @@ export function SidebarContainer() {
     } = useSidebar()
     const { expenses } = useExpenses()
     const user = useUserStore((state) => state.user);
-
-    const handleMouseDown = (e: React.MouseEvent) => {
-        e.preventDefault()
-        setIsResizing(true)
-    }
-
 
     useEffect(() => {
         const handleMouseMove = (e: MouseEvent) => {
@@ -56,6 +47,15 @@ export function SidebarContainer() {
             document.removeEventListener("mouseup", handleMouseUp)
         }
     }, [isResizing, updateSidebarState, setIsResizing])
+
+    if (pathName === "/login" || pathName === "/register") {
+        return null // 로그인 페이지나 회원가입 페이지에서는 사이드바를 렌더링하지 않음
+    }
+
+    const handleMouseDown = (e: React.MouseEvent) => {
+        e.preventDefault()
+        setIsResizing(true)
+    }
 
 
     return (

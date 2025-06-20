@@ -1,6 +1,7 @@
 import { User } from "@/types/auth";
 import { ParsedExpense } from "../expense-message";
 import { Expenses } from "@/types/expenses";
+import { fetchWithAuthRetry } from "./auth";
 
 interface CreateExpensesRequest {
     requestId: string;
@@ -16,17 +17,13 @@ const BASE_URL = process.env.NODE_ENV === 'development'
 
 export const createExpenses = async (payload: CreateExpensesRequest): Promise<void> => {
     try {
-
-
-        const response = await fetch(`${BASE_URL}/api/v1/expenses`, {
+        const response = await fetchWithAuthRetry(`${BASE_URL}/api/v1/expenses`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(payload),
-            credentials: 'include', // 쿠키를 주고받기 위해 필요한 설정
         });
-
         if (!response.ok) {
             const error = await response.json();
             //  Popup Error message
@@ -58,27 +55,26 @@ export const getExpenses = async (query: GetExpensesQuery): Promise<Expenses[]> 
             }
         });
         const queryParams = new URLSearchParams(queryStringParams).toString();
-        const response = await fetch(`${BASE_URL}/api/v1/expenses?${queryParams}`, {
+        const response = await fetchWithAuthRetry(`${BASE_URL}/api/v1/expenses?${queryParams}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
             },
-            credentials: 'include', // 쿠키를 주고받기 위해 필요한 설정
         });
         if (!response.ok) {
-            const error = await response.json();
-            throw new Error(error.message || 'Failed to fetch expenses');
+            return [];
+            // const error = await response.json();
+            // throw new Error(error.message || 'Failed to fetch expenses');
         }
         const res = await response.json();
-        
         return res.data.items as Expenses[];
-
     } catch (error) {
         if (error instanceof Error) {
-            throw error;
+            // throw error;
+            return [];
         }
+        return [];
         throw new Error('알 수 없는 에러가 발생했습니다.');
     }
-
 }
 
