@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { Settings, LogOut, Edit, Download, Upload } from "lucide-react"
 import type { User as UserType } from "@/types/auth"
+import { toast } from "@/hooks/use-toast"
 
 interface UserStatusProps {
   user?: UserType | null
@@ -37,7 +38,7 @@ export function UserStatus({ user, onLogout }: UserStatusProps) {
   }
 
   const handleDataExport = () => {
-    alert("데이터 내보내기가 시작되었습니다. 완료되면 이메일로 알려드립니다.")
+    toast({ title: "데이터 내보내기", description: "데이터 내보내기가 시작되었습니다. 완료되면 이메일로 알려드립니다.", variant: "default" })
   }
 
   const handleDataImport = () => {
@@ -47,7 +48,7 @@ export function UserStatus({ user, onLogout }: UserStatusProps) {
     input.onchange = (e) => {
       const file = (e.target as HTMLInputElement).files?.[0]
       if (file) {
-        alert(`${file.name} 파일을 가져오는 중입니다...`)
+        toast({ title: "데이터 가져오기", description: `${file.name} 파일을 가져오는 중입니다...`, variant: "default" })
       }
     }
     input.click()

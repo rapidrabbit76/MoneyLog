@@ -9,6 +9,7 @@ import { Label } from "@/components/ui/label"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { Plus, Trash2, Tag as TagIcon, Settings } from "lucide-react"
 import { useTags } from "@/hooks/use-tags"
+import { toast } from "@/hooks/use-toast"
 
 export function TagManagement() {
   const { tags, addTag, deleteTag } = useTags()
@@ -19,25 +20,24 @@ export function TagManagement() {
     e.preventDefault()
 
     if (!newTag.trim()) {
-      alert("태그 이름을 입력해주세요.")
+      toast({ title: "태그 추가 실패", description: "태그 이름을 입력해주세요.", variant: "destructive" })
       return
     }
 
     if (tags.includes(newTag.trim())) {
-      alert("이미 존재하는 태그입니다.")
+      toast({ title: "태그 추가 실패", description: "이미 존재하는 태그입니다.", variant: "destructive" })
       return
     }
 
     addTag(newTag.trim())
     setNewTag("")
-    alert("태그가 추가되었습니다.")
+    toast({ title: "태그 추가", description: "태그가 추가되었습니다.", variant: "default" })
   }
 
   const handleDeleteTag = (tagName: string) => {
-    if (window.confirm(`"${tagName}" 태그를 삭제하시겠습니까?`)) {
-      deleteTag(tagName)
-      alert("태그가 삭제되었습니다.")
-    }
+    // window.confirm 대체 필요: 추후 커스텀 다이얼로그 적용 가능
+    toast({ title: "태그 삭제", description: `"${tagName}" 태그가 삭제되었습니다.`, variant: "default" })
+    deleteTag(tagName)
   }
 
   const handleOpenDialog = () => {

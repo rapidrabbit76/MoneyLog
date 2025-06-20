@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Plus, Trash2, Settings } from "lucide-react"
 import { useTags } from "@/hooks/use-tags"
+import { toast } from "@/hooks/use-toast"
 
 export function SimpleTagManager() {
   const { tags, addTag, deleteTag } = useTags()
@@ -14,27 +15,25 @@ export function SimpleTagManager() {
 
   const handleAddTag = () => {
     if (!newTag.trim()) {
-      alert("태그 이름을 입력해주세요.")
+      toast({ title: "태그 추가 실패", description: "태그 이름을 입력해주세요.", variant: "destructive" })
       return
     }
 
     if (tags.includes(newTag.trim())) {
-      alert("이미 존재하는 태그입니다.")
+      toast({ title: "태그 추가 실패", description: "이미 존재하는 태그입니다.", variant: "destructive" })
       return
     }
 
     const success = addTag(newTag.trim())
     if (success) {
       setNewTag("")
-      alert("태그가 추가되었습니다.")
+      toast({ title: "태그 추가", description: "태그가 추가되었습니다.", variant: "default" })
     }
   }
 
   const handleDeleteTag = (tagName: string) => {
-    if (window.confirm(`"${tagName}" 태그를 삭제하시겠습니까?`)) {
-      deleteTag(tagName)
-      alert("태그가 삭제되었습니다.")
-    }
+    toast({ title: "태그 삭제", description: `"${tagName}" 태그가 삭제되었습니다.`, variant: "default" })
+    deleteTag(tagName)
   }
 
   if (!isOpen) {

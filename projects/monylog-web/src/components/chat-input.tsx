@@ -13,6 +13,7 @@ import LoadingPopup from "./loading-popup"
 import { AnalyzeExpenseMessageResponse } from "@/lib/api/llm"
 import { createExpenses } from "@/lib/api/expenses"
 import { useExpenses } from "@/hooks/use-expenses"
+import { toast } from "@/hooks/use-toast"
 
 interface ChatInputProps {
   onSubmit: () => void
@@ -39,7 +40,7 @@ export function ChatInput({ onSubmit }: ChatInputProps) {
       if (parsed.count > 0) {
         setPendingExpense(parsed)
       } else {
-        alert("입력 형식이 올바르지 않습니다. 예: '담배 4800' 또는 '커피 3000, 점심 8000'")
+        toast({ title: "입력 오류", description: "입력 형식이 올바르지 않습니다. 예: '담배 4800' 또는 '커피 3000, 점심 8000'", variant: "destructive" });
       }
     } catch (error) {
       console.error("Error processing message:", error)
@@ -63,7 +64,7 @@ export function ChatInput({ onSubmit }: ChatInputProps) {
       })
       .catch((error) => {
         console.error("Error creating expenses:", error)
-        alert("지출 내역을 저장하는 중 오류가 발생했습니다. 다시 시도해주세요.")
+        toast({ title: "지출 저장 오류", description: "지출 내역을 저장하는 중 오류가 발생했습니다. 다시 시도해주세요.", variant: "destructive" });
       })
       .finally(() => {
         setIsLoading(false)
