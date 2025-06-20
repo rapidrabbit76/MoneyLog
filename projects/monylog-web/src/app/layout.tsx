@@ -8,6 +8,7 @@ import { Mona_Sans as FontSans } from "next/font/google"
 import type React from "react"
 import "./globals.css"
 import AuthGuard from "@/app/AuthGuard"
+import { Toaster } from "@/components/ui/toaster"
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -46,6 +47,7 @@ export default function RootLayout({
                   </div>
                 </div>
               </div>
+              <Toaster />
             </SidebarProvider>
           {/* </ExpensesProvider> */}
         </ThemeProvider>

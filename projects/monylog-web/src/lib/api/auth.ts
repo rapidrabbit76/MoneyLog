@@ -1,4 +1,5 @@
 import { User } from "@/types/auth";
+import { toast } from "@/hooks/use-toast";
 
 interface LoginRequest {
     email: string;
@@ -21,6 +22,15 @@ async function fetchWithAuthRetry(input: RequestInfo | URL, init?: RequestInit, 
             // refreshToken 실패 시 그대로 403 반환
         }
     }
+    if (!response.ok) {
+        const error = await response.json();
+        toast({
+            title: '요청 실패',
+            description: error.message || '알 수 없는 에러가 발생했습니다.',
+            variant: 'destructive',
+        });
+        throw new Error(error.message || '요청에 실패했습니다.');
+    }
     return response;
 }
 
@@ -38,13 +48,20 @@ export const loginWithEmail = async (credentials: LoginRequest): Promise<void> =
         });
         if (!response.ok) {
             const error = await response.json();
+            toast({
+                title: '로그인 실패',
+                description: error.message || '로그인에 실패했습니다.',
+                variant: 'destructive',
+            });
             throw new Error(error.message || '로그인에 실패했습니다.');
         }
     } catch (error) {
-        if (error instanceof Error) {
-            throw error;
-        }
-        throw new Error('알 수 없는 에러가 발생했습니다.');
+        toast({
+            title: '로그인 실패',
+            description: error instanceof Error ? error.message : '알 수 없는 에러가 발생했습니다.',
+            variant: 'destructive',
+        });
+        throw error;
     }
 };
 

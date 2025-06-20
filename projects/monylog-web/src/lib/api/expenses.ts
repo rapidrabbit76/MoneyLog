@@ -2,6 +2,7 @@ import { User } from "@/types/auth";
 import { ParsedExpense } from "../expense-message";
 import { Expenses } from "@/types/expenses";
 import { fetchWithAuthRetry } from "./auth";
+import { toast } from "@/hooks/use-toast";
 
 interface CreateExpensesRequest {
     requestId: string;
@@ -26,13 +27,20 @@ export const createExpenses = async (payload: CreateExpensesRequest): Promise<vo
         });
         if (!response.ok) {
             const error = await response.json();
-            //  Popup Error message
+            toast({
+                title: '지출 등록 실패',
+                description: error.message || '지출 등록 중 오류가 발생했습니다.',
+                variant: 'destructive',
+            });
+            throw new Error(error.message || '지출 등록 중 오류가 발생했습니다.');
         }
     } catch (error) {
-        if (error instanceof Error) {
-            throw error;
-        }
-        throw new Error('알 수 없는 에러가 발생했습니다.');
+        toast({
+            title: '지출 등록 실패',
+            description: error instanceof Error ? error.message : '알 수 없는 에러가 발생했습니다.',
+            variant: 'destructive',
+        });
+        throw error;
     }
 };
 
@@ -62,19 +70,23 @@ export const getExpenses = async (query: GetExpensesQuery): Promise<Expenses[]> 
             },
         });
         if (!response.ok) {
+            const error = await response.json();
+            toast({
+                title: '지출 목록 불러오기 실패',
+                description: error.message || '지출 목록을 불러오는 중 오류가 발생했습니다.',
+                variant: 'destructive',
+            });
             return [];
-            // const error = await response.json();
-            // throw new Error(error.message || 'Failed to fetch expenses');
         }
         const res = await response.json();
         return res.data.items as Expenses[];
     } catch (error) {
-        if (error instanceof Error) {
-            // throw error;
-            return [];
-        }
+        toast({
+            title: '지출 목록 불러오기 실패',
+            description: error instanceof Error ? error.message : '알 수 없는 에러가 발생했습니다.',
+            variant: 'destructive',
+        });
         return [];
-        throw new Error('알 수 없는 에러가 발생했습니다.');
     }
 }
 
