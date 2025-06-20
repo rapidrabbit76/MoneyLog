@@ -1,5 +1,6 @@
 import { User } from "@/types/auth";
 import { toast } from "@/hooks/use-toast";
+import { useUserStore } from "@/store/user-store";
 
 interface LoginRequest {
     email: string;
@@ -19,7 +20,18 @@ async function fetchWithAuthRetry(input: RequestInfo | URL, init?: RequestInit, 
             await refreshToken();
             response = await fetch(input, { ...init, credentials: 'include' });
         } catch (e) {
-            // refreshToken 실패 시 그대로 403 반환
+            // refreshToken 실패 시 자동 로그아웃 및 안내
+            toast({
+                title: '세션 만료',
+                description: '세션이 만료되었습니다. 다시 로그인 해주세요.',
+                variant: 'destructive',
+            });
+            if (typeof window !== 'undefined') {
+                // zustand store 직접 접근하여 로그아웃
+                const { logout } = require("@/store/user-store").useUserStore.getState();
+                if (logout) await logout();
+            }
+            throw new Error('세션이 만료되었습니다. 다시 로그인 해주세요.');
         }
     }
     if (!response.ok) {
