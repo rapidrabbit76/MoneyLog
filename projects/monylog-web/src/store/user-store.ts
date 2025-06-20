@@ -1,3 +1,7 @@
+// zustand store: 사용자 인증/정보 등 도메인 상태만 관리합니다.
+// UI/임시 상태는 context 또는 로컬 state로 관리하세요.
+// hydration(SSR/CSR) 처리는 hasHydrated로 일관성 있게 적용합니다.
+
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { User } from '@/types/auth';
@@ -13,6 +17,10 @@ interface UserState {
     fetchUser: () => Promise<void>;
     logout: () => Promise<void>;
 }
+
+// hasHydrated: zustand persist의 hydration(스토리지에서 상태 복원)이 완료되면 true가 됩니다.
+// CSR 환경에서만 의미가 있으며, 인증 체크는 hasHydrated가 true일 때만 신뢰할 수 있습니다.
+// AuthGuard 등에서 hasHydrated를 활용해 인증 상태 race condition을 방지하세요.
 
 export const useUserStore = create<UserState>()(
     persist(

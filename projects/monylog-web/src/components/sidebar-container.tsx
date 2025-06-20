@@ -6,10 +6,10 @@ import { cn } from "@/lib/utils"
 import { useExpenses } from "@/hooks/use-expenses"
 import React, { useEffect } from "react"
 import { usePathname } from "next/navigation"
-import { useUserStore } from '@/store/user-store';
 
 export function SidebarContainer() {
     const pathName = usePathname()
+    // 사이드바 UI 상태는 context로만 관리
     const {
         sidebarOpen,
         setSidebarOpen,
@@ -24,8 +24,8 @@ export function SidebarContainer() {
         updateSidebarState,
         toggleSidebar
     } = useSidebar()
+    // 도메인 데이터(지출)는 zustand store에서 관리
     const { expenses } = useExpenses()
-    const user = useUserStore((state) => state.user);
 
     useEffect(() => {
         const handleMouseMove = (e: MouseEvent) => {
@@ -49,7 +49,7 @@ export function SidebarContainer() {
     }, [isResizing, updateSidebarState, setIsResizing])
 
     if (pathName === "/login" || pathName === "/register") {
-        return null // 로그인 페이지나 회원가입 페이지에서는 사이드바를 렌더링하지 않음
+        return null // 로그인/회원가입 페이지에서는 사이드바 미노출
     }
 
     const handleMouseDown = (e: React.MouseEvent) => {

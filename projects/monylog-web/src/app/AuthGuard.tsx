@@ -26,6 +26,8 @@ export default function AuthGuard({ children }: { children: React.ReactNode }) {
         }
     }, [user, isLoading, hasHydrated, isPublic, router]);
 
+    // AuthGuard는 zustand persist의 hydration(hasHydrated)이 완료된 후에만 인증 상태를 신뢰합니다.
+    // hasHydrated가 false인 동안에는 인증 체크/리다이렉트가 동작하지 않으며, 로딩 화면만 노출됩니다.
     if (!hasHydrated) {
         return <div className="flex h-screen items-center justify-center">로딩 중...</div>;
     }

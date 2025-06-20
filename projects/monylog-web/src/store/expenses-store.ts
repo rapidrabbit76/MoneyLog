@@ -2,6 +2,10 @@ import { create } from 'zustand';
 import { Expenses } from '@/types/expenses';
 import { getExpenses } from '@/lib/api/expenses';
 
+// zustand store: 지출(Expenses) 등 도메인 상태만 관리합니다.
+// selector 패턴으로 필요한 상태만 구독하세요.
+// UI/임시 상태는 context 또는 로컬 state로 관리하세요.
+
 interface ExpensesState {
   expenses: Expenses[];
   isLoading: boolean;
