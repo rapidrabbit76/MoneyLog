@@ -8,7 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Badge } from "@/components/ui/badge"
 import { Check, X, Edit } from "lucide-react"
 import type { ParsedExpense } from "@/lib/expense-message"
-import { useCategories } from "@/hooks/use-tags"
+import { useTags } from "@/hooks/use-tags"
 
 interface TransactionConfirmationProps {
   parsedTransaction: ParsedExpense
@@ -17,7 +17,7 @@ interface TransactionConfirmationProps {
 }
 
 export function TransactionConfirmation({ parsedTransaction, onConfirm, onCancel }: TransactionConfirmationProps) {
-  const { categories } = useCategories()
+  const { tags } = useTags()
   const [isEditing, setIsEditing] = useState(false)
   const [editedTransaction, setEditedTransaction] = useState<ParsedExpense>(parsedTransaction)
 

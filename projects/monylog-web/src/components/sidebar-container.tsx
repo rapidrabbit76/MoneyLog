@@ -4,9 +4,9 @@ import { Sidebar } from "@/components/sidebar"
 import { useSidebar } from "@/contexts/sidebar-context"
 import { cn } from "@/lib/utils"
 import { useExpenses } from "@/contexts/expenses-context"
-import React, { useContext, useEffect } from "react"
-import { UserContext } from "@/contexts/user-context"
+import React, { useEffect } from "react"
 import { usePathname } from "next/navigation"
+import { useUserStore } from '@/store/user-store';
 
 export function SidebarContainer() {
     const pathName = usePathname()
@@ -28,7 +28,7 @@ export function SidebarContainer() {
         toggleSidebar
     } = useSidebar()
     const { expenses } = useExpenses()
-
+    const user = useUserStore((state) => state.user);
 
     const handleMouseDown = (e: React.MouseEvent) => {
         e.preventDefault()

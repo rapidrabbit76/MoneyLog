@@ -3,11 +3,11 @@ import { SidebarContainer } from "@/components/sidebar-container"
 import { ThemeProvider } from "@/components/theme/provider"
 import { ExpensesProvider } from "@/contexts/expenses-context"
 import { SidebarProvider } from "@/contexts/sidebar-context"
-import { UserProvider } from "@/contexts/user-context"
 import type { Metadata } from "next"
 import { Mona_Sans as FontSans } from "next/font/google"
 import type React from "react"
 import "./globals.css"
+import AuthGuard from "@/app/AuthGuard"
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -35,21 +35,19 @@ export default function RootLayout({
           disableTransitionOnChange={false}
           storageKey="finance-chat-theme"
         >
-          <UserProvider>
-            <ExpensesProvider>
-              <SidebarProvider>
-                <div className="flex h-screen w-full overflow-hidden">
-                  <SidebarContainer />
-                  <div className="flex-1 flex flex-col overflow-hidden">
-                    <AppHeader />
-                    <div className="flex flex-1 flex-col overflow-hidden p-4">
-                      {children}
-                    </div>
+          <ExpensesProvider>
+            <SidebarProvider>
+              <div className="flex h-screen w-full overflow-hidden">
+                <SidebarContainer />
+                <div className="flex-1 flex flex-col overflow-hidden">
+                  <AppHeader />
+                  <div className="flex flex-1 flex-col overflow-hidden p-4">
+                    <AuthGuard>{children}</AuthGuard>
                   </div>
                 </div>
-              </SidebarProvider>
-            </ExpensesProvider>
-          </UserProvider>
+              </div>
+            </SidebarProvider>
+          </ExpensesProvider>
         </ThemeProvider>
       </body>
     </html>

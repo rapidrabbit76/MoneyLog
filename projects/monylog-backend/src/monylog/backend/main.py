@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
 from fastapi.middleware import Middleware
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.gzip import GZipMiddleware
@@ -54,6 +55,11 @@ def create_app() -> FastAPI:
 
     # ENDPOINTs
     app.include_router(APIEndpoints)
+
+    app.mount(
+        "/",
+        StaticFiles(directory="./web", html=True, follow_symlink=True),
+    )
     return app
 
 

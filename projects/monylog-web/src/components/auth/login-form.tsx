@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { useContext, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -11,38 +11,36 @@ import { Separator } from "@/components/ui/separator"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Github } from "lucide-react"
 import { loginWithGoogle, loginWithGithub } from "@/lib/auth"
-import { loginWithEmail, getCurrentUser } from "@/lib/api/auth"
-import { UserContext } from "@/contexts/user-context"
+import { loginWithEmail } from "@/lib/api/auth"
+import { useUserStore } from '@/store/user-store';
 
 interface LoginFormProps {
   onSignupClick: () => void
 }
 
 export function LoginForm({ onSignupClick }: LoginFormProps) {
-  const router = useRouter()
+  const router = useRouter();
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [error, setError] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(false)
-  const userContext = useContext(UserContext);
-
+  const fetchUser = useUserStore((state) => state.fetchUser);
+  const user = useUserStore((state) => state.user);
 
   const handleEmailLogin = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setError(null)
-    setIsLoading(true)
-
+    e.preventDefault();
+    setError(null);
+    setIsLoading(true);
     try {
-      await loginWithEmail({ email, password })
-      await userContext?.fetchUser()
-      const user = userContext?.user;
+      await loginWithEmail({ email, password });
+      await fetchUser();
       if (user) {
-        router.push("/")
+        router.push("/");
       }
     } catch (err) {
-      setError("이메일 또는 비밀번호가 올바르지 않습니다.")
+      setError("이메일 또는 비밀번호가 올바르지 않습니다.");
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
   }
 

@@ -9,7 +9,7 @@ import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
 import { Check, X, Edit, ArrowLeft, ArrowRight } from "lucide-react"
 import type { ParsedExpense } from "@/lib/expense-message"
-import { useCategories } from "@/hooks/use-tags"
+import { useTags } from "@/hooks/use-tags"
 
 interface ExpensesConfirmationStackProps {
   expenses: {
@@ -24,7 +24,7 @@ interface ExpensesConfirmationStackProps {
 }
 
 export function ExpensesConfirmationStack({ expenses, onConfirm, onCancel }: ExpensesConfirmationStackProps) {
-  const { categories: tags } = useCategories()
+  const { tags } = useTags()
   const [currentIndex, setCurrentIndex] = useState(0)
   const [confirmedExpenses, setConfirmedExpenses] = useState<ParsedExpense[]>([])
   const [editingExpenses, setEditingExpenses] = useState<{
