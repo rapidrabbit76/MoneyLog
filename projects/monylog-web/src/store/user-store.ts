@@ -49,13 +49,21 @@ export const useUserStore = create<UserState>()(
                 }
             },
             logout: async () => {
-                await logoutUser();
-                set({ user: null });
-                // localStorage의 user-storage 키도 삭제
-                if (typeof window !== 'undefined') {
-                    window.localStorage.removeItem('user-storage');
+                try {
+                    await logoutUser();
+                    set({ user: null });
+                    // localStorage의 user-storage 키도 삭제
+                    if (typeof window !== 'undefined') {
+                        window.localStorage.removeItem('user-storage');
+                    }
+                    window.location.href = '/login'; // 로그아웃 후 로그인 페이지로 리다이렉트
+                } catch (error) {
+                    toast({
+                        title: '로그아웃 실패',
+                        description: error instanceof Error ? error.message : '알 수 없는 에러가 발생했습니다.',
+                        variant: 'destructive',
+                    });
                 }
-                window.location.href = '/login'; // 로그아웃 후 로그인 페이지로 리다이렉트
             },
         }),
         {
