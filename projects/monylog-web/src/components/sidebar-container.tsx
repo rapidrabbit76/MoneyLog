@@ -3,7 +3,7 @@
 import { Sidebar } from "@/components/sidebar"
 import { useSidebar } from "@/contexts/sidebar-context"
 import { cn } from "@/lib/utils"
-import { useExpenses } from "@/contexts/expenses-context"
+import { useExpenses } from "@/hooks/use-expenses"
 import React, { useEffect } from "react"
 import { usePathname } from "next/navigation"
 import { useUserStore } from '@/store/user-store';

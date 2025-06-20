@@ -1,7 +1,7 @@
 import { AppHeader } from "@/components/header"
 import { SidebarContainer } from "@/components/sidebar-container"
 import { ThemeProvider } from "@/components/theme/provider"
-import { ExpensesProvider } from "@/contexts/expenses-context"
+// import { ExpensesProvider } from "@/contexts/expenses-context" // zustand로 대체됨
 import { SidebarProvider } from "@/contexts/sidebar-context"
 import type { Metadata } from "next"
 import { Mona_Sans as FontSans } from "next/font/google"
@@ -35,7 +35,7 @@ export default function RootLayout({
           disableTransitionOnChange={false}
           storageKey="finance-chat-theme"
         >
-          <ExpensesProvider>
+          {/* <ExpensesProvider> zustand로 대체됨 */}
             <SidebarProvider>
               <div className="flex h-screen w-full overflow-hidden">
                 <SidebarContainer />
@@ -47,7 +47,7 @@ export default function RootLayout({
                 </div>
               </div>
             </SidebarProvider>
-          </ExpensesProvider>
+          {/* </ExpensesProvider> */}
         </ThemeProvider>
       </body>
     </html>

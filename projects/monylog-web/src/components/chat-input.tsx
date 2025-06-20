@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { useContext, useState } from "react"
+import { useState } from "react"
 import { Send } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
@@ -12,7 +12,7 @@ import LoadingPopup from "./loading-popup"
 
 import { AnalyzeExpenseMessageResponse } from "@/lib/api/llm"
 import { createExpenses } from "@/lib/api/expenses"
-import { ExpensesContext } from "@/contexts/expenses-context"
+import { useExpenses } from "@/hooks/use-expenses"
 
 interface ChatInputProps {
   onSubmit: () => void
@@ -23,8 +23,7 @@ export function ChatInput({ onSubmit }: ChatInputProps) {
   const [pendingExpense, setPendingExpense] = useState<AnalyzeExpenseMessageResponse>(
     { id: "", count: 0, expenses: [] }
   )
-
-  const expenseContext = useContext(ExpensesContext)
+  const { fetchExpenses } = useExpenses()
   const [isLoading, setIsLoading] = useState(false)
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -60,7 +59,7 @@ export function ChatInput({ onSubmit }: ChatInputProps) {
     })
       .then(() => {
         console.log("Expenses created successfully")
-        expenseContext?.refreshExpenses?.()
+        fetchExpenses()
       })
       .catch((error) => {
         console.error("Error creating expenses:", error)

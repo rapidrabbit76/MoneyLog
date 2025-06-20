@@ -1,7 +1,7 @@
 "use client"
 
 import { AnalyticsPage } from "@/components/analytics-page"
-import { useExpenses } from "@/contexts/expenses-context"
+import { useExpenses } from "@/hooks/use-expenses"
 
 export default function AnalyticsRoutePage() {
   const { expenses } = useExpenses()

@@ -1,7 +1,7 @@
 "use client"
 
 import { CalendarView } from "@/components/calendar-view"
-import { useExpenses } from "@/contexts/expenses-context"
+import { useExpenses } from "@/hooks/use-expenses"
 
 export default function ExpensesRoutePage() {
   const { expenses } = useExpenses()
