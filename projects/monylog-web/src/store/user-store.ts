@@ -6,6 +6,7 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { User } from '@/types/auth';
 import { getCurrentUser, logout as logoutUser } from '@/lib/api/auth';
+import { toast } from '@/hooks/use-toast';
 
 interface UserState {
     user: User | null;
@@ -38,6 +39,11 @@ export const useUserStore = create<UserState>()(
                     set({ user: currentUser });
                 } catch (error) {
                     set({ user: null });
+                    toast({
+                        title: '사용자 정보 불러오기 실패',
+                        description: error instanceof Error ? error.message : '알 수 없는 에러가 발생했습니다.',
+                        variant: 'destructive',
+                    });
                 } finally {
                     set({ isLoading: false });
                 }
