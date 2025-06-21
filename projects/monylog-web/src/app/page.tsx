@@ -1,16 +1,16 @@
-"use client"
+"use client";
 
-import type React from "react"
-import { useRouter } from "next/navigation"
-import { useUserStore } from '@/store/user-store';
-import { useEffect } from "react"
+import type React from "react";
+import { useRouter } from "next/navigation";
+import { useUserStore } from "@/store/user-store";
+import { useEffect } from "react";
 import { ChatInput } from "@/components/chat-input";
 import { ExpenseViewList } from "@/components/expense/list";
 import { useExpenses } from "@/hooks/use-expenses";
 
 export default function Home() {
   const { expenses, fetchExpenses } = useExpenses();
-  const defaultHandleChatSubmit = () => { }
+  const defaultHandleChatSubmit = () => {};
 
   useEffect(() => {
     fetchExpenses();
@@ -25,5 +25,5 @@ export default function Home() {
         <ExpenseViewList expenses={expenses} />
       </div>
     </>
-  )
+  );
 }

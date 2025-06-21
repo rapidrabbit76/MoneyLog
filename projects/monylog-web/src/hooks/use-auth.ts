@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { useUserStore } from '@/store/user-store';
+import { useUserStore } from "@/store/user-store";
 
 export function useAuth() {
   const user = useUserStore((state) => state.user);

@@ -1,4 +1,4 @@
-import { useExpensesStore } from '@/store/expenses-store';
+import { useExpensesStore } from "@/store/expenses-store";
 
 export function useExpenses() {
   const expenses = useExpensesStore((state) => state.expenses);

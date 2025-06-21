@@ -1,24 +1,32 @@
-"use client"
+"use client";
 
-import { Home, Receipt, Settings, BarChart3 } from "lucide-react"
-import { cn } from "@/lib/utils"
-import type { Expenses } from "@/types/expenses"
-import { formatCurrency } from "@/lib/format-currency"
-import { useRouter, usePathname } from "next/navigation"
-import { useContext } from "react"
-import { useUserStore } from '@/store/user-store';
+import { Home, Receipt, Settings, BarChart3 } from "lucide-react";
+import { cn } from "@/lib/utils";
+import type { Expenses } from "@/types/expenses";
+import { formatCurrency } from "@/lib/format-currency";
+import { useRouter, usePathname } from "next/navigation";
+import { useContext } from "react";
+import { useUserStore } from "@/store/user-store";
 
 interface SidebarProps {
-  expenses: Expenses[]
-  collapsed: boolean
-  toggleCollapsed: () => void
+  expenses: Expenses[];
+  collapsed: boolean;
+  toggleCollapsed: () => void;
 }
 
-export function Sidebar({ expenses, collapsed, toggleCollapsed }: SidebarProps) {
-  const totalExpense = expenses.filter((e) => e.type === "expense").reduce((sum, e) => sum + e.amount, 0)
-  const totalIncome = expenses.filter((e) => e.type === "income").reduce((sum, e) => sum + e.amount, 0)
-  const router = useRouter()
-  const pathname = usePathname()
+export function Sidebar({
+  expenses,
+  collapsed,
+  toggleCollapsed,
+}: SidebarProps) {
+  const totalExpense = expenses
+    .filter((e) => e.type === "expense")
+    .reduce((sum, e) => sum + e.amount, 0);
+  const totalIncome = expenses
+    .filter((e) => e.type === "income")
+    .reduce((sum, e) => sum + e.amount, 0);
+  const router = useRouter();
+  const pathname = usePathname();
   // const user = useUserStore((state) => state.user);
 
   // // if (!user) {
@@ -31,7 +39,9 @@ export function Sidebar({ expenses, collapsed, toggleCollapsed }: SidebarProps) 
         <button
           className={cn(
             "flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors",
-            pathname === "/" ? "bg-primary text-primary-foreground" : "hover:bg-muted hover:text-foreground",
+            pathname === "/"
+              ? "bg-primary text-primary-foreground"
+              : "hover:bg-muted hover:text-foreground",
             collapsed && "justify-center px-2",
           )}
           onClick={() => router.push("/")}
@@ -42,7 +52,9 @@ export function Sidebar({ expenses, collapsed, toggleCollapsed }: SidebarProps) 
         <button
           className={cn(
             "flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors",
-            pathname === "/expenses" ? "bg-primary text-primary-foreground" : "hover:bg-muted hover:text-foreground",
+            pathname === "/expenses"
+              ? "bg-primary text-primary-foreground"
+              : "hover:bg-muted hover:text-foreground",
             collapsed && "justify-center px-2",
           )}
           onClick={() => router.push("/expenses")}
@@ -53,7 +65,9 @@ export function Sidebar({ expenses, collapsed, toggleCollapsed }: SidebarProps) 
         <button
           className={cn(
             "flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors",
-            pathname === "/analytics" ? "bg-primary text-primary-foreground" : "hover:bg-muted hover:text-foreground",
+            pathname === "/analytics"
+              ? "bg-primary text-primary-foreground"
+              : "hover:bg-muted hover:text-foreground",
             collapsed && "justify-center px-2",
           )}
           onClick={() => router.push("/analytics")}
@@ -64,7 +78,9 @@ export function Sidebar({ expenses, collapsed, toggleCollapsed }: SidebarProps) 
         <button
           className={cn(
             "flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors",
-            pathname === "/settings" ? "bg-primary text-primary-foreground" : "hover:bg-muted hover:text-foreground",
+            pathname === "/settings"
+              ? "bg-primary text-primary-foreground"
+              : "hover:bg-muted hover:text-foreground",
             collapsed && "justify-center px-2",
           )}
           onClick={() => router.push("/settings")}
@@ -74,5 +90,5 @@ export function Sidebar({ expenses, collapsed, toggleCollapsed }: SidebarProps) 
         </button>
       </div>
     </div>
-  )
+  );
 }

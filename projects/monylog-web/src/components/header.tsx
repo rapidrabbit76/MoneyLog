@@ -1,24 +1,24 @@
-"use client"
+"use client";
 
-import { Logo } from "@/components/logo"
-import { ThemeToggle } from "@/components/theme/toggle"
-import { UserStatus } from "@/components/user-status"
-import { useAuth } from "@/hooks/use-auth"
-import { usePathname, useRouter } from "next/navigation"
+import { Logo } from "@/components/logo";
+import { ThemeToggle } from "@/components/theme/toggle";
+import { UserStatus } from "@/components/user-status";
+import { useAuth } from "@/hooks/use-auth";
+import { usePathname, useRouter } from "next/navigation";
 
 export function AppHeader() {
-  const pathName = usePathname()
-  const { user, logout } = useAuth()
-  const router = useRouter()
+  const pathName = usePathname();
+  const { user, logout } = useAuth();
+  const router = useRouter();
 
   if (pathName === "/login" || pathName === "/register") {
-    return null
+    return null;
   }
 
   const handleLogout = async () => {
-    await logout()
-    router.push("/login")
-  }
+    await logout();
+    router.push("/login");
+  };
 
   return (
     <header className="flex h-16 items-center border-b bg-card px-4 shadow-sm lg:px-6">
@@ -31,5 +31,5 @@ export function AppHeader() {
         <UserStatus user={user} onLogout={handleLogout} />
       </div>
     </header>
-  )
+  );
 }

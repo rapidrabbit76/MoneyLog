@@ -1,45 +1,63 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState, useRef } from "react"
-import { useRouter } from "next/navigation"
-import { useAuth } from "@/hooks/use-auth"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Alert, AlertDescription } from "@/components/ui/alert"
-import { ArrowLeft, Camera, Eye, EyeOff, Save, User, Shield, Upload } from "lucide-react"
-import { ThemeToggle } from "@/components/theme/toggle"
-import { Logo } from "@/components/logo"
+import { useState, useRef } from "react";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/hooks/use-auth";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import {
+  ArrowLeft,
+  Camera,
+  Eye,
+  EyeOff,
+  Save,
+  User,
+  Shield,
+  Upload,
+} from "lucide-react";
+import { ThemeToggle } from "@/components/theme/toggle";
+import { Logo } from "@/components/logo";
 
 export function AccountPage() {
-  const router = useRouter()
-  const { user, logout } = useAuth()
-  const fileInputRef = useRef<HTMLInputElement>(null)
+  const router = useRouter();
+  const { user, logout } = useAuth();
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   // 프로필 정보 상태
   const [profileData, setProfileData] = useState({
     name: user?.nickname || "",
     email: user?.email || "",
     image: user?.thumbnail || null,
-  })
+  });
 
   // 비밀번호 변경 상태
   const [passwordData, setPasswordData] = useState({
     currentPassword: "",
     newPassword: "",
     confirmPassword: "",
-  })
+  });
 
   // UI 상태
-  const [showCurrentPassword, setShowCurrentPassword] = useState(false)
-  const [showNewPassword, setShowNewPassword] = useState(false)
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
-  const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null)
+  const [showCurrentPassword, setShowCurrentPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [message, setMessage] = useState<{
+    type: "success" | "error";
+    text: string;
+  } | null>(null);
 
   const initials = profileData.name
     ? profileData.name
@@ -47,94 +65,109 @@ export function AccountPage() {
         .map((n) => n[0])
         .join("")
         .toUpperCase()
-    : "U"
+    : "U";
 
   const handleProfileUpdate = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsLoading(true)
-    setMessage(null)
+    e.preventDefault();
+    setIsLoading(true);
+    setMessage(null);
 
     try {
       // 실제로는 API 호출
-      await new Promise((resolve) => setTimeout(resolve, 1000))
+      await new Promise((resolve) => setTimeout(resolve, 1000));
 
       // 로컬 스토리지의 세션 정보 업데이트 (모킹)
-      const sessionData = localStorage.getItem("finance-chat-session")
+      const sessionData = localStorage.getItem("finance-chat-session");
       if (sessionData) {
-        const session = JSON.parse(sessionData)
+        const session = JSON.parse(sessionData);
         session.user = {
           ...session.user,
           name: profileData.name,
           email: profileData.email,
           image: profileData.image,
-        }
-        localStorage.setItem("finance-chat-session", JSON.stringify(session))
-        window.dispatchEvent(new Event("auth-change"))
+        };
+        localStorage.setItem("finance-chat-session", JSON.stringify(session));
+        window.dispatchEvent(new Event("auth-change"));
       }
 
-      setMessage({ type: "success", text: "프로필이 성공적으로 업데이트되었습니다." })
+      setMessage({
+        type: "success",
+        text: "프로필이 성공적으로 업데이트되었습니다.",
+      });
     } catch (error) {
-      setMessage({ type: "error", text: "프로필 업데이트 중 오류가 발생했습니다." })
+      setMessage({
+        type: "error",
+        text: "프로필 업데이트 중 오류가 발생했습니다.",
+      });
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   const handlePasswordChange = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setMessage(null)
+    e.preventDefault();
+    setMessage(null);
 
     if (passwordData.newPassword !== passwordData.confirmPassword) {
-      setMessage({ type: "error", text: "새 비밀번호가 일치하지 않습니다." })
-      return
+      setMessage({ type: "error", text: "새 비밀번호가 일치하지 않습니다." });
+      return;
     }
 
     if (passwordData.newPassword.length < 6) {
-      setMessage({ type: "error", text: "비밀번호는 6자 이상이어야 합니다." })
-      return
+      setMessage({ type: "error", text: "비밀번호는 6자 이상이어야 합니다." });
+      return;
     }
 
-    setIsLoading(true)
+    setIsLoading(true);
 
     try {
       // 실제로는 API 호출
-      await new Promise((resolve) => setTimeout(resolve, 1000))
+      await new Promise((resolve) => setTimeout(resolve, 1000));
 
-      setMessage({ type: "success", text: "비밀번호가 성공적으로 변경되었습니다." })
+      setMessage({
+        type: "success",
+        text: "비밀번호가 성공적으로 변경되었습니다.",
+      });
       setPasswordData({
         currentPassword: "",
         newPassword: "",
         confirmPassword: "",
-      })
+      });
     } catch (error) {
-      setMessage({ type: "error", text: "비밀번호 변경 중 오류가 발생했습니다." })
+      setMessage({
+        type: "error",
+        text: "비밀번호 변경 중 오류가 발생했습니다.",
+      });
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0]
+    const file = e.target.files?.[0];
     if (file) {
       // 실제로는 이미지를 서버에 업로드하고 URL을 받아야 함
-      const reader = new FileReader()
+      const reader = new FileReader();
       reader.onload = (event) => {
-        const imageUrl = event.target?.result as string
-        setProfileData((prev) => ({ ...prev, image: imageUrl }))
-        setMessage({ type: "success", text: "프로필 이미지가 업로드되었습니다." })
-      }
-      reader.readAsDataURL(file)
+        const imageUrl = event.target?.result as string;
+        setProfileData((prev) => ({ ...prev, image: imageUrl }));
+        setMessage({
+          type: "success",
+          text: "프로필 이미지가 업로드되었습니다.",
+        });
+      };
+      reader.readAsDataURL(file);
     }
-  }
+  };
 
   const handleImageClick = () => {
-    fileInputRef.current?.click()
-  }
+    fileInputRef.current?.click();
+  };
 
   const handleLogout = async () => {
-    await logout()
-    router.push("/login")
-  }
+    await logout();
+    router.push("/login");
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -172,7 +205,9 @@ export function AccountPage() {
               <User className="h-5 w-5" />
               프로필 정보
             </CardTitle>
-            <CardDescription>기본 프로필 정보를 수정할 수 있습니다.</CardDescription>
+            <CardDescription>
+              기본 프로필 정보를 수정할 수 있습니다.
+            </CardDescription>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleProfileUpdate} className="space-y-6">
@@ -181,9 +216,14 @@ export function AccountPage() {
                 <div className="relative">
                   <Avatar className="h-24 w-24 border-4 border-primary/20">
                     {profileData.image ? (
-                      <AvatarImage src={profileData.image || "/placeholder.svg"} alt={profileData.name} />
+                      <AvatarImage
+                        src={profileData.image || "/placeholder.svg"}
+                        alt={profileData.name}
+                      />
                     ) : (
-                      <AvatarFallback className="bg-primary/10 text-primary text-2xl">{initials}</AvatarFallback>
+                      <AvatarFallback className="bg-primary/10 text-primary text-2xl">
+                        {initials}
+                      </AvatarFallback>
                     )}
                   </Avatar>
                   <Button
@@ -196,11 +236,18 @@ export function AccountPage() {
                   </Button>
                 </div>
                 <div className="text-center">
-                  <Button type="button" variant="outline" size="sm" onClick={handleImageClick}>
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    onClick={handleImageClick}
+                  >
                     <Upload className="h-4 w-4 mr-2" />
                     프로필 사진 변경
                   </Button>
-                  <p className="text-xs text-muted-foreground mt-1">JPG, PNG 파일만 업로드 가능합니다.</p>
+                  <p className="text-xs text-muted-foreground mt-1">
+                    JPG, PNG 파일만 업로드 가능합니다.
+                  </p>
                 </div>
                 <input
                   ref={fileInputRef}
@@ -218,7 +265,12 @@ export function AccountPage() {
                   <Input
                     id="name"
                     value={profileData.name}
-                    onChange={(e) => setProfileData((prev) => ({ ...prev, name: e.target.value }))}
+                    onChange={(e) =>
+                      setProfileData((prev) => ({
+                        ...prev,
+                        name: e.target.value,
+                      }))
+                    }
                     placeholder="이름을 입력하세요"
                     disabled={isLoading}
                   />
@@ -230,7 +282,12 @@ export function AccountPage() {
                     id="email"
                     type="email"
                     value={profileData.email}
-                    onChange={(e) => setProfileData((prev) => ({ ...prev, email: e.target.value }))}
+                    onChange={(e) =>
+                      setProfileData((prev) => ({
+                        ...prev,
+                        email: e.target.value,
+                      }))
+                    }
                     placeholder="이메일을 입력하세요"
                     disabled={isLoading}
                   />
@@ -251,7 +308,7 @@ export function AccountPage() {
                       name: user?.nickname || "",
                       email: user?.email || "",
                       image: user?.thumbnail || null,
-                    })
+                    });
                   }}
                   disabled={isLoading}
                   className="flex-1"
@@ -270,7 +327,9 @@ export function AccountPage() {
               <Shield className="h-5 w-5" />
               비밀번호 변경
             </CardTitle>
-            <CardDescription>계정 보안을 위해 정기적으로 비밀번호를 변경하세요.</CardDescription>
+            <CardDescription>
+              계정 보안을 위해 정기적으로 비밀번호를 변경하세요.
+            </CardDescription>
           </CardHeader>
           <CardContent>
             <form onSubmit={handlePasswordChange} className="space-y-4">
@@ -281,7 +340,12 @@ export function AccountPage() {
                     id="currentPassword"
                     type={showCurrentPassword ? "text" : "password"}
                     value={passwordData.currentPassword}
-                    onChange={(e) => setPasswordData((prev) => ({ ...prev, currentPassword: e.target.value }))}
+                    onChange={(e) =>
+                      setPasswordData((prev) => ({
+                        ...prev,
+                        currentPassword: e.target.value,
+                      }))
+                    }
                     placeholder="현재 비밀번호를 입력하세요"
                     disabled={isLoading}
                   />
@@ -292,7 +356,11 @@ export function AccountPage() {
                     className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
                     onClick={() => setShowCurrentPassword(!showCurrentPassword)}
                   >
-                    {showCurrentPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                    {showCurrentPassword ? (
+                      <EyeOff className="h-4 w-4" />
+                    ) : (
+                      <Eye className="h-4 w-4" />
+                    )}
                   </Button>
                 </div>
               </div>
@@ -304,7 +372,12 @@ export function AccountPage() {
                     id="newPassword"
                     type={showNewPassword ? "text" : "password"}
                     value={passwordData.newPassword}
-                    onChange={(e) => setPasswordData((prev) => ({ ...prev, newPassword: e.target.value }))}
+                    onChange={(e) =>
+                      setPasswordData((prev) => ({
+                        ...prev,
+                        newPassword: e.target.value,
+                      }))
+                    }
                     placeholder="새 비밀번호를 입력하세요 (6자 이상)"
                     disabled={isLoading}
                   />
@@ -315,7 +388,11 @@ export function AccountPage() {
                     className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
                     onClick={() => setShowNewPassword(!showNewPassword)}
                   >
-                    {showNewPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                    {showNewPassword ? (
+                      <EyeOff className="h-4 w-4" />
+                    ) : (
+                      <Eye className="h-4 w-4" />
+                    )}
                   </Button>
                 </div>
               </div>
@@ -327,7 +404,12 @@ export function AccountPage() {
                     id="confirmPassword"
                     type={showConfirmPassword ? "text" : "password"}
                     value={passwordData.confirmPassword}
-                    onChange={(e) => setPasswordData((prev) => ({ ...prev, confirmPassword: e.target.value }))}
+                    onChange={(e) =>
+                      setPasswordData((prev) => ({
+                        ...prev,
+                        confirmPassword: e.target.value,
+                      }))
+                    }
                     placeholder="새 비밀번호를 다시 입력하세요"
                     disabled={isLoading}
                   />
@@ -338,7 +420,11 @@ export function AccountPage() {
                     className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
                     onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                   >
-                    {showConfirmPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                    {showConfirmPassword ? (
+                      <EyeOff className="h-4 w-4" />
+                    ) : (
+                      <Eye className="h-4 w-4" />
+                    )}
                   </Button>
                 </div>
               </div>
@@ -355,7 +441,9 @@ export function AccountPage() {
         <Card className="border-red-200 dark:border-red-800">
           <CardHeader>
             <CardTitle className="text-red-600">위험 구역</CardTitle>
-            <CardDescription>계정을 삭제하면 모든 데이터가 영구적으로 삭제됩니다.</CardDescription>
+            <CardDescription>
+              계정을 삭제하면 모든 데이터가 영구적으로 삭제됩니다.
+            </CardDescription>
           </CardHeader>
           <CardContent>
             <Button
@@ -366,8 +454,8 @@ export function AccountPage() {
                     "정말로 계정을 삭제하시겠습니까?\n\n이 작업은 되돌릴 수 없으며, 모든 데이터가 영구적으로 삭제됩니다.",
                   )
                 ) {
-                  alert("계정 삭제가 요청되었습니다.")
-                  handleLogout()
+                  alert("계정 삭제가 요청되었습니다.");
+                  handleLogout();
                 }
               }}
             >
@@ -377,5 +465,5 @@ export function AccountPage() {
         </Card>
       </div>
     </div>
-  )
+  );
 }

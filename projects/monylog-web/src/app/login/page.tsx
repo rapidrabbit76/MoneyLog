@@ -1,25 +1,29 @@
-"use client"
+"use client";
 
-import { useEffect, useState } from "react"
-import { useRouter } from "next/navigation"
-import { useUserStore } from '@/store/user-store';
-import { LoginForm } from "@/components/auth/login-form"
-import { SignupForm } from "@/components/auth/signup-form"
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useUserStore } from "@/store/user-store";
+import { LoginForm } from "@/components/auth/login-form";
+import { SignupForm } from "@/components/auth/signup-form";
 
 export default function LoginPage() {
   const user = useUserStore((state) => state.user);
   const isLoading = useUserStore((state) => state.isLoading);
-  const router = useRouter()
-  const [isSignupMode, setIsSignupMode] = useState(false)
+  const router = useRouter();
+  const [isSignupMode, setIsSignupMode] = useState(false);
 
   useEffect(() => {
     if (!isLoading && user) {
-      router.push("/")
+      router.push("/");
     }
-  }, [user, isLoading, router])
+  }, [user, isLoading, router]);
 
   if (isLoading) {
-    return <div className="flex h-screen items-center justify-center">로딩 중...</div>
+    return (
+      <div className="flex h-screen items-center justify-center">
+        로딩 중...
+      </div>
+    );
   }
 
   if (user) {
@@ -34,7 +38,9 @@ export default function LoginPage() {
           <div className="w-full max-w-md space-y-8">
             <div className="text-center">
               <h1 className="text-3xl font-bold tracking-tight">
-                {isSignupMode ? "가계부 챗 회원가입" : "가계부 챗에 오신 것을 환영합니다"}
+                {isSignupMode
+                  ? "가계부 챗 회원가입"
+                  : "가계부 챗에 오신 것을 환영합니다"}
               </h1>
               <p className="mt-2 text-sm text-muted-foreground">
                 {isSignupMode
@@ -55,9 +61,12 @@ export default function LoginPage() {
         <div className="hidden bg-primary/10 lg:block lg:w-1/2">
           <div className="flex h-full flex-col items-center justify-center px-8 text-center">
             <div className="mx-auto max-w-md">
-              <h2 className="text-3xl font-bold text-primary">채팅으로 간편하게 관리하는 가계부</h2>
+              <h2 className="text-3xl font-bold text-primary">
+                채팅으로 간편하게 관리하는 가계부
+              </h2>
               <p className="mt-4 text-lg text-foreground/80">
-                복잡한 입력 없이 채팅하듯 간편하게 수입과 지출을 기록하고 관리하세요.
+                복잡한 입력 없이 채팅하듯 간편하게 수입과 지출을 기록하고
+                관리하세요.
               </p>
 
               <div className="mt-12 grid grid-cols-2 gap-8">
@@ -79,7 +88,9 @@ export default function LoginPage() {
                     </svg>
                   </div>
                   <h3 className="text-lg font-medium">채팅 입력</h3>
-                  <p className="text-sm text-muted-foreground">"담배 4800"처럼 간단하게 입력하면 자동으로 분석합니다</p>
+                  <p className="text-sm text-muted-foreground">
+                    "담배 4800"처럼 간단하게 입력하면 자동으로 분석합니다
+                  </p>
                 </div>
 
                 <div className="space-y-2">
@@ -100,7 +111,9 @@ export default function LoginPage() {
                     </svg>
                   </div>
                   <h3 className="text-lg font-medium">통계 분석</h3>
-                  <p className="text-sm text-muted-foreground">수입과 지출을 자동으로 분석하여 보기 쉽게 표시합니다</p>
+                  <p className="text-sm text-muted-foreground">
+                    수입과 지출을 자동으로 분석하여 보기 쉽게 표시합니다
+                  </p>
                 </div>
 
                 <div className="space-y-2">
@@ -121,7 +134,9 @@ export default function LoginPage() {
                     </svg>
                   </div>
                   <h3 className="text-lg font-medium">달력 보기</h3>
-                  <p className="text-sm text-muted-foreground">달력으로 일별 수입과 지출을 한눈에 확인할 수 있습니다</p>
+                  <p className="text-sm text-muted-foreground">
+                    달력으로 일별 수입과 지출을 한눈에 확인할 수 있습니다
+                  </p>
                 </div>
 
                 <div className="space-y-2">
@@ -142,7 +157,9 @@ export default function LoginPage() {
                     </svg>
                   </div>
                   <h3 className="text-lg font-medium">맞춤 설정</h3>
-                  <p className="text-sm text-muted-foreground">다크 모드 등 사용자 취향에 맞게 설정할 수 있습니다</p>
+                  <p className="text-sm text-muted-foreground">
+                    다크 모드 등 사용자 취향에 맞게 설정할 수 있습니다
+                  </p>
                 </div>
               </div>
             </div>
@@ -150,5 +167,5 @@ export default function LoginPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }

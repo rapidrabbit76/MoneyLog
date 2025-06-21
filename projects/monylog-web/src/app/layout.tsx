@@ -1,30 +1,30 @@
-import { AppHeader } from "@/components/header"
-import { SidebarContainer } from "@/components/sidebar-container"
-import { ThemeProvider } from "@/components/theme/provider"
+import { AppHeader } from "@/components/header";
+import { SidebarContainer } from "@/components/sidebar-container";
+import { ThemeProvider } from "@/components/theme/provider";
 // import { ExpensesProvider } from "@/contexts/expenses-context" // zustand로 대체됨
-import { SidebarProvider } from "@/contexts/sidebar-context"
-import type { Metadata } from "next"
-import { Mona_Sans as FontSans } from "next/font/google"
-import type React from "react"
-import "./globals.css"
-import AuthGuard from "@/app/AuthGuard"
-import { Toaster } from "@/components/ui/toaster"
+import { SidebarProvider } from "@/contexts/sidebar-context";
+import type { Metadata } from "next";
+import { Mona_Sans as FontSans } from "next/font/google";
+import type React from "react";
+import "./globals.css";
+import AuthGuard from "@/app/AuthGuard";
+import { Toaster } from "@/components/ui/toaster";
 
 const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
-})
+});
 
 export const metadata: Metadata = {
   title: "가계부 챗",
   description: "채팅으로 가계부를 작성하는 서비스",
-  generator: 'v0.dev'
-}
+  generator: "v0.dev",
+};
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode
+  children: React.ReactNode;
 }>) {
   return (
     <html lang="ko" suppressHydrationWarning>
@@ -37,21 +37,21 @@ export default function RootLayout({
           storageKey="finance-chat-theme"
         >
           {/* <ExpensesProvider> zustand로 대체됨 */}
-            <SidebarProvider>
-              <div className="flex h-screen w-full overflow-hidden">
-                <SidebarContainer />
-                <div className="flex-1 flex flex-col overflow-hidden">
-                  <AppHeader />
-                  <div className="flex flex-1 flex-col overflow-hidden p-4">
-                    <AuthGuard>{children}</AuthGuard>
-                  </div>
+          <SidebarProvider>
+            <div className="flex h-screen w-full overflow-hidden">
+              <SidebarContainer />
+              <div className="flex-1 flex flex-col overflow-hidden">
+                <AppHeader />
+                <div className="flex flex-1 flex-col overflow-hidden p-4">
+                  <AuthGuard>{children}</AuthGuard>
                 </div>
               </div>
-              <Toaster />
-            </SidebarProvider>
+            </div>
+            <Toaster />
+          </SidebarProvider>
           {/* </ExpensesProvider> */}
         </ThemeProvider>
       </body>
     </html>
-  )
+  );
 }

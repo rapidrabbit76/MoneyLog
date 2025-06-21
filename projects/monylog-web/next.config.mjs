@@ -9,7 +9,7 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  output: 'export', // CSR/정적 export만 하도록 설정
-}
+  output: "export", // CSR/정적 export만 하도록 설정
+};
 
-export default nextConfig
+export default nextConfig;

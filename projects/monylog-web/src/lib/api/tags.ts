@@ -5,88 +5,96 @@ import { fetchWithAuthRetry } from "./auth";
 import { toast } from "@/hooks/use-toast";
 
 interface CreateExpensesRequest {
-    requestId: string;
-    expenses: ParsedExpense[];
+  requestId: string;
+  expenses: ParsedExpense[];
 }
 
 // API 기본 URL 설정
-const BASE_URL = process.env.NODE_ENV === 'development'
-    ? 'http://localhost:8080'
-    : '';
+const BASE_URL =
+  process.env.NODE_ENV === "development" ? "http://localhost:8080" : "";
 
-
-
-export const createExpenses = async (payload: CreateExpensesRequest): Promise<void> => {
-    try {
-        const response = await fetchWithAuthRetry(`${BASE_URL}/api/v1/expenses`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(payload),
-        });
-        if (!response.ok) {
-            const error = await response.json();
-            toast({
-                title: '지출 등록 실패',
-                description: error.message || '지출 등록 중 오류가 발생했습니다.',
-                variant: 'destructive',
-            });
-            throw new Error(error.message || '지출 등록 중 오류가 발생했습니다.');
-        }
-    } catch (error) {
-        toast({
-            title: '지출 등록 실패',
-            description: error instanceof Error ? error.message : '알 수 없는 에러가 발생했습니다.',
-            variant: 'destructive',
-        });
-        throw error;
+export const createExpenses = async (
+  payload: CreateExpensesRequest,
+): Promise<void> => {
+  try {
+    const response = await fetchWithAuthRetry(`${BASE_URL}/api/v1/expenses`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+    if (!response.ok) {
+      const error = await response.json();
+      toast({
+        title: "지출 등록 실패",
+        description: error.message || "지출 등록 중 오류가 발생했습니다.",
+        variant: "destructive",
+      });
+      throw new Error(error.message || "지출 등록 중 오류가 발생했습니다.");
     }
+  } catch (error) {
+    toast({
+      title: "지출 등록 실패",
+      description:
+        error instanceof Error
+          ? error.message
+          : "알 수 없는 에러가 발생했습니다.",
+      variant: "destructive",
+    });
+    throw error;
+  }
 };
 
 interface GetExpensesQuery {
-    startDate?: string; // YYYY-MM-DD 형식
-    endDate?: string; // YYYY-MM-DD 형식
-    page?: number;
-    size?: number;
-    sort?: string; // 예: "date,desc" 또는 "amount,asc"
-
+  startDate?: string; // YYYY-MM-DD 형식
+  endDate?: string; // YYYY-MM-DD 형식
+  page?: number;
+  size?: number;
+  sort?: string; // 예: "date,desc" 또는 "amount,asc"
 }
 
-
-export const getExpenses = async (query: GetExpensesQuery): Promise<Expenses[]> => {
-    try {
-        const queryStringParams: Record<string, string> = {};
-        Object.entries(query).forEach(([key, value]) => {
-            if (value !== undefined) {
-                queryStringParams[key] = String(value);
-            }
-        });
-        const queryParams = new URLSearchParams(queryStringParams).toString();
-        const response = await fetchWithAuthRetry(`${BASE_URL}/api/v1/expenses?${queryParams}`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
-        if (!response.ok) {
-            const error = await response.json();
-            toast({
-                title: '지출 목록 불러오기 실패',
-                description: error.message || '지출 목록을 불러오는 중 오류가 발생했습니다.',
-                variant: 'destructive',
-            });
-            return [];
-        }
-        const res = await response.json();
-        return res.data.items as Expenses[];
-    } catch (error) {
-        toast({
-            title: '지출 목록 불러오기 실패',
-            description: error instanceof Error ? error.message : '알 수 없는 에러가 발생했습니다.',
-            variant: 'destructive',
-        });
-        return [];
+export const getExpenses = async (
+  query: GetExpensesQuery,
+): Promise<Expenses[]> => {
+  try {
+    const queryStringParams: Record<string, string> = {};
+    Object.entries(query).forEach(([key, value]) => {
+      if (value !== undefined) {
+        queryStringParams[key] = String(value);
+      }
+    });
+    const queryParams = new URLSearchParams(queryStringParams).toString();
+    const response = await fetchWithAuthRetry(
+      `${BASE_URL}/api/v1/expenses?${queryParams}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+    );
+    if (!response.ok) {
+      const error = await response.json();
+      toast({
+        title: "지출 목록 불러오기 실패",
+        description:
+          error.message || "지출 목록을 불러오는 중 오류가 발생했습니다.",
+        variant: "destructive",
+      });
+      return [];
     }
-}
-
+    const res = await response.json();
+    return res.data.items as Expenses[];
+  } catch (error) {
+    toast({
+      title: "지출 목록 불러오기 실패",
+      description:
+        error instanceof Error
+          ? error.message
+          : "알 수 없는 에러가 발생했습니다.",
+      variant: "destructive",
+    });
+    return [];
+  }
+};

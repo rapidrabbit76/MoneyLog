@@ -1,18 +1,18 @@
-"use client"
+"use client";
 
-import { Button } from "@/components/ui/button"
-import { ThemeToggle } from "@/components/theme/toggle"
-import { SimpleTagManager } from "@/components/tag/manager"
-import { useRouter } from "next/navigation"
-import type { User } from "@/types/auth"
+import { Button } from "@/components/ui/button";
+import { ThemeToggle } from "@/components/theme/toggle";
+import { SimpleTagManager } from "@/components/tag/manager";
+import { useRouter } from "next/navigation";
+import type { User } from "@/types/auth";
 
 interface SettingsPanelProps {
-  user: User | null | undefined
-  onLogout: () => void
+  user: User | null | undefined;
+  onLogout: () => void;
 }
 
 export function SettingsPanel({ user, onLogout }: SettingsPanelProps) {
-  const router = useRouter()
+  const router = useRouter();
   return (
     <div className="flex-1 overflow-y-auto pb-4">
       <div className="space-y-8">
@@ -27,15 +27,24 @@ export function SettingsPanel({ user, onLogout }: SettingsPanelProps) {
               <h4 className="mb-4 text-lg font-medium">계정 정보</h4>
               <div className="space-y-2">
                 <p>
-                  <span className="text-muted-foreground">이메일:</span> {user?.email}
+                  <span className="text-muted-foreground">이메일:</span>{" "}
+                  {user?.email}
                 </p>
                 <p>
-                  <span className="text-muted-foreground">이름:</span> {user?.nickname}
+                  <span className="text-muted-foreground">이름:</span>{" "}
+                  {user?.nickname}
                 </p>
               </div>
               <div className="flex gap-4 mt-6">
-                <Button variant="outline" onClick={() => router.push("/account")}>계정정보 수정</Button>
-                <Button variant="destructive" onClick={onLogout}>로그아웃</Button>
+                <Button
+                  variant="outline"
+                  onClick={() => router.push("/account")}
+                >
+                  계정정보 수정
+                </Button>
+                <Button variant="destructive" onClick={onLogout}>
+                  로그아웃
+                </Button>
               </div>
             </div>
           </div>
@@ -45,5 +54,5 @@ export function SettingsPanel({ user, onLogout }: SettingsPanelProps) {
         </div>
       </div>
     </div>
-  )
+  );
 }

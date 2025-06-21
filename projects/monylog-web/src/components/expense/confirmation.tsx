@@ -1,42 +1,53 @@
-"use client"
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Badge } from "@/components/ui/badge"
-import { Check, X, Edit } from "lucide-react"
-import type { ParsedExpense } from "@/lib/expense-message"
-import { useTags } from "@/hooks/use-tags"
+"use client";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Badge } from "@/components/ui/badge";
+import { Check, X, Edit } from "lucide-react";
+import type { ParsedExpense } from "@/lib/expense-message";
+import { useTags } from "@/hooks/use-tags";
 
 interface TransactionConfirmationProps {
-  parsedTransaction: ParsedExpense
-  onConfirm: (transaction: ParsedExpense) => void
-  onCancel: () => void
+  parsedTransaction: ParsedExpense;
+  onConfirm: (transaction: ParsedExpense) => void;
+  onCancel: () => void;
 }
 
-export function TransactionConfirmation({ parsedTransaction, onConfirm, onCancel }: TransactionConfirmationProps) {
-  const { tags } = useTags()
-  const [isEditing, setIsEditing] = useState(false)
-  const [editedTransaction, setEditedTransaction] = useState<ParsedExpense>(parsedTransaction)
+export function TransactionConfirmation({
+  parsedTransaction,
+  onConfirm,
+  onCancel,
+}: TransactionConfirmationProps) {
+  const { tags } = useTags();
+  const [isEditing, setIsEditing] = useState(false);
+  const [editedTransaction, setEditedTransaction] =
+    useState<ParsedExpense>(parsedTransaction);
 
   const handleConfirm = () => {
-    onConfirm(editedTransaction)
-  }
+    onConfirm(editedTransaction);
+  };
 
   const handleEdit = () => {
-    setIsEditing(true)
-  }
+    setIsEditing(true);
+  };
 
   const handleSaveEdit = () => {
-    setIsEditing(false)
-  }
+    setIsEditing(false);
+  };
 
   const handleCancelEdit = () => {
-    setEditedTransaction(parsedTransaction)
-    setIsEditing(false)
-  }
+    setEditedTransaction(parsedTransaction);
+    setIsEditing(false);
+  };
 
   return (
     <Card className="w-full max-w-md mx-auto border-primary/20 shadow-lg">
@@ -58,7 +69,12 @@ export function TransactionConfirmation({ parsedTransaction, onConfirm, onCancel
               <Input
                 id="description"
                 value={editedTransaction.description}
-                onChange={(e) => setEditedTransaction({ ...editedTransaction, description: e.target.value })}
+                onChange={(e) =>
+                  setEditedTransaction({
+                    ...editedTransaction,
+                    description: e.target.value,
+                  })
+                }
               />
             </div>
 
@@ -69,7 +85,10 @@ export function TransactionConfirmation({ parsedTransaction, onConfirm, onCancel
                 type="number"
                 value={editedTransaction.amount}
                 onChange={(e) =>
-                  setEditedTransaction({ ...editedTransaction, amount: Number.parseFloat(e.target.value) })
+                  setEditedTransaction({
+                    ...editedTransaction,
+                    amount: Number.parseFloat(e.target.value),
+                  })
                 }
               />
             </div>
@@ -96,7 +115,12 @@ export function TransactionConfirmation({ parsedTransaction, onConfirm, onCancel
               <Label htmlFor="category">카테고리</Label>
               <Select
                 value={editedTransaction.category}
-                onValueChange={(value) => setEditedTransaction({ ...editedTransaction, category: value })}
+                onValueChange={(value) =>
+                  setEditedTransaction({
+                    ...editedTransaction,
+                    category: value,
+                  })
+                }
               >
                 <SelectTrigger>
                   <SelectValue placeholder="카테고리 선택" />
@@ -116,7 +140,11 @@ export function TransactionConfirmation({ parsedTransaction, onConfirm, onCancel
                 <Check className="h-4 w-4 mr-2" />
                 저장
               </Button>
-              <Button variant="outline" onClick={handleCancelEdit} className="flex-1">
+              <Button
+                variant="outline"
+                onClick={handleCancelEdit}
+                className="flex-1"
+              >
                 <X className="h-4 w-4 mr-2" />
                 취소
               </Button>
@@ -127,7 +155,9 @@ export function TransactionConfirmation({ parsedTransaction, onConfirm, onCancel
             <div className="space-y-3">
               <div className="flex justify-between items-center">
                 <span className="text-sm text-muted-foreground">설명:</span>
-                <span className="font-medium">{editedTransaction.description}</span>
+                <span className="font-medium">
+                  {editedTransaction.description}
+                </span>
               </div>
 
               <div className="flex justify-between items-center">
@@ -150,7 +180,13 @@ export function TransactionConfirmation({ parsedTransaction, onConfirm, onCancel
 
               <div className="flex justify-between items-center">
                 <span className="text-sm text-muted-foreground">유형:</span>
-                <Badge variant={editedTransaction.type === "expense" ? "destructive" : "default"}>
+                <Badge
+                  variant={
+                    editedTransaction.type === "expense"
+                      ? "destructive"
+                      : "default"
+                  }
+                >
                   {editedTransaction.type === "expense" ? "지출" : "수입"}
                 </Badge>
               </div>
@@ -175,5 +211,5 @@ export function TransactionConfirmation({ parsedTransaction, onConfirm, onCancel
         )}
       </CardContent>
     </Card>
-  )
+  );
 }

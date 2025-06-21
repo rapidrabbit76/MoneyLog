@@ -1,29 +1,29 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useEffect, useState } from "react"
-import { useRouter } from "next/navigation"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Separator } from "@/components/ui/separator"
-import { Alert, AlertDescription } from "@/components/ui/alert"
-import { Github } from "lucide-react"
-import { loginWithGoogle, loginWithGithub } from "@/lib/auth"
-import { loginWithEmail } from "@/lib/api/auth"
-import { useUserStore } from '@/store/user-store';
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Separator } from "@/components/ui/separator";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Github } from "lucide-react";
+import { loginWithGoogle, loginWithGithub } from "@/lib/auth";
+import { loginWithEmail } from "@/lib/api/auth";
+import { useUserStore } from "@/store/user-store";
 
 interface LoginFormProps {
-  onSignupClick: () => void
+  onSignupClick: () => void;
 }
 
 export function LoginForm({ onSignupClick }: LoginFormProps) {
   const router = useRouter();
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const [error, setError] = useState<string | null>(null)
-  const [isLoading, setIsLoading] = useState(false)
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
   const fetchUser = useUserStore((state) => state.fetchUser);
   const user = useUserStore((state) => state.user);
 
@@ -42,11 +42,11 @@ export function LoginForm({ onSignupClick }: LoginFormProps) {
     } finally {
       setIsLoading(false);
     }
-  }
+  };
 
-  const handleGoogleLogin = async () => { }
+  const handleGoogleLogin = async () => {};
 
-  const handleGithubLogin = async () => { }
+  const handleGithubLogin = async () => {};
 
   return (
     <div className="mt-8">
@@ -98,7 +98,9 @@ export function LoginForm({ onSignupClick }: LoginFormProps) {
             <Separator className="w-full" />
           </div>
           <div className="relative flex justify-center text-xs uppercase">
-            <span className="bg-background px-2 text-muted-foreground">또는 이메일로 로그인</span>
+            <span className="bg-background px-2 text-muted-foreground">
+              또는 이메일로 로그인
+            </span>
           </div>
         </div>
 
@@ -145,11 +147,14 @@ export function LoginForm({ onSignupClick }: LoginFormProps) {
 
         <div className="text-center text-sm">
           계정이 없으신가요?{" "}
-          <button onClick={onSignupClick} className="text-primary hover:underline">
+          <button
+            onClick={onSignupClick}
+            className="text-primary hover:underline"
+          >
             회원가입
           </button>
         </div>
       </div>
     </div>
-  )
+  );
 }

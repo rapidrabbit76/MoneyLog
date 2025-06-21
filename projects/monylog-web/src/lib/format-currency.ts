@@ -4,5 +4,5 @@ export function formatCurrency(amount: number): string {
     currency: "KRW",
     currencyDisplay: "symbol",
     maximumFractionDigits: 0,
-  }).format(amount)
+  }).format(amount);
 }

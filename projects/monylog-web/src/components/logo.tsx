@@ -1,4 +1,4 @@
-import { CreditCard } from "lucide-react"
+import { CreditCard } from "lucide-react";
 
 export function Logo() {
   return (
@@ -7,5 +7,5 @@ export function Logo() {
         <CreditCard className="h-5 w-5" />
       </div>
     </div>
-  )
+  );
 }

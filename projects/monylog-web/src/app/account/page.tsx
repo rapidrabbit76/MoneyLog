@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import { AccountPage } from "@/components/account-page"
+import { AccountPage } from "@/components/account-page";
 
 export default function Account() {
-  return <AccountPage />
+  return <AccountPage />;
 }

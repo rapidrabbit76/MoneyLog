@@ -3,142 +3,154 @@ import { toast } from "@/hooks/use-toast";
 import { useUserStore } from "@/store/user-store";
 
 interface LoginRequest {
-    email: string;
-    password: string;
+  email: string;
+  password: string;
 }
 
 // API 기본 URL 설정
-const BASE_URL = process.env.NODE_ENV === 'development'
-    ? 'http://localhost:8080'
-    : '';
+const BASE_URL =
+  process.env.NODE_ENV === "development" ? "http://localhost:8080" : "";
 
 // 공통 fetch 래퍼: 403 발생 시 refreshToken 후 1회 재시도
-async function fetchWithAuthRetry(input: RequestInfo | URL, init?: RequestInit, retry = true): Promise<Response> {
-    let response = await fetch(input, { ...init, credentials: 'include' });
-    if (response.status === 403 && retry) {
-        try {
-            await refreshToken();
-            response = await fetch(input, { ...init, credentials: 'include' });
-        } catch (e) {
-            // refreshToken 실패 시 자동 로그아웃 및 안내
-            toast({
-                title: '세션 만료',
-                description: '세션이 만료되었습니다. 다시 로그인 해주세요.',
-                variant: 'destructive',
-            });
-            if (typeof window !== 'undefined') {
-                // zustand store 직접 접근하여 로그아웃
-                const { logout } = require("@/store/user-store").useUserStore.getState();
-                if (logout) await logout();
-            }
-            throw new Error('세션이 만료되었습니다. 다시 로그인 해주세요.');
-        }
+async function fetchWithAuthRetry(
+  input: RequestInfo | URL,
+  init?: RequestInit,
+  retry = true,
+): Promise<Response> {
+  let response = await fetch(input, { ...init, credentials: "include" });
+  if (response.status === 403 && retry) {
+    try {
+      await refreshToken();
+      response = await fetch(input, { ...init, credentials: "include" });
+    } catch (e) {
+      // refreshToken 실패 시 자동 로그아웃 및 안내
+      toast({
+        title: "세션 만료",
+        description: "세션이 만료되었습니다. 다시 로그인 해주세요.",
+        variant: "destructive",
+      });
+      if (typeof window !== "undefined") {
+        // zustand store 직접 접근하여 로그아웃
+        const { logout } =
+          require("@/store/user-store").useUserStore.getState();
+        if (logout) await logout();
+      }
+      throw new Error("세션이 만료되었습니다. 다시 로그인 해주세요.");
     }
-    if (!response.ok) {
-        const error = await response.json();
-        toast({
-            title: '요청 실패',
-            description: error.message || '알 수 없는 에러가 발생했습니다.',
-            variant: 'destructive',
-        });
-        throw new Error(error.message || '요청에 실패했습니다.');
-    }
-    return response;
+  }
+  if (!response.ok) {
+    const error = await response.json();
+    toast({
+      title: "요청 실패",
+      description: error.message || "알 수 없는 에러가 발생했습니다.",
+      variant: "destructive",
+    });
+    throw new Error(error.message || "요청에 실패했습니다.");
+  }
+  return response;
 }
 
-export const loginWithEmail = async (credentials: LoginRequest): Promise<void> => {
-    try {
-        const formData = new URLSearchParams();
-        formData.append('email', credentials.email);
-        formData.append('password', credentials.password);
-        const response = await fetchWithAuthRetry(`${BASE_URL}/api/v1/auth/login`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: formData.toString(),
-        });
-        if (!response.ok) {
-            const error = await response.json();
-            toast({
-                title: '로그인 실패',
-                description: error.message || '로그인에 실패했습니다.',
-                variant: 'destructive',
-            });
-            throw new Error(error.message || '로그인에 실패했습니다.');
-        }
-    } catch (error) {
-        toast({
-            title: '로그인 실패',
-            description: error instanceof Error ? error.message : '알 수 없는 에러가 발생했습니다.',
-            variant: 'destructive',
-        });
-        throw error;
+export const loginWithEmail = async (
+  credentials: LoginRequest,
+): Promise<void> => {
+  try {
+    const formData = new URLSearchParams();
+    formData.append("email", credentials.email);
+    formData.append("password", credentials.password);
+    const response = await fetchWithAuthRetry(`${BASE_URL}/api/v1/auth/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: formData.toString(),
+    });
+    if (!response.ok) {
+      const error = await response.json();
+      toast({
+        title: "로그인 실패",
+        description: error.message || "로그인에 실패했습니다.",
+        variant: "destructive",
+      });
+      throw new Error(error.message || "로그인에 실패했습니다.");
     }
+  } catch (error) {
+    toast({
+      title: "로그인 실패",
+      description:
+        error instanceof Error
+          ? error.message
+          : "알 수 없는 에러가 발생했습니다.",
+      variant: "destructive",
+    });
+    throw error;
+  }
 };
 
 export const getCurrentUser = async (): Promise<User> => {
-    try {
-        const response = await fetchWithAuthRetry(`${BASE_URL}/api/v1/auth/me`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-        });
-        if (!response.ok) {
-            const error = await response.json();
-            throw new Error(error.message || '로그인에 실패했습니다.');
-        }
-        const res = await response.json();
-        const user = res.data;
-        return user;
-    } catch (error) {
-        if (error instanceof Error) {
-            throw error;
-        }
-        throw new Error('알 수 없는 에러가 발생했습니다.');
+  try {
+    const response = await fetchWithAuthRetry(`${BASE_URL}/api/v1/auth/me`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+    });
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message || "로그인에 실패했습니다.");
     }
-}
+    const res = await response.json();
+    const user = res.data;
+    return user;
+  } catch (error) {
+    if (error instanceof Error) {
+      throw error;
+    }
+    throw new Error("알 수 없는 에러가 발생했습니다.");
+  }
+};
 
 export const logout = async (): Promise<void> => {
-    try {
-        const response = await fetchWithAuthRetry(`${BASE_URL}/api/v1/auth/logout`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-        });
-        if (!response.ok) {
-            const error = await response.json();
-            throw new Error(error.message || '로그아웃에 실패했습니다.');
-        }
-    } catch (error) {
-        if (error instanceof Error) {
-            throw error;
-        }
-        throw new Error('알 수 없는 에러가 발생했습니다.');
+  try {
+    const response = await fetchWithAuthRetry(
+      `${BASE_URL}/api/v1/auth/logout`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+      },
+    );
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message || "로그아웃에 실패했습니다.");
     }
+  } catch (error) {
+    if (error instanceof Error) {
+      throw error;
+    }
+    throw new Error("알 수 없는 에러가 발생했습니다.");
+  }
 };
 
 export const refreshToken = async (): Promise<void> => {
-    try {
-        const response = await fetch(`${BASE_URL}/api/v1/auth/refresh`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            credentials: 'include',
-        });
-        if (!response.ok) {
-            const error = await response.json();
-            throw new Error(error.message || '토큰 갱신에 실패했습니다.');
-        }
-    } catch (error) {
-        if (error instanceof Error) {
-            throw error;
-        }
-        throw new Error('알 수 없는 에러가 발생했습니다.');
+  try {
+    const response = await fetch(`${BASE_URL}/api/v1/auth/refresh`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      credentials: "include",
+    });
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message || "토큰 갱신에 실패했습니다.");
     }
-}
+  } catch (error) {
+    if (error instanceof Error) {
+      throw error;
+    }
+    throw new Error("알 수 없는 에러가 발생했습니다.");
+  }
+};
 
 export { fetchWithAuthRetry };

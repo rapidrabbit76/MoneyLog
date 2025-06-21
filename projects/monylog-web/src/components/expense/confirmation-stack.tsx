@@ -1,15 +1,21 @@
-"use client"
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Badge } from "@/components/ui/badge"
-import { Progress } from "@/components/ui/progress"
-import { Check, X, Edit, ArrowLeft, ArrowRight } from "lucide-react"
-import type { ParsedExpense } from "@/lib/expense-message"
-import { useTags } from "@/hooks/use-tags"
+"use client";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
+import { Check, X, Edit, ArrowLeft, ArrowRight } from "lucide-react";
+import type { ParsedExpense } from "@/lib/expense-message";
+import { useTags } from "@/hooks/use-tags";
 
 interface ExpensesConfirmationStackProps {
   expenses: {
@@ -17,101 +23,113 @@ interface ExpensesConfirmationStackProps {
     tags: string[];
     amount: number;
     dt: string;
-    type: 'expense' | 'income';
-  }[]
-  onConfirm: (expenses: ParsedExpense[]) => void
-  onCancel: () => void
+    type: "expense" | "income";
+  }[];
+  onConfirm: (expenses: ParsedExpense[]) => void;
+  onCancel: () => void;
 }
 
-export function ExpensesConfirmationStack({ expenses, onConfirm, onCancel }: ExpensesConfirmationStackProps) {
-  const { tags } = useTags()
-  const [currentIndex, setCurrentIndex] = useState(0)
-  const [confirmedExpenses, setConfirmedExpenses] = useState<ParsedExpense[]>([])
-  const [editingExpenses, setEditingExpenses] = useState<{
-    title: string;
-    tags: string[];
-    amount: number;
-    dt: string;
-    type: 'expense' | 'income';
-  }[]>(expenses)
-  const [isEditing, setIsEditing] = useState(false)
+export function ExpensesConfirmationStack({
+  expenses,
+  onConfirm,
+  onCancel,
+}: ExpensesConfirmationStackProps) {
+  const { tags } = useTags();
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [confirmedExpenses, setConfirmedExpenses] = useState<ParsedExpense[]>(
+    [],
+  );
+  const [editingExpenses, setEditingExpenses] = useState<
+    {
+      title: string;
+      tags: string[];
+      amount: number;
+      dt: string;
+      type: "expense" | "income";
+    }[]
+  >(expenses);
+  const [isEditing, setIsEditing] = useState(false);
 
-  const currentExpenses = editingExpenses[currentIndex]
-  const totalExpenses = editingExpenses.length
-  const progress = ((currentIndex + 1) / totalExpenses) * 100
+  const currentExpenses = editingExpenses[currentIndex];
+  const totalExpenses = editingExpenses.length;
+  const progress = ((currentIndex + 1) / totalExpenses) * 100;
 
   const handleConfirmCurrent = () => {
-    const confirmed = [...confirmedExpenses, currentExpenses]
-    setConfirmedExpenses(confirmed)
+    const confirmed = [...confirmedExpenses, currentExpenses];
+    setConfirmedExpenses(confirmed);
 
     if (currentIndex < editingExpenses.length - 1) {
-      setCurrentIndex(currentIndex + 1)
-      setIsEditing(false)
+      setCurrentIndex(currentIndex + 1);
+      setIsEditing(false);
     } else {
       // 모든 거래 확인 완료
-      onConfirm(confirmed)
+      onConfirm(confirmed);
     }
-  }
+  };
 
   const handleSkipCurrent = () => {
     // 현재 거래를 제외하고 다음으로
-    const updatedExpenses = editingExpenses.filter((_, index) => index !== currentIndex)
-    setEditingExpenses(updatedExpenses)
+    const updatedExpenses = editingExpenses.filter(
+      (_, index) => index !== currentIndex,
+    );
+    setEditingExpenses(updatedExpenses);
 
     if (updatedExpenses.length === 0) {
       // 모든 거래가 제거됨
-      onConfirm(confirmedExpenses)
+      onConfirm(confirmedExpenses);
     } else if (currentIndex >= updatedExpenses.length) {
       // 마지막 거래를 제거한 경우
-      setCurrentIndex(updatedExpenses.length - 1)
+      setCurrentIndex(updatedExpenses.length - 1);
     }
-    setIsEditing(false)
-  }
+    setIsEditing(false);
+  };
 
   const handleEdit = () => {
-    setIsEditing(true)
-  }
+    setIsEditing(true);
+  };
 
   const handleSaveEdit = () => {
-    setIsEditing(false)
-  }
+    setIsEditing(false);
+  };
 
   const handleCancelEdit = () => {
     // 원래 값으로 복원
-    const originalExpense = expenses.find((t) => t.title === currentExpenses.title)
+    const originalExpense = expenses.find(
+      (t) => t.title === currentExpenses.title,
+    );
     if (originalExpense) {
-      const updatedExpenses = [...editingExpenses]
-      updatedExpenses[currentIndex] = originalExpense
-      setEditingExpenses(updatedExpenses)
+      const updatedExpenses = [...editingExpenses];
+      updatedExpenses[currentIndex] = originalExpense;
+      setEditingExpenses(updatedExpenses);
     }
-    setIsEditing(false)
-  }
+    setIsEditing(false);
+  };
 
   const handleExpenseChange = (field: keyof ParsedExpense, value: any) => {
-    const updatedExpense = [...editingExpenses]
+    const updatedExpense = [...editingExpenses];
     updatedExpense[currentIndex] = {
       ...updatedExpense[currentIndex],
       [field]: value,
-    }
-    setEditingExpenses(updatedExpense)
-  }
+    };
+    setEditingExpenses(updatedExpense);
+  };
 
   const handlePrevious = () => {
     if (currentIndex > 0) {
-      setCurrentIndex(currentIndex - 1)
-      setIsEditing(false)
+      setCurrentIndex(currentIndex - 1);
+      setIsEditing(false);
     }
-  }
+  };
 
   const handleNext = () => {
     if (currentIndex < editingExpenses.length - 1) {
-      setCurrentIndex(currentIndex + 1)
-      setIsEditing(false)
+      setCurrentIndex(currentIndex + 1);
+      setIsEditing(false);
     }
-  }
+  };
 
   if (editingExpenses.length === 0) {
-    return null
+    return null;
   }
 
   return (
@@ -130,20 +148,22 @@ export function ExpensesConfirmationStack({ expenses, onConfirm, onCancel }: Exp
       {/* 카드 스택 */}
       <div className="relative h-[400px]">
         {editingExpenses.map((pendingExpense, index) => {
-          const isActive = index === currentIndex
-          const offset = index - currentIndex
-          const isVisible = Math.abs(offset) <= 2
+          const isActive = index === currentIndex;
+          const offset = index - currentIndex;
+          const isVisible = Math.abs(offset) <= 2;
 
-          if (!isVisible) return null
+          if (!isVisible) return null;
 
           return (
             <Card
               key={index}
-              className={`absolute inset-0 border-primary/20 shadow-lg transition-all duration-300 ${isActive ? "z-30 scale-100" : "z-20"
-                }`}
+              className={`absolute inset-0 border-primary/20 shadow-lg transition-all duration-300 ${
+                isActive ? "z-30 scale-100" : "z-20"
+              }`}
               style={{
-                transform: `translateY(${offset * 8}px) translateX(${offset * 4}px) scale(${isActive ? 1 : 0.95 - Math.abs(offset) * 0.05
-                  })`,
+                transform: `translateY(${offset * 8}px) translateX(${offset * 4}px) scale(${
+                  isActive ? 1 : 0.95 - Math.abs(offset) * 0.05
+                })`,
                 opacity: isActive ? 1 : 0.7 - Math.abs(offset) * 0.2,
               }}
             >
@@ -165,7 +185,9 @@ export function ExpensesConfirmationStack({ expenses, onConfirm, onCancel }: Exp
                       <Input
                         id="Title"
                         value={currentExpenses.title}
-                        onChange={(e) => handleExpenseChange("title", e.target.value)}
+                        onChange={(e) =>
+                          handleExpenseChange("title", e.target.value)
+                        }
                       />
                     </div>
 
@@ -175,7 +197,12 @@ export function ExpensesConfirmationStack({ expenses, onConfirm, onCancel }: Exp
                         id="amount"
                         type="number"
                         value={currentExpenses.amount}
-                        onChange={(e) => handleExpenseChange("amount", Number.parseFloat(e.target.value))}
+                        onChange={(e) =>
+                          handleExpenseChange(
+                            "amount",
+                            Number.parseFloat(e.target.value),
+                          )
+                        }
                       />
                     </div>
 
@@ -183,7 +210,9 @@ export function ExpensesConfirmationStack({ expenses, onConfirm, onCancel }: Exp
                       <Label htmlFor="type">유형</Label>
                       <Select
                         value={currentExpenses.type}
-                        onValueChange={(value: "income" | "expense") => handleExpenseChange("type", value)}
+                        onValueChange={(value: "income" | "expense") =>
+                          handleExpenseChange("type", value)
+                        }
                       >
                         <SelectTrigger>
                           <SelectValue />
@@ -199,7 +228,12 @@ export function ExpensesConfirmationStack({ expenses, onConfirm, onCancel }: Exp
                       <Label htmlFor="tag">태그</Label>
                       <Select
                         value={currentExpenses.tags.join(", ")}
-                        onValueChange={(value) => handleExpenseChange("tags", value.split(", ").map(tag => tag.trim()))}
+                        onValueChange={(value) =>
+                          handleExpenseChange(
+                            "tags",
+                            value.split(", ").map((tag) => tag.trim()),
+                          )
+                        }
                       >
                         <SelectTrigger>
                           <SelectValue placeholder="태그 선택" />
@@ -219,7 +253,11 @@ export function ExpensesConfirmationStack({ expenses, onConfirm, onCancel }: Exp
                         <Check className="h-4 w-4 mr-2" />
                         저장
                       </Button>
-                      <Button variant="outline" onClick={handleCancelEdit} className="flex-1">
+                      <Button
+                        variant="outline"
+                        onClick={handleCancelEdit}
+                        className="flex-1"
+                      >
                         <X className="h-4 w-4 mr-2" />
                         취소
                       </Button>
@@ -229,17 +267,24 @@ export function ExpensesConfirmationStack({ expenses, onConfirm, onCancel }: Exp
                   <>
                     <div className="space-y-3">
                       <div className="flex justify-between items-center">
-                        <span className="text-sm text-muted-foreground">제목:</span>
-                        <span className="font-medium">{pendingExpense.title}</span>
+                        <span className="text-sm text-muted-foreground">
+                          제목:
+                        </span>
+                        <span className="font-medium">
+                          {pendingExpense.title}
+                        </span>
                       </div>
 
                       <div className="flex justify-between items-center">
-                        <span className="text-sm text-muted-foreground">금액:</span>
+                        <span className="text-sm text-muted-foreground">
+                          금액:
+                        </span>
                         <span
-                          className={`font-bold text-lg ${pendingExpense.type === "expense"
-                            ? "text-red-500 dark:text-red-400"
-                            : "text-blue-500 dark:text-blue-400"
-                            }`}
+                          className={`font-bold text-lg ${
+                            pendingExpense.type === "expense"
+                              ? "text-red-500 dark:text-red-400"
+                              : "text-blue-500 dark:text-blue-400"
+                          }`}
                         >
                           {pendingExpense.type === "expense" ? "-" : "+"}
                           {new Intl.NumberFormat("ko-KR", {
@@ -251,14 +296,24 @@ export function ExpensesConfirmationStack({ expenses, onConfirm, onCancel }: Exp
                       </div>
 
                       <div className="flex justify-between items-center">
-                        <span className="text-sm text-muted-foreground">유형:</span>
-                        <Badge variant={pendingExpense.type === "expense" ? "destructive" : "default"}>
+                        <span className="text-sm text-muted-foreground">
+                          유형:
+                        </span>
+                        <Badge
+                          variant={
+                            pendingExpense.type === "expense"
+                              ? "destructive"
+                              : "default"
+                          }
+                        >
                           {pendingExpense.type === "expense" ? "지출" : "수입"}
                         </Badge>
                       </div>
 
                       <div className="flex justify-between items-center">
-                        <span className="text-sm text-muted-foreground">태그:</span>
+                        <span className="text-sm text-muted-foreground">
+                          태그:
+                        </span>
                         <Badge variant="outline">{pendingExpense.tags}</Badge>
                       </div>
                     </div>
@@ -268,14 +323,21 @@ export function ExpensesConfirmationStack({ expenses, onConfirm, onCancel }: Exp
                         {/* 네비게이션 버튼 */}
                         {totalExpenses > 1 && (
                           <div className="flex justify-center gap-2 pt-2">
-                            <Button variant="outline" size="sm" onClick={handlePrevious} disabled={currentIndex === 0}>
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={handlePrevious}
+                              disabled={currentIndex === 0}
+                            >
                               <ArrowLeft className="h-4 w-4" />
                             </Button>
                             <Button
                               variant="outline"
                               size="sm"
                               onClick={handleNext}
-                              disabled={currentIndex === editingExpenses.length - 1}
+                              disabled={
+                                currentIndex === editingExpenses.length - 1
+                              }
                             >
                               <ArrowRight className="h-4 w-4" />
                             </Button>
@@ -284,11 +346,18 @@ export function ExpensesConfirmationStack({ expenses, onConfirm, onCancel }: Exp
 
                         {/* 확인/건너뛰기 버튼 */}
                         <div className="flex gap-2 pt-4">
-                          <Button onClick={handleConfirmCurrent} className="flex-1">
+                          <Button
+                            onClick={handleConfirmCurrent}
+                            className="flex-1"
+                          >
                             <Check className="h-4 w-4 mr-2" />
                             확인
                           </Button>
-                          <Button variant="outline" onClick={handleSkipCurrent} className="flex-1">
+                          <Button
+                            variant="outline"
+                            onClick={handleSkipCurrent}
+                            className="flex-1"
+                          >
                             <X className="h-4 w-4 mr-2" />
                             건너뛰기
                           </Button>
@@ -299,7 +368,7 @@ export function ExpensesConfirmationStack({ expenses, onConfirm, onCancel }: Exp
                 )}
               </CardContent>
             </Card>
-          )
+          );
         })}
       </div>
 
@@ -310,5 +379,5 @@ export function ExpensesConfirmationStack({ expenses, onConfirm, onCancel }: Exp
         </Button>
       </div>
     </div>
-  )
+  );
 }

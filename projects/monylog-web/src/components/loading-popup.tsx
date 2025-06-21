@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { loadingMessages } from '@/lib/loading-messages';
+import { useEffect, useState } from "react";
+import { loadingMessages } from "@/lib/loading-messages";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"; // Card 컴포넌트 import
 import { Progress } from "@/components/ui/progress"; // Progress 컴포넌트 import
 
@@ -8,7 +8,7 @@ interface LoadingPopupProps {
 }
 
 const LoadingPopup: React.FC<LoadingPopupProps> = ({ isOpen }) => {
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState("");
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
@@ -49,7 +49,9 @@ const LoadingPopup: React.FC<LoadingPopupProps> = ({ isOpen }) => {
     <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4">
       <Card className="w-full max-w-md bg-background text-foreground">
         <CardHeader>
-          <CardTitle className="text-center text-2xl font-bold">잠시만 기다려주세요...</CardTitle>
+          <CardTitle className="text-center text-2xl font-bold">
+            잠시만 기다려주세요...
+          </CardTitle>
         </CardHeader>
         <CardContent className="flex flex-col items-center space-y-6">
           <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-primary"></div>

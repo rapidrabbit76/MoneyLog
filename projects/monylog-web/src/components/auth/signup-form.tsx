@@ -1,74 +1,74 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState } from "react"
-import { useRouter } from "next/navigation"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Separator } from "@/components/ui/separator"
-import { Alert, AlertDescription } from "@/components/ui/alert"
-import { Github, ArrowLeft } from "lucide-react"
-import { loginWithGoogle, loginWithGithub } from "@/lib/auth"
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Separator } from "@/components/ui/separator";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Github, ArrowLeft } from "lucide-react";
+import { loginWithGoogle, loginWithGithub } from "@/lib/auth";
 
 interface SignupFormProps {
-  onBackToLogin: () => void
+  onBackToLogin: () => void;
 }
 
 export function SignupForm({ onBackToLogin }: SignupFormProps) {
-  const router = useRouter()
+  const router = useRouter();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
     confirmPassword: "",
-  })
-  const [error, setError] = useState<string | null>(null)
-  const [isLoading, setIsLoading] = useState(false)
+  });
+  const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target
+    const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
       [name]: value,
-    }))
-  }
+    }));
+  };
 
   const handleSignup = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setError(null)
-    setIsLoading(true)
+    e.preventDefault();
+    setError(null);
+    setIsLoading(true);
 
     // 유효성 검사
     if (!formData.name.trim()) {
-      setError("이름을 입력해주세요.")
-      setIsLoading(false)
-      return
+      setError("이름을 입력해주세요.");
+      setIsLoading(false);
+      return;
     }
 
     if (!formData.email.trim()) {
-      setError("이메일을 입력해주세요.")
-      setIsLoading(false)
-      return
+      setError("이메일을 입력해주세요.");
+      setIsLoading(false);
+      return;
     }
 
     if (formData.password.length < 6) {
-      setError("비밀번호는 6자 이상이어야 합니다.")
-      setIsLoading(false)
-      return
+      setError("비밀번호는 6자 이상이어야 합니다.");
+      setIsLoading(false);
+      return;
     }
 
     if (formData.password !== formData.confirmPassword) {
-      setError("비밀번호가 일치하지 않습니다.")
-      setIsLoading(false)
-      return
+      setError("비밀번호가 일치하지 않습니다.");
+      setIsLoading(false);
+      return;
     }
 
     try {
       // 실제로는 회원가입 API 호출
       // 여기서는 모킹으로 처리
-      await new Promise((resolve) => setTimeout(resolve, 1000))
+      await new Promise((resolve) => setTimeout(resolve, 1000));
 
       // 회원가입 성공 후 자동 로그인 (모킹)
       const session = {
@@ -79,56 +79,61 @@ export function SignupForm({ onBackToLogin }: SignupFormProps) {
           image: null,
         },
         expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
-      }
+      };
 
-      localStorage.setItem("finance-chat-session", JSON.stringify(session))
+      localStorage.setItem("finance-chat-session", JSON.stringify(session));
 
       // 인증 상태 변경 이벤트 발생
-      window.dispatchEvent(new Event("auth-change"))
-      router.push("/")
+      window.dispatchEvent(new Event("auth-change"));
+      router.push("/");
     } catch (err) {
-      setError("회원가입 중 오류가 발생했습니다.")
+      setError("회원가입 중 오류가 발생했습니다.");
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   const handleGoogleSignup = async () => {
-    setError(null)
-    setIsLoading(true)
+    setError(null);
+    setIsLoading(true);
 
     try {
-      await loginWithGoogle()
+      await loginWithGoogle();
       // 인증 상태 변경 이벤트 발생
-      window.dispatchEvent(new Event("auth-change"))
-      router.push("/")
+      window.dispatchEvent(new Event("auth-change"));
+      router.push("/");
     } catch (err) {
-      setError("Google 회원가입 중 오류가 발생했습니다.")
+      setError("Google 회원가입 중 오류가 발생했습니다.");
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   const handleGithubSignup = async () => {
-    setError(null)
-    setIsLoading(true)
+    setError(null);
+    setIsLoading(true);
 
     try {
-      await loginWithGithub()
+      await loginWithGithub();
       // 인증 상태 변경 이벤트 발생
-      window.dispatchEvent(new Event("auth-change"))
-      router.push("/")
+      window.dispatchEvent(new Event("auth-change"));
+      router.push("/");
     } catch (err) {
-      setError("GitHub 회원가입 중 오류가 발생했습니다.")
+      setError("GitHub 회원가입 중 오류가 발생했습니다.");
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   return (
     <div className="mt-8">
       <div className="flex items-center gap-2 mb-6">
-        <Button variant="ghost" size="sm" onClick={onBackToLogin} className="p-0 h-auto">
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={onBackToLogin}
+          className="p-0 h-auto"
+        >
           <ArrowLeft className="h-4 w-4 mr-1" />
           로그인으로 돌아가기
         </Button>
@@ -182,7 +187,9 @@ export function SignupForm({ onBackToLogin }: SignupFormProps) {
             <Separator className="w-full" />
           </div>
           <div className="relative flex justify-center text-xs uppercase">
-            <span className="bg-background px-2 text-muted-foreground">또는 이메일로 회원가입</span>
+            <span className="bg-background px-2 text-muted-foreground">
+              또는 이메일로 회원가입
+            </span>
           </div>
         </div>
 
@@ -256,11 +263,14 @@ export function SignupForm({ onBackToLogin }: SignupFormProps) {
 
         <div className="text-center text-sm">
           이미 계정이 있으신가요?{" "}
-          <button onClick={onBackToLogin} className="text-primary hover:underline">
+          <button
+            onClick={onBackToLogin}
+            className="text-primary hover:underline"
+          >
             로그인
           </button>
         </div>
       </div>
     </div>
-  )
+  );
 }

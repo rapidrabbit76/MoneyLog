@@ -1,11 +1,11 @@
 export interface Expenses {
-  id: number
+  id: number;
   title: string;
   amount: number;
   dt: string;
-  type: 'expense' | 'income';
+  type: "expense" | "income";
   tags: {
-    id: string,
-    name: string
+    id: string;
+    name: string;
   }[];
 }
