@@ -18,7 +18,8 @@ async function fetchWithAuthRetry(
   retry = true,
 ): Promise<Response> {
   let response = await fetch(input, { ...init, credentials: "include" });
-  if (response.status === 403 && retry) {
+  // 401(Unauthorized) 또는 403(Forbidden) 발생 시 refresh 시도
+  if ([401, 403].includes(response.status) && retry) {
     try {
       await refreshToken();
       response = await fetch(input, { ...init, credentials: "include" });

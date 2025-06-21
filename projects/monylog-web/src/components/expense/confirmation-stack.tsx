@@ -16,6 +16,7 @@ import { Progress } from "@/components/ui/progress";
 import { Check, X, Edit, ArrowLeft, ArrowRight } from "lucide-react";
 import type { ParsedExpense } from "@/lib/expense-message";
 import { useTagStore } from "@/store/tag-store";
+import { MultiSelectChips } from "@/components/ui/multi-select-chips";
 
 interface ExpensesConfirmationStackProps {
   tags: string[];
@@ -176,11 +177,11 @@ export function ExpensesConfirmationStack({
                   )}
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-4">
+              <CardContent className="space-y-2">
                 {isActive && isEditing ? (
                   <>
                     <div className="space-y-2">
-                      <Label htmlFor="title">Title</Label>
+                      <Label htmlFor="title">제목</Label>
                       <Input
                         id="Title"
                         value={currentExpenses.title}
@@ -205,46 +206,40 @@ export function ExpensesConfirmationStack({
                       />
                     </div>
 
-                    <div className="space-y-2">
+                    <div className="space-y-2 text-sm">
                       <Label htmlFor="type">유형</Label>
-                      <Select
-                        value={currentExpenses.type}
-                        onValueChange={(value: "income" | "expense") =>
-                          handleExpenseChange("type", value)
-                        }
-                      >
-                        <SelectTrigger>
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="expense">지출</SelectItem>
-                          <SelectItem value="income">수입</SelectItem>
-                        </SelectContent>
-                      </Select>
+                      <div className="flex items-center gap-2">
+                        <Badge
+                          role="button"
+                          tabIndex={0}
+                          aria-label={`유형: ${currentExpenses.type === "expense" ? "지출" : "수입"} (클릭 시 변경)`}
+                          className={`cursor-pointer select-none px-3 py-0 text-base ${currentExpenses.type === "expense" ? "bg-red-500 text-white" : "bg-blue-500 text-white"}`}
+                          onClick={() => handleExpenseChange("type", currentExpenses.type === "expense" ? "income" : "expense")}
+                          onKeyDown={e => {
+                            if (e.key === "Enter" || e.key === " ") {
+                              handleExpenseChange("type", currentExpenses.type === "expense" ? "income" : "expense");
+                            }
+                          }}
+                        >
+                          {currentExpenses.type === "expense" ? "지출" : "수입"}
+                        </Badge>
+                      </div>
                     </div>
 
+                    {/* 태그 선택 부분 교체 */}
                     <div className="space-y-2">
-                      <Label htmlFor="tag">태그</Label>
-                      <Select
-                        value={currentExpenses.tags.join(", ")}
-                        onValueChange={(value) =>
+                      <Label htmlFor="tags">태그</Label>
+                      <MultiSelectChips
+                        options={tags.map((t) => ({ id: t, name: t }))}
+                        selected={currentExpenses.tags.map((t) => ({ id: t, name: t }))}
+                        onChange={(selected) =>
                           handleExpenseChange(
                             "tags",
-                            value.split(", ").map((tag) => tag.trim()),
+                            selected.map((t) => t.name),
                           )
                         }
-                      >
-                        <SelectTrigger>
-                          <SelectValue placeholder="태그 선택" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {tags.map((tag) => (
-                            <SelectItem key={tag} value={tag}>
-                              {tag}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
+                        placeholder="태그 선택"
+                      />
                     </div>
 
                     <div className="flex gap-2 pt-2">
@@ -298,11 +293,16 @@ export function ExpensesConfirmationStack({
                           유형:
                         </span>
                         <Badge
-                          variant={
-                            pendingExpense.type === "expense"
-                              ? "destructive"
-                              : "default"
-                          }
+                          role="button"
+                          tabIndex={0}
+                          aria-label={`유형: ${pendingExpense.type === "expense" ? "지출" : "수입"} (클릭 시 변경)`}
+                          className={`cursor-pointer select-none px-3 py-0 text-base ${pendingExpense.type === "expense" ? "bg-red-500 text-white" : "bg-blue-500 text-white"}`}
+                          onClick={() => handleExpenseChange("type", pendingExpense.type === "expense" ? "income" : "expense")}
+                          onKeyDown={e => {
+                            if (e.key === "Enter" || e.key === " ") {
+                              handleExpenseChange("type", pendingExpense.type === "expense" ? "income" : "expense");
+                            }
+                          }}
                         >
                           {pendingExpense.type === "expense" ? "지출" : "수입"}
                         </Badge>

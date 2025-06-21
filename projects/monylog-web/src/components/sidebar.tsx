@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import type { Expenses } from "@/types/expenses";
 import { formatCurrency } from "@/lib/format-currency";
 import { useRouter, usePathname } from "next/navigation";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useUserStore } from "@/store/user-store";
 
 interface SidebarProps {
@@ -33,6 +33,14 @@ export function Sidebar({
   // //   router.push("/login") // Redirect to login if user is not authenticated
   // // }
 
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth <= 640);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
   return (
     <div className="flex h-full flex-col">
       <div className="flex flex-col space-y-1 p-2">
@@ -42,12 +50,12 @@ export function Sidebar({
             pathname === "/"
               ? "bg-primary text-primary-foreground"
               : "hover:bg-muted hover:text-foreground",
-            collapsed && "justify-center px-2",
+            (collapsed || isMobile) && "justify-center px-2",
           )}
           onClick={() => router.push("/")}
         >
           <Home className="h-4 w-4" />
-          {!collapsed && <span>메인</span>}
+          {!(collapsed || isMobile) && <span>메인</span>}
         </button>
         <button
           className={cn(
@@ -55,12 +63,12 @@ export function Sidebar({
             pathname === "/expenses"
               ? "bg-primary text-primary-foreground"
               : "hover:bg-muted hover:text-foreground",
-            collapsed && "justify-center px-2",
+            (collapsed || isMobile) && "justify-center px-2",
           )}
           onClick={() => router.push("/expenses")}
         >
           <Receipt className="h-4 w-4" />
-          {!collapsed && <span>소비내역</span>}
+          {!(collapsed || isMobile) && <span>소비내역</span>}
         </button>
         <button
           className={cn(
@@ -68,12 +76,12 @@ export function Sidebar({
             pathname === "/analytics"
               ? "bg-primary text-primary-foreground"
               : "hover:bg-muted hover:text-foreground",
-            collapsed && "justify-center px-2",
+            (collapsed || isMobile) && "justify-center px-2",
           )}
           onClick={() => router.push("/analytics")}
         >
           <BarChart3 className="h-4 w-4" />
-          {!collapsed && <span>분석</span>}
+          {!(collapsed || isMobile) && <span>분석</span>}
         </button>
         <button
           className={cn(
@@ -81,12 +89,12 @@ export function Sidebar({
             pathname === "/settings"
               ? "bg-primary text-primary-foreground"
               : "hover:bg-muted hover:text-foreground",
-            collapsed && "justify-center px-2",
+            (collapsed || isMobile) && "justify-center px-2",
           )}
           onClick={() => router.push("/settings")}
         >
           <Settings className="h-4 w-4" />
-          {!collapsed && <span>설정</span>}
+          {!(collapsed || isMobile) && <span>설정</span>}
         </button>
       </div>
     </div>

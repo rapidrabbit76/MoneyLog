@@ -142,7 +142,7 @@ class ExpenseUseCase(SyncSqlaMixIn):
     ) -> list[Expense]:
         with self.db.session() as session:
             stmt = sa.select(Expense).where(Expense.user_id == user.id)
-            stmt = stmt.offset(payload.offset).limit(payload.limit)
+            stmt = stmt.offset(payload.offset).limit(payload.limit).order_by(Expense.id.desc())
             if payload.start_date and payload.end_date:
                 stmt = stmt.where(Expense.dt >= payload.start_date, Expense.dt <= payload.end_date)
 

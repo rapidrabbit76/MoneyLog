@@ -61,7 +61,12 @@ export function ExpenseViewList({ expenses }: ExpenseListProps) {
                 <CardContent className="p-4">
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="font-medium">{expense.title}</p>
+                      <div className="flex items-center gap-2">
+                        <p className="font-medium">{expense.title}</p>
+                        <span className="text-xs text-muted-foreground">
+                          {new Date(expense.dt).toLocaleTimeString("ko-KR", { hour: "2-digit", minute: "2-digit" })}
+                        </span>
+                      </div>
                       <p className="text-sm text-muted-foreground">
                         {expense.tags.length === 0 ? (
                           <span>태그 없음</span>

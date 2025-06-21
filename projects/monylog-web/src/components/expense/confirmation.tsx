@@ -15,6 +15,7 @@ import { Badge } from "@/components/ui/badge";
 import { Check, X, Edit } from "lucide-react";
 import type { ParsedExpense } from "@/lib/expense-message";
 import { useTags } from "@/hooks/use-tags";
+import { MultiSelectChips } from "@/components/ui/multi-select-chips";
 
 interface TransactionConfirmationProps {
   parsedTransaction: ParsedExpense;
@@ -135,6 +136,21 @@ export function TransactionConfirmation({
               </Select>
             </div>
 
+            <div className="space-y-2">
+              <Label htmlFor="tags">태그</Label>
+              <MultiSelectChips
+                options={tags.map((t) => ({ id: t, name: t }))}
+                selected={editedTransaction.tags.map((t) => ({ id: t, name: t }))}
+                onChange={(selected) =>
+                  setEditedTransaction({
+                    ...editedTransaction,
+                    tags: selected.map((t) => t.name),
+                  })
+                }
+                placeholder="태그 선택"
+              />
+            </div>
+
             <div className="flex gap-2 pt-2">
               <Button onClick={handleSaveEdit} className="flex-1">
                 <Check className="h-4 w-4 mr-2" />
@@ -194,6 +210,17 @@ export function TransactionConfirmation({
               <div className="flex justify-between items-center">
                 <span className="text-sm text-muted-foreground">카테고리:</span>
                 <Badge variant="outline">{editedTransaction.category}</Badge>
+              </div>
+
+              <div className="flex justify-between items-center">
+                <span className="text-sm text-muted-foreground">태그:</span>
+                <div className="flex flex-wrap gap-2">
+                  {editedTransaction.tags.map((tag) => (
+                    <Badge key={tag} variant="outline">
+                      {tag}
+                    </Badge>
+                  ))}
+                </div>
               </div>
             </div>
 
