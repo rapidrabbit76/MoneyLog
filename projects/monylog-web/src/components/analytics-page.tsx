@@ -24,7 +24,7 @@ import {
 } from "lucide-react";
 import type { Expenses } from "@/types/expenses";
 import { formatCurrency } from "@/lib/format-currency";
-import { useTags } from "@/hooks/use-tags";
+import { useTagStore } from "@/store/tag-store";
 
 interface AnalyticsPageProps {
   expenses: Expenses[];
@@ -50,7 +50,7 @@ interface TagData {
 export function AnalyticsPage({ expenses }: AnalyticsPageProps) {
   const [selectedPeriod, setSelectedPeriod] = useState<Period>("month");
   const [viewType, setViewType] = useState<ViewType>("both");
-  const { tags } = useTags();
+  const tags = useTagStore((state) => state.tags);
 
   const periodLabels = {
     week: "이번 주",
@@ -98,8 +98,7 @@ export function AnalyticsPage({ expenses }: AnalyticsPageProps) {
 
   const tagData = useMemo(() => {
     const { start, end } = getDateRange(selectedPeriod);
-    const { start: prevStart, end: prevEnd } =
-      getPreviousDateRange(selectedPeriod);
+    const { start: prevStart, end: prevEnd } = getPreviousDateRange(selectedPeriod);
 
     // 현재 기간 거래 필터링
     const currentExpenses = expenses.filter((t) => {
@@ -113,52 +112,56 @@ export function AnalyticsPage({ expenses }: AnalyticsPageProps) {
       return date >= prevStart && date <= prevEnd;
     });
 
-    // 태그별 집계
+    // 태그별 집계 (모든 태그 반영)
     const tagMap = new Map<string, TagData>();
     const prevTagMap = new Map<string, { expense: number; income: number }>();
 
     // 이전 기간 데이터
     previousExpenses.forEach((expense) => {
-      const tagName = expense.tags[0]?.name || "기타";
-      const current = prevTagMap.get(tagName) || { expense: 0, income: 0 };
-      if (expense.type === "expense") {
-        current.expense += expense.amount;
-      } else {
-        current.income += expense.amount;
-      }
-      prevTagMap.set(tagName, current);
+      (expense.tags.length ? expense.tags : [{ name: "기타" }]).forEach((tag) => {
+        const tagName = tag.name;
+        const current = prevTagMap.get(tagName) || { expense: 0, income: 0 };
+        if (expense.type === "expense") {
+          current.expense += expense.amount;
+        } else {
+          current.income += expense.amount;
+        }
+        prevTagMap.set(tagName, current);
+      });
     });
 
     // 현재 기간 데이터
     currentExpenses.forEach((expense) => {
-      const tagName = expense.tags[0]?.name || "기타";
-      const current = tagMap.get(tagName);
-      if (current) {
-        if (expense.type === "expense") {
-          current.expenseAmount += expense.amount;
-          current.expenseCount += 1;
+      (expense.tags.length ? expense.tags : [{ name: "기타" }]).forEach((tag) => {
+        const tagName = tag.name;
+        const current = tagMap.get(tagName);
+        if (current) {
+          if (expense.type === "expense") {
+            current.expenseAmount += expense.amount;
+            current.expenseCount += 1;
+          } else {
+            current.incomeAmount += expense.amount;
+            current.incomeCount += 1;
+          }
+          current.totalCount += 1;
+          current.netAmount = current.incomeAmount - current.expenseAmount;
         } else {
-          current.incomeAmount += expense.amount;
-          current.incomeCount += 1;
+          tagMap.set(tagName, {
+            tag: tagName,
+            expenseAmount: expense.type === "expense" ? expense.amount : 0,
+            incomeAmount: expense.type === "income" ? expense.amount : 0,
+            netAmount:
+              expense.type === "income" ? expense.amount : -expense.amount,
+            expenseCount: expense.type === "expense" ? 1 : 0,
+            incomeCount: expense.type === "income" ? 1 : 0,
+            totalCount: 1,
+            expensePercentage: 0,
+            incomePercentage: 0,
+            trend: "same",
+            trendPercentage: 0,
+          });
         }
-        current.totalCount += 1;
-        current.netAmount = current.incomeAmount - current.expenseAmount;
-      } else {
-        tagMap.set(tagName, {
-          tag: tagName,
-          expenseAmount: expense.type === "expense" ? expense.amount : 0,
-          incomeAmount: expense.type === "income" ? expense.amount : 0,
-          netAmount:
-            expense.type === "income" ? expense.amount : -expense.amount,
-          expenseCount: expense.type === "expense" ? 1 : 0,
-          incomeCount: expense.type === "income" ? 1 : 0,
-          totalCount: 1,
-          expensePercentage: 0,
-          incomePercentage: 0,
-          trend: "same",
-          trendPercentage: 0,
-        });
-      }
+      });
     });
 
     // 총 지출/수입 계산
@@ -342,7 +345,7 @@ export function AnalyticsPage({ expenses }: AnalyticsPageProps) {
       {/* 분석 탭 */}
       <Tabs
         value={viewType}
-        onValueChange={(value: ViewType) => setViewType(value)}
+        onValueChange={(value) => setViewType(value as ViewType)}
       >
         <TabsList className="grid w-full grid-cols-3">
           <TabsTrigger value="both" className="flex items-center gap-2">
