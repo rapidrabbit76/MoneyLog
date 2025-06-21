@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { Expenses } from "@/types/expenses";
-import { getExpenses } from "@/lib/api/expenses";
+import { getExpenses, deleteExpense as apiDeleteExpense } from "@/lib/api/expenses";
 import { toast } from "@/hooks/use-toast";
 
 // zustand store: 지출(Expenses) 등 도메인 상태만 관리합니다.
@@ -13,6 +13,7 @@ interface ExpensesState {
   setExpenses: (expenses: Expenses[]) => void;
   addExpense: (expense: Expenses) => void;
   deleteExpense: (id: number) => void;
+  deleteExpenseAsync: (id: number) => Promise<void>;
   fetchExpenses: () => Promise<void>;
 }
 
@@ -24,6 +25,10 @@ export const useExpensesStore = create<ExpensesState>((set, get) => ({
     set((state) => ({ expenses: [expense, ...state.expenses] })),
   deleteExpense: (id) =>
     set((state) => ({ expenses: state.expenses.filter((e) => e.id !== id) })),
+  deleteExpenseAsync: async (id) => {
+    await apiDeleteExpense(id);
+    get().deleteExpense(id);
+  },
   fetchExpenses: async () => {
     set({ isLoading: true });
     try {

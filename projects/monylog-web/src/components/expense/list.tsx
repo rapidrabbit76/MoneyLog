@@ -1,16 +1,22 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import type { Expenses } from "@/types/expenses";
 import { formatCurrency } from "@/lib/format-currency";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { useExpensesStore } from "@/store/expenses-store";
+import { Button } from "@/components/ui/button";
 
 interface ExpenseListProps {
   expenses: Expenses[];
+  onDelete?: (id: number) => void; // Optional callback for parent refresh
 }
 
-export function ExpenseViewList({ expenses }: ExpenseListProps) {
+export function ExpenseViewList({ expenses, onDelete }: ExpenseListProps) {
+  const [deletingId, setDeletingId] = useState<number | null>(null);
+  const deleteExpenseAsync = useExpensesStore((s) => s.deleteExpenseAsync);
+
   const groupedExpenses = useMemo(() => {
     const groups: Record<string, Expenses[]> = {};
 
@@ -79,15 +85,31 @@ export function ExpenseViewList({ expenses }: ExpenseListProps) {
                         )}
                       </p>
                     </div>
-                    <p
-                      className={`text-lg font-bold ${expense.type === "expense"
-                        ? "text-red-500 dark:text-red-400"
-                        : "text-blue-500 dark:text-blue-400"
-                        }`}
-                    >
-                      {expense.type === "expense" ? "-" : "+"}
-                      {formatCurrency(expense.amount)}
-                    </p>
+                    <div className="flex items-center gap-2">
+                      <p
+                        className={`text-lg font-bold ${expense.type === "expense"
+                          ? "text-red-500 dark:text-red-400"
+                          : "text-blue-500 dark:text-blue-400"
+                          }`}
+                      >
+                        {expense.type === "expense" ? "-" : "+"}
+                        {formatCurrency(expense.amount)}
+                      </p>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        aria-label="지출 삭제"
+                        disabled={deletingId === expense.id}
+                        onClick={async () => {
+                          setDeletingId(expense.id);
+                          await deleteExpenseAsync(expense.id);
+                          setDeletingId(null);
+                          onDelete?.(expense.id);
+                        }}
+                      >
+                        🗑️
+                      </Button>
+                    </div>
                   </div>
                 </CardContent>
               </Card>
