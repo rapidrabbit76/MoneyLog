@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/theme/toggle";
-import { SimpleTagManager } from "@/components/tag/manager";
+import { TagManager } from "@/components/tag/manager";
 import { useRouter } from "next/navigation";
 import type { User } from "@/types/auth";
 
@@ -50,7 +50,7 @@ export function SettingsPanel({ user, onLogout }: SettingsPanelProps) {
           </div>
         </div>
         <div className="rounded-lg border bg-card p-6 shadow-sm">
-          <SimpleTagManager />
+          <TagManager />
         </div>
       </div>
     </div>

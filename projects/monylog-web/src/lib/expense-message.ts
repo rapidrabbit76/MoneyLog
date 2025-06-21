@@ -4,6 +4,8 @@ import {
   AnalyzeExpenseMessageResponse,
 } from "@/lib/api/llm";
 
+import { useTagStore } from "@/store/tag-store"
+import { use, useState } from "react";
 export interface ParsedExpense {
   title: string;
   tags: string[];
@@ -13,28 +15,12 @@ export interface ParsedExpense {
 }
 
 export async function expenseMessageProcessing(
-  message: string,
+  { message, tags }: { message: string; tags: string[] }
 ): Promise<AnalyzeExpenseMessageResponse> {
   if (!message || message.trim().length === 0) {
     return { id: "", count: 0, expenses: [] };
   }
-  // AI API를 호출하여 메시지를 분석
-  const aiResponse = await analyzeExpenseMessage({
-    message,
-    tags: [
-      "담배",
-      "커피",
-      "점심",
-      "저녁",
-      "택시",
-      "버스",
-      "지하철",
-      "월급",
-      "용돈",
-      "이자",
-      "배당금",
-    ],
-  });
+  const aiResponse = await analyzeExpenseMessage({ message, tags });
   return aiResponse;
 
   // 간단한 예시: 쉼표나 줄바꿈으로 구분된 여러 거래

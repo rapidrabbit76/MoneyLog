@@ -38,15 +38,6 @@ async function fetchWithAuthRetry(
       throw new Error("세션이 만료되었습니다. 다시 로그인 해주세요.");
     }
   }
-  if (!response.ok) {
-    const error = await response.json();
-    toast({
-      title: "요청 실패",
-      description: error.message || "알 수 없는 에러가 발생했습니다.",
-      variant: "destructive",
-    });
-    throw new Error(error.message || "요청에 실패했습니다.");
-  }
   return response;
 }
 

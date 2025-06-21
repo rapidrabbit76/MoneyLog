@@ -53,8 +53,8 @@ export const useUserStore = create<UserState>()(
       },
       logout: async () => {
         try {
-          await logoutUser();
           set({ user: null });
+          await logoutUser();
           // localStorage의 user-storage 키도 삭제
           if (typeof window !== "undefined") {
             window.localStorage.removeItem("user-storage");

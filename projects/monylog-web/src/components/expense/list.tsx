@@ -4,6 +4,7 @@ import { useMemo } from "react";
 import type { Expenses } from "@/types/expenses";
 import { formatCurrency } from "@/lib/format-currency";
 import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 
 interface ExpenseListProps {
   expenses: Expenses[];
@@ -52,26 +53,32 @@ export function ExpenseViewList({ expenses }: ExpenseListProps) {
             {expenses.map((expense, index) => (
               <Card
                 key={index}
-                className={`overflow-hidden transition-all hover:shadow-md ${
-                  expense.type === "expense"
-                    ? "border-l-4 border-l-red-500 dark:border-l-red-400"
-                    : "border-l-4 border-l-blue-500 dark:border-l-blue-400"
-                }`}
+                className={`overflow-hidden transition-all hover:shadow-md ${expense.type === "expense"
+                  ? "border-l-4 border-l-red-500 dark:border-l-red-400"
+                  : "border-l-4 border-l-blue-500 dark:border-l-blue-400"
+                  }`}
               >
                 <CardContent className="p-4">
                   <div className="flex items-center justify-between">
                     <div>
                       <p className="font-medium">{expense.title}</p>
                       <p className="text-sm text-muted-foreground">
-                        {expense.tags.join(", ")}
+                        {expense.tags.length === 0 ? (
+                          <span>태그 없음</span>
+                        ) : (
+                          expense.tags.map((tag) => (
+                            <Badge key={tag.id} className="mr-1 mt-1">
+                              {tag.name}
+                            </Badge>
+                          ))
+                        )}
                       </p>
                     </div>
                     <p
-                      className={`text-lg font-bold ${
-                        expense.type === "expense"
-                          ? "text-red-500 dark:text-red-400"
-                          : "text-blue-500 dark:text-blue-400"
-                      }`}
+                      className={`text-lg font-bold ${expense.type === "expense"
+                        ? "text-red-500 dark:text-red-400"
+                        : "text-blue-500 dark:text-blue-400"
+                        }`}
                     >
                       {expense.type === "expense" ? "-" : "+"}
                       {formatCurrency(expense.amount)}

@@ -1,19 +1,31 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Plus, Trash2, Settings } from "lucide-react";
-import { useTags } from "@/hooks/use-tags";
+import { useTagStore } from "@/store/tag-store";
 import { toast } from "@/hooks/use-toast";
 
-export function SimpleTagManager() {
-  const { tags, addTag, deleteTag } = useTags();
+export function TagManager() {
+  const {
+    tags,
+    fetchTags,
+    createTag,
+    deleteTag,
+    loading,
+    error,
+  } = useTagStore();
   const [isOpen, setIsOpen] = useState(false);
   const [newTag, setNewTag] = useState("");
 
-  const handleAddTag = () => {
+  useEffect(() => {
+    fetchTags();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const handleAddTag = async () => {
     if (!newTag.trim()) {
       toast({
         title: "태그 추가 실패",
@@ -22,8 +34,7 @@ export function SimpleTagManager() {
       });
       return;
     }
-
-    if (tags.includes(newTag.trim())) {
+    if (tags.some((t) => t.name === newTag.trim())) {
       toast({
         title: "태그 추가 실패",
         description: "이미 존재하는 태그입니다.",
@@ -31,25 +42,23 @@ export function SimpleTagManager() {
       });
       return;
     }
-
-    const success = addTag(newTag.trim());
-    if (success) {
-      setNewTag("");
-      toast({
-        title: "태그 추가",
-        description: "태그가 추가되었습니다.",
-        variant: "default",
-      });
-    }
-  };
-
-  const handleDeleteTag = (tagName: string) => {
+    await createTag({ name: newTag.trim() });
+    setNewTag("");
+    await fetchTags(); // 새 태그 목록 갱신
     toast({
-      title: "태그 삭제",
-      description: `"${tagName}" 태그가 삭제되었습니다.`,
+      title: "태그 추가",
+      description: "태그가 추가되었습니다.",
       variant: "default",
     });
-    deleteTag(tagName);
+  };
+
+  const handleDeleteTag = async (id: string, name: string) => {
+    await deleteTag(id);
+    toast({
+      title: "태그 삭제",
+      description: `"${name}" 태그가 삭제되었습니다.`,
+      variant: "default",
+    });
   };
 
   if (!isOpen) {
@@ -64,10 +73,7 @@ export function SimpleTagManager() {
         <Button
           variant="outline"
           className="flex items-center gap-2"
-          onClick={() => {
-            console.log("태그 관리 버튼 클릭됨");
-            setIsOpen(true);
-          }}
+          onClick={() => setIsOpen(true)}
         >
           <Settings className="h-4 w-4" />
           태그 관리
@@ -100,8 +106,9 @@ export function SimpleTagManager() {
                   handleAddTag();
                 }
               }}
+              disabled={loading}
             />
-            <Button onClick={handleAddTag} size="icon">
+            <Button onClick={handleAddTag} size="icon" disabled={loading}>
               <Plus className="h-4 w-4" />
             </Button>
           </div>
@@ -113,22 +120,27 @@ export function SimpleTagManager() {
             현재 태그 ({tags.length}개)
           </label>
           <div className="max-h-64 overflow-y-auto space-y-2 border rounded-md p-2">
-            {tags.length === 0 ? (
+            {loading ? (
+              <p className="text-sm text-muted-foreground text-center py-4">
+                로딩 중...
+              </p>
+            ) : tags.length === 0 ? (
               <p className="text-sm text-muted-foreground text-center py-4">
                 등록된 태그가 없습니다.
               </p>
             ) : (
               tags.map((tag) => (
                 <div
-                  key={tag}
+                  key={tag.id}
                   className="flex items-center justify-between p-2 rounded-md bg-muted/50 hover:bg-muted transition-colors"
                 >
-                  <span className="text-sm font-medium">{tag}</span>
+                  <span className="text-sm font-medium">{tag.name}</span>
                   <Button
                     variant="ghost"
                     size="sm"
-                    onClick={() => handleDeleteTag(tag)}
+                    onClick={() => handleDeleteTag(tag.id, tag.name)}
                     className="h-8 w-8 p-0 text-muted-foreground hover:text-destructive"
+                    disabled={loading}
                   >
                     <Trash2 className="h-4 w-4" />
                   </Button>
@@ -146,6 +158,9 @@ export function SimpleTagManager() {
             필요시 수정할 수 있습니다.
           </p>
         </div>
+        {error && (
+          <div className="text-xs text-destructive">{error}</div>
+        )}
       </CardContent>
     </Card>
   );

@@ -15,9 +15,10 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Check, X, Edit, ArrowLeft, ArrowRight } from "lucide-react";
 import type { ParsedExpense } from "@/lib/expense-message";
-import { useTags } from "@/hooks/use-tags";
+import { useTagStore } from "@/store/tag-store";
 
 interface ExpensesConfirmationStackProps {
+  tags: string[];
   expenses: {
     title: string;
     tags: string[];
@@ -30,11 +31,11 @@ interface ExpensesConfirmationStackProps {
 }
 
 export function ExpensesConfirmationStack({
+  tags,
   expenses,
   onConfirm,
   onCancel,
 }: ExpensesConfirmationStackProps) {
-  const { tags } = useTags();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [confirmedExpenses, setConfirmedExpenses] = useState<ParsedExpense[]>(
     [],
@@ -157,13 +158,11 @@ export function ExpensesConfirmationStack({
           return (
             <Card
               key={index}
-              className={`absolute inset-0 border-primary/20 shadow-lg transition-all duration-300 ${
-                isActive ? "z-30 scale-100" : "z-20"
-              }`}
+              className={`absolute inset-0 border-primary/20 shadow-lg transition-all duration-300 ${isActive ? "z-30 scale-100" : "z-20"
+                }`}
               style={{
-                transform: `translateY(${offset * 8}px) translateX(${offset * 4}px) scale(${
-                  isActive ? 1 : 0.95 - Math.abs(offset) * 0.05
-                })`,
+                transform: `translateY(${offset * 8}px) translateX(${offset * 4}px) scale(${isActive ? 1 : 0.95 - Math.abs(offset) * 0.05
+                  })`,
                 opacity: isActive ? 1 : 0.7 - Math.abs(offset) * 0.2,
               }}
             >
@@ -280,11 +279,10 @@ export function ExpensesConfirmationStack({
                           금액:
                         </span>
                         <span
-                          className={`font-bold text-lg ${
-                            pendingExpense.type === "expense"
-                              ? "text-red-500 dark:text-red-400"
-                              : "text-blue-500 dark:text-blue-400"
-                          }`}
+                          className={`font-bold text-lg ${pendingExpense.type === "expense"
+                            ? "text-red-500 dark:text-red-400"
+                            : "text-blue-500 dark:text-blue-400"
+                            }`}
                         >
                           {pendingExpense.type === "expense" ? "-" : "+"}
                           {new Intl.NumberFormat("ko-KR", {

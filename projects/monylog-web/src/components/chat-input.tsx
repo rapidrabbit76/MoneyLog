@@ -17,6 +17,7 @@ import { AnalyzeExpenseMessageResponse } from "@/lib/api/llm";
 import { createExpenses } from "@/lib/api/expenses";
 import { useExpenses } from "@/hooks/use-expenses";
 import { toast } from "@/hooks/use-toast";
+import { useTagStore } from "@/store/tag-store";
 
 interface ChatInputProps {
   onSubmit: () => void;
@@ -32,13 +33,10 @@ export function ChatInput({ onSubmit }: ChatInputProps) {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!message.trim()) return;
-
-    const currentInput = message;
-    setMessage("");
-
     setIsLoading(true);
     try {
-      const parsed = await expenseMessageProcessing(currentInput);
+      const tags = await useTagStore.getState().fetchTags();
+      const parsed = await expenseMessageProcessing({ message, tags: tags.map((tag) => tag.name) });
       if (parsed.count > 0) {
         setPendingExpense(parsed);
       } else {
@@ -52,6 +50,7 @@ export function ChatInput({ onSubmit }: ChatInputProps) {
     } catch (error) {
       console.error("Error processing message:", error);
     } finally {
+      setMessage("");
       setIsLoading(false);
     }
   };
@@ -93,6 +92,7 @@ export function ChatInput({ onSubmit }: ChatInputProps) {
     return (
       <div className="space-y-4">
         <ExpensesConfirmationStack
+          tags={useTagStore.getState().tags.map((tag) => tag.name)}
           expenses={pendingExpense.expenses}
           onConfirm={handleConfirm}
           onCancel={handleCancel}
