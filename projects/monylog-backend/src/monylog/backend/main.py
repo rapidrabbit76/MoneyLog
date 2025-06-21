@@ -1,8 +1,10 @@
-from fastapi import FastAPI
+import os
+from fastapi import FastAPI, Request
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware import Middleware
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.gzip import GZipMiddleware
+from fastapi.responses import FileResponse, Response
 
 from monylog.backend.container import MonyLogContainer
 from monylog.backend.settings import Settings
@@ -52,14 +54,15 @@ def create_app() -> FastAPI:
 
     app.container = container  # type: ignore
     app.settings = settings  # type: ignore
-
     # ENDPOINTs
-    app.include_router(APIEndpoints)
+    app.include_router(APIEndpoints, prefix="/api")
 
     app.mount(
         "/",
-        StaticFiles(directory="./web", html=True, follow_symlink=True),
+        StaticFiles(directory="web", html=True, follow_symlink=True),
+        name="web",
     )
+
     return app
 
 

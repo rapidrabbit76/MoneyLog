@@ -98,3 +98,85 @@ export const getExpenses = async (
     return [];
   }
 };
+
+/**
+ * Delete an expense by ID
+ * @param id Expense ID
+ */
+export const deleteExpense = async (id: number): Promise<void> => {
+  try {
+    const response = await fetchWithAuthRetry(
+      `${BASE_URL}/api/v1/expenses/${id}`,
+      {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+      },
+    );
+    if (!response.ok) {
+      const error = await response.json();
+      toast({
+        title: "지출 삭제 실패",
+        description: error.message || "지출 삭제 중 오류가 발생했습니다.",
+        variant: "destructive",
+      });
+      throw new Error(error.message || "지출 삭제 중 오류가 발생했습니다.");
+    }
+  } catch (error) {
+    toast({
+      title: "지출 삭제 실패",
+      description:
+        error instanceof Error
+          ? error.message
+          : "알 수 없는 에러가 발생했습니다.",
+      variant: "destructive",
+    });
+    throw error;
+  }
+};
+
+/**
+ * Edit an expense note by ID
+ * @param id Expense ID
+ * @param note Note string
+ * @returns Updated expense object
+ */
+export const editExpenseNote = async (
+  id: string,
+  note: string,
+): Promise<Expenses | null> => {
+  try {
+    const response = await fetchWithAuthRetry(
+      `${BASE_URL}/api/v1/expenses/${id}/note`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ note }),
+      },
+    );
+    if (!response.ok) {
+      const error = await response.json();
+      toast({
+        title: "지출 메모 수정 실패",
+        description: error.message || "메모 수정 중 오류가 발생했습니다.",
+        variant: "destructive",
+      });
+      return null;
+    }
+    const res = await response.json();
+    return res.data as Expenses;
+  } catch (error) {
+    toast({
+      title: "지출 메모 수정 실패",
+      description:
+        error instanceof Error
+          ? error.message
+          : "알 수 없는 에러가 발생했습니다.",
+      variant: "destructive",
+    });
+    return null;
+  }
+};
+
+
