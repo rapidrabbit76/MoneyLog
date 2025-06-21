@@ -37,7 +37,7 @@ export default function Home() {
   return (
     <>
       <div className="mb-4">
-        <ChatInput onSubmit={defaultHandleChatSubmit} />
+        <ChatInput />
       </div>
       <div className="flex-1 overflow-y-auto pb-4">
         {expenses.length === 0 ? (

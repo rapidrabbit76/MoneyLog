@@ -19,11 +19,8 @@ import { useExpenses } from "@/hooks/use-expenses";
 import { toast } from "@/hooks/use-toast";
 import { useTagStore } from "@/store/tag-store";
 
-interface ChatInputProps {
-  onSubmit: () => void;
-}
 
-export function ChatInput({ onSubmit }: ChatInputProps) {
+export function ChatInput() {
   const [message, setMessage] = useState("");
   const [pendingExpense, setPendingExpense] =
     useState<AnalyzeExpenseMessageResponse>({ id: "", count: 0, expenses: [] });
@@ -80,7 +77,6 @@ export function ChatInput({ onSubmit }: ChatInputProps) {
       .finally(() => {
         setIsLoading(false);
         setPendingExpense({ id: "", count: 0, expenses: [] });
-        onSubmit();
       });
   };
 

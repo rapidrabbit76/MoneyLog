@@ -49,30 +49,6 @@ Your final response MUST be a well-structured markdown document containing:
 4.  **Quality & Constraints:** A section for testing, performance, and other non-functional requirements.
 5.  **Files to be Modified/Created:** A list of relevant file paths.
 
-## 6.Task History Checklist:
-**Objective:** To maintain a detailed record of all completed coding tasks in `./github/history/tasks.md`.
-
-* **[DATE]_[TASK_ID]_[BRIEF_DESCRIPTION]:**
-    * **Feature/Module:** [Specify the feature or module worked on, e.g., 'User Authentication', 'Payment Gateway Integration']
-    * **Description:** [Provide a concise summary of the task completed. e.g., 'Implemented JWT token generation for user login.']
-    * **Files Modified/Created:** [List relevant file paths, e.g., 'src/auth/auth.controller.ts, src/auth/auth.service.ts']
-    * **Dependencies/Prerequisites:** [Note any tasks or libraries required for this task. e.g., 'Requires bcryptjs library.']
-    * **Testing Performed:** [Briefly describe how the task was tested. e.g., 'Unit tests for login, Postman API test.']
-    * **Link to PR/Commit (Optional):** [e.g., 'https://github.com/your_repo/pull/123']
-
-## 7. Troubleshooting History Checklist:
-**Objective:** To document issues encountered, their resolutions, and lessons learned in `./github/history/troubleshooting.md`.
-
-* **[DATE]_[ISSUE_ID]_[BRIEF_PROBLEM_SUMMARY]:**
-    * **Problem Description:** [Describe the issue in detail. e.g., 'User login failing intermittently with 500 error after deployment.']
-    * **Symptoms:** [What were the observable signs of the problem? e.g., 'Server logs showed 'TypeError: Cannot read property of undefined' in auth.service.']
-    * **Steps Taken to Diagnose:** [How did you investigate the problem? e.g., 'Checked server logs, debugged auth.service, verified database connection.']
-    * **Root Cause:** [What was the actual cause of the problem? e.g., 'Environment variable for JWT_SECRET was not correctly loaded in production.']
-    * **Solution Implemented:** [What was done to fix it? e.g., 'Updated .env file on production server and restarted the application.']
-    * **Impact:** [What was the effect of the issue? e.g., 'Users unable to log in for 30 minutes.']
-    * **Lessons Learned/Prevention:** [What did you learn and how can it be prevented in the future? e.g., 'Implement more robust environment variable validation at startup.']
-    * **Link to Relevant Resources (Optional):** [e.g., 'Stack Overflow thread, internal documentation.']
-
 **Instructions for Use:**
 1.  **Ensure the directory `./github/history/` exists** in your project's root. Create it if it doesn't.
 2.  **Create two dedicated files:**
