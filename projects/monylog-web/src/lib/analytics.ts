@@ -151,3 +151,47 @@ export function aggregateTagData(
     return Math.abs(b.netAmount) - Math.abs(a.netAmount);
   });
 }
+
+/**
+ * API 쿼리용: startDate, endDate 모두 포함하는 yyyy-mm-dd 문자열 반환
+ */
+export function getInclusiveDateRange(period: Period): { startDate: string; endDate: string } {
+  const now = new Date();
+  let startDate: string, endDate: string;
+  switch (period) {
+    case "month": {
+      const firstDay = new Date(now.getFullYear(), now.getMonth(), 1);
+      const lastDay = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+      startDate = firstDay.toISOString().slice(0, 10);
+      endDate = lastDay.toISOString().slice(0, 10);
+      break;
+    }
+    case "week": {
+      const day = now.getDay();
+      const diffToMonday = (day === 0 ? -6 : 1) - day;
+      const monday = new Date(now.getFullYear(), now.getMonth(), now.getDate() + diffToMonday);
+      const sunday = new Date(monday.getFullYear(), monday.getMonth(), monday.getDate() + 6);
+      startDate = monday.toISOString().slice(0, 10);
+      endDate = sunday.toISOString().slice(0, 10);
+      break;
+    }
+    case "quarter": {
+      const quarter = Math.floor(now.getMonth() / 3);
+      const firstDay = new Date(now.getFullYear(), quarter * 3, 1);
+      const lastDay = new Date(now.getFullYear(), quarter * 3 + 3, 0);
+      startDate = firstDay.toISOString().slice(0, 10);
+      endDate = lastDay.toISOString().slice(0, 10);
+      break;
+    }
+    case "year": {
+      const firstDay = new Date(now.getFullYear(), 0, 1);
+      const lastDay = new Date(now.getFullYear(), 11, 31);
+      startDate = firstDay.toISOString().slice(0, 10);
+      endDate = lastDay.toISOString().slice(0, 10);
+      break;
+    }
+    default:
+      throw new Error("Invalid period");
+  }
+  return { startDate, endDate };
+}

@@ -4,9 +4,15 @@ import { Progress } from "@/components/ui/progress";
 import { TrendingUp, TrendingDown, Minus, ArrowUpCircle, ArrowDownCircle } from "lucide-react";
 import { formatCurrency } from "@/lib/format-currency";
 import { TagData } from "@/lib/analytics";
+import { SummaryResponseData } from "@/lib/api/insights";
+
+
+export interface TagAnalysisCardData extends SummaryResponseData {
+  name: string; // 태그 이름 추가
+}
 
 interface TagAnalysisCardProps {
-  tagData: TagData[];
+  tagData: TagAnalysisCardData[];
   periodLabel: string;
   selectedPeriod: string;
   type: "both" | "expense" | "income";
@@ -45,8 +51,8 @@ function getTrendColor(trend: "up" | "down" | "same") {
 
 export function TagAnalysisCard({ tagData, periodLabel, selectedPeriod, type }: TagAnalysisCardProps) {
   let filtered = tagData;
-  if (type === "expense") filtered = tagData.filter((tag) => tag.expenseAmount > 0);
-  if (type === "income") filtered = tagData.filter((tag) => tag.incomeAmount > 0);
+  if (type === "expense") filtered = tagData.filter((data) => data.count.expense > 0);
+  if (type === "income") filtered = tagData.filter((data) => data.count.income > 0);
   if (type === "both") filtered = tagData;
   return (
     <Card>
@@ -66,47 +72,47 @@ export function TagAnalysisCard({ tagData, periodLabel, selectedPeriod, type }: 
           </div>
         ) : (
           <div className={type === "both" ? "grid gap-4 md:grid-cols-2 lg:grid-cols-3" : "space-y-4"}>
-            {filtered.map((tag) => (
-              <Card key={tag.tag} className={type === "both" ? "hover:shadow-md transition-shadow" : undefined}>
+            {filtered.map((data) => (
+              <Card key={data.name} className={type === "both" ? "hover:shadow-md transition-shadow" : undefined}>
                 <CardContent className="p-4">
                   <div className="space-y-3">
                     <div className="flex items-center justify-between">
-                      <Badge variant="outline" className="font-medium">{tag.tag}</Badge>
-                      <div className="flex items-center gap-1">
-                        {getTrendIcon(tag.trend)}
-                        {tag.trend !== "same" && (
-                          <span className={`text-sm font-medium ${getTrendColor(tag.trend)}`}>{tag.trendPercentage.toFixed(0)}%</span>
+                      <Badge variant="outline" className="font-medium">{data.name}</Badge>
+                      {/* <div className="flex items-center gap-1">
+                        {getTrendIcon(data.trend)}
+                        {data.trend !== "same" && (
+                          <span className={`text-sm font-medium ${getTrendColor(data.trend)}`}>{data.trendPercentage.toFixed(0)}%</span>
                         )}
-                      </div>
+                      </div> */}
                     </div>
                     <div className="flex items-center justify-between">
                       <span className="text-sm text-muted-foreground">순 수지</span>
                       <div className="flex items-center gap-2">
-                        {getNetAmountIcon(tag.netAmount)}
-                        <span className={`font-bold ${getNetAmountColor(tag.netAmount)}`}>{formatCurrency(tag.netAmount)}</span>
+                        {getNetAmountIcon(Number(data.amount.total))}
+                        <span className={`font-bold ${getNetAmountColor(Number(data.amount.total))}`}>{formatCurrency(Number(data.amount.total))}</span>
                       </div>
                     </div>
-                    {tag.expenseAmount > 0 && (
+                    {data.count.expense > 0 && (
                       <div className="flex justify-between items-center">
                         <span className="text-sm text-muted-foreground">지출</span>
                         <div className="text-right">
-                          <div className="text-sm font-medium text-red-500 dark:text-red-400">{formatCurrency(tag.expenseAmount)}</div>
-                          <div className="text-xs text-muted-foreground">{tag.expenseCount}건</div>
+                          <div className="text-sm font-medium text-red-500 dark:text-red-400">{formatCurrency(Number(data.amount.expense))}</div>
+                          <div className="text-xs text-muted-foreground">{data.count.expense}건</div>
                         </div>
                       </div>
                     )}
-                    {tag.incomeAmount > 0 && (
+                    {data.count.income > 0 && (
                       <div className="flex justify-between items-center">
                         <span className="text-sm text-muted-foreground">수입</span>
                         <div className="text-right">
-                          <div className="text-sm font-medium text-blue-500 dark:text-blue-400">{formatCurrency(tag.incomeAmount)}</div>
-                          <div className="text-xs text-muted-foreground">{tag.incomeCount}건</div>
+                          <div className="text-sm font-medium text-blue-500 dark:text-blue-400">{formatCurrency(Number(data.amount.income))}</div>
+                          <div className="text-xs text-muted-foreground">{data.count.income}건</div>
                         </div>
                       </div>
                     )}
-                    {type !== "both" && (
-                      <Progress value={type === "expense" ? tag.expensePercentage : tag.incomePercentage} className="h-2" />
-                    )}
+                    {/* {type !== "both" && (
+                      <Progress value={type === "expense" ? data.expensePercentage : data.incomePercentage} className="h-2" />
+                    )} */}
                   </div>
                 </CardContent>
               </Card>

@@ -1,37 +1,83 @@
 "use client";
 
-import { useState } from "react";
-import { useExpenses } from "@/hooks/use-expenses";
-import { useTagStore } from "@/store/tag-store";
+import { InsightTabs } from "@/components/insights/InsightTabs";
 import { PeriodSelector } from "@/components/insights/PeriodSelector";
 import { SummaryCards } from "@/components/insights/SummaryCards";
-import { InsightTabs } from "@/components/insights/InsightTabs";
-import { aggregateTagData, Period } from "@/lib/analytics";
+import { TagAnalysisCardData } from "@/components/insights/TagAnalysisCard";
+import { useExpenses } from "@/hooks/use-expenses";
+import { getInclusiveDateRange, Period } from "@/lib/analytics";
+import { getSummaryInsights, SummaryResponseData } from "@/lib/api/insights";
+import { ExpenseTag } from "@/lib/api/tags";
+import { useTagStore } from "@/store/tag-store";
+import { useEffect, useState } from "react";
+const periodLabels = {
+  week: "이번 주",
+  month: "이번 달",
+  quarter: "이번 분기",
+  year: "올해",
+};
 
 export default function AnalyticsPage() {
   const { expenses } = useExpenses();
   const [selectedPeriod, setSelectedPeriod] = useState<Period>("month");
   const [viewType, setViewType] = useState<"expense" | "income" | "both">("both");
-  const tags = useTagStore((state) => state.tags);
+  // summary API 상태
+  const [summary, setSummary] = useState<SummaryResponseData>({
+    amount: { expense: 0, income: 0, total: 0 },
+    count: { expense: 0, income: 0, total: 0 },
+    timeseries: [],
+    startDate: new Date().toISOString(),
+    endDate: new Date().toISOString(),
 
-  const periodLabels = {
-    week: "이번 주",
-    month: "이번 달",
-    quarter: "이번 분기",
-    year: "올해",
-  };
+  });
+  // const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [tags, setTags] = useState<ExpenseTag[]>([]);
+  const [tagData, setTagData] = useState<TagAnalysisCardData[]>([]); // 태그별 데이터 상태
 
-  const tagData = aggregateTagData(expenses, selectedPeriod, viewType);
-  const totals = tagData.reduce(
-    (acc, tag) => ({
-      expense: acc.expense + tag.expenseAmount,
-      income: acc.income + tag.incomeAmount,
-      net: acc.net + tag.netAmount,
-      expenseCount: acc.expenseCount + tag.expenseCount,
-      incomeCount: acc.incomeCount + tag.incomeCount,
-    }),
-    { expense: 0, income: 0, net: 0, expenseCount: 0, incomeCount: 0 },
-  );
+  useEffect(() => {
+    const storedTags = useTagStore.getState().tags;
+    if (storedTags.length > 0) {
+      setTags(storedTags);
+      return;
+    }
+    useTagStore.getState().fetchTags().then((fetchedTags) => {
+      setTags(fetchedTags);
+    });
+  }, []);
+
+  useEffect(() => {
+    // 모든 태그에 대해 비동기 요청을 병렬로 실행
+    const { startDate, endDate } = getInclusiveDateRange(selectedPeriod);
+
+    Promise.all(
+      tags.map((tag) => getSummaryInsights({ startDate, endDate, tag: tag.name }))
+    ).then((responses) => {
+      const tagData: TagAnalysisCardData[] = responses.map((data, index) => ({
+        name: tags[index].name,
+        ...data,
+      }));
+      setTagData(tagData);
+      console.log("Tag summary data:", responses);
+    })
+  }, [selectedPeriod, tags]);
+
+  // summary API 호출
+  useEffect(() => {
+    async function fetchSummary() {
+      setError(null);
+      try {
+        // 재사용 가능한 날짜 계산 함수 사용
+        const { startDate, endDate } = getInclusiveDateRange(selectedPeriod);
+        const res = await getSummaryInsights({ startDate, endDate });
+        setSummary(res);
+      } catch (e: any) {
+        setError(e.message || "요약 정보 불러오기 실패");
+      } finally {
+      }
+    }
+    fetchSummary();
+  }, [selectedPeriod]);
 
   return (
     <div className="space-y-6">
@@ -46,15 +92,21 @@ export default function AnalyticsPage() {
         </div>
       </div>
       {/* 요약 카드들 */}
-      <SummaryCards
-        expense={totals.expense}
-        income={totals.income}
-        net={totals.net}
-        expenseCount={totals.expenseCount}
-        incomeCount={totals.incomeCount}
-        periodLabel={periodLabels[selectedPeriod]}
-      />
-      {/* 분석 탭 */}
+      <div className="relative">
+        {summary && (
+          <SummaryCards
+            expense={Number(summary.amount.expense)}
+            income={Number(summary.amount.income)}
+            net={Number(summary.amount.total)}
+            expenseCount={summary.count.expense}
+            incomeCount={summary.count.income}
+            periodLabel={periodLabels[selectedPeriod]}
+          />
+        )}
+        {error && (
+          <div className="text-red-500 mt-2">{error}</div>
+        )}
+      </div>
       <InsightTabs
         viewType={viewType}
         setViewType={setViewType}

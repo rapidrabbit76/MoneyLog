@@ -16,16 +16,29 @@ export interface SummaryRequestQuery {
 
 export interface SummaryTimeseriesEntry {
   date: string;
-  total: string;
-  expense: string;
-  income: string;
+  amount: {
+    expense: string | number;
+    income: string | number;
+    total: string | number;
+  }
+  count: {
+    expense: number;
+    income: number;
+    total: number;
+  }
 }
 
 export interface SummaryResponseData {
-  total: string;
-  expense: string;
-  income: string;
-  count: number;
+  amount: {
+    expense: string | number;
+    income: string | number;
+    total: string | number;
+  }
+  count: {
+    expense: number;
+    income: number;
+    total: number;
+  }
 
   timeseries: SummaryTimeseriesEntry[];
   startDate?: string;
@@ -44,7 +57,7 @@ const BASE_URL =
  * @param query - The summary request query parameters.
  * @returns ApiResponse<SummaryResponseData>
  */
-export async function getSummaryInsights(query: SummaryRequestQuery): Promise<ApiResponse<SummaryResponseData>> {
+export async function getSummaryInsights(query: SummaryRequestQuery): Promise<SummaryResponseData> {
   const params = new URLSearchParams({ ...query }).toString();
   const url = `${BASE_URL}/api/v1/insights/summary?${params}`;
   try {
@@ -53,7 +66,7 @@ export async function getSummaryInsights(query: SummaryRequestQuery): Promise<Ap
       headers: { "Content-Type": "application/json" },
     });
     const res: ApiResponse<SummaryResponseData> = await response.json();
-    return res;
+    return res.data;
   } catch (error) {
     toast({
       title: "요약 정보 불러오기 실패",

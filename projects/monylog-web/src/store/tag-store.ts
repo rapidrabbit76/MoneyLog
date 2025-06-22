@@ -19,9 +19,10 @@ interface TagStoreState {
 }
 
 export const useTagStore = create<TagStoreState>((set) => ({
-    tags: [],
+    tags: [] = [],
     loading: false,
     error: null,
+
 
     fetchTags: async () => {
         set({ loading: true, error: null });
