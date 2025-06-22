@@ -10,9 +10,13 @@ import { getSummaryInsights, SummaryResponseData } from "@/lib/api/insights";
 import { ExpenseTag } from "@/lib/api/tags";
 import { useTagStore } from "@/store/tag-store";
 import { Button } from "@/components/ui/button";
+import { Calendar } from "@/components/ui/calendar";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { da, ko } from "date-fns/locale";
 import { format, format as formatDate, set } from "date-fns";
 import { useEffect, useState } from "react";
+import { PeriodOrCustom } from "@/components/insights/PeriodSelector";
+import { CustomCalendar } from "@/components/ui/custom-calendar";
 const periodLabels = {
   week: "이번 주",
   month: "이번 달",
@@ -21,11 +25,7 @@ const periodLabels = {
 };
 
 export default function AnalyticsPage() {
-  const [selectedPeriod, setSelectedPeriod] = useState<Period>("month");
-  const [dateRange, setDateRange] = useState<{ startDate: string; endDate: string }>({
-    startDate: formatDate(new Date(), "yyyy-MM-dd", { locale: ko }),
-    endDate: formatDate(new Date(), "yyyy-MM-dd", { locale: ko }),
-  });
+  const [selectedPeriod, setSelectedPeriod] = useState<PeriodOrCustom>("month");
   const [viewType, setViewType] = useState<"expense" | "income" | "both">("both");
   const [summary, setSummary] = useState<SummaryResponseData>({
     amount: { expense: 0, income: 0, total: 0 },
@@ -37,12 +37,9 @@ export default function AnalyticsPage() {
   const [error, setError] = useState<string | null>(null);
   const [tags, setTags] = useState<ExpenseTag[]>([]);
   const [tagData, setTagData] = useState<TagAnalysisCardData[]>([]);
-
-
-  useEffect(() => {
-    let { startDate, endDate } = getInclusiveDateRange(selectedPeriod);
-    setDateRange({ startDate, endDate });
-  }, [selectedPeriod]);
+  // 사용자 기간 지정용 상태
+  const [dateRange, setDateRange] = useState<{ from?: string; to?: string }>({});
+  const [calendarOpen, setCalendarOpen] = useState(false);
 
   useEffect(() => {
     const storedTags = useTagStore.getState().tags;
@@ -56,7 +53,16 @@ export default function AnalyticsPage() {
   }, []);
 
   useEffect(() => {
-    const { startDate, endDate } = dateRange;
+    // custom일 때만 dateRange 사용, 아니면 기존 기간 사용
+    let startDate: string, endDate: string;
+    if (selectedPeriod === "custom" && dateRange.from && dateRange.to) {
+      startDate = dateRange.from;
+      endDate = dateRange.to;
+    } else {
+      const range = getInclusiveDateRange(selectedPeriod === "custom" ? "month" : selectedPeriod);
+      startDate = format(new Date(range.startDate), "yyyy-MM-dd");
+      endDate = format(new Date(range.endDate), "yyyy-MM-dd");
+    }
     Promise.all(
       tags.map((tag) => getSummaryInsights({ startDate, endDate, tag: tag.name }))
     ).then((responses) => {
@@ -70,10 +76,18 @@ export default function AnalyticsPage() {
       }));
       setTagData(tagData);
     });
-  }, [dateRange, tags]);
+  }, [selectedPeriod, tags, dateRange]);
 
   useEffect(() => {
-    const { startDate, endDate } = dateRange;
+    let startDate: string, endDate: string;
+    if (selectedPeriod === "custom" && dateRange.from && dateRange.to) {
+      startDate = dateRange.from;
+      endDate = dateRange.to;
+    } else {
+      const range = getInclusiveDateRange(selectedPeriod === "custom" ? "month" : selectedPeriod);
+      startDate = format(new Date(range.startDate), "yyyy-MM-dd");
+      endDate = format(new Date(range.endDate), "yyyy-MM-dd");
+    }
     async function fetchSummary() {
       setError(null);
       try {
@@ -90,7 +104,29 @@ export default function AnalyticsPage() {
       }
     }
     fetchSummary();
-  }, [dateRange]);
+  }, [selectedPeriod, dateRange]);
+
+  // 사용자 기간 지정용 날짜 표시
+  const rangeLabel = dateRange.from && dateRange.to
+    ? `${dateRange.from} ~ ${dateRange.to}`
+    : "시작일 ~ 종료일";
+
+  // 캘린더에서 날짜 선택 시 endDate까지 선택되면 바로 상태 반영 및 팝오버 닫기
+  const handleCalendarSelect = (range?: { from?: string; to?: string }) => {
+    setDateRange(range ?? {});
+    if (range?.from && range?.to) {
+      setCalendarOpen(false);
+    }
+  };
+
+  // 캘린더 Clear/Confirm 핸들러
+  const handleClear = () => {
+    setDateRange({});
+    setCalendarOpen(false);
+  };
+  const handleConfirm = () => {
+    setCalendarOpen(false);
+  };
 
   return (
     <div className="space-y-6">
@@ -102,6 +138,35 @@ export default function AnalyticsPage() {
         </div>
         <div className="flex items-center gap-4">
           <PeriodSelector value={selectedPeriod} onChange={setSelectedPeriod} />
+          {selectedPeriod === "custom" && (
+            <Popover open={calendarOpen} onOpenChange={setCalendarOpen}>
+              <PopoverTrigger asChild>
+                <Button
+                  variant="outline"
+                  className={`w-[220px] justify-start text-left font-normal ${!dateRange.from ? "text-muted-foreground" : ""}`}
+                  onClick={() => setCalendarOpen(true)}
+                  aria-label="기간 선택 열기"
+                >
+                  {rangeLabel}
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent align="start" className="w-auto p-0">
+                <div className="flex flex-col items-center">
+                  <CustomCalendar
+                    value={{
+                      from: dateRange.from ? new Date(dateRange.from) : undefined,
+                      to: dateRange.to ? new Date(dateRange.to) : undefined,
+                    }}
+                    onChange={handleCalendarSelect}
+                  />
+                  <div className="flex gap-2 justify-end w-full px-4 pb-2 pt-2">
+                    <Button variant="ghost" size="sm" onClick={handleClear}>Clear</Button>
+                    <Button variant="default" size="sm" onClick={handleConfirm} disabled={!dateRange.from || !dateRange.to}>Confirm</Button>
+                  </div>
+                </div>
+              </PopoverContent>
+            </Popover>
+          )}
         </div>
       </div>
       {/* 요약 카드들 */}
@@ -113,7 +178,7 @@ export default function AnalyticsPage() {
             net={Number(summary.amount.total)}
             expenseCount={summary.count.expense}
             incomeCount={summary.count.income}
-            periodLabel={periodLabels[selectedPeriod]}
+            periodLabel={selectedPeriod === "custom" ? rangeLabel : periodLabels[selectedPeriod]}
           />
         )}
         {error && (
@@ -124,7 +189,7 @@ export default function AnalyticsPage() {
         viewType={viewType}
         setViewType={setViewType}
         tagData={tagData}
-        periodLabel={periodLabels[selectedPeriod]}
+        periodLabel={selectedPeriod === "custom" ? rangeLabel : periodLabels[selectedPeriod]}
         selectedPeriod={selectedPeriod}
       />
     </div>
