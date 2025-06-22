@@ -4,11 +4,12 @@ import { TagData } from "@/lib/analytics";
 import { TagAnalysisCard } from "./TagAnalysisCard";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
+import { SummaryResponseData } from "@/lib/api/insights";
 
 interface InsightTabsTabsProps {
   viewType: "expense" | "income" | "both";
   setViewType: (v: "expense" | "income" | "both") => void;
-  tagData: TagData[];
+  tagData: SummaryResponseData[];
   periodLabel: string;
   selectedPeriod: string;
 }

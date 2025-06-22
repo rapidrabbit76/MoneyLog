@@ -1,7 +1,7 @@
 "use client";
 
 import { InsightTabs } from "@/components/insights/InsightTabs";
-import { PeriodSelector } from "@/components/insights/PeriodSelector";
+import { PeriodSelector, PeriodOrCustom } from "@/components/insights/PeriodSelector";
 import { SummaryCards } from "@/components/insights/SummaryCards";
 import { TagAnalysisCardData } from "@/components/insights/TagAnalysisCard";
 import { useExpenses } from "@/hooks/use-expenses";
@@ -9,6 +9,9 @@ import { getInclusiveDateRange, Period } from "@/lib/analytics";
 import { getSummaryInsights, SummaryResponseData } from "@/lib/api/insights";
 import { ExpenseTag } from "@/lib/api/tags";
 import { useTagStore } from "@/store/tag-store";
+import { Button } from "@/components/ui/button";
+import { ko } from "date-fns/locale";
+import { format, format as formatDate } from "date-fns";
 import { useEffect, useState } from "react";
 const periodLabels = {
   week: "이번 주",
@@ -18,22 +21,18 @@ const periodLabels = {
 };
 
 export default function AnalyticsPage() {
-  const { expenses } = useExpenses();
   const [selectedPeriod, setSelectedPeriod] = useState<Period>("month");
   const [viewType, setViewType] = useState<"expense" | "income" | "both">("both");
-  // summary API 상태
   const [summary, setSummary] = useState<SummaryResponseData>({
     amount: { expense: 0, income: 0, total: 0 },
     count: { expense: 0, income: 0, total: 0 },
     timeseries: [],
     startDate: new Date().toISOString(),
     endDate: new Date().toISOString(),
-
   });
-  // const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [tags, setTags] = useState<ExpenseTag[]>([]);
-  const [tagData, setTagData] = useState<TagAnalysisCardData[]>([]); // 태그별 데이터 상태
+  const [tagData, setTagData] = useState<TagAnalysisCardData[]>([]);
 
   useEffect(() => {
     const storedTags = useTagStore.getState().tags;
@@ -47,33 +46,37 @@ export default function AnalyticsPage() {
   }, []);
 
   useEffect(() => {
-    // 모든 태그에 대해 비동기 요청을 병렬로 실행
     const { startDate, endDate } = getInclusiveDateRange(selectedPeriod);
-
     Promise.all(
       tags.map((tag) => getSummaryInsights({ startDate, endDate, tag: tag.name }))
     ).then((responses) => {
       const tagData: TagAnalysisCardData[] = responses.map((data, index) => ({
         name: tags[index].name,
-        ...data,
+        ...(data ?? {
+          amount: { expense: 0, income: 0, total: 0 },
+          count: { expense: 0, income: 0, total: 0 },
+          timeseries: [],
+        }),
       }));
       setTagData(tagData);
-      console.log("Tag summary data:", responses);
-    })
+    });
   }, [selectedPeriod, tags]);
 
-  // summary API 호출
   useEffect(() => {
+    const { startDate, endDate } = getInclusiveDateRange(selectedPeriod);
     async function fetchSummary() {
       setError(null);
       try {
-        // 재사용 가능한 날짜 계산 함수 사용
-        const { startDate, endDate } = getInclusiveDateRange(selectedPeriod);
         const res = await getSummaryInsights({ startDate, endDate });
-        setSummary(res);
+        setSummary(res ?? {
+          amount: { expense: 0, income: 0, total: 0 },
+          count: { expense: 0, income: 0, total: 0 },
+          timeseries: [],
+          startDate: undefined,
+          endDate: undefined,
+        });
       } catch (e: any) {
         setError(e.message || "요약 정보 불러오기 실패");
-      } finally {
       }
     }
     fetchSummary();

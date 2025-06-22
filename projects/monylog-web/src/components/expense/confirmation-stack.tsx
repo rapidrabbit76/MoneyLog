@@ -17,7 +17,7 @@ import { Check, X, Edit, ArrowLeft, ArrowRight } from "lucide-react";
 import type { ParsedExpense } from "@/lib/expense-message";
 import { useTagStore } from "@/store/tag-store";
 import { MultiSelectChips } from "@/components/ui/multi-select-chips";
-import { Calendar } from "@/components/ui/calendar";
+import { CustomCalendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 
 interface ExpensesConfirmationStackProps {
@@ -253,7 +253,7 @@ export function ExpensesConfirmationStack({
                       </PopoverTrigger>
                       <PopoverContent className="min-w-[320px] max-w-[360px] p-0 z-50" align="center" sideOffset={8} style={{ boxShadow: "0 8px 32px 0 rgba(0,0,0,0.25)" }}>
                         <div className="flex flex-col gap-2 p-4">
-                          <Calendar
+                          <CustomCalendar
                             mode="single"
                             selected={currentExpenses.dt ? new Date(currentExpenses.dt) : undefined}
                             onSelect={(date: Date | undefined) => {
