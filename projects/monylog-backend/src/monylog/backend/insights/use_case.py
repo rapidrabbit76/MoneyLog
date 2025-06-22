@@ -9,7 +9,7 @@ from monylog.backend.expense.services.calculrator import ExpenseGroupSumCalculat
 from monylog.shared_kernel.domain.enum import ExpenseType
 from monylog.shared_kernel.infra.database.sqla.mixin import SyncSqlaMixIn
 
-from .dtos.schemas import ExpenseSummarySchema, ExpenseTimeSeriesSchema
+from .dtos.schemas import ExpenseTimeSeriesSchema, ExpenseInsightSchema, ExpenseInsightSchemaBase
 
 if TYPE_CHECKING:
     from monylog.backend.auth.dtos.schemas import UserPayloadSchema
@@ -29,6 +29,15 @@ class InsightUseCase(SyncSqlaMixIn):
     ):
         expenses = self.get_expenses(user, query)
         summary = ExpenseGroupSumCalculator.calculate(expenses=expenses)
+        amount = ExpenseInsightSchema.Amount(
+            total=summary.total,
+            expense=summary.groups.get(ExpenseType.EXPENSE, Decimal("0.00")),
+            income=summary.groups.get(ExpenseType.INCOME, Decimal("0.00")),
+        )
+        count = ExpenseInsightSchema.Count(
+            expense=len([e for e in expenses if e.type == ExpenseType.EXPENSE]),
+            income=len([e for e in expenses if e.type == ExpenseType.INCOME]),
+        )
 
         dates = defaultdict(list)
         for expense in expenses:
@@ -40,20 +49,20 @@ class InsightUseCase(SyncSqlaMixIn):
             timeseries.append(
                 ExpenseTimeSeriesSchema(
                     date=date,
-                    total=daily_summary.total,
-                    expense=daily_summary.groups.get(ExpenseType.EXPENSE, Decimal("0.00")),
-                    income=daily_summary.groups.get(ExpenseType.INCOME, Decimal("0.00")),
+                    amount=ExpenseTimeSeriesSchema.Amount(
+                        total=daily_summary.total,
+                        expense=daily_summary.groups.get(ExpenseType.EXPENSE, Decimal("0.00")),
+                        income=daily_summary.groups.get(ExpenseType.INCOME, Decimal("0.00")),
+                    ),
+                    count=ExpenseTimeSeriesSchema.Count(
+                        expense=len([e for e in daily_expenses if e.type == ExpenseType.EXPENSE]),
+                        income=len([e for e in daily_expenses if e.type == ExpenseType.INCOME]),
+                    ),
                 )
             )
 
-        return ExpenseSummarySchema(
-            total=summary.total,
-            expense=summary.groups.get(ExpenseType.EXPENSE, Decimal("0.00")),
-            income=summary.groups.get(ExpenseType.INCOME, Decimal("0.00")),
-            count=len(expenses),
-            timeseries=timeseries,
-            start_date=query.start_date,
-            end_date=query.end_date,
+        return ExpenseInsightSchema(
+            amount=amount, count=count, timeseries=timeseries, start_date=query.start_date, end_date=query.end_date
         )
 
     @trace("get_expenses")
