@@ -3,9 +3,9 @@
 import { useState } from "react";
 import { useExpenses } from "@/hooks/use-expenses";
 import { useTagStore } from "@/store/tag-store";
-import { PeriodSelector } from "@/components/analytics/PeriodSelector";
-import { SummaryCards } from "@/components/analytics/SummaryCards";
-import { AnalysisTabs } from "@/components/analytics/AnalysisTabs";
+import { PeriodSelector } from "@/components/insights/PeriodSelector";
+import { SummaryCards } from "@/components/insights/SummaryCards";
+import { InsightTabs } from "@/components/insights/InsightTabs";
 import { aggregateTagData, Period } from "@/lib/analytics";
 
 export default function AnalyticsPage() {
@@ -55,7 +55,7 @@ export default function AnalyticsPage() {
         periodLabel={periodLabels[selectedPeriod]}
       />
       {/* 분석 탭 */}
-      <AnalysisTabs
+      <InsightTabs
         viewType={viewType}
         setViewType={setViewType}
         tagData={tagData}

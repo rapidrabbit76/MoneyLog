@@ -73,12 +73,12 @@ export function Sidebar({
         <button
           className={cn(
             "flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors",
-            pathname === "/analytics"
+            pathname === "/insights"
               ? "bg-primary text-primary-foreground"
               : "hover:bg-muted hover:text-foreground",
             (collapsed || isMobile) && "justify-center px-2",
           )}
-          onClick={() => router.push("/analytics")}
+          onClick={() => router.push("/insights")}
         >
           <BarChart3 className="h-4 w-4" />
           {!(collapsed || isMobile) && <span>분석</span>}

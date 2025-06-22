@@ -5,7 +5,7 @@ import { TagAnalysisCard } from "./TagAnalysisCard";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
 
-interface AnalysisTabsProps {
+interface InsightTabsTabsProps {
   viewType: "expense" | "income" | "both";
   setViewType: (v: "expense" | "income" | "both") => void;
   tagData: TagData[];
@@ -13,7 +13,7 @@ interface AnalysisTabsProps {
   selectedPeriod: string;
 }
 
-export function AnalysisTabs({ viewType, setViewType, tagData, periodLabel, selectedPeriod }: AnalysisTabsProps) {
+export function InsightTabs({ viewType, setViewType, tagData, periodLabel, selectedPeriod }: InsightTabsTabsProps) {
   return (
     <Tabs value={viewType} onValueChange={(value) => setViewType(value as any)}>
       <TabsList className="grid w-full grid-cols-3">
