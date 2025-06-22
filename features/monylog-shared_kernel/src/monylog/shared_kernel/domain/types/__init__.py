@@ -81,6 +81,10 @@ class PriceRage(CamelModel):
 class DateRange(CamelModel):
     start_date: date | None = Field(None)
     end_date: date | None = Field(None)
+    
+    @property
+    def is_empty(self) -> bool:
+        return self.start_date is None and self.end_date is None
 
     def between(self, c: Any):
         s = self.start_date
@@ -92,6 +96,8 @@ class DateRange(CamelModel):
         if e:
             return c <= e
         return True
+    
+    
 
     @property
     def preve(self) -> "DateRange":
