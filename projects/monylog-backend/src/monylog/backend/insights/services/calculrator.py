@@ -76,11 +76,12 @@ class ExpenseGroupSumCalculator(ExpenseCalculator):
         """
         groups = {}
         for expense in expenses:
-            match expense.type:
-                case ExpenseType.INCOME:
-                    groups[expense.type] = groups.get(expense.type, Decimal(0)) + expense.amount
-                case ExpenseType.EXPENSE:
-                    groups[expense.type] = groups.get(expense.type, Decimal(0)) - expense.amount
-                case _:
-                    raise ValueError(f"Unknown expense type: {expense.type}")
+            if expense.type not in groups:
+                groups[expense.type] = Decimal(0)
+            if expense.type == ExpenseType.INCOME:
+                groups[expense.type] += expense.amount
+            elif expense.type == ExpenseType.EXPENSE:
+                groups[expense.type] -= expense.amount
+            else:
+                raise ValueError(f"Unknown expense type: {expense.type}")
         return ExpenseCalculatorResult(groups=groups)

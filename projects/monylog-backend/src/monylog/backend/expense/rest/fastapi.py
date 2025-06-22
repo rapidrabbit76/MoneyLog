@@ -136,3 +136,84 @@ async def edit_expense_note(
     node: str = Body(..., embed=True),
 ):
     use_case.edit_expense_node(id=id, note=node, user=user)
+
+
+@router.get(
+    "/expenses/summary",
+    status_code=status.HTTP_200_OK,
+)
+@inject
+async def get_expenses_summary(
+    user: UserPayloadSchema = Depends(JWTService.get_current_user),
+    use_case: ExpenseUseCase = Depends(get_exponse_use_case),
+    # Add query params for period (week/month/quarter/year) as needed
+):
+    """
+    기간별(주/월/분기/년) 요약 통계 (총 지출, 총 수입, 순수지, 건수)
+    """
+    raise NotImplementedError("Summary statistics endpoint not implemented yet.")
+
+
+@router.get(
+    "/expenses/aggregate-by-tag",
+    status_code=status.HTTP_200_OK,
+)
+@inject
+async def get_expenses_aggregate_by_tag(
+    user: UserPayloadSchema = Depends(JWTService.get_current_user),
+    use_case: ExpenseUseCase = Depends(get_exponse_use_case),
+    # Add query params for filtering as needed
+):
+    """
+    태그별/유형별(지출/수입) 집계 및 비율
+    """
+    raise NotImplementedError("Aggregate by tag endpoint not implemented yet.")
+
+
+@router.get(
+    "/expenses/trend",
+    status_code=status.HTTP_200_OK,
+)
+@inject
+async def get_expenses_trend(
+    user: UserPayloadSchema = Depends(JWTService.get_current_user),
+    use_case: ExpenseUseCase = Depends(get_exponse_use_case),
+    # Add query params for period, tag, type, etc.
+):
+    """
+    태그별/유형별 트렌드(전월/전주 대비 증감률)
+    """
+    raise NotImplementedError("Trend endpoint not implemented yet.")
+
+
+@router.get(
+    "/expenses/by-tag/{tag_id}",
+    status_code=status.HTTP_200_OK,
+)
+@inject
+async def get_expenses_by_tag(
+    tag_id: int = Path(..., description="ID of the tag"),
+    user: UserPayloadSchema = Depends(JWTService.get_current_user),
+    use_case: ExpenseUseCase = Depends(get_exponse_use_case),
+    # Add query params for filtering as needed
+):
+    """
+    태그별 상세 내역(해당 태그의 거래 리스트)
+    """
+    raise NotImplementedError("Expenses by tag endpoint not implemented yet.")
+
+
+@router.get(
+    "/expenses/count-and-sum",
+    status_code=status.HTTP_200_OK,
+)
+@inject
+async def get_expenses_count_and_sum(
+    user: UserPayloadSchema = Depends(JWTService.get_current_user),
+    use_case: ExpenseUseCase = Depends(get_exponse_use_case),
+    # Add query params for period, tag, type, etc.
+):
+    """
+    기간/태그/유형별 거래 건수 및 금액 합계
+    """
+    raise NotImplementedError("Count and sum endpoint not implemented yet.")

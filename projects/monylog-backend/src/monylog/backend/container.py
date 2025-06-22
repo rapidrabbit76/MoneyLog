@@ -2,9 +2,10 @@ import boto3.session
 import httpx
 from dependency_injector import containers, providers
 
-from monylog.backend.expense.containers.di import ExpenseContainer
-from monylog.backend.llm.containers.di import LLMContainer
 from monylog.backend.auth.containers.di import AuthContainer
+from monylog.backend.expense.containers.di import ExpenseContainer
+from monylog.backend.insights.containers.di import InsightsContainer
+from monylog.backend.llm.containers.di import LLMContainer
 from monylog.backend.settings import Settings
 from monylog.shared_kernel.infra.database.sqla.container.di import SqlaContainer
 
@@ -24,6 +25,7 @@ class MonyLogContainer(containers.DeclarativeContainer):
             "monylog.backend.expense.rest.fastapi",
             "monylog.backend.llm.rest.fastapi",
             "monylog.backend.auth.rest.fastapi",
+            "monylog.backend.insights.rest.fastapi",
         ],
     )
 
@@ -41,5 +43,9 @@ class MonyLogContainer(containers.DeclarativeContainer):
     expense = providers.Container(ExpenseContainer, settings=settings)
     llm = providers.Container(LLMContainer, settings=settings)
     auth = providers.Container(AuthContainer, settings=settings)
+    insights = providers.Container(
+        InsightsContainer,
+        settings=settings,
+    )
 
     async_http_client = providers.Singleton(http_client)
