@@ -1,17 +1,17 @@
 "use client";
 
 import { InsightTabs } from "@/components/insights/InsightTabs";
-import { PeriodSelector, PeriodOrCustom } from "@/components/insights/PeriodSelector";
+import { PeriodSelector } from "@/components/insights/PeriodSelector";
 import { SummaryCards } from "@/components/insights/SummaryCards";
 import { TagAnalysisCardData } from "@/components/insights/TagAnalysisCard";
 import { useExpenses } from "@/hooks/use-expenses";
-import { getInclusiveDateRange, Period } from "@/lib/analytics";
+import { getInclusiveDateRange, Period, DateRange } from "@/lib/analytics";
 import { getSummaryInsights, SummaryResponseData } from "@/lib/api/insights";
 import { ExpenseTag } from "@/lib/api/tags";
 import { useTagStore } from "@/store/tag-store";
 import { Button } from "@/components/ui/button";
-import { ko } from "date-fns/locale";
-import { format, format as formatDate } from "date-fns";
+import { da, ko } from "date-fns/locale";
+import { format, format as formatDate, set } from "date-fns";
 import { useEffect, useState } from "react";
 const periodLabels = {
   week: "이번 주",
@@ -22,6 +22,10 @@ const periodLabels = {
 
 export default function AnalyticsPage() {
   const [selectedPeriod, setSelectedPeriod] = useState<Period>("month");
+  const [dateRange, setDateRange] = useState<{ startDate: string; endDate: string }>({
+    startDate: formatDate(new Date(), "yyyy-MM-dd", { locale: ko }),
+    endDate: formatDate(new Date(), "yyyy-MM-dd", { locale: ko }),
+  });
   const [viewType, setViewType] = useState<"expense" | "income" | "both">("both");
   const [summary, setSummary] = useState<SummaryResponseData>({
     amount: { expense: 0, income: 0, total: 0 },
@@ -33,6 +37,12 @@ export default function AnalyticsPage() {
   const [error, setError] = useState<string | null>(null);
   const [tags, setTags] = useState<ExpenseTag[]>([]);
   const [tagData, setTagData] = useState<TagAnalysisCardData[]>([]);
+
+
+  useEffect(() => {
+    let { startDate, endDate } = getInclusiveDateRange(selectedPeriod);
+    setDateRange({ startDate, endDate });
+  }, [selectedPeriod]);
 
   useEffect(() => {
     const storedTags = useTagStore.getState().tags;
@@ -46,7 +56,7 @@ export default function AnalyticsPage() {
   }, []);
 
   useEffect(() => {
-    const { startDate, endDate } = getInclusiveDateRange(selectedPeriod);
+    const { startDate, endDate } = dateRange;
     Promise.all(
       tags.map((tag) => getSummaryInsights({ startDate, endDate, tag: tag.name }))
     ).then((responses) => {
@@ -60,10 +70,10 @@ export default function AnalyticsPage() {
       }));
       setTagData(tagData);
     });
-  }, [selectedPeriod, tags]);
+  }, [dateRange, tags]);
 
   useEffect(() => {
-    const { startDate, endDate } = getInclusiveDateRange(selectedPeriod);
+    const { startDate, endDate } = dateRange;
     async function fetchSummary() {
       setError(null);
       try {
@@ -80,7 +90,7 @@ export default function AnalyticsPage() {
       }
     }
     fetchSummary();
-  }, [selectedPeriod]);
+  }, [dateRange]);
 
   return (
     <div className="space-y-6">

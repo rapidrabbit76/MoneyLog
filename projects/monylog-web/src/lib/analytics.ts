@@ -3,6 +3,12 @@ import type { Expenses } from "@/types/expenses";
 
 export type Period = "week" | "month" | "quarter" | "year";
 
+export interface DateRange {
+  startDate?: string;
+  endDate?: string;
+  period?: Period;
+}
+
 export function getDateRange(period: Period) {
   const now = new Date();
   const start = new Date();
