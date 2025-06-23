@@ -132,3 +132,4 @@ projects/monylog-backend/data/monylog.db
 projects/monylog-backend/.vscode/PythonImportHelper-v2-Completion.json
 projects/monylog-web/src/app/.DS_Store
 projects/monylog-web/docs/api/prd-20250621.md
+projects/monylog-backend/.env

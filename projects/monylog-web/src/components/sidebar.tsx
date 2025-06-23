@@ -57,7 +57,7 @@ export function Sidebar({
           <Home className="h-4 w-4" />
           {!(collapsed || isMobile) && <span>메인</span>}
         </button>
-        <button
+        {/* <button
           className={cn(
             "flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors",
             pathname === "/expenses"
@@ -69,7 +69,7 @@ export function Sidebar({
         >
           <Receipt className="h-4 w-4" />
           {!(collapsed || isMobile) && <span>소비내역</span>}
-        </button>
+        </button> */}
         <button
           className={cn(
             "flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors",
