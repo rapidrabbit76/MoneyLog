@@ -15,6 +15,7 @@ from .. import exceptions
 from ..dtos.request import UserLoginRequest, UserRegisterRequest
 from ..dtos.response import UserReadSchema, UserResponse
 from ..use_case import AuthUseCase
+from ..services.oauth import OauthProviderBase
 
 settings = get_settings()
 router = APIRouter()
@@ -22,6 +23,7 @@ oauth_router = APIRouter()
 get_auth_use_case = Provide[MonyLogContainer.auth.use_case]
 get_oauth_client = Provide[MonyLogContainer.auth.oauth_client]
 get_oauth_service = Provide[MonyLogContainer.auth.oauth_service]
+get_oauth_providers = Provide[MonyLogContainer.auth.oauth_providers]
 
 
 @oauth_router.get(
@@ -52,6 +54,7 @@ async def oauth_callback(
     response: Response,
     oauth: OAuthClient = Depends(get_oauth_client),
     service: OauthService = Depends(get_oauth_service),
+    providers: dict[str, OauthProviderBase] = Depends(get_oauth_providers),
     provider: str = Path(
         ...,
         description="OAuth provider name (e.g., 'google', 'github')",
@@ -65,9 +68,9 @@ async def oauth_callback(
         ex = exceptions.AuthTokenInvalidException()
         ex.message = f"OAuth error: {e.error} - {e.description}"
         raise ex
-
-    user = await service.oauth_callback(provider, token)
+    user = await service.oauth_callback(providers[provider], token)
     await service.on_after_login(user)
+    # Set cookies for access and refresh tokens
     response.set_cookie(
         key=JWTService.access_cookie_scheme.model.name,
         value=JWTService.create_access_token({"sub": user.email, "user": {"id": user.id, "email": user.email}}),

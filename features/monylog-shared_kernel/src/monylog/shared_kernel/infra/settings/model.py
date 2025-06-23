@@ -58,7 +58,7 @@ class AuthManagerSettings(BaseModel):
 
 class OAuthSettings(BaseModel):
     client_id: str = ""
-    client_secrets: str = ""
+    client_secret: str = ""
     redirect_url: str | None = None
 
 

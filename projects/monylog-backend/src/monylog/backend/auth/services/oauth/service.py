@@ -7,6 +7,7 @@ from monylog.shared_kernel.infra.database.sqla.mixin import SyncSqlaMixIn
 
 from ...entities import OAuth2Account, User, UserLoginHistory
 from .client import OAuthClient
+from .provider import OauthProviderBase
 
 
 @dataclass(kw_only=True, slots=True)
@@ -17,60 +18,34 @@ class OauthService(SyncSqlaMixIn):
 
     async def oauth_callback(
         self,
-        provider: str,
+        provider: OauthProviderBase,
         token: dict,
     ):
-        client = self.client.client.create_client(provider)
-
-        if provider == "google":
-            profile_res = await client.get(
-                "https://people.googleapis.com/v1/people/me",
-                params={"personFields": "emailAddresses"},
-                token=token,
-            )  # type: ignore
-            profile = profile_res.json()
-            user_info = token["userinfo"]
-            account_id = profile["resourceName"]
-            account_email = next(email["value"] for email in profile["emailAddresses"] if email["metadata"]["primary"])
-            nickname = user_info.get("name", None)
-            thumbnail = user_info.get("picture", None)
-
-        elif provider == "github":
-            profile_res = await client.get("user", token=token)  # type: ignore
-            profile = profile_res.json()
-            account_id = profile["id"]
-            account_email = profile.get("email")
-            nickname = profile.get("name", profile.get("login", None))
-            thumbnail = profile.get("avatar_url", None)
-
-            if not account_email:
-                email_res = await client.get("user/emails", token=token)  # type: ignore
-                emails = email_res.json()
-                account_email = next((e["email"] for e in emails if e.get("primary")), emails[0]["email"])
-
+        client = self.client.client.create_client(provider.name)
+        profile = await provider.fetch_profile(client, token)
         oauth_account_dict = {
             "oauth_name": provider,
             "access_token": token["access_token"],
             "expires_at": token.get("expires_at"),
             "refresh_token": token.get("refresh_token"),
-            "account_id": account_id,
-            "account_email": account_email,
+            "account_id": profile.account_id,
+            "account_email": profile.account_email,
         }
-        user = await self.get_by_oauth_account(provider, account_id)
+        user = await self.get_by_oauth_account(provider.name, profile.account_id)
 
         if user:
             return user
 
         if user is None:
-            user = await self.get_by_oauth_email(account_email)
+            user = await self.get_by_oauth_email(profile.account_email)
 
         if user is None:
             # If user does not exist, create a new user
             user = await self.create_user_from_oauth(
-                account_email,
-                oauth_account_dict,
-                nickname=nickname,
-                thumbnail=thumbnail,
+                email=profile.account_email,
+                oauth_account_dict=oauth_account_dict,
+                nickname=profile.nickname,
+                thumbnail=profile.thumbnail,
             )
             return user
 
