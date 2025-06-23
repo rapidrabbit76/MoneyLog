@@ -10,7 +10,7 @@ class CreateExpenseTagRequest(CamelModel):
         color: str = Field("#00f0f0")
 
     name: str = Field(default="", description="name of ExpenseTag")
-    data: ExpenseTagDataSchema = Field(default_factory=ExpenseTagDataSchema)
+    data: ExpenseTagDataSchema = Field(default_factory=ExpenseTagDataSchema) # type: ignore
 
 
 class SearchExpenseTagRequest(CamelModel):

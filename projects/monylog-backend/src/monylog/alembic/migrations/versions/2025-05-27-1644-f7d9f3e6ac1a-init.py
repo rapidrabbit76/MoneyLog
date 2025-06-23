@@ -41,6 +41,20 @@ def upgrade() -> None:
             sa.Column("created_at", sa.TIMESTAMP(timezone=True), default=sa.func.now(), nullable=False),
             sa.Column("updated_at", sa.TIMESTAMP(timezone=True), default=sa.func.now(), nullable=False),
         )
+    if auth_entities.OAuth2Account.__tablename__ not in existing_tables:
+        op.create_table(
+            auth_entities.OAuth2Account.__tablename__,
+            sa.Column("id", sa.Integer, primary_key=True, autoincrement=True),
+            sa.Column("oauth_name", sa.String(length=100), index=True, nullable=False),
+            sa.Column("access_token", sa.String(length=1024), nullable=False),
+            sa.Column("expires_at", sa.Integer, nullable=True),
+            sa.Column("refresh_token", sa.String(length=1024), nullable=True),
+            sa.Column("account_id", sa.String(length=320), index=True, nullable=False),
+            sa.Column("account_email", sa.String(length=320), nullable=False),
+            sa.Column("user_id", sa.VARCHAR(32), sa.ForeignKey("monylog_user.id"), nullable=False),
+            sa.Column("created_at", sa.TIMESTAMP(timezone=True), default=sa.func.now(), nullable=False),
+            sa.Column("updated_at", sa.TIMESTAMP(timezone=True), default=sa.func.now(), nullable=False),
+        )
     if auth_entities.UserLoginHistory.__tablename__ not in existing_tables:
         op.create_table(
             auth_entities.UserLoginHistory.__tablename__,

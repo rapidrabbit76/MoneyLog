@@ -2,11 +2,13 @@ import nanoid
 import sqlalchemy as sa
 from sqlalchemy import orm
 from sqlalchemy.orm import Mapped, mapped_column
-
+import secrets
+from pendulum import DateTime
 from monylog.shared_kernel.infra.database.sqla import Base
 from monylog.shared_kernel.infra.database.sqla.mixin import TimestampMixin
 from typing import Optional
 from ..services.password_helper import PasswordHelper
+from .oauth import OAuth2Account
 
 
 class User(Base, TimestampMixin):
@@ -29,6 +31,13 @@ class User(Base, TimestampMixin):
         uselist=True,
     )
 
+    oauth_accounts: Mapped[list[OAuth2Account]] = orm.relationship(
+        "OAuth2Account",
+        lazy="selectin",
+        backref="user",
+        uselist=True,
+    )
+
     def update_thumbnail(self, image: str) -> None:
         self.thumbnail = image
 
@@ -45,6 +54,10 @@ class User(Base, TimestampMixin):
 
     def check_password(self, password: str) -> bool:
         return PasswordHelper.password_verify(password, self.hashed_password)
+
+    @classmethod
+    def generate_password(cls) -> str:
+        return secrets.token_urlsafe()
 
 
 class UserLoginHistory(Base):
@@ -63,3 +76,13 @@ class UserLoginHistory(Base):
         lazy="selectin",
         back_populates="login_histories",
     )
+
+    @classmethod
+    def build(
+        cls,
+        user_id: str,
+        login_time: DateTime | None = None,
+    ) -> "UserLoginHistory":
+        if login_time is None:
+            login_time = DateTime.now("UTC")
+        return cls(user_id=user_id, login_time=login_time)

@@ -1,13 +1,16 @@
+import jmespath
 from typing import Optional
 
+from fastapi import APIRouter, Depends, Form, Body, Request, Response, status, Path
+
 from dependency_injector.wiring import Provide, inject
-from fastapi import APIRouter, Body, Depends, Form, Response, status
 
 from monylog.backend.auth.dtos.schemas import UserPayloadSchema
 from monylog.backend.auth.services.jwt import JWTService
 from monylog.backend.container import MonyLogContainer
 from monylog.backend.settings import get_settings
-
+from authlib.integrations.base_client import OAuthError
+from ..services.oauth import OAuthClient, OauthService
 from .. import exceptions
 from ..dtos.request import UserLoginRequest, UserRegisterRequest
 from ..dtos.response import UserReadSchema, UserResponse
@@ -15,7 +18,70 @@ from ..use_case import AuthUseCase
 
 settings = get_settings()
 router = APIRouter()
+oauth_router = APIRouter()
 get_auth_use_case = Provide[MonyLogContainer.auth.use_case]
+get_oauth_client = Provide[MonyLogContainer.auth.oauth_client]
+get_oauth_service = Provide[MonyLogContainer.auth.oauth_service]
+
+
+@oauth_router.get(
+    "/login/{provider}",
+    status_code=status.HTTP_200_OK,
+)
+@inject
+async def oauth_login(
+    request: Request,
+    oauth: OAuthClient = Depends(get_oauth_client),
+    provider: str = Path(
+        ...,
+        description="OAuth provider name (e.g., 'google', 'github')",
+    ),
+):
+    redirect_uri = f"{request.url.scheme}://{request.url.netloc}/api/v1/oauth/login/{provider}/callback"
+    client = oauth.client.create_client(provider)
+    result = await client.authorize_redirect(request, redirect_uri)  # type: ignore
+    return result
+
+
+@oauth_router.get(
+    "/login/{provider}/callback",
+)
+@inject
+async def oauth_callback(
+    request: Request,
+    response: Response,
+    oauth: OAuthClient = Depends(get_oauth_client),
+    service: OauthService = Depends(get_oauth_service),
+    provider: str = Path(
+        ...,
+        description="OAuth provider name (e.g., 'google', 'github')",
+    ),
+):
+    client = oauth.client.create_client(provider)
+
+    try:
+        token = await client.authorize_access_token(request)  # type: ignore
+    except OAuthError as e:
+        ex = exceptions.AuthTokenInvalidException()
+        ex.message = f"OAuth error: {e.error} - {e.description}"
+        raise ex
+
+    user = await service.oauth_callback(provider, token)
+    await service.on_after_login(user)
+    response.set_cookie(
+        key=JWTService.access_cookie_scheme.model.name,
+        value=JWTService.create_access_token({"sub": user.email, "user": {"id": user.id, "email": user.email}}),
+        httponly=True,
+        secure=False,
+        samesite="lax",
+    )
+    response.set_cookie(
+        key=JWTService.refresh_cookie_scheme.model.name,
+        value=JWTService.create_refresh_token({"sub": user.email, "user": {"id": user.id, "email": user.email}}),
+        httponly=True,
+        secure=False,
+        samesite="lax",
+    )
 
 
 @router.post(

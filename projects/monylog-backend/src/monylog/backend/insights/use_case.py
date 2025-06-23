@@ -62,7 +62,11 @@ class InsightUseCase(SyncSqlaMixIn):
             )
 
         return ExpenseInsightSchema(
-            amount=amount, count=count, timeseries=timeseries, start_date=query.start_date, end_date=query.end_date
+            amount=amount,
+            count=count,
+            timeseries=timeseries,
+            start_date=query.start_date,
+            end_date=query.end_date,
         )
 
     @trace("get_expenses")

@@ -29,6 +29,7 @@ class Settings(BaseSettings):
     jwt: JWTSettings = JWTSettings()
     email: EmailSettings = EmailSettings()
     oauth_google: OAuthSettings = OAuthSettings()
+    oauth_github: OAuthSettings = OAuthSettings()
     rate_limiter: RatelimiterSettings = RatelimiterSettings()
     object_storege: ObjectStorageSettings = ObjectStorageSettings()
     cache: CacheSettings = CacheSettings()
