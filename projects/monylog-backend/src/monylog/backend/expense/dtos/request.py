@@ -1,7 +1,7 @@
 from monylog.shared_kernel.infra.camel_model import CamelModel, Field
 from pydantic import model_validator
 from .schemas import ExpenseSchema
-from monylog.shared_kernel.infra.fastapi.dtos.request import Pageable
+from monylog.shared_kernel.infra.fastapi.pageable import OffsetPageable
 from monylog.shared_kernel.domain.types import DateRange
 
 
@@ -10,7 +10,7 @@ class CreateExpenseTagRequest(CamelModel):
         color: str = Field("#00f0f0")
 
     name: str = Field(default="", description="name of ExpenseTag")
-    data: ExpenseTagDataSchema = Field(default_factory=ExpenseTagDataSchema) # type: ignore
+    data: ExpenseTagDataSchema = Field(default_factory=ExpenseTagDataSchema)  # type: ignore
 
 
 class SearchExpenseTagRequest(CamelModel):
@@ -29,5 +29,5 @@ class CreateExpenseRequest(CamelModel):
     expenses: list[ExpenseSchema]
 
 
-class ExpenseQeuryRequest(Pageable, DateRange, CamelModel):
+class ExpenseQeuryRequest(OffsetPageable, DateRange, CamelModel):
     pass

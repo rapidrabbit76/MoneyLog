@@ -7,14 +7,13 @@ import sqlalchemy as sa
 from monylog.backend.expense.entities.expense import Expense, ExpenseTag
 from monylog.backend.expense.entities.log import ExpenseLog
 from monylog.shared_kernel.infra.database.sqla.mixin import SyncSqlaMixIn
-from monylog.shared_kernel.infra.fastapi.dtos.response import PaginationList
+from monylog.shared_kernel.infra.fastapi.pageable import Page
 
 from . import exceptions
 from .dtos.request import CreateExpenseRequest
 from .services.calculrator import ExpenseGroupSumCalculator, ExpenseSumCalculator
 
 if TYPE_CHECKING:
-    from monylog.shared_kernel.infra.fastapi.dtos.request import Pageable
     from monylog.backend.auth.dtos.schemas import UserPayloadSchema
 
     from .dtos.request import ExpenseQeuryRequest
@@ -139,7 +138,7 @@ class ExpenseUseCase(SyncSqlaMixIn):
         self,
         user: "UserPayloadSchema",
         payload: "ExpenseQeuryRequest",
-    ) -> list[Expense]:
+    ) -> Page[Expense]:
         with self.db.session() as session:
             stmt = sa.select(Expense).where(Expense.user_id == user.id)
             stmt = stmt.offset(payload.offset).limit(payload.limit).order_by(Expense.id.desc())
@@ -148,7 +147,7 @@ class ExpenseUseCase(SyncSqlaMixIn):
 
             expenses = session.execute(stmt).scalars().all()
             total = session.execute(sa.select(sa.func.count()).select_from(stmt.cte())).scalar_one()
-        return PaginationList.build(data=expenses, total=total)
+        return Page(items=expenses, total=total)
 
     def get_expense_by_id(
         self,

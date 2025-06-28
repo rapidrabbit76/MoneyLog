@@ -5,7 +5,7 @@ from monylog.backend.auth.dtos.schemas import UserPayloadSchema
 from monylog.backend.auth.services.jwt import JWTService
 from monylog.backend.container import MonyLogContainer
 from monylog.backend.expense.use_case import ExpenseUseCase
-from monylog.shared_kernel.infra.fastapi.dtos.response import PaginationResponse
+from monylog.shared_kernel.infra.fastapi.pageable import PaginationResponse
 
 from ..dtos.request import CreateExpenseRequest, CreateExpenseTagRequest, ExpenseQeuryRequest, SearchExpenseTagRequest
 from ..dtos.response import ExpensePagingResponse, ExpenseTagPagingResponse

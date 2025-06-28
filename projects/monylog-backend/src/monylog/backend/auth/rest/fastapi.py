@@ -1,21 +1,20 @@
-import jmespath
 from typing import Optional
 
-from fastapi import APIRouter, Depends, Form, Body, Request, Response, status, Path
-
+import jmespath
+from authlib.integrations.base_client import OAuthError
 from dependency_injector.wiring import Provide, inject
+from fastapi import APIRouter, Body, Depends, Form, Path, Request, Response, status
 
 from monylog.backend.auth.dtos.schemas import UserPayloadSchema
 from monylog.backend.auth.services.jwt import JWTService
 from monylog.backend.container import MonyLogContainer
 from monylog.backend.settings import get_settings
-from authlib.integrations.base_client import OAuthError
-from ..services.oauth import OAuthClient, OauthService
+
 from .. import exceptions
 from ..dtos.request import UserLoginRequest, UserRegisterRequest
 from ..dtos.response import UserReadSchema, UserResponse
+from ..services.oauth import OAuthClient, OauthProviderBase, OauthService
 from ..use_case import AuthUseCase
-from ..services.oauth import OauthProviderBase
 
 settings = get_settings()
 router = APIRouter()
@@ -70,6 +69,7 @@ async def oauth_callback(
         raise ex
     user = await service.oauth_callback(providers[provider], token)
     await service.on_after_login(user)
+
     # Set cookies for access and refresh tokens
     response.set_cookie(
         key=JWTService.access_cookie_scheme.model.name,

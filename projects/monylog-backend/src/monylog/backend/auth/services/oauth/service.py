@@ -32,7 +32,6 @@ class OauthService(SyncSqlaMixIn):
             "account_email": profile.account_email,
         }
         user = await self.get_by_oauth_account(provider.name, profile.account_id)
-
         if user:
             return user
 
