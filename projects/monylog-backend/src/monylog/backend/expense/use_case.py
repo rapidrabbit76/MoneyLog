@@ -15,8 +15,7 @@ from .services.calculrator import ExpenseGroupSumCalculator, ExpenseSumCalculato
 
 if TYPE_CHECKING:
     from monylog.backend.auth.dtos.schemas import UserPayloadSchema
-
-    from .dtos.request import ExpenseQeuryRequest
+    from .dtos.request import ExpenseQueryRequest
 
 
 @dataclass
@@ -137,8 +136,8 @@ class ExpenseUseCase(SyncSqlaMixIn):
     def get_expenses(
         self,
         user: "UserPayloadSchema",
-        payload: "ExpenseQeuryRequest",
-    ) -> Page[Expense]:
+        payload: "ExpenseQueryRequest",
+    ):
         with self.db.session() as session:
             stmt = sa.select(Expense).where(Expense.user_id == user.id)
             stmt = stmt.offset(payload.offset).limit(payload.limit).order_by(Expense.id.desc())

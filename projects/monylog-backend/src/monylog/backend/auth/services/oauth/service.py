@@ -24,7 +24,7 @@ class OauthService(SyncSqlaMixIn):
         client = self.client.client.create_client(provider.name)
         profile = await provider.fetch_profile(client, token)
         oauth_account_dict = {
-            "oauth_name": provider,
+            "oauth_name": provider.name,
             "access_token": token["access_token"],
             "expires_at": token.get("expires_at"),
             "refresh_token": token.get("refresh_token"),

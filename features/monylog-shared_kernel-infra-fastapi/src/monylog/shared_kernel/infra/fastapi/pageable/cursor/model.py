@@ -57,7 +57,6 @@ class CursorPageableBase(PageableBase, Generic[CT]):
             raise ValueError(f"Invalid cursor format: {cursor}. Error: {str(e)}") from e
         return cursor
 
-    @computed_field(exclude=True)
     @property
     def cursor_model(self) -> CT | None:
         if not self.cursor:
@@ -67,7 +66,9 @@ class CursorPageableBase(PageableBase, Generic[CT]):
             model = CamelModel.parse_obj(decoded_cursor, cls=CT)
             return model
         except Exception as e:
-            raise ValueError(f"Invalid cursor format: {self.cursor}. Error: {str(e)}") from e
+            raise ValueError(
+                f"Invalid cursor format: {self.cursor}. Error: {str(e)}"
+            ) from e
 
     @classmethod
     def decode_cursor(cls, cursor: str) -> dict:

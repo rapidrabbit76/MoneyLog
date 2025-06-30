@@ -7,7 +7,7 @@ from monylog.backend.container import MonyLogContainer
 from monylog.backend.expense.use_case import ExpenseUseCase
 from monylog.shared_kernel.infra.fastapi.pageable import PaginationResponse
 
-from ..dtos.request import CreateExpenseRequest, CreateExpenseTagRequest, ExpenseQeuryRequest, SearchExpenseTagRequest
+from ..dtos.request import CreateExpenseRequest, CreateExpenseTagRequest, ExpenseQueryRequest, SearchExpenseTagRequest
 from ..dtos.response import ExpensePagingResponse, ExpenseTagPagingResponse
 from ..dtos.schemas import ExpenseTagSchema
 
@@ -99,12 +99,12 @@ async def get_expense(
     *,
     user: UserPayloadSchema = Depends(JWTService.get_current_user),
     use_case: ExpenseUseCase = Depends(get_exponse_use_case),
-    payload: ExpenseQeuryRequest = Query(),
+    query: ExpenseQueryRequest = Query(),
 ):
-    expense = use_case.get_expenses(payload=payload, user=user)
+    expense = use_case.get_expenses(payload=query, user=user)
     return ExpensePagingResponse(
         status=status.HTTP_200_OK,
-        data=PaginationResponse.build(expense, payload),
+        data=PaginationResponse.build(expense, query),
         message="Expenses retrieved successfully.",
     )
 

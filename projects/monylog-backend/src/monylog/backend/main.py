@@ -57,11 +57,11 @@ def create_app() -> FastAPI:
     # ENDPOINTs
     app.include_router(APIEndpoints, prefix="/api")
 
-    app.mount(
-        "/",
-        StaticFiles(directory="web", html=True, follow_symlink=True),
-        name="web",
-    )
+    # app.mount(
+    #     "/",
+    #     StaticFiles(directory="web", html=True, follow_symlink=True),
+    #     name="web",
+    # )
 
     return app
 

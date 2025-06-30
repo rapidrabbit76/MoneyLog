@@ -1,6 +1,5 @@
 from typing import Optional
 
-import jmespath
 from authlib.integrations.base_client import OAuthError
 from dependency_injector.wiring import Provide, inject
 from fastapi import APIRouter, Body, Depends, Form, Path, Request, Response, status

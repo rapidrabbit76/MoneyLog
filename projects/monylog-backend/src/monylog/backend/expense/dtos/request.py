@@ -29,5 +29,5 @@ class CreateExpenseRequest(CamelModel):
     expenses: list[ExpenseSchema]
 
 
-class ExpenseQeuryRequest(OffsetPageable, DateRange, CamelModel):
+class ExpenseQueryRequest(OffsetPageable, DateRange, CamelModel):
     pass

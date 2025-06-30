@@ -47,7 +47,8 @@ class PaginationResponse(BaseModel, Generic[T]):
             page=pageable.page if hasattr(data, "page") is not None else None,
             total=data.total if hasattr(data, "total") else None,
             next_cursor=data.next_cursor if hasattr(data, "next_cursor") else None,
-            previous_cursor=data.previous_cursor if hasattr(data, "previous_cursor") else None,
+            previous_cursor=data.previous_cursor
+            if hasattr(data, "previous_cursor")
+            else None,
         )
-        metadata = data.metadata if hasattr(data, "metadata") else None
-        return PaginationResponse(items=data, meta=paging, metadata=metadata)
+        return PaginationResponse(items=data.items, meta=paging)

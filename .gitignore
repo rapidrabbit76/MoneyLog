@@ -134,3 +134,5 @@ projects/monylog-web/src/app/.DS_Store
 projects/monylog-web/docs/api/prd-20250621.md
 projects/monylog-backend/.env
 features/monylog-shared_kernel-infra-fastapi/.vscode/PythonImportHelper-v2-Completion.json
+features/monylog-shared_kernel/.vscode/PythonImportHelper-v2-Completion.json
+.gitignore
