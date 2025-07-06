@@ -21,3 +21,8 @@ class UserReadSchema(CamelModel):
 class UserPayloadSchema(CamelModel):
     id: str = Field(..., description="User's unique identifier")
     email: str = Field(..., description="User's email address")
+
+
+class OAuthLoginSchema(CamelModel):
+    provider: str = Field(..., description="OAuth provider name")
+    redirect_uri: str = Field(..., description="Redirect URI after OAuth login")

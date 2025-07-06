@@ -11,7 +11,7 @@ from monylog.backend.settings import get_settings
 
 from .. import exceptions
 from ..dtos.request import UserLoginRequest, UserRegisterRequest
-from ..dtos.response import UserReadSchema, UserResponse
+from ..dtos.response import UserReadSchema, UserResponse, OAuthLoginResponse, OAuthLoginSchema
 from ..services.oauth import OAuthClient, OauthProviderBase, OauthService
 from ..use_case import AuthUseCase
 
@@ -27,6 +27,7 @@ get_oauth_providers = Provide[MonyLogContainer.auth.oauth_providers]
 @oauth_router.get(
     "/login/{provider}",
     status_code=status.HTTP_200_OK,
+    response_model=OAuthLoginResponse,
 )
 @inject
 async def oauth_login(
@@ -38,9 +39,15 @@ async def oauth_login(
     ),
 ):
     redirect_uri = f"{request.url.scheme}://{request.url.netloc}/api/v1/oauth/login/{provider}/callback"
+    # # redirect_uri = f"http://localhost:3000/oauth/{provider}/callback"
+    redirect_uri = f"http://localhost:3000/oauth-callback?provider={provider}"
     client = oauth.client.create_client(provider)
     result = await client.authorize_redirect(request, redirect_uri)  # type: ignore
-    return result
+    return OAuthLoginResponse(
+        status=status.HTTP_200_OK,
+        message="Redirecting to OAuth provider for login",
+        data=OAuthLoginSchema(provider=provider, redirect_uri=result.headers["location"]),
+    )
 
 
 @oauth_router.get(
