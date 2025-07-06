@@ -4,7 +4,7 @@ import { useRouter, usePathname } from "next/navigation";
 import { useEffect } from "react";
 
 // 인증이 필요한 경로를 정의 (로그인, 회원가입 등은 제외)
-const PUBLIC_PATHS = ["/login", "/signup", "/_error", "/404"];
+const PUBLIC_PATHS = ["/login", "/signup", "/_error", "/404", "/oauth-callback"];
 
 export default function AuthGuard({ children }: { children: React.ReactNode }) {
   const user = useUserStore((state) => state.user);

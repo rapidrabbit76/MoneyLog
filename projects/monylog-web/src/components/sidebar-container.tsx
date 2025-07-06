@@ -43,7 +43,7 @@ export function SidebarContainer() {
     return () => window.removeEventListener("resize", checkMobile);
   }, [setSidebarCollapsed]);
 
-  if (pathName === "/login" || pathName === "/register") {
+  if (pathName === "/login" || pathName === "/register" || pathName === "/oauth-callback") {
     return null; // 로그인/회원가입 페이지에서는 사이드바 미노출
   }
 

@@ -10,8 +10,7 @@ import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Github } from "lucide-react";
-import { loginWithGoogle, loginWithGithub } from "@/lib/auth";
-import { loginWithEmail } from "@/lib/api/auth";
+import { loginWithEmail, oauthLoginPopup, oauthLogin } from "@/lib/api/auth";
 import { useUserStore } from "@/store/user-store";
 
 interface LoginFormProps {
@@ -44,9 +43,33 @@ export function LoginForm({ onSignupClick }: LoginFormProps) {
     }
   };
 
-  const handleGoogleLogin = async () => {};
+  const handleGoogleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+    try {
+      const response = await oauthLogin("google");
+      router.push(response.redirectUri);
+    } catch (error) {
+      console.error("Google 로그인 실패:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
-  const handleGithubLogin = async () => {};
+  const handleGithubLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+    try {
+      const response = await oauthLogin("github");
+      router.push(response.redirectUri);
+    } catch (error) {
+      console.error("GitHub 로그인 실패:", error);
+    } finally {
+      // setIsLoading(false);
+    }
+  };
+
+
 
   return (
     <div className="mt-8">
